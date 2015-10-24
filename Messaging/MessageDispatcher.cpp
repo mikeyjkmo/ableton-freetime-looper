@@ -7,9 +7,9 @@ namespace AbletonProject
     {
     }
 
-    void MessageDispatcher::sendMessage(std::string message)
+    void MessageDispatcher::sendMessage(Message message)
     {
-        std::cout << message << std::endl;
+        // todo
     }
 
 }

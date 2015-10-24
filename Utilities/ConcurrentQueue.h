@@ -1,10 +1,8 @@
 #pragma once
 
 #include <queue>
-#include <string>
 #include <memory>
 #include <mutex>
-#include <condition_variable>
 
 namespace AbletonProject
 {

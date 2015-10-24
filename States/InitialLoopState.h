@@ -1,9 +1,9 @@
 #pragma once
-#include <string>
 
 #include "StateBase.h"
 #include "Utilities/Stopwatch.h"
 #include "Messaging/MessageDispatcher.h"
+#include "Messaging/Message.h"
 
 namespace AbletonProject
 {
@@ -17,7 +17,7 @@ namespace AbletonProject
         InitialLoopState(MessageDispatcher* messageDispatcher);
         virtual ~InitialLoopState() = default;
 
-        void handle(std::unique_ptr<StateBase>& state, std::string message);
+        void handle(std::unique_ptr<StateBase>& state, Message message);
     };
 
 }

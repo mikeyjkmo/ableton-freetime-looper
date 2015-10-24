@@ -1,11 +1,11 @@
 #pragma once
-#include <string>
 #include <chrono>
 
 #include "StateBase.h"
 #include "Utilities/AsyncTimer.h"
 #include "Utilities/ConcurrentQueue.h"
 #include "Messaging/MessageDispatcher.h"
+#include "Messaging/Message.h"
 
 namespace AbletonProject
 {
@@ -14,7 +14,7 @@ namespace AbletonProject
     {
     private:
         AsyncTimer _asyncTimer;
-        ConcurrentQueue<std::string> _queue;
+        ConcurrentQueue<Message> _queue;
         void forwardMessage();
         void _dequeueAndSendAll();
         MessageDispatcher* _messageDispatcher;
@@ -22,7 +22,7 @@ namespace AbletonProject
         RunningState(std::chrono::milliseconds timespan, MessageDispatcher* messageDispatcher);
         virtual ~RunningState();
 
-        void handle(std::unique_ptr<StateBase>& state, std::string message);
+        void handle(std::unique_ptr<StateBase>& state, Message message);
     };
 
 }

@@ -9,7 +9,7 @@ namespace AbletonProject
     {
     }
 
-    void CreatedState::handle(std::unique_ptr<StateBase>& state, std::string message)
+    void CreatedState::handle(std::unique_ptr<StateBase>& state, Message message)
     {
         state = std::make_unique<InitialLoopState>(_messageDispatcher);
         _messageDispatcher->sendMessage(message);

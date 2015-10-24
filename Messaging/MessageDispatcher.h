@@ -1,8 +1,6 @@
 #pragma once
 
-#include <string>
-
-#include <iostream>
+#include "Message.h"
 
 namespace AbletonProject
 {
@@ -11,6 +9,6 @@ namespace AbletonProject
     public:
         MessageDispatcher();
         virtual ~MessageDispatcher() = default;
-        void sendMessage(std::string message);
+        void sendMessage(Message message);
     };
 }

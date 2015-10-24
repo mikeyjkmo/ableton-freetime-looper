@@ -1,11 +1,11 @@
 #pragma once
 #include <memory>
-#include <string>
 #include <mutex>
 
 #include "States/StateBase.h"
 #include "States/CreatedState.h"
 #include "MessageDispatcher.h"
+#include "Message.h"
 
 namespace AbletonProject
 {
@@ -19,6 +19,6 @@ namespace AbletonProject
         MessageReceiver();
         virtual ~MessageReceiver() = default;
 
-        void receiveMessage(std::string message);
+        void receiveMessage(Message message);
     };
 }

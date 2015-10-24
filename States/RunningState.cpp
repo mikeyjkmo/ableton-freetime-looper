@@ -19,14 +19,14 @@ namespace AbletonProject
 
     void RunningState::_dequeueAndSendAll()
     {
-        std::string message;
+        Message message;
         while (_queue.tryDequeue(message))
         {
             _messageDispatcher->sendMessage(message);
         }
     }
 
-    void RunningState::handle(std::unique_ptr<StateBase>& state, std::string message)
+    void RunningState::handle(std::unique_ptr<StateBase>& state, Message message)
     {
         _queue.enqueue(message);
     }

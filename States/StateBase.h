@@ -1,7 +1,7 @@
 #pragma once
-
-#include <string>
 #include <memory>
+
+#include "Messaging/Message.h"
 
 namespace AbletonProject
 {
@@ -12,7 +12,7 @@ namespace AbletonProject
         StateBase();
     public:
         virtual ~StateBase() = default;
-        virtual void handle(std::unique_ptr<StateBase>& state, std::string message) = 0;
+        virtual void handle(std::unique_ptr<StateBase>& state, Message message) = 0;
     };
 
 }

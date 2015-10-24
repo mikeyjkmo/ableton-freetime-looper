@@ -15,10 +15,18 @@ int main()
 {
     MessageReceiver receiver;
 
-    receiver.receiveMessage("foo");
-    receiver.receiveMessage("bar");
-    receiver.receiveMessage("zim");
-    receiver.receiveMessage("zam");
+    receiver.receiveMessage(Message());
+
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    receiver.receiveMessage(Message());
+
+    for (int i = 0; i < 20; i++)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        receiver.receiveMessage(Message());
+    }
+
 
     return 0;
 }

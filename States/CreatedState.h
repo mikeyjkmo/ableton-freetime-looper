@@ -1,10 +1,10 @@
 #pragma once
 #include <memory>
-#include <string>
 
 #include "Utilities/Stopwatch.h"
 #include "Messaging/MessageDispatcher.h"
 #include "StateBase.h"
+#include "Messaging/Message.h"
 
 namespace AbletonProject
 {
@@ -17,7 +17,7 @@ namespace AbletonProject
         CreatedState(MessageDispatcher* messageDispatcher);
         virtual ~CreatedState() = default;
 
-        void handle(std::unique_ptr<StateBase>& state, std::string message);
+        void handle(std::unique_ptr<StateBase>& state, Message message);
     };
 
 }
