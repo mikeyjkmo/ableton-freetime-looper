@@ -46,7 +46,7 @@ namespace AbletonProject
 
             if (_queue.empty()) return false;
 
-            item = _queue.back();
+            item = _queue.front();
             _queue.pop();
             return true;
         }

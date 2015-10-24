@@ -9,6 +9,12 @@ namespace AbletonProject
           _queue(),
           _messageDispatcher(messageDispatcher)
     {
+        _asyncTimer.start();
+    }
+
+    RunningState::~RunningState()
+    {
+        _asyncTimer.stop();
     }
 
     void RunningState::_dequeueAndSendAll()
@@ -23,8 +29,7 @@ namespace AbletonProject
     void RunningState::handle(std::unique_ptr<StateBase>& state, std::string message)
     {
         _queue.enqueue(message);
-
-        // todo for now immeditetly forward
-        _dequeueAndSendAll();
     }
+
+
 }
