@@ -58,16 +58,18 @@ int main(int argc, char *argv[])
         MessageDispatcher dispatcher(midiOut);
         MessageReceiver receiver(dispatcher);
 
-        receiver.receiveMessage(Message());
+        // Control Change: 176, 7, 100 (volume)
+        Message volumeControlMessage({176, 7, 100});
+        receiver.receiveMessage(volumeControlMessage);
 
         std::this_thread::sleep_for(std::chrono::seconds(2));
 
-        receiver.receiveMessage(Message());
+        receiver.receiveMessage(volumeControlMessage);
 
         for (int i = 0; i < 20; i++)
         {
             std::this_thread::sleep_for(std::chrono::seconds(1));
-            receiver.receiveMessage(Message());
+            receiver.receiveMessage(volumeControlMessage);
         }
 
         midiOut.closePort();

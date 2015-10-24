@@ -12,6 +12,12 @@ namespace AbletonProject
 
     void MessageDispatcher::sendMessage(Message& message)
     {
+        std::cout << "Sending message with payload:";
+        for (auto& c : message.payload)
+        {
+            std::cout << " " << (unsigned int) c;
+        }
+        std::cout << std::endl;
         _midiOut.sendMessage(&(message.payload));
     }
 
