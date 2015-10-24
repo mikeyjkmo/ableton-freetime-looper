@@ -13,7 +13,6 @@ namespace AbletonProject
     class RunningState : public StateBase
     {
     private:
-        AsyncTimer _timer;
         ConcurrentQueue<std::string> _queue;
         void forwardMessage();
         MessageDispatcher* _messageDispatcher;

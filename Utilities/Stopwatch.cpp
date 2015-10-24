@@ -13,7 +13,8 @@ namespace AbletonProject
     {
         if (_isRunning) return;
 
-        _startTime = std::chrono::high_resolution_clock::now();
+        //TODO fix this
+        //_startTime = std::chrono::high_resolution_clock::now();
         _isRunning = true;
     }
 
@@ -54,6 +55,8 @@ namespace AbletonProject
 
     std::chrono::duration<std::chrono::system_clock::rep, std::chrono::system_clock::period> Stopwatch::calculateElapsed() const
     {
-        return _elapsed + std::chrono::high_resolution_clock::now() - _startTime;
+        //TODO: Fix this
+        //return _elapsed + std::chrono::high_resolution_clock::now() - _startTime;
+        return _elapsed;
     }
 }

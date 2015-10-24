@@ -1,14 +1,11 @@
 #include "RunningState.h"
 
-#include <stdexcept>
 
 namespace AbletonProject
 {
 
     RunningState::RunningState(std::chrono::milliseconds timespan, MessageDispatcher* messageDispatcher)
-        : _timer(timespan),
-        _queue(),
-        _messageDispatcher(messageDispatcher)
+        : _queue(),_messageDispatcher(messageDispatcher)
     {
     }
 

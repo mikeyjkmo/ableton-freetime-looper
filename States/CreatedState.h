@@ -3,8 +3,8 @@
 #include <string>
 
 #include "../Utilities/Stopwatch.h"
-#include "../Utilities/StateBase.h"
 #include "../Messaging/MessageDispatcher.h"
+#include "StateBase.h"
 
 namespace AbletonProject
 {

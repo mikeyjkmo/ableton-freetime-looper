@@ -11,7 +11,7 @@
 
 using namespace AbletonProject;
 
-int main(int argc, char* argv[])
+int main()
 {
     MessageReceiver receiver;
 
