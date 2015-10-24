@@ -2,10 +2,12 @@
 
 namespace AbletonProject
 {
+    using namespace std::chrono;
+
     Stopwatch::Stopwatch() :
         _isRunning(false),
-        _elapsed(std::chrono::system_clock::duration::zero()),
-        _startTime(std::chrono::system_clock::duration::zero())
+        _elapsed(high_resolution_clock::duration::zero()),
+        _startTime(high_resolution_clock::duration::zero())
     {
     }
 
@@ -13,8 +15,7 @@ namespace AbletonProject
     {
         if (_isRunning) return;
 
-        //TODO fix this
-        //_startTime = std::chrono::high_resolution_clock::now();
+        _startTime = high_resolution_clock::now();
         _isRunning = true;
     }
 
@@ -27,7 +28,7 @@ namespace AbletonProject
 
     void Stopwatch::reset()
     {
-        _elapsed = std::chrono::system_clock::duration::zero();
+        _elapsed = high_resolution_clock::duration::zero();
         _isRunning = false;
     }
 
@@ -41,22 +42,20 @@ namespace AbletonProject
     {
         return _isRunning;
     }
-    
-    std::chrono::milliseconds Stopwatch::getElapsedMilliseconds() const
+
+    milliseconds Stopwatch::getElapsedMilliseconds() const
     {
-        return std::chrono::duration_cast<std::chrono::milliseconds>(getElapsed());
+        return duration_cast<milliseconds>(getElapsed());
     }
 
-    std::chrono::duration<std::chrono::system_clock::rep, std::chrono::system_clock::period> Stopwatch::getElapsed() const
+    duration<high_resolution_clock::rep, high_resolution_clock::period> Stopwatch::getElapsed() const
     {
         if (!_isRunning) return _elapsed;
         return calculateElapsed();
     }
 
-    std::chrono::duration<std::chrono::system_clock::rep, std::chrono::system_clock::period> Stopwatch::calculateElapsed() const
+    duration<high_resolution_clock::rep, high_resolution_clock::period> Stopwatch::calculateElapsed() const
     {
-        //TODO: Fix this
-        //return _elapsed + std::chrono::high_resolution_clock::now() - _startTime;
-        return _elapsed;
+        return _elapsed + high_resolution_clock::now() - _startTime;
     }
 }
