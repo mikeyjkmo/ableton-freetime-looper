@@ -4,7 +4,7 @@
 namespace AbletonProject
 {
 
-    InitialLoopState::InitialLoopState(MessageDispatcher* messageDispatcher) :
+    InitialLoopState::InitialLoopState(MessageDispatcher& messageDispatcher) :
         _stopWatch(),
         _messageDispatcher(messageDispatcher)
     {
@@ -16,6 +16,6 @@ namespace AbletonProject
         _stopWatch.stop();
 
         state = std::move(std::make_unique<RunningState>(_stopWatch.getElapsedMilliseconds(), _messageDispatcher));
-        _messageDispatcher->sendMessage(message);
+        _messageDispatcher.sendMessage(message);
     }
 }

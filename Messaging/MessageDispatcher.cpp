@@ -3,7 +3,8 @@
 namespace AbletonProject
 {
 
-    MessageDispatcher::MessageDispatcher()
+    MessageDispatcher::MessageDispatcher(std::unique_ptr<RtMidiOut> mOut)
+        : _midiOut(std::move(mOut))
     {
     }
 

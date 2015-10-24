@@ -17,9 +17,9 @@ namespace AbletonProject
         ConcurrentQueue<Message> _queue;
         void forwardMessage();
         void _dequeueAndSendAll();
-        MessageDispatcher* _messageDispatcher;
+        MessageDispatcher& _messageDispatcher;
     public:
-        RunningState(std::chrono::milliseconds timespan, MessageDispatcher* messageDispatcher);
+        RunningState(std::chrono::milliseconds timespan, MessageDispatcher& messageDispatcher);
         virtual ~RunningState();
 
         void handle(std::unique_ptr<StateBase>& state, Message message);

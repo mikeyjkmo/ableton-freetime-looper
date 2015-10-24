@@ -12,9 +12,9 @@ namespace AbletonProject
     {
     private:
         Stopwatch _stopWatch;
-        MessageDispatcher* _messageDispatcher;
+        MessageDispatcher& _messageDispatcher;
     public:
-        InitialLoopState(MessageDispatcher* messageDispatcher);
+        InitialLoopState(MessageDispatcher& messageDispatcher);
         virtual ~InitialLoopState() = default;
 
         void handle(std::unique_ptr<StateBase>& state, Message message);
