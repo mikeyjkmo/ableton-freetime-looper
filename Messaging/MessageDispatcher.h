@@ -10,10 +10,10 @@ namespace AbletonProject
     class MessageDispatcher
     {
     public:
-        MessageDispatcher(std::unique_ptr<RtMidiOut> mOut);
+        MessageDispatcher(RtMidiOut& mOut);
         virtual ~MessageDispatcher() = default;
         void sendMessage(Message& message);
     private:
-        std::unique_ptr<RtMidiOut> _midiOut;
+        RtMidiOut& _midiOut;
     };
 }

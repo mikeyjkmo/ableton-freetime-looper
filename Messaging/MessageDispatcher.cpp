@@ -5,15 +5,14 @@
 namespace AbletonProject
 {
 
-    MessageDispatcher::MessageDispatcher(std::unique_ptr<RtMidiOut> mOut)
-        : _midiOut(std::move(mOut))
+    MessageDispatcher::MessageDispatcher(RtMidiOut& mOut)
+        : _midiOut(mOut)
     {
     }
 
     void MessageDispatcher::sendMessage(Message& message)
     {
-        for (const unsigned char &i : message.payload)
-            std::cout << i << std::endl;
+        _midiOut.sendMessage(&(message.payload));
     }
 
 }
