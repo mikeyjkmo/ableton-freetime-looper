@@ -25,6 +25,8 @@ namespace AbletonProject
         std::shared_ptr<std::thread> _previousThread;
         std::shared_ptr<std::thread> _thread;
 
+        void _joinThreads(bool joinCurrent);
+        void _threadCallback();
         void _scheduleNextCall();
 
     };

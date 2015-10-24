@@ -16,7 +16,10 @@ namespace AbletonProject
     }
 
 
-    AsyncTimer::~AsyncTimer() {}
+    AsyncTimer::~AsyncTimer()
+    {
+        stop();
+    }
 
 
     void AsyncTimer::start()
@@ -28,42 +31,46 @@ namespace AbletonProject
         }
     }
 
-
-    void AsyncTimer::stop()
+    void AsyncTimer::_joinThreads(bool joinCurrent)
     {
-        _stopped = true;
-        if (_previousThread)
+        if (_previousThread && _previousThread->joinable())
         {
             _previousThread->join();
         }
-        if (_thread)
+        if (joinCurrent && _thread && _thread->joinable())
         {
             _thread->join();
         }
     }
 
+    void AsyncTimer::stop()
+    {
+        _stopped = true;
+        _joinThreads(true);
+    }
+
+    void AsyncTimer::_threadCallback()
+    {
+        this_thread::sleep_for(_intervalMilliseconds);
+        if (!_stopped)
+        {
+            _function();
+            _scheduleNextCall();
+        }
+    }
 
     void AsyncTimer::_scheduleNextCall()
     {
         if (!_stopped)
         {
-            if (_previousThread)
-            {
-                _previousThread->join();
-            }
+            _joinThreads(false);
             if (_thread)
             {
                 _previousThread = _thread;
             }
 
             _thread = make_shared<thread>(
-                [this]()
-                {
-                    this_thread::sleep_for(this->_intervalMilliseconds);
-                    this->_function();
-                    this->_scheduleNextCall();
-                }
-            );
+                std::bind(&AsyncTimer::_threadCallback, this));
         }
     }
 

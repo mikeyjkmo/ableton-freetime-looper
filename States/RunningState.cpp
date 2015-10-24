@@ -14,7 +14,6 @@ namespace AbletonProject
 
     RunningState::~RunningState()
     {
-        _asyncTimer.stop();
     }
 
     void RunningState::_dequeueAndSendAll()
