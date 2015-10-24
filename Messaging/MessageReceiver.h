@@ -3,8 +3,8 @@
 #include <string>
 #include <mutex>
 
-#include "../States/StateBase.h"
-#include "../States/CreatedState.h"
+#include "States/StateBase.h"
+#include "States/CreatedState.h"
 #include "MessageDispatcher.h"
 
 namespace AbletonProject

@@ -3,9 +3,9 @@
 #include <chrono>
 
 #include "StateBase.h"
-#include "../Utilities/AsyncTimer.h"
-#include "../Utilities/ConcurrentQueue.h"
-#include "../Messaging/MessageDispatcher.h"
+#include "Utilities/AsyncTimer.h"
+#include "Utilities/ConcurrentQueue.h"
+#include "Messaging/MessageDispatcher.h"
 
 namespace AbletonProject
 {

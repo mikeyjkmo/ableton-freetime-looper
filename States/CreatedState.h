@@ -2,8 +2,8 @@
 #include <memory>
 #include <string>
 
-#include "../Utilities/Stopwatch.h"
-#include "../Messaging/MessageDispatcher.h"
+#include "Utilities/Stopwatch.h"
+#include "Messaging/MessageDispatcher.h"
 #include "StateBase.h"
 
 namespace AbletonProject
