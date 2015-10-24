@@ -10,7 +10,7 @@
 namespace AbletonProject
 {
 
-    class RunningState : public StateBase
+    class RunningState final : public StateBase
     {
     private:
         AsyncTimer _asyncTimer;
@@ -20,7 +20,6 @@ namespace AbletonProject
         MessageDispatcher& _messageDispatcher;
     public:
         RunningState(std::chrono::milliseconds timespan, MessageDispatcher& messageDispatcher);
-        virtual ~RunningState();
 
         void handle(std::unique_ptr<StateBase>& state, Message& message);
     };

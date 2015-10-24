@@ -8,14 +8,13 @@
 namespace AbletonProject
 {
     // Waiting for and timing completion of intial loop
-    class InitialLoopState : public StateBase
+    class InitialLoopState final : public StateBase
     {
     private:
         Stopwatch _stopWatch;
         MessageDispatcher& _messageDispatcher;
     public:
         InitialLoopState(MessageDispatcher& messageDispatcher);
-        virtual ~InitialLoopState() = default;
 
         void handle(std::unique_ptr<StateBase>& state, Message& message);
     };

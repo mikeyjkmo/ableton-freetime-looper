@@ -7,7 +7,7 @@
 namespace AbletonProject
 {
     template<typename T>
-    class ConcurrentQueue
+    class ConcurrentQueue final
     {
     private:
         std::queue<T> _queue;
@@ -19,8 +19,6 @@ namespace AbletonProject
             _mutex()
         {
         }
-
-        virtual ~ConcurrentQueue() = default;
 
         bool empty() const
         {

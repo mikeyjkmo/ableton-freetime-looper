@@ -7,7 +7,7 @@
 
 namespace AbletonProject
 {
-    class AsyncTimer
+    class AsyncTimer final
     {
     public:
         AsyncTimer(const std::chrono::milliseconds intervalMilliseconds, std::function<void()> f);

@@ -7,7 +7,7 @@
 namespace AbletonProject
 {
 
-    class Stopwatch
+    class Stopwatch final
     {
     private:
         bool _isRunning;
@@ -20,7 +20,6 @@ namespace AbletonProject
                               std::chrono::high_resolution_clock::period> getElapsed() const;
     public:
         Stopwatch();
-        virtual ~Stopwatch() = default;
 
         void start();
         void stop();

@@ -12,10 +12,6 @@ namespace AbletonProject
         _asyncTimer.start();
     }
 
-    RunningState::~RunningState()
-    {
-    }
-
     void RunningState::_dequeueAndSendAll()
     {
         Message message;

@@ -9,13 +9,12 @@
 namespace AbletonProject
 {
     // Waiting for first message to start Initial Loop
-    class CreatedState : public StateBase
+    class CreatedState final : public StateBase
     {
     private:
         MessageDispatcher& _messageDispatcher;
     public:
         CreatedState(MessageDispatcher& messageDispatcher);
-        virtual ~CreatedState() = default;
 
         void handle(std::unique_ptr<StateBase>& state, Message& message);
     };

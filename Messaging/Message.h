@@ -5,7 +5,7 @@
 
 namespace AbletonProject
 {
-    struct Message
+    struct Message final
     {
     public:
         Message() {}

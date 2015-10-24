@@ -7,11 +7,10 @@
 
 namespace AbletonProject
 {
-    class MessageDispatcher
+    class MessageDispatcher final
     {
     public:
         MessageDispatcher(RtMidiOut& mOut);
-        virtual ~MessageDispatcher() = default;
         void sendMessage(Message& message);
     private:
         RtMidiOut& _midiOut;

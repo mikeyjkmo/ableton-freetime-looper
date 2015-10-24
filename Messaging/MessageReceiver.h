@@ -9,14 +9,13 @@
 
 namespace AbletonProject
 {
-    class MessageReceiver
+    class MessageReceiver final
     {
     private:
         std::unique_ptr<StateBase> _currentState;
         std::mutex _mutex;
     public:
         MessageReceiver(MessageDispatcher& messageDispatcher);
-        virtual ~MessageReceiver() = default;
 
         void receiveMessage(Message& message);
     };
