@@ -5,11 +5,13 @@ namespace AbletonProject
 {
 
     RunningState::RunningState(std::chrono::milliseconds timespan, MessageDispatcher* messageDispatcher)
-        : _queue(),_messageDispatcher(messageDispatcher)
+        : _asyncTimer(timespan, std::bind(&RunningState::_dequeueAndSendAll, this)),
+          _queue(),
+          _messageDispatcher(messageDispatcher)
     {
     }
 
-    void RunningState::dequeueAndSendAll()
+    void RunningState::_dequeueAndSendAll()
     {
         std::string message;
         while (_queue.tryDequeue(message))
@@ -23,6 +25,6 @@ namespace AbletonProject
         _queue.enqueue(message);
 
         // todo for now immeditetly forward
-        dequeueAndSendAll();
+        _dequeueAndSendAll();
     }
 }
