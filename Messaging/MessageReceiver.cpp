@@ -3,9 +3,8 @@
 namespace AbletonProject
 {
 
-    MessageReceiver::MessageReceiver() :
-        _messageDispatcher(std::make_unique<MessageDispatcher>()),
-        _currentState(std::make_unique<CreatedState>(_messageDispatcher.get()))
+    MessageReceiver::MessageReceiver(MessageDispatcher& messageDispatcher) :
+        _currentState(std::make_unique<CreatedState>(messageDispatcher))
     {
     }
 

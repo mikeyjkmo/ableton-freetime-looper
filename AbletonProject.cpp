@@ -9,11 +9,14 @@
 #include <chrono>
 #include <thread>
 
+#include "RtMidi/Rtmidi.h"
+
 using namespace AbletonProject;
 
 int main()
 {
-    MessageReceiver receiver;
+    MessageDispatcher dispatcher(std::make_unique<RtMidiOut>());
+    MessageReceiver receiver(dispatcher);
 
     receiver.receiveMessage(Message({ 'a' }));
 

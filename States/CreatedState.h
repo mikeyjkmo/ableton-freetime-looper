@@ -12,9 +12,9 @@ namespace AbletonProject
     class CreatedState : public StateBase
     {
     private:
-        MessageDispatcher* _messageDispatcher;
+        MessageDispatcher& _messageDispatcher;
     public:
-        CreatedState(MessageDispatcher* messageDispatcher);
+        CreatedState(MessageDispatcher& messageDispatcher);
         virtual ~CreatedState() = default;
 
         void handle(std::unique_ptr<StateBase>& state, Message& message);

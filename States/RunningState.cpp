@@ -4,7 +4,7 @@
 namespace AbletonProject
 {
 
-    RunningState::RunningState(std::chrono::milliseconds timespan, MessageDispatcher* messageDispatcher)
+    RunningState::RunningState(std::chrono::milliseconds timespan, MessageDispatcher& messageDispatcher)
         : _asyncTimer(timespan, std::bind(&RunningState::_dequeueAndSendAll, this)),
           _queue(),
           _messageDispatcher(messageDispatcher)
@@ -22,7 +22,7 @@ namespace AbletonProject
         Message message;
         while (_queue.tryDequeue(message))
         {
-            _messageDispatcher->sendMessage(message);
+            _messageDispatcher.sendMessage(message);
         }
     }
 
