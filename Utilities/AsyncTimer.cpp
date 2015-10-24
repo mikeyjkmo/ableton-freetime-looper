@@ -9,9 +9,9 @@ namespace AbletonProject
     AsyncTimer::AsyncTimer(
             const chrono::milliseconds intervalMilliseconds, function<void()> f)
         : _intervalMilliseconds(intervalMilliseconds),
+          _function(f),
           _started(false),
-          _stopped(false),
-          _function(f)
+          _stopped(false)
     {
     }
 

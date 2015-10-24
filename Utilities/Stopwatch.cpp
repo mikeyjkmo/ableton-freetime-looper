@@ -6,8 +6,8 @@ namespace AbletonProject
 
     Stopwatch::Stopwatch() :
         _isRunning(false),
-        _elapsed(high_resolution_clock::duration::zero()),
-        _startTime(high_resolution_clock::duration::zero())
+        _startTime(high_resolution_clock::duration::zero()),
+        _elapsed(high_resolution_clock::duration::zero())
     {
     }
 
