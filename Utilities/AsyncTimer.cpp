@@ -1,4 +1,4 @@
-#include "AsyncTimer.hpp"
+#include "AsyncTimer.h"
 #include <iostream>
 
 using namespace std;

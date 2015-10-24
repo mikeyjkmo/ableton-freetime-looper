@@ -3,13 +3,13 @@
 namespace AbletonProject
 {
 
-	MessageDispatcher::MessageDispatcher()
-	{
-	}
+    MessageDispatcher::MessageDispatcher()
+    {
+    }
 
-	void MessageDispatcher::sendMessage(std::string message)
-	{
-		std::cout << message << std::endl;
-	}
+    void MessageDispatcher::sendMessage(std::string message)
+    {
+        std::cout << message << std::endl;
+    }
 
 }

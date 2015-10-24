@@ -6,14 +6,11 @@
 
 namespace AbletonProject
 {
-
-	class MessageDispatcher
-	{
-	public:
-		MessageDispatcher();
-		virtual ~MessageDispatcher() = default;
-		
-		void sendMessage(std::string message);
-	};
-
+    class MessageDispatcher
+    {
+    public:
+        MessageDispatcher();
+        virtual ~MessageDispatcher() = default;
+        void sendMessage(std::string message);
+    };
 }

@@ -3,7 +3,7 @@
 namespace AbletonProject
 {
 
-	StateBase::StateBase()
-	{
-	}
+    StateBase::StateBase()
+    {
+    }
 }

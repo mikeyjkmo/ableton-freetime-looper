@@ -1,87 +1,31 @@
-#include "AsyncTimer.hpp"
-#include <iostream>
+#pragma once
 
-using namespace std;
+#include <functional>
+#include <chrono>
+#include <future>
+#include <cstdio>
 
-
-AsyncTimer::AsyncTimer(
-        const chrono::milliseconds intervalMilliseconds, function<void()> f)
-    : _intervalMilliseconds(intervalMilliseconds),
-      _started(false),
-      _stopped(false),
-      _function(f)
+namespace AbletonProject
 {
-}
-
-
-AsyncTimer::~AsyncTimer() {}
-
-
-void AsyncTimer::start()
-{
-    if (!_started)
+    class AsyncTimer
     {
-        _started = true;
-        _scheduleNextCall();
-    }
-}
+    public:
+        AsyncTimer(const std::chrono::milliseconds intervalMilliseconds, std::function<void()> f);
+        ~AsyncTimer();
 
+        void start();
+        void stop();
 
-void AsyncTimer::stop()
-{
-    _stopped = true;
-    if (_previousThread)
-    {
-        _previousThread->join();
-    }
-    if (_thread)
-    {
-        _thread->join();
-    }
-}
+    private:
+        const std::chrono::milliseconds _intervalMilliseconds;
+        std::function<void()> _function;
 
+        bool _started;
+        bool _stopped;
+        std::shared_ptr<std::thread> _previousThread;
+        std::shared_ptr<std::thread> _thread;
 
-void AsyncTimer::_scheduleNextCall()
-{
-    if (!_stopped)
-    {
-        if (_previousThread)
-        {
-            _previousThread->join();
-        }
-        if (_thread)
-        {
-            _previousThread = _thread;
-        }
+        void _scheduleNextCall();
 
-        _thread = make_shared<thread>(
-            [this]()
-            {
-                this_thread::sleep_for(this->_intervalMilliseconds);
-                this->_function();
-                this->_scheduleNextCall();
-            }
-        );
-    }
-}
-
-
-int number = 0;
-void printHello()
-{
-    cout << "Hello! " << number << endl;
-    number++;
-}
-
-
-int main()
-{
-    AsyncTimer at(chrono::milliseconds(100), printHello);
-    cout << "Starting AsyncTimer" << endl;
-    at.start();
-    cout << "Sleeping in main thread..." << endl;
-    this_thread::sleep_for(chrono::milliseconds(500));
-    cout << "Stopping AsyncTimer" << endl;
-    at.stop();
-    return 0;
+    };
 }
