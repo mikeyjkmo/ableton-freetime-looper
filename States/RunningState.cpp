@@ -1,6 +1,5 @@
 #include "RunningState.h"
 
-
 namespace AbletonProject
 {
 
@@ -26,5 +25,9 @@ namespace AbletonProject
         _queue.enqueue(message);
     }
 
+    void RunningState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
+    {
+        state = std::make_unique<CreatedState>(_messageDispatcher);
+    }
 
 }

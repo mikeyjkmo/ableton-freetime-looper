@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <mutex>
+#include <string>
 
 #include "States/StateBase.h"
 #include "States/CreatedState.h"
@@ -18,5 +19,6 @@ namespace AbletonProject
         MessageReceiver(MessageDispatcher& messageDispatcher);
 
         void receiveMessage(Message& message);
+        void receiveStdin(std::string& input);
     };
 }

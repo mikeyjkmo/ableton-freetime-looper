@@ -7,18 +7,19 @@
 #include "StateBase.h"
 #include "Messaging/Message.h"
 
-// Next state:
-#include "InitialLoopWaitingState.h"
+// Next states:
+#include "InitialLoopState.h"
+#include "CreatedState.h"
 
 namespace AbletonProject
 {
-    // Waiting for stdIn to signal that intial loop start message is coming
-    class CreatedState final : public StateBase
+    // Waiting for first message to start Initial Loop
+    class InitialLoopWaitingState final : public StateBase
     {
     private:
         MessageDispatcher& _messageDispatcher;
     public:
-        CreatedState(MessageDispatcher& messageDispatcher);
+        InitialLoopWaitingState(MessageDispatcher& messageDispatcher);
 
         void handle(std::unique_ptr<StateBase>& state, Message& message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;

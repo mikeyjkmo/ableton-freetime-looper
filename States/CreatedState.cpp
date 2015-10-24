@@ -1,5 +1,4 @@
 #include "CreatedState.h"
-#include "InitialLoopState.h"
 
 namespace AbletonProject
 {
@@ -11,8 +10,12 @@ namespace AbletonProject
 
     void CreatedState::handle(std::unique_ptr<StateBase>& state, Message& message)
     {
-        state = std::make_unique<InitialLoopState>(_messageDispatcher);
         _messageDispatcher.sendMessage(message);
+    }
+
+    void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
+    {
+        state = std::make_unique<InitialLoopWaitingState>(_messageDispatcher);
     }
 
 }

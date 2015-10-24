@@ -1,5 +1,4 @@
 #include "InitialLoopState.h"
-#include "RunningState.h"
 
 namespace AbletonProject
 {
@@ -17,5 +16,10 @@ namespace AbletonProject
 
         state = std::move(std::make_unique<RunningState>(_stopWatch.getElapsedMilliseconds(), _messageDispatcher));
         _messageDispatcher.sendMessage(message);
+    }
+
+    void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
+    {
+        state = std::move(std::make_unique<CreatedState>(_messageDispatcher));
     }
 }
