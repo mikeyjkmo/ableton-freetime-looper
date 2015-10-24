@@ -22,7 +22,7 @@ namespace AbletonProject
         RunningState(std::chrono::milliseconds timespan, MessageDispatcher* messageDispatcher);
         virtual ~RunningState();
 
-        void handle(std::unique_ptr<StateBase>& state, Message message);
+        void handle(std::unique_ptr<StateBase>& state, Message& message);
     };
 
 }

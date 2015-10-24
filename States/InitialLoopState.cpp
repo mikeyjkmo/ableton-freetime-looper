@@ -11,7 +11,7 @@ namespace AbletonProject
         _stopWatch.start();
     }
 
-    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, Message message)
+    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, Message& message)
     {
         _stopWatch.stop();
 

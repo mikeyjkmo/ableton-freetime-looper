@@ -26,7 +26,7 @@ namespace AbletonProject
         }
     }
 
-    void RunningState::handle(std::unique_ptr<StateBase>& state, Message message)
+    void RunningState::handle(std::unique_ptr<StateBase>& state, Message& message)
     {
         _queue.enqueue(message);
     }

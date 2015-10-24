@@ -1,5 +1,7 @@
 #include "MessageDispatcher.h"
 
+#include <iostream>
+
 namespace AbletonProject
 {
 
@@ -7,9 +9,10 @@ namespace AbletonProject
     {
     }
 
-    void MessageDispatcher::sendMessage(Message message)
+    void MessageDispatcher::sendMessage(Message& message)
     {
-        // todo
+        for (const unsigned char &i : message.payload)
+            std::cout << i << std::endl;
     }
 
 }

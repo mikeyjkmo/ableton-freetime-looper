@@ -17,7 +17,7 @@ namespace AbletonProject
         CreatedState(MessageDispatcher* messageDispatcher);
         virtual ~CreatedState() = default;
 
-        void handle(std::unique_ptr<StateBase>& state, Message message);
+        void handle(std::unique_ptr<StateBase>& state, Message& message);
     };
 
 }

@@ -15,16 +15,16 @@ int main()
 {
     MessageReceiver receiver;
 
-    receiver.receiveMessage(Message());
+    receiver.receiveMessage(Message({ 'a' }));
 
     std::this_thread::sleep_for(std::chrono::seconds(2));
 
-    receiver.receiveMessage(Message());
+    receiver.receiveMessage(Message({ 'a' }));
 
     for (int i = 0; i < 20; i++)
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        receiver.receiveMessage(Message());
+        receiver.receiveMessage(Message({ (unsigned char)(i*12) }));
     }
 
 

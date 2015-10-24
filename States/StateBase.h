@@ -12,7 +12,7 @@ namespace AbletonProject
         StateBase();
     public:
         virtual ~StateBase() = default;
-        virtual void handle(std::unique_ptr<StateBase>& state, Message message) = 0;
+        virtual void handle(std::unique_ptr<StateBase>& state, Message& message) = 0;
     };
 
 }

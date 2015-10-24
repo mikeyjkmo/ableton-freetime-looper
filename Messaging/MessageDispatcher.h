@@ -9,6 +9,6 @@ namespace AbletonProject
     public:
         MessageDispatcher();
         virtual ~MessageDispatcher() = default;
-        void sendMessage(Message message);
+        void sendMessage(Message& message);
     };
 }

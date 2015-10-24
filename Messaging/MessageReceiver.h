@@ -19,6 +19,6 @@ namespace AbletonProject
         MessageReceiver();
         virtual ~MessageReceiver() = default;
 
-        void receiveMessage(Message message);
+        void receiveMessage(Message& message);
     };
 }

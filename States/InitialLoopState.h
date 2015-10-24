@@ -17,7 +17,7 @@ namespace AbletonProject
         InitialLoopState(MessageDispatcher* messageDispatcher);
         virtual ~InitialLoopState() = default;
 
-        void handle(std::unique_ptr<StateBase>& state, Message message);
+        void handle(std::unique_ptr<StateBase>& state, Message& message);
     };
 
 }
