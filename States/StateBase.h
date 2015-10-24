@@ -9,7 +9,7 @@ namespace AbletonProject
     class StateBase
     {
     protected:
-        StateBase();
+        StateBase() {};
     public:
         virtual ~StateBase() = default;
         virtual void handle(std::unique_ptr<StateBase>& state, Message& message) = 0;
