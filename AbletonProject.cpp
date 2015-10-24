@@ -4,6 +4,7 @@
 
 #include "Utilities/Stopwatch.h"
 #include "Utilities/ConcurrentQueue.h"
+#include "Utilities/RtMidiExt.h"
 #include "Messaging/MessageReceiver.h"
 
 #include <chrono>
@@ -13,24 +14,6 @@
 
 using namespace AbletonProject;
 
-void printPorts(RtMidi& midi, const std::string &portType)
-{
-    // Check inputs.
-    unsigned int nPorts = midi.getPortCount();
-    std::cout << "\nThere are " << nPorts << " MIDI " << portType << " ports available." << std::endl;
-    std::string portName;
-
-    for (unsigned int i = 0; i < nPorts; i++) {
-        try {
-            portName = midi.getPortName(i);
-        }
-        catch (RtMidiError &error) {
-            error.printMessage();
-        }
-        std::cout << "  " << portType << " Port #" << i+1 << ": " << portName << std::endl;
-    }
-}
-
 int main(int argc, char *argv[])
 {
     RtMidiOut midiOut;
@@ -38,7 +21,7 @@ int main(int argc, char *argv[])
 
     if (argc == 1)
     {
-        printPorts(midiOut, "Output");
+        RtMidiExt::printPorts(midiOut, "Output");
         return 0;
     }
 
