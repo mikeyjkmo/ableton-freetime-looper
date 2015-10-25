@@ -21,7 +21,7 @@ namespace AbletonProject
             _recording.erase(recordingLoopEntry);
             return;
         }
-        
+
         auto runningMessageEntry = _running.find(*message);
         // If unknown, move to recording
         if (runningMessageEntry == _running.end())
@@ -31,7 +31,7 @@ namespace AbletonProject
     }
 
     std::vector<Message*> LoopTracker::getNextRestartMessages()
-    { 
+    {
         std::vector<Message*> restartMessages;
 
         for (auto& i : _running)

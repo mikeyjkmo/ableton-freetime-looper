@@ -11,17 +11,12 @@ namespace AbletonProject
 
     void Loop::incrementInterval()
     {
-        _interval++;
+        ++_interval;
     }
 
     bool Loop::checkIfRestartRequired()
     {
-        if (_waitUntilNextRestart < 1)
-        {
-            return true;
-        }
-
-        return false;
+        return _waitUntilNextRestart < 1;
     }
 
     void Loop::decrementNextRestartWait()
@@ -31,8 +26,8 @@ namespace AbletonProject
             _waitUntilNextRestart = _interval - 1;
             return;
         }
-        
-        _waitUntilNextRestart--;
+
+        --_waitUntilNextRestart;
     }
 
     Message* Loop::getControlMessage()
