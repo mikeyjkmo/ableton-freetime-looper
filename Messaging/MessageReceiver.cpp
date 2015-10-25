@@ -32,7 +32,9 @@ namespace AbletonProject
 
     bool MessageReceiver::isMidiCommand(Message* message)
     {
-        // todo implement
-        return true;
+        if (message->payload.empty()) return false;
+
+        auto first_byte = message->payload[0];
+        return first_byte > 175 && first_byte < 192;
     }
 }
