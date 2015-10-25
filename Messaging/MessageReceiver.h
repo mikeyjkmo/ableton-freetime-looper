@@ -17,6 +17,8 @@ namespace AbletonProject
         std::unique_ptr<StateBase> _currentState;
         std::mutex _mutex;
         EventLogger _logger;
+
+        bool isMidiCommand(Message* message);
     public:
         MessageReceiver(MessageDispatcher& messageDispatcher, EventLogger& logger);
 

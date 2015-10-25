@@ -18,12 +18,21 @@ namespace AbletonProject
     void MessageReceiver::receiveMidiMessage(std::unique_ptr<Message> message)
     {
         std::lock_guard<std::mutex> lock(_mutex);
-        _currentState->handle(_currentState, std::move(message));
+        if (isMidiCommand(message.get()))
+        {
+            _currentState->handle(_currentState, std::move(message));
+        }
     }
 
     void MessageReceiver::receiveStdin(std::string& input)
     {
         std::lock_guard<std::mutex> lock(_mutex);
         _currentState->handleStdin(_currentState, input);
+    }
+
+    bool MessageReceiver::isMidiCommand(Message* message)
+    {
+        // todo implement
+        return true;
     }
 }
