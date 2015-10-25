@@ -15,10 +15,12 @@ namespace AbletonProject
     {
         _messageDispatcher.sendMidiMessage(message);
 
-        if (!_loopStartingMessage.Matches(message)) return;
-
-        _stopWatch.stop();
-        state = std::move(std::make_unique<RunningState>(_stopWatch.getElapsedMilliseconds(), _messageDispatcher));
+        if (_loopStartingMessage == message)
+        {
+            _stopWatch.stop();
+            state = std::move(std::make_unique<RunningState>(
+                _stopWatch.getElapsedMilliseconds(), _messageDispatcher));
+        }
     }
 
     void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)

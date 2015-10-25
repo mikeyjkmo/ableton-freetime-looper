@@ -16,7 +16,7 @@ namespace AbletonProject
 
         std::vector<unsigned char> payload;
 
-        bool Matches(Message const& other) const
+        bool operator==(const Message& other) const
         {
             return other.payload == payload;
         }
