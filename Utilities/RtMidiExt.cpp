@@ -20,7 +20,7 @@ namespace AbletonProject
                     error.printMessage();
                 }
                 std::cout << "  " << portType << " Port #"
-                          << i + 1 << ": " << portName << std::endl;
+                          << i << ": " << portName << std::endl;
             }
         }
 
