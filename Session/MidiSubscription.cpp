@@ -9,7 +9,7 @@ namespace AbletonProject
     {
         for (MessageReceiver*& subscribingReceiver : global_MidiSubcriptions)
         {
-            subscribingReceiver->receiveRawMidiMessage(deltatime, rawMessage, userData);
+            subscribingReceiver->receiveRawMidiMessage(deltatime, rawMessage);
         }
     };
 

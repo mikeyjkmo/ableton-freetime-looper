@@ -9,7 +9,6 @@ namespace AbletonProject
     {
     public:
         Session(int ac, char* av[]);
-        ~Session();
 
         int run();
     private:

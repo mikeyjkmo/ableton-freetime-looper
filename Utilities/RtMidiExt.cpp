@@ -1,4 +1,5 @@
 #include "RtMidiExt.h"
+#include "Messaging/MessageReceiver.h"
 
 namespace AbletonProject
 {
@@ -22,6 +23,13 @@ namespace AbletonProject
                 std::cout << "  " << portType << " Port #"
                           << i + 1 << ": " << portName << std::endl;
             }
+        }
+
+        void callbackWrapper(
+            double deltatime, std::vector<unsigned char> *rawMessage, void *userData)
+        {
+            (static_cast<MessageReceiver*>(userData))->receiveRawMidiMessage(
+                    deltatime, rawMessage);
         }
     }
 }

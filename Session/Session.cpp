@@ -7,7 +7,7 @@
 #include "Utilities/RtMidiExt.h"
 #include "Messaging/MessageReceiver.h"
 #include "Session.h"
-#include "MidiSubscription.h"
+
 
 namespace AbletonProject
 {
@@ -20,11 +20,6 @@ namespace AbletonProject
           _inputDeviceID(0)
     {
         _setDeviceIDs();
-    }
-
-    Session::~Session()
-    {
-        global_MidiSubcriptions.clear();
     }
 
     void Session::_setDeviceIDs()
@@ -56,9 +51,7 @@ namespace AbletonProject
         MessageDispatcher dispatcher(_midiOut);
         MessageReceiver receiver(dispatcher, logger);
 
-        global_subscribeForMidiCallback(&receiver);
-
-        _midiIn.setCallback(global_MidiSubcriptionsLambda);
+        _midiIn.setCallback(&RtMidiExt::callbackWrapper, &receiver);
         _midiIn.ignoreTypes(false, false, false);
 
         while (true)
@@ -82,7 +75,6 @@ namespace AbletonProject
 
         _midiOut.closePort();
         _midiIn.closePort();
-        global_unsubscribeFromMidiCallback(&receiver);
 
         return 0;
     }
@@ -154,7 +146,7 @@ namespace AbletonProject
                 return 1;
             }
 
-            return _test();
+            return _openPortsAndStartReceiving();
         }
         else
         {

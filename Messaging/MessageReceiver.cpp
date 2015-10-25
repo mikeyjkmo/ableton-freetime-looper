@@ -10,7 +10,7 @@ namespace AbletonProject
     }
 
     void MessageReceiver::receiveRawMidiMessage(
-        double deltatime, std::vector<unsigned char> *rawMessage, void *userData)
+        double deltatime, std::vector<unsigned char> *rawMessage)
     {
         Message message(deltatime, rawMessage);
         receiveMidiMessage(message);
