@@ -1,5 +1,6 @@
 # pragma once
 #include "RtMidi/RtMidi.h"
+#include "Messaging/MessageReceiver.h"
 
 namespace AbletonProject
 {
@@ -7,6 +8,7 @@ namespace AbletonProject
     {
     public:
         Session(int ac, char* av[]);
+        ~Session();
 
         int run();
     private:

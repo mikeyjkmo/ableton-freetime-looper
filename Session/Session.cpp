@@ -7,6 +7,7 @@
 #include "Utilities/RtMidiExt.h"
 #include "Messaging/MessageReceiver.h"
 #include "Session.h"
+#include "MidiSubscription.h"
 
 namespace AbletonProject
 {
@@ -19,6 +20,11 @@ namespace AbletonProject
           _inputDeviceID(0)
     {
         _setDeviceIDs();
+    }
+
+    Session::~Session()
+    {
+        global_MidiSubcriptions.clear();
     }
 
     void Session::_setDeviceIDs()
@@ -43,43 +49,39 @@ namespace AbletonProject
 
     int Session::_openPortsAndStartReceiving()
     {
-        //TODO fix function pointer broken on line 59
-        //_midiOut.openPort(_outputDeviceID);
-        //_midiIn.openPort(_inputDeviceID);
+        _midiOut.openPort(_outputDeviceID);
+        _midiIn.openPort(_inputDeviceID);
 
-        //MessageDispatcher dispatcher(_midiOut);
-        //MessageReceiver receiver(dispatcher);
+        MessageDispatcher dispatcher(_midiOut);
+        MessageReceiver receiver(dispatcher);
 
-        //auto receiveRawMessageLambda =
-        //    [&receiver] (double deltatime, std::vector<unsigned char> *rawMessage, void *userData)
-        //    {
-        //        receiver.receiveRawMidiMessage(deltatime, rawMessage, userData);
-        //    };
+        global_subscribeForMidiCallback(&receiver);
 
-        //_midiIn.setCallback(&receiveRawMidiMessage);
-        //_midiIn.ignoreTypes(false, false, false);
+        _midiIn.setCallback(global_MidiSubcriptionsLambda);
+        _midiIn.ignoreTypes(false, false, false);
 
-        //while (true)
-        //{
-        //    std::cout << std::endl
-        //              << "CONFIGURATION MODE" << std::endl
-        //              << "Relaying all MIDI messages for configuration. "
-        //              << "Press 'Enter' to enter LOOP MODE"
-        //              << std::endl;
-        //    std::string input;
-        //    std::getline(std::cin, input);
-        //    receiver.receiveStdin(input);
+        while (true)
+        {
+            std::cout << std::endl
+                      << "CONFIGURATION MODE" << std::endl
+                      << "Relaying all MIDI messages for configuration. "
+                      << "Press 'Enter' to enter LOOP MODE"
+                      << std::endl;
+            std::string input;
+            std::getline(std::cin, input);
+            receiver.receiveStdin(input);
 
-        //    std::cout << std::endl
-        //              << "LOOP MODE" << std::endl
-        //              << "Press 'Enter' to return to CONFIGURATION MODE"
-        //              << std::endl;
-        //    std::getline(std::cin, input);
-        //    receiver.receiveStdin(input);
-        //}
+            std::cout << std::endl
+                      << "LOOP MODE" << std::endl
+                      << "Press 'Enter' to return to CONFIGURATION MODE"
+                      << std::endl;
+            std::getline(std::cin, input);
+            receiver.receiveStdin(input);
+        }
 
-        //_midiOut.closePort();
-        //_midiIn.closePort();
+        _midiOut.closePort();
+        _midiIn.closePort();
+        global_unsubscribeFromMidiCallback(&receiver);
 
         return 0;
     }
@@ -149,6 +151,7 @@ namespace AbletonProject
                 std::cout << "The MIDI device you specified does not exist" << std::endl;
                 return 1;
             }
+
             return _test();
         }
         else
