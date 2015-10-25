@@ -10,7 +10,7 @@ namespace AbletonProject
 
     void CreatedState::handle(std::unique_ptr<StateBase>& state, Message& message)
     {
-        _messageDispatcher.sendMessage(message);
+        _messageDispatcher.sendMidiMessage(message);
     }
 
     void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)

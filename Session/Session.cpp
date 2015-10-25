@@ -55,26 +55,26 @@ namespace AbletonProject
         Message otherControlMessage({ 176, 7, 99 });
 
         // Send Messages through Created State
-        receiver.receiveMessage(volumeControlMessage);
-        receiver.receiveMessage(volumeControlMessage);
+        receiver.receiveMidiMessage(volumeControlMessage);
+        receiver.receiveMidiMessage(volumeControlMessage);
 
         std::string inputStr;
         receiver.receiveStdin(inputStr);
 
         // Send Message to Set Loop time to 2 seconds
-        receiver.receiveMessage(volumeControlMessage);
+        receiver.receiveMidiMessage(volumeControlMessage);
         // Unrelated messages are just relayed
-        receiver.receiveMessage(otherControlMessage);
+        receiver.receiveMidiMessage(otherControlMessage);
 
         std::this_thread::sleep_for(std::chrono::seconds(2));
 
-        receiver.receiveMessage(volumeControlMessage);
+        receiver.receiveMidiMessage(volumeControlMessage);
 
         // Send Messages through Running State
         for (int i = 0; i < 20; i++)
         {
             std::this_thread::sleep_for(std::chrono::seconds(1));
-            receiver.receiveMessage(volumeControlMessage);
+            receiver.receiveMidiMessage(volumeControlMessage);
         }
 
         _midiOut.closePort();

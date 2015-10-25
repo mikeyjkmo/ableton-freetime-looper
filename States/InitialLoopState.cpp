@@ -13,7 +13,7 @@ namespace AbletonProject
 
     void InitialLoopState::handle(std::unique_ptr<StateBase>& state, Message& message)
     {
-        _messageDispatcher.sendMessage(message);
+        _messageDispatcher.sendMidiMessage(message);
 
         if (!_loopStartingMessage.Matches(message)) return;
 

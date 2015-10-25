@@ -16,7 +16,7 @@ namespace AbletonProject
         Message message;
         while (_queue.tryDequeue(message))
         {
-            _messageDispatcher.sendMessage(message);
+            _messageDispatcher.sendMidiMessage(message);
         }
     }
 

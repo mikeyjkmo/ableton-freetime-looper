@@ -8,7 +8,7 @@ namespace AbletonProject
     {
     }
 
-    void MessageReceiver::receiveMessage(Message& message)
+    void MessageReceiver::receiveMidiMessage(Message& message)
     {
         std::lock_guard<std::mutex> lock(_mutex);
         _currentState->handle(_currentState, message);

@@ -11,7 +11,7 @@ namespace AbletonProject
     void InitialLoopWaitingState::handle(std::unique_ptr<StateBase>& state, Message& message)
     {
         state = std::make_unique<InitialLoopState>(_messageDispatcher, message);
-        _messageDispatcher.sendMessage(message);
+        _messageDispatcher.sendMidiMessage(message);
     }
 
     void InitialLoopWaitingState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
