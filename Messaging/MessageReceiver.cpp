@@ -3,8 +3,9 @@
 namespace AbletonProject
 {
 
-    MessageReceiver::MessageReceiver(MessageDispatcher& messageDispatcher) :
-        _currentState(std::make_unique<CreatedState>(messageDispatcher))
+    MessageReceiver::MessageReceiver(MessageDispatcher& messageDispatcher, EventLogger& logger) :
+        _currentState(std::make_unique<CreatedState>(messageDispatcher, logger)),
+        _logger(logger)
     {
     }
 

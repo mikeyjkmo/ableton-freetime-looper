@@ -2,8 +2,8 @@
 
 namespace AbletonProject
 {
-    StateChangedEvent::StateChangedEvent(std::chrono::high_resolution_clock::time_point time, std::string detail, std::string eventSource) :
-        _time(time),
+    StateChangedEvent::StateChangedEvent(std::string detail, std::string eventSource) :
+        _time(std::chrono::high_resolution_clock::now()),
         _detail(detail),
         _eventSource(eventSource)
     {

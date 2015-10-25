@@ -52,8 +52,9 @@ namespace AbletonProject
         _midiOut.openPort(_outputDeviceID);
         _midiIn.openPort(_inputDeviceID);
 
+        EventLogger logger;
         MessageDispatcher dispatcher(_midiOut);
-        MessageReceiver receiver(dispatcher);
+        MessageReceiver receiver(dispatcher, logger);
 
         global_subscribeForMidiCallback(&receiver);
 
@@ -90,8 +91,9 @@ namespace AbletonProject
     {
         _midiOut.openPort(_outputDeviceID);
 
+        EventLogger logger;
         MessageDispatcher dispatcher(_midiOut);
-        MessageReceiver receiver(dispatcher);
+        MessageReceiver receiver(dispatcher, logger);
 
         // Control Change: 176, 7, 100 (volume)
         Message volumeControlMessage({176, 7, 100});

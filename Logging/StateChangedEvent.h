@@ -14,7 +14,7 @@ namespace AbletonProject
         std::string _detail;
         std::string _eventSource;
     public:
-        StateChangedEvent(std::chrono::high_resolution_clock::time_point time, std::string detail, std::string eventSource);
+        StateChangedEvent(std::string detail, std::string eventSource);
 
         std::string getName() const override;
         std::chrono::high_resolution_clock::time_point getTime() const override;

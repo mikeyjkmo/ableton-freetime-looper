@@ -6,6 +6,8 @@
 #include "Messaging/MessageDispatcher.h"
 #include "StateBase.h"
 #include "Messaging/Message.h"
+#include "Logging/EventLogger.h"
+#include "Logging/StateChangedEvent.h"
 
 // Next states:
 #include "InitialLoopState.h"
@@ -18,8 +20,9 @@ namespace AbletonProject
     {
     private:
         MessageDispatcher& _messageDispatcher;
+        EventLogger& _logger;
     public:
-        InitialLoopWaitingState(MessageDispatcher& messageDispatcher);
+        InitialLoopWaitingState(MessageDispatcher& messageDispatcher, EventLogger& logger);
 
         void handle(std::unique_ptr<StateBase>& state, Message message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;

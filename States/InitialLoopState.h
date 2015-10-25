@@ -6,6 +6,8 @@
 #include "Utilities/Stopwatch.h"
 #include "Messaging/MessageDispatcher.h"
 #include "Messaging/Message.h"
+#include "Logging/EventLogger.h"
+#include "Logging/StateChangedEvent.h"
 
 // Next states:
 #include "RunningState.h"
@@ -20,8 +22,9 @@ namespace AbletonProject
         Stopwatch _stopWatch;
         MessageDispatcher& _messageDispatcher;
         Message _loopStartingMessage;
+        EventLogger& _logger;
     public:
-        InitialLoopState(MessageDispatcher& messageDispatcher, Message message);
+        InitialLoopState(MessageDispatcher& messageDispatcher, EventLogger& logger, Message message);
 
         void handle(std::unique_ptr<StateBase>& state, Message message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;

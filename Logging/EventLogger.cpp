@@ -10,13 +10,13 @@ namespace AbletonProject
     {
         // todo time
         std::cout
-            << " Name: "
+            << "Name: "
             << evnt->getName()
-            << " Level: "
+            << "|| Level: "
             << evnt->getLogLevel()
-            << " Detail: "
+            << "|| Detail: "
             << evnt->getDetail()
-            << " Source: "
+            << "|| Source: "
             << evnt->getEventSource()
             << std::endl;
     }
