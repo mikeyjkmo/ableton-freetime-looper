@@ -29,6 +29,7 @@ namespace AbletonProject
 
     void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
     {
+        _resources.loopTracker.clear();
         state = std::move(std::make_unique<CreatedState>(_resources));
         _resources.logger.log(std::make_unique<StateChangedEvent>(
             std::string("StdIn detected, reverting from InitialLoop to Created"),
