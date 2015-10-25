@@ -23,7 +23,7 @@ namespace AbletonProject
         {
             _resources.messageDispatcher.sendMidiMessage(message.get());
             // inform the loopTracker that a command has been received
-            _resources.loopTracker.commandReceived(message);
+            _resources.loopTracker.commandReceived(std::move(message));
         }
 
         // Get vector of restart messages to send

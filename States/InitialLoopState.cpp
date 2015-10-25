@@ -3,10 +3,10 @@
 namespace AbletonProject
 {
 
-    InitialLoopState::InitialLoopState(StateResources& resources, std::unique_ptr<Message> message)
+    InitialLoopState::InitialLoopState(StateResources& resources, Message message)
         : _stopWatch(),
          _resources(resources),
-         _loopStartingMessage(std::move(message))
+         _loopStartingMessage(message)
     {
         _stopWatch.start();
     }
@@ -15,9 +15,10 @@ namespace AbletonProject
     {
         _resources.messageDispatcher.sendMidiMessage(message.get());
 
-        if (_loopStartingMessage == message)
+        if (_loopStartingMessage == *message)
         {
             _stopWatch.stop();
+            _resources.loopTracker.commandReceived(std::move(message));
             state = std::move(std::make_unique<RunningState>(
                 _resources, _stopWatch.getElapsedMilliseconds()));
             _resources.logger.log(std::make_unique<StateChangedEvent>(

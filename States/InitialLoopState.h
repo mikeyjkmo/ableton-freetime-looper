@@ -21,9 +21,9 @@ namespace AbletonProject
     private:
         Stopwatch _stopWatch;
         StateResources& _resources;
-        std::unique_ptr<Message> _loopStartingMessage;
+        Message _loopStartingMessage;
     public:
-        InitialLoopState(StateResources& resources, std::unique_ptr<Message> message);
+        InitialLoopState(StateResources& resources, Message message);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;
