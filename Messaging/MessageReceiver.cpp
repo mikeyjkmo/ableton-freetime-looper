@@ -13,13 +13,13 @@ namespace AbletonProject
         double deltatime, std::vector<unsigned char> *rawMessage)
     {
         Message message(deltatime, rawMessage);
-        receiveMidiMessage(message);
+        receiveMidiMessage(std::make_unique<Message>(message));
     }
 
-    void MessageReceiver::receiveMidiMessage(Message message)
+    void MessageReceiver::receiveMidiMessage(std::unique_ptr<Message> message)
     {
         std::lock_guard<std::mutex> lock(_mutex);
-        _currentState->handle(_currentState, message);
+        _currentState->handle(_currentState, std::move(message));
     }
 
     void MessageReceiver::receiveStdin(std::string& input)

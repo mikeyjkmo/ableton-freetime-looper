@@ -9,13 +9,13 @@ namespace AbletonProject
     {
     }
 
-    void InitialLoopWaitingState::handle(std::unique_ptr<StateBase>& state, Message message)
+    void InitialLoopWaitingState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message)
     {
-        state = std::make_unique<InitialLoopState>(_messageDispatcher, _logger, message);
+        _messageDispatcher.sendMidiMessage(message.get());
+        state = std::make_unique<InitialLoopState>(_messageDispatcher, _logger, std::move(message));
         _logger.Log(std::make_unique<StateChangedEvent>(
             std::string("Loop starting message detected, moving from InitialLoopWaiting to InitialLoop"),
             std::string("InitialLoopWaitingState")));
-        _messageDispatcher.sendMidiMessage(message);
     }
 
     void InitialLoopWaitingState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)

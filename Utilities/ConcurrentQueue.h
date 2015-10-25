@@ -33,7 +33,7 @@ namespace AbletonProject
         void enqueue(T item)
         {
             std::lock_guard<std::mutex> lock(_mutex);
-            _queue.push(item);
+            _queue.push(std::move(item));
         }
 
         bool tryDequeue(T& item)
@@ -42,7 +42,7 @@ namespace AbletonProject
 
             if (_queue.empty()) return false;
 
-            item = _queue.front();
+            item = std::move(_queue.front());
             _queue.pop();
             return true;
         }

@@ -10,15 +10,15 @@ namespace AbletonProject
     {
     }
 
-    void MessageDispatcher::sendMidiMessage(Message message)
+    void MessageDispatcher::sendMidiMessage(Message* message)
     {
         std::cout << "Sending message with payload:";
-        for (auto& c : message.payload)
+        for (auto& c : message->payload)
         {
             std::cout << " " << (unsigned int) c;
         }
         std::cout << std::endl;
-        _midiOut.sendMessage(&(message.payload));
+        _midiOut.sendMessage(&(message->payload));
     }
 
 }

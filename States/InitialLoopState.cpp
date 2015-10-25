@@ -3,18 +3,18 @@
 namespace AbletonProject
 {
 
-    InitialLoopState::InitialLoopState(MessageDispatcher& messageDispatcher, EventLogger& logger, Message message) :
+    InitialLoopState::InitialLoopState(MessageDispatcher& messageDispatcher, EventLogger& logger, std::unique_ptr<Message> message) :
         _stopWatch(),
         _messageDispatcher(messageDispatcher),
-        _loopStartingMessage(message),
+        _loopStartingMessage(std::move(message)),
         _logger(logger)
     {
         _stopWatch.start();
     }
 
-    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, Message message)
+    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message)
     {
-        _messageDispatcher.sendMidiMessage(message);
+        _messageDispatcher.sendMidiMessage(message.get());
 
         if (_loopStartingMessage == message)
         {

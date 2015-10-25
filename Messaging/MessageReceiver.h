@@ -20,9 +20,8 @@ namespace AbletonProject
     public:
         MessageReceiver(MessageDispatcher& messageDispatcher, EventLogger& logger);
 
-        void receiveRawMidiMessage(
-            double deltatime, std::vector<unsigned char> *rawMessage);
-        void receiveMidiMessage(Message message);
+        void receiveRawMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
+        void receiveMidiMessage(std::unique_ptr<Message> message);
         void receiveStdin(std::string& input);
     };
 }
