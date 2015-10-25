@@ -1,3 +1,14 @@
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+#include "Utilities/Stopwatch.h"
+#include "Utilities/ConcurrentQueue.h"
+#include "Utilities/RtMidiExt.h"
+#include "Messaging/MessageReceiver.h"
+#include "Messaging/MessageReceiver.h"
+#include "Messaging/LoopTracker.h"
+#include "Logging/EventLogger.h"
 #include "Session.h"
 
 
@@ -40,8 +51,10 @@ namespace AbletonProject
         _midiIn.openPort(_inputDeviceID);
 
         EventLogger logger;
+        LoopTracker loopTracker;
+
         MessageDispatcher dispatcher(_midiOut);
-        MessageReceiver receiver(dispatcher, logger);
+        MessageReceiver receiver(dispatcher, loopTracker, logger);
 
         _midiIn.setCallback(&RtMidiExt::callbackWrapper, &receiver);
         _midiIn.ignoreTypes(false, false, false);
@@ -76,8 +89,9 @@ namespace AbletonProject
         _midiOut.openPort(_outputDeviceID);
 
         EventLogger logger;
+        LoopTracker loopTracker;
         MessageDispatcher dispatcher(_midiOut);
-        MessageReceiver receiver(dispatcher, logger);
+        MessageReceiver receiver(dispatcher, loopTracker, logger);
 
         // Control Change: 176, 7, 100 (volume)
         Message volumeControlMessage({176, 7, 100});
