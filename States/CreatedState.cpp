@@ -8,7 +8,7 @@ namespace AbletonProject
     {
     }
 
-    void CreatedState::handle(std::unique_ptr<StateBase>& state, Message& message)
+    void CreatedState::handle(std::unique_ptr<StateBase>& state, Message message)
     {
         _messageDispatcher.sendMidiMessage(message);
     }

@@ -11,7 +11,7 @@ namespace AbletonProject
     {
     public:
         MessageDispatcher(RtMidiOut& mOut);
-        void sendMidiMessage(Message& message);
+        void sendMidiMessage(Message message);
     private:
         RtMidiOut& _midiOut;
     };

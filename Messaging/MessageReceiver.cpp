@@ -8,7 +8,14 @@ namespace AbletonProject
     {
     }
 
-    void MessageReceiver::receiveMidiMessage(Message& message)
+    void MessageReceiver::receiveRawMidiMessage(
+        double deltatime, std::vector<unsigned char> *rawMessage, void *userData)
+    {
+        Message message(deltatime, rawMessage);
+        receiveMidiMessage(message);
+    }
+
+    void MessageReceiver::receiveMidiMessage(Message message)
     {
         std::lock_guard<std::mutex> lock(_mutex);
         _currentState->handle(_currentState, message);

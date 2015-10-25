@@ -21,7 +21,7 @@ namespace AbletonProject
     public:
         InitialLoopWaitingState(MessageDispatcher& messageDispatcher);
 
-        void handle(std::unique_ptr<StateBase>& state, Message& message) override;
+        void handle(std::unique_ptr<StateBase>& state, Message message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;
     };
 
