@@ -2,6 +2,41 @@
 
 namespace AbletonProject
 {
+    Loop::Loop(std::unique_ptr<Message> controlMessage) :
+        _controlMessage(std::move(controlMessage)),
+        _interval(0)
+    {
 
+    }
 
+    void Loop::incrementInterval()
+    {
+        _interval++;
+    }
+
+    bool Loop::checkIfRestartRequired()
+    {
+        if (_waitUntilNextRestart < 1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    void Loop::decrementNextRestartWait()
+    {
+        if (_waitUntilNextRestart < 1)
+        {
+            _waitUntilNextRestart = _interval - 1;
+            return;
+        }
+        
+        _waitUntilNextRestart--;
+    }
+
+    Message* Loop::getControlMessage()
+    {
+        return _controlMessage.get();
+    }
 }

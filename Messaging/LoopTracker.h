@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <memory>
+#include <unordered_map>
 
 #include "Message.h"
 #include "Loop.h"
@@ -11,24 +11,14 @@ namespace AbletonProject
     class LoopTracker final
     {
     private:
-        // todo hashmap
-        std::vector<Loop> _recording;
-        std::vector<Loop> _running;
+        std::unordered_map<Message, std::unique_ptr<Loop>> _recording;
+        std::unordered_map<Message, std::unique_ptr<Loop>> _running;
     public:
         LoopTracker() {}
 
-        void incrementInterval()
-        {
-            // ++ interval on all recording loops
-        }
-
-        void commandReceived(std::unique_ptr<Message> message)
-        {
-            // if in recording, move to running
-            // otherwise ignore
-        }
-
-        std::vector<Message*> getNextRestartMessages() { return std::vector<Message*>();  }
+        void commandReceived(std::unique_ptr<Message> message);
+        std::vector<Message*> getNextRestartMessages();
+        void incrementInterval();
 
     };
 }

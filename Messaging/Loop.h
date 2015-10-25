@@ -10,11 +10,19 @@ namespace AbletonProject
 
     class Loop
     {
-    private:
-        std::int32_t interval;
-        std::unique_ptr<Message> controlMessage;
+    private:    
+        // Length of loop relative to initial loop interval
+        std::int32_t _interval; 
+        // Counts down when checkIfRestartRequired and decrementNextRestartWait called
+        // st checkIfRestartRequired returns true every _interval times
+        std::int32_t _waitUntilNextRestart;
+        std::unique_ptr<Message> _controlMessage;
     public:
-        Loop() {}
+        Loop(std::unique_ptr<Message> controlMessage);
+        void incrementInterval();
+        bool checkIfRestartRequired();
+        void decrementNextRestartWait();
+        Message* getControlMessage();
     };
 
 }
