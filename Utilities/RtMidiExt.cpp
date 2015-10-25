@@ -1,5 +1,4 @@
 #include "RtMidiExt.h"
-#include "Messaging/MessageReceiver.h"
 
 namespace AbletonProject
 {

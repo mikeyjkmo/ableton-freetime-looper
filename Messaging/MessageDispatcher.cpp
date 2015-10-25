@@ -1,7 +1,5 @@
 #include "MessageDispatcher.h"
 
-#include <iostream>
-
 namespace AbletonProject
 {
 

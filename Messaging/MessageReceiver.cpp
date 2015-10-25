@@ -12,8 +12,7 @@ namespace AbletonProject
     void MessageReceiver::receiveRawMidiMessage(
         double deltatime, std::vector<unsigned char> *rawMessage)
     {
-        Message message(deltatime, rawMessage);
-        receiveMidiMessage(std::make_unique<Message>(message));
+        receiveMidiMessage(std::make_unique<Message>(deltatime, rawMessage));
     }
 
     void MessageReceiver::receiveMidiMessage(std::unique_ptr<Message> message)
