@@ -5,7 +5,7 @@
 
 namespace AbletonProject
 {
-    struct Message final
+    class Message final
     {
     public:
         Message() {}
@@ -14,8 +14,12 @@ namespace AbletonProject
         {
         }
 
-        virtual ~Message() = default;
-
         std::vector<unsigned char> payload;
+
+        bool Matches(Message const& other) const
+        {
+            return other.payload == payload;
+        }
+        
     };
 }

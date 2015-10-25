@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
 
         // Control Change: 176, 7, 100 (volume)
         Message volumeControlMessage({176, 7, 100});
+        Message otherControlMessage({ 176, 7, 99 });
 
         // Send Messages through Created State
         receiver.receiveMessage(volumeControlMessage);
@@ -70,6 +71,8 @@ int main(int argc, char *argv[])
 
         // Send Message to Set Loop time to 2 seconds
         receiver.receiveMessage(volumeControlMessage);
+        // Unrelated messages are just relayed
+        receiver.receiveMessage(otherControlMessage);
 
         std::this_thread::sleep_for(std::chrono::seconds(2));
 
