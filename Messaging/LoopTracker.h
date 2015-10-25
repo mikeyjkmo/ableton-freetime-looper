@@ -19,6 +19,7 @@ namespace AbletonProject
         void commandReceived(std::unique_ptr<Message> message);
         std::vector<Message*> getNextRestartMessages();
         void incrementInterval();
+        void clear();
 
     };
 }

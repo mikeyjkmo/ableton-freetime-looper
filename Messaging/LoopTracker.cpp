@@ -47,4 +47,10 @@ namespace AbletonProject
         return restartMessages;
     }
 
+    void LoopTracker::clear()
+    {
+        _recording.clear();
+        _running.clear();
+    }
+
 }
