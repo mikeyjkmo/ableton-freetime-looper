@@ -18,10 +18,9 @@ namespace AbletonProject
     class CreatedState final : public StateBase
     {
     private:
-        MessageDispatcher& _messageDispatcher;
-        EventLogger& _logger;
+        StateResources& _resources;
     public:
-        CreatedState(MessageDispatcher& messageDispatcher, EventLogger& logger);
+        CreatedState(StateResources& resources);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;

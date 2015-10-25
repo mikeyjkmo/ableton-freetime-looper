@@ -2,10 +2,27 @@
 #include <memory>
 #include <string>
 
-#include "Messaging/Message.h"
+#include "Messaging/MessageDispatcher.h"
+#include "Messaging/LoopTracker.h"
+#include "Logging/EventLogger.h"
 
 namespace AbletonProject
 {
+    class StateResources
+    {
+    public:
+        MessageDispatcher& messageDispatcher;
+        LoopTracker& loopTracker;
+        EventLogger& logger;
+
+        StateResources(
+            MessageDispatcher& messageDispatcher, LoopTracker& loopTracker, EventLogger& logger)
+            : messageDispatcher(messageDispatcher),
+              loopTracker(loopTracker),
+              logger(logger)
+        {
+        }
+    };
 
     class StateBase
     {

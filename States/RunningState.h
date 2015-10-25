@@ -22,12 +22,12 @@ namespace AbletonProject
     private:
         AsyncTimer _asyncTimer;
         ConcurrentQueue<std::unique_ptr<Message>> _queue;
+        StateResources& _resources;
+
         void forwardMessage();
         void _dequeueAndSendAll();
-        MessageDispatcher& _messageDispatcher;
-        EventLogger& _logger;
     public:
-        RunningState(std::chrono::milliseconds timespan, MessageDispatcher& messageDispatcher, EventLogger& logger);
+        RunningState(StateResources& resources, std::chrono::milliseconds timespan);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;

@@ -2,22 +2,19 @@
 
 namespace AbletonProject
 {
-
-    CreatedState::CreatedState(MessageDispatcher& messageDispatcher, EventLogger& logger) :
-        _messageDispatcher(messageDispatcher),
-        _logger(logger)
+    CreatedState::CreatedState(StateResources& resources) : _resources(resources)
     {
     }
 
     void CreatedState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message)
     {
-        _messageDispatcher.sendMidiMessage(message.get());
+        _resources.messageDispatcher.sendMidiMessage(message.get());
     }
 
     void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
     {
-        state = std::make_unique<InitialLoopWaitingState>(_messageDispatcher, _logger);
-        _logger.log(std::make_unique<StateChangedEvent>(
+        state = std::make_unique<InitialLoopWaitingState>(_resources);
+        _resources.logger.log(std::make_unique<StateChangedEvent>(
             std::string("StdIn detected, moving from Created to InitialLoopWaiting"),
             std::string("CreatedState")));
     }

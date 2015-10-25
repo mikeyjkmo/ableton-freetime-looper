@@ -15,9 +15,9 @@ namespace AbletonProject
     class MessageReceiver final
     {
     private:
-        std::unique_ptr<StateBase> _currentState;
         std::mutex _mutex;
-        LoopTracker& _loopTracker;
+        StateResources _resources;
+        std::unique_ptr<StateBase> _currentState;
 
         bool isMidiCommand(Message* message);
     public:

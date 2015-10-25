@@ -2,11 +2,10 @@
 
 namespace AbletonProject
 {
-
     MessageReceiver::MessageReceiver(
-            MessageDispatcher& messageDispatcher, LoopTracker& loopTracker, EventLogger& logger)
-        : _currentState(std::make_unique<CreatedState>(messageDispatcher, logger)),
-          _loopTracker(loopTracker)
+        MessageDispatcher& messageDispatcher, LoopTracker& loopTracker, EventLogger& logger)
+        : _resources(messageDispatcher, loopTracker, logger),
+          _currentState(std::make_unique<CreatedState>(_resources))
     {
     }
 

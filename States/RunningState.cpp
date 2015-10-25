@@ -3,11 +3,10 @@
 namespace AbletonProject
 {
 
-    RunningState::RunningState(std::chrono::milliseconds timespan, MessageDispatcher& messageDispatcher, EventLogger& logger)
+    RunningState::RunningState(StateResources& resources, std::chrono::milliseconds timespan)
         : _asyncTimer(timespan, std::bind(&RunningState::_dequeueAndSendAll, this)),
           _queue(),
-          _messageDispatcher(messageDispatcher),
-          _logger(logger)
+          _resources(resources)
     {
         _asyncTimer.start();
     }
@@ -17,7 +16,7 @@ namespace AbletonProject
         std::unique_ptr<Message> message;
         while (_queue.tryDequeue(message))
         {
-            _messageDispatcher.sendMidiMessage(message.get());
+            _resources.messageDispatcher.sendMidiMessage(message.get());
         }
     }
 
@@ -28,8 +27,8 @@ namespace AbletonProject
 
     void RunningState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
     {
-        state = std::make_unique<CreatedState>(_messageDispatcher, _logger);
-        _logger.log(std::make_unique<StateChangedEvent>(
+        state = std::make_unique<CreatedState>(_resources);
+        _resources.logger.log(std::make_unique<StateChangedEvent>(
             std::string("StdIn detected, reverting from Running to Created"),
             std::string("RunningState")));
     }
