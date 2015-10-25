@@ -14,6 +14,6 @@ namespace AbletonProject
     public:
         EventLogger();
 
-        void Log(std::unique_ptr<EventBase> evnt);
+        void log(std::unique_ptr<EventBase> evnt);
     };
 }

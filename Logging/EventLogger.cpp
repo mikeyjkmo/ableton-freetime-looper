@@ -6,7 +6,7 @@ namespace AbletonProject
     {
     }
 
-    void EventLogger::Log(std::unique_ptr<EventBase> evnt)
+    void EventLogger::log(std::unique_ptr<EventBase> evnt)
     {
         // todo time
         std::cout
