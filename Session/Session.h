@@ -17,8 +17,10 @@ namespace AbletonProject
         unsigned int _outputDeviceID;
         unsigned int _inputDeviceID;
 
+        int _openPortsAndStartReceiving();
         int _test();
         void _setDeviceIDs();
         void _printAllAvailablePorts();
+        bool _verifyMidiPortSelections();
     };
 }

@@ -33,19 +33,60 @@ namespace AbletonProject
         }
     }
 
+    bool Session::_verifyMidiPortSelections()
+    {
+        auto outPortCount = _midiOut.getPortCount();
+        auto inPortCount = _midiIn.getPortCount();
+
+        return (_outputDeviceID < outPortCount && _inputDeviceID < inPortCount);
+    }
+
+    int Session::_openPortsAndStartReceiving()
+    {
+        //TODO fix function pointer broken on line 59
+        //_midiOut.openPort(_outputDeviceID);
+        //_midiIn.openPort(_inputDeviceID);
+
+        //MessageDispatcher dispatcher(_midiOut);
+        //MessageReceiver receiver(dispatcher);
+
+        //auto receiveRawMessageLambda =
+        //    [&receiver] (double deltatime, std::vector<unsigned char> *rawMessage, void *userData)
+        //    {
+        //        receiver.receiveRawMidiMessage(deltatime, rawMessage, userData);
+        //    };
+
+        //_midiIn.setCallback(&receiveRawMidiMessage);
+        //_midiIn.ignoreTypes(false, false, false);
+
+        //while (true)
+        //{
+        //    std::cout << std::endl
+        //              << "CONFIGURATION MODE" << std::endl
+        //              << "Relaying all MIDI messages for configuration. "
+        //              << "Press 'Enter' to enter LOOP MODE"
+        //              << std::endl;
+        //    std::string input;
+        //    std::getline(std::cin, input);
+        //    receiver.receiveStdin(input);
+
+        //    std::cout << std::endl
+        //              << "LOOP MODE" << std::endl
+        //              << "Press 'Enter' to return to CONFIGURATION MODE"
+        //              << std::endl;
+        //    std::getline(std::cin, input);
+        //    receiver.receiveStdin(input);
+        //}
+
+        //_midiOut.closePort();
+        //_midiIn.closePort();
+
+        return 0;
+    }
+
     int Session::_test()
     {
-        // Open the specified MIDI port
-        unsigned int portNum = _outputDeviceID;
-        unsigned int portCount = _midiOut.getPortCount();
-
-        if (portNum >= portCount)
-        {
-            std::cout << "The MIDI device you specified does not exist" << std::endl;
-            return 1;
-        }
-
-        _midiOut.openPort(portNum);
+        _midiOut.openPort(_outputDeviceID);
 
         MessageDispatcher dispatcher(_midiOut);
         MessageReceiver receiver(dispatcher);
@@ -103,6 +144,11 @@ namespace AbletonProject
 
         if (portCount > 0)
         {
+            if (!_verifyMidiPortSelections())
+            {
+                std::cout << "The MIDI device you specified does not exist" << std::endl;
+                return 1;
+            }
             return _test();
         }
         else
