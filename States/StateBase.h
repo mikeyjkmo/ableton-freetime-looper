@@ -6,7 +6,7 @@
 #include "Messaging/LoopTracker.h"
 #include "Logging/EventLogger.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     class StateResources
     {

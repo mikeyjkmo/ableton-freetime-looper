@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     class Stopwatch final

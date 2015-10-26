@@ -1,6 +1,6 @@
 #include "Loop.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     Loop::Loop(std::unique_ptr<Message> controlMessage) :
         _interval(0),

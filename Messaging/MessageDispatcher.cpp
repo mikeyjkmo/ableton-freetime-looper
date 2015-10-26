@@ -3,7 +3,7 @@
 #include "MessageDispatcher.h"
 #include "Message.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     MessageDispatcher::MessageDispatcher(RtMidiOut& mOut)

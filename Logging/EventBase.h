@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     enum LogLevel { INFO };
 

@@ -12,7 +12,7 @@
 #include "Session.h"
 
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     Session::Session(int ac, char* av[])
         : _midiOut(),
@@ -139,7 +139,7 @@ namespace AbletonProject
         if (_numUserSpecifiedDevices == 0)
         {
             _printAllAvailablePorts();
-            std::cout << "Usage: AbletonProject [output_device_num] [input_device_num]"
+            std::cout << "Usage: LiveFreetimeLooper [output_device_num] [input_device_num]"
                       << std::endl << std::endl;
             return 0;
         }

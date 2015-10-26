@@ -1,7 +1,7 @@
 #include <iostream>
 #include "EventLogger.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     EventLogger::EventLogger()
     {

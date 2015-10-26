@@ -5,7 +5,7 @@
 
 #include "Message.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     class Loop

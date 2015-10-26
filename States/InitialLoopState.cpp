@@ -3,7 +3,7 @@
 #include "CreatedState.h"
 #include "Logging/StateChangedEvent.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     InitialLoopState::InitialLoopState(StateResources& resources, Message message)

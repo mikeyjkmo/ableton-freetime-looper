@@ -4,7 +4,7 @@
 #include <memory>
 #include <mutex>
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     template<typename T>
     class ConcurrentQueue final

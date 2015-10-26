@@ -2,7 +2,7 @@
 #include <memory>
 #include "EventBase.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     class EventLogger final

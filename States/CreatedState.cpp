@@ -3,7 +3,7 @@
 #include "Logging/EventLogger.h"
 #include "Logging/StateChangedEvent.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     CreatedState::CreatedState(StateResources& resources) : _resources(resources)
     {

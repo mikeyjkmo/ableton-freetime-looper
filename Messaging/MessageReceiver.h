@@ -10,7 +10,7 @@ class MessageDispatcher;
 class EventLogger;
 class LoopTracker;
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     class MessageReceiver final
     {

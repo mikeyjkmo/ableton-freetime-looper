@@ -4,7 +4,7 @@
 #include <chrono>
 #include "EventBase.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     class StateChangedEvent final : public EventBase

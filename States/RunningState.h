@@ -7,7 +7,7 @@
 #include "Utilities/AsyncTimer.h"
 #include "Utilities/ConcurrentQueue.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     class RunningState final : public StateBase

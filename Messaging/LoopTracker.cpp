@@ -1,6 +1,6 @@
 #include "LoopTracker.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     void LoopTracker::incrementInterval()
     {

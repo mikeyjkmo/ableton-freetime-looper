@@ -2,7 +2,7 @@
 
 class RtMidi;
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     namespace RtMidiExt
     {

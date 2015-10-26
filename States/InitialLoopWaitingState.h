@@ -5,7 +5,7 @@
 #include "StateBase.h"
 #include "Messaging/Message.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     // Waiting for first message to start Initial Loop
     class InitialLoopWaitingState final : public StateBase

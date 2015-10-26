@@ -3,7 +3,7 @@
 #include "RtMidiExt.h"
 #include "RtMidi/Rtmidi.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     namespace RtMidiExt
     {

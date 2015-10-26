@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     class Message final
     {
@@ -34,9 +34,9 @@ namespace AbletonProject
 namespace std
 {
     template <>
-    struct hash<AbletonProject::Message>
+    struct hash<LiveFreetimeLooper::Message>
     {
-        size_t operator()(const AbletonProject::Message& k) const
+        size_t operator()(const LiveFreetimeLooper::Message& k) const
         {
             // Hash just based on payload
             std::size_t seed = 0;

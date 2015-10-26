@@ -1,6 +1,6 @@
 #include "StateChangedEvent.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     StateChangedEvent::StateChangedEvent(std::string detail, std::string eventSource) :
         _time(std::chrono::high_resolution_clock::now()),

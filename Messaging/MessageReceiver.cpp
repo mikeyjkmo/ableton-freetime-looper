@@ -4,7 +4,7 @@
 #include "States/CreatedState.h"
 #include "Logging/EventLogger.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     MessageReceiver::MessageReceiver(
         MessageDispatcher& messageDispatcher, LoopTracker& loopTracker, EventLogger& logger)

@@ -5,7 +5,7 @@
 #include "Messaging/Message.h"
 #include "Messaging/MessageDispatcher.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     RunningState::RunningState(StateResources& resources, std::chrono::milliseconds timespan)

@@ -4,7 +4,7 @@
 #include <chrono>
 #include <future>
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     class AsyncTimer final
     {

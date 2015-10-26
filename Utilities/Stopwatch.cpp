@@ -1,6 +1,6 @@
 #include "Stopwatch.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     using namespace std::chrono;
 

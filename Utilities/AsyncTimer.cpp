@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
 
     AsyncTimer::AsyncTimer(

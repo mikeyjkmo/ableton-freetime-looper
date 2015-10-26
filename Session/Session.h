@@ -1,7 +1,7 @@
 # pragma once
 #include "RtMidi/RtMidi.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     class Session final
     {

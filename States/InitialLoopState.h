@@ -6,7 +6,7 @@
 #include "Utilities/Stopwatch.h"
 #include "Messaging/Message.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     // Waiting for and timing completion of initial loop
     class InitialLoopState final : public StateBase

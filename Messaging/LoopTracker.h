@@ -6,7 +6,7 @@
 #include "Message.h"
 #include "Loop.h"
 
-namespace AbletonProject
+namespace LiveFreetimeLooper
 {
     class LoopTracker final
     {

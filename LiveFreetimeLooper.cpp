@@ -1,8 +1,6 @@
-// AbletonProject.cpp : Defines the entry point for the console application.
-//
 #include "Session/Session.h"
 
-using namespace AbletonProject;
+using namespace LiveFreetimeLooper;
 
 int main(int argc, char *argv[])
 {
