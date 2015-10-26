@@ -6,12 +6,12 @@
 #include "States/StateBase.h"
 #include "Message.h"
 
-class MessageDispatcher;
-class EventLogger;
-class LoopTracker;
-
 namespace LiveFreetimeLooper
 {
+    class MessageDispatcher;
+    class EventLogger;
+    class LoopTracker;
+
     class MessageReceiver final
     {
     private:
