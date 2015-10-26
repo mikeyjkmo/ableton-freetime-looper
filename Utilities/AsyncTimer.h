@@ -3,6 +3,7 @@
 #include <functional>
 #include <chrono>
 #include <future>
+#include <memory>
 
 namespace LiveFreetimeLooper
 {
@@ -21,8 +22,8 @@ namespace LiveFreetimeLooper
 
         bool _started;
         bool _stopped;
-        std::shared_ptr<std::thread> _previousThread;
-        std::shared_ptr<std::thread> _thread;
+        std::unique_ptr<std::thread> _previousThread;
+        std::unique_ptr<std::thread> _currentThread;
 
         void _joinThreads(bool joinCurrent);
         void _threadCallback();

@@ -38,9 +38,9 @@ namespace LiveFreetimeLooper
         {
             _previousThread->join();
         }
-        if (joinCurrent && _thread && _thread->joinable())
+        if (joinCurrent && _currentThread && _currentThread->joinable())
         {
-            _thread->join();
+            _currentThread->join();
         }
     }
 
@@ -65,12 +65,12 @@ namespace LiveFreetimeLooper
         if (!_stopped)
         {
             _joinThreads(false);
-            if (_thread)
+            if (_currentThread)
             {
-                _previousThread = _thread;
+                _previousThread = std::move(_currentThread);
             }
 
-            _thread = make_shared<thread>(
+            _currentThread = make_unique<thread>(
                 std::bind(&AsyncTimer::_threadCallback, this));
         }
     }
