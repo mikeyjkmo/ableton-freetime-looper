@@ -1,12 +1,11 @@
 #pragma once
 
-#include <string>
-#include <iostream>
-#include "Message.h"
 #include "RtMidi/RtMidi.h"
 
 namespace AbletonProject
 {
+    class Message;
+
     class MessageDispatcher final
     {
     public:

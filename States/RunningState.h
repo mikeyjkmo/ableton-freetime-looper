@@ -6,13 +6,6 @@
 #include "StateBase.h"
 #include "Utilities/AsyncTimer.h"
 #include "Utilities/ConcurrentQueue.h"
-#include "Messaging/MessageDispatcher.h"
-#include "Messaging/Message.h"
-#include "Logging/EventLogger.h"
-#include "Logging/StateChangedEvent.h"
-
-// Next state:
-#include "CreatedState.h"
 
 namespace AbletonProject
 {

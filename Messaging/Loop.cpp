@@ -3,8 +3,8 @@
 namespace AbletonProject
 {
     Loop::Loop(std::unique_ptr<Message> controlMessage) :
-        _controlMessage(std::move(controlMessage)),
-        _interval(0)
+        _interval(0),
+        _controlMessage(std::move(controlMessage))
     {
 
     }

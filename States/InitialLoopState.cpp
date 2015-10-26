@@ -1,4 +1,7 @@
 #include "InitialLoopState.h"
+#include "RunningState.h"
+#include "CreatedState.h"
+#include "Logging/StateChangedEvent.h"
 
 namespace AbletonProject
 {

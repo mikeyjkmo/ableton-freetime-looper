@@ -2,15 +2,8 @@
 #include <memory>
 #include <string>
 
-#include "Utilities/Stopwatch.h"
-#include "Messaging/MessageDispatcher.h"
 #include "StateBase.h"
 #include "Messaging/Message.h"
-#include "Logging/EventLogger.h"
-#include "Logging/StateChangedEvent.h"
-
-// Next state:
-#include "InitialLoopWaitingState.h"
 
 namespace AbletonProject
 {

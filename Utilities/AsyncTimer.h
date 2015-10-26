@@ -3,8 +3,6 @@
 #include <functional>
 #include <chrono>
 #include <future>
-#include <cstdio>
-#include <iostream>
 
 namespace AbletonProject
 {

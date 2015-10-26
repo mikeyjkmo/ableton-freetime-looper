@@ -1,8 +1,6 @@
 #pragma once
 
 #include <chrono>
-#include <cstdint>
-#include <cstdint>
 
 namespace AbletonProject
 {

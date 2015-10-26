@@ -4,11 +4,11 @@
 #include <string>
 
 #include "States/StateBase.h"
-#include "States/CreatedState.h"
-#include "MessageDispatcher.h"
 #include "Message.h"
-#include "LoopTracker.h"
-#include "Logging/EventLogger.h"
+
+class MessageDispatcher;
+class EventLogger;
+class LoopTracker;
 
 namespace AbletonProject
 {

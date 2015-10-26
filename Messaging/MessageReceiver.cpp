@@ -1,4 +1,8 @@
 #include "MessageReceiver.h"
+#include "MessageDispatcher.h"
+#include "LoopTracker.h"
+#include "States/CreatedState.h"
+#include "Logging/EventLogger.h"
 
 namespace AbletonProject
 {

@@ -14,9 +14,7 @@ namespace AbletonProject
         std::mutex _mutex;
 
     public:
-        ConcurrentQueue()
-            : _queue(),
-            _mutex()
+        ConcurrentQueue() : _queue(), _mutex()
         {
         }
 

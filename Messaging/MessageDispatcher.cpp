@@ -1,4 +1,7 @@
+#include <string>
+#include <iostream>
 #include "MessageDispatcher.h"
+#include "Message.h"
 
 namespace AbletonProject
 {

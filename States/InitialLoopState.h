@@ -4,14 +4,7 @@
 
 #include "StateBase.h"
 #include "Utilities/Stopwatch.h"
-#include "Messaging/MessageDispatcher.h"
 #include "Messaging/Message.h"
-#include "Logging/EventLogger.h"
-#include "Logging/StateChangedEvent.h"
-
-// Next states:
-#include "RunningState.h"
-#include "CreatedState.h"
 
 namespace AbletonProject
 {

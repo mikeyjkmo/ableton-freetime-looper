@@ -1,7 +1,6 @@
 # pragma once
-#include <iostream>
-#include "RtMidi/Rtmidi.h"
-#include "Messaging/MessageReceiver.h"
+
+class RtMidi;
 
 namespace AbletonProject
 {
