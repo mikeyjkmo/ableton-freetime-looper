@@ -32,7 +32,7 @@ namespace AbletonProject
         }
 
         // Get vector of restart messages to send
-        for (auto* restartMessage : _resources.loopTracker.getNextRestartMessages())
+        for (auto*& restartMessage : _resources.loopTracker.getNextRestartMessages())
         {
             _resources.messageDispatcher.sendMidiMessage(restartMessage);
         }
