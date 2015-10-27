@@ -22,20 +22,20 @@ namespace LiveFreetimeLooper
         {
             _stopWatch.stop();
             _resources.loopTracker.commandReceived(std::move(message));
-            state = std::move(std::make_unique<RunningState>(
-                _resources, _stopWatch.getElapsedMilliseconds()));
             _resources.logger.log(std::make_unique<StateChangedEvent>(
                 std::string("Loop ending message detected, moving from InitialLoop to Running"),
                 std::string("InitialLoopState")));
+            state = std::move(std::make_unique<RunningState>(
+                _resources, _stopWatch.getElapsedMilliseconds()));
         }
     }
 
     void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
     {
         _resources.loopTracker.clear();
-        state = std::move(std::make_unique<CreatedState>(_resources));
         _resources.logger.log(std::make_unique<StateChangedEvent>(
             std::string("StdIn detected, reverting from InitialLoop to Created"),
             std::string("InitialLoopState")));
+        state = std::move(std::make_unique<CreatedState>(_resources));
     }
 }

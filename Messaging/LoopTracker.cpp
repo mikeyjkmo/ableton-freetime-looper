@@ -12,7 +12,8 @@ namespace LiveFreetimeLooper
 
     void LoopTracker::commandReceived(std::unique_ptr<Message> message)
     {
-        auto recordingLoopEntry = _recording.find(*message);
+        auto messageKey = *message;
+        auto recordingLoopEntry = _recording.find(messageKey);
 
         // If recording, move to running
         if (recordingLoopEntry != _recording.end())
@@ -22,11 +23,11 @@ namespace LiveFreetimeLooper
             return;
         }
 
-        auto runningMessageEntry = _running.find(*message);
+        auto runningMessageEntry = _running.find(messageKey);
         // If unknown, move to recording
         if (runningMessageEntry == _running.end())
         {
-            _recording.emplace(*message, std::make_unique<Loop>(std::move(message)));
+            _recording.emplace(messageKey, std::make_unique<Loop>(std::move(message)));
         }
     }
 
