@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         StateResources& _resources;
         Message _loopStartingMessage;
     public:
-        InitialLoopState(StateResources& resources, Message message);
+        InitialLoopState(StateResources& resources, Message& message);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;

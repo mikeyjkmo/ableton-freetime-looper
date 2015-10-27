@@ -6,7 +6,7 @@
 namespace LiveFreetimeLooper
 {
 
-    InitialLoopState::InitialLoopState(StateResources& resources, Message message)
+    InitialLoopState::InitialLoopState(StateResources& resources, Message& message)
         : _stopWatch(),
          _resources(resources),
          _loopStartingMessage(message)
