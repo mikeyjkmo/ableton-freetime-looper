@@ -8,7 +8,8 @@
 namespace LiveFreetimeLooper
 {
 
-    RunningState::RunningState(StateResources& resources, std::chrono::milliseconds timespan)
+    RunningState::RunningState(StateResources& resources,
+        std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> timespan)
         : _asyncTimer(timespan, std::bind(&RunningState::_dequeueAndSendAll, this)),
           _queue(),
           _resources(resources)

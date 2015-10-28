@@ -28,7 +28,7 @@ namespace LiveFreetimeLooper
                 std::string("ms. Progress: InitialLoop -> Running"),
                 std::string("InitialLoopState")));
             state = std::move(std::make_unique<RunningState>(
-                _resources, _stopWatch.getElapsedMilliseconds()));
+                _resources, _stopWatch.getElapsed()));
         }
     }
 

@@ -10,14 +10,15 @@ namespace LiveFreetimeLooper
     class AsyncTimer final
     {
     public:
-        AsyncTimer(const std::chrono::milliseconds intervalMilliseconds, std::function<void()> f);
+        AsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
+            std::function<void()> f);
         ~AsyncTimer();
 
         void start();
         void stop();
 
     private:
-        const std::chrono::milliseconds _intervalMilliseconds;
+        const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> _interval;
         std::function<void()> _function;
 
         bool _started;

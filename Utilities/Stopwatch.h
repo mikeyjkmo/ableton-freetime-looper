@@ -14,8 +14,6 @@ namespace LiveFreetimeLooper
                               std::chrono::high_resolution_clock::period> _elapsed;
         std::chrono::duration<std::chrono::high_resolution_clock::rep,
                               std::chrono::high_resolution_clock::period> calculateElapsed() const;
-        std::chrono::duration<std::chrono::high_resolution_clock::rep,
-                              std::chrono::high_resolution_clock::period> getElapsed() const;
     public:
         Stopwatch();
 
@@ -24,6 +22,8 @@ namespace LiveFreetimeLooper
         void reset();
         void restart();
         bool IsRunning();
+        std::chrono::duration<std::chrono::high_resolution_clock::rep,
+            std::chrono::high_resolution_clock::period> getElapsed() const;
         std::chrono::milliseconds getElapsedMilliseconds() const;
     };
 }

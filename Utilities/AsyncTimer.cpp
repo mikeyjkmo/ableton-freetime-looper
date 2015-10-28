@@ -8,8 +8,9 @@ namespace LiveFreetimeLooper
 {
 
     AsyncTimer::AsyncTimer(
-            const chrono::milliseconds intervalMilliseconds, function<void()> f)
-        : _intervalMilliseconds(intervalMilliseconds),
+        const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
+            function<void()> f)
+            : _interval(interval),
           _function(f),
           _started(false),
           _stopped(false)
@@ -52,7 +53,7 @@ namespace LiveFreetimeLooper
 
     void AsyncTimer::_threadCallback()
     {
-        this_thread::sleep_for(_intervalMilliseconds);
+        this_thread::sleep_for(_interval);
         if (!_stopped)
         {
             _function();

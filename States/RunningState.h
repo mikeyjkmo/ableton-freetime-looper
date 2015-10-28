@@ -20,7 +20,8 @@ namespace LiveFreetimeLooper
         void forwardMessage();
         void _dequeueAndSendAll();
     public:
-        RunningState(StateResources& resources, std::chrono::milliseconds timespan);
+        RunningState(StateResources& resources,
+            std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> timespan);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;
