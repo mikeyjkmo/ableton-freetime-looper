@@ -9,7 +9,6 @@ namespace LiveFreetimeLooper
 
     void EventLogger::log(std::unique_ptr<EventBase> evnt)
     {
-        // todo time
         std::cout
             << evnt->getName()
             << "\t: "
