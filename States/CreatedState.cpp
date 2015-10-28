@@ -17,7 +17,7 @@ namespace LiveFreetimeLooper
     void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
     {
         _resources.logger.log(std::make_unique<StateChangedEvent>(
-            std::string("StdIn detected, moving from Created to InitialLoopWaiting"),
+            std::string("StdIn. Progress: Created -> InitialLoopWaiting"),
             std::string("CreatedState")));
         state = std::make_unique<InitialLoopWaitingState>(_resources);
     }

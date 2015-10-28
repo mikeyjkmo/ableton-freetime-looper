@@ -11,14 +11,9 @@ namespace LiveFreetimeLooper
     {
         // todo time
         std::cout
-            << "Name: "
             << evnt->getName()
-            << "|| Level: "
-            << evnt->getLogLevel()
-            << "|| Detail: "
+            << "\t: "
             << evnt->getDetail()
-            << "|| Source: "
-            << evnt->getEventSource()
             << std::endl;
     }
 }

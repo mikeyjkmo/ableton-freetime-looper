@@ -5,7 +5,7 @@
 
 namespace LiveFreetimeLooper
 {
-    enum LogLevel { INFO };
+    enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, FATAL };
 
     class EventBase
     {

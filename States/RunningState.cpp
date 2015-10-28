@@ -49,7 +49,7 @@ namespace LiveFreetimeLooper
     {
         _resources.loopTracker.clear();
         _resources.logger.log(std::make_unique<StateChangedEvent>(
-            std::string("StdIn detected, reverting from Running to Created"),
+            std::string("StdIn. Reset: Running -> Created"),
             std::string("RunningState")));
         state = std::make_unique<CreatedState>(_resources);
     }

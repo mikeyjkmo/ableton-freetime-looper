@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         Message tempMessage = *message;
         _resources.loopTracker.commandReceived(std::move(message));       
         _resources.logger.log(std::make_unique<StateChangedEvent>(
-            std::string("Loop starting message detected, moving from InitialLoopWaiting to InitialLoop"),
+            std::string("Start Message Received. Progress: InitialLoopWaiting -> InitialLoop"),
             std::string("InitialLoopWaitingState")));
         state = std::make_unique<InitialLoopState>(_resources, tempMessage);
     }
@@ -25,7 +25,7 @@ namespace LiveFreetimeLooper
     {
         _resources.loopTracker.clear();
         _resources.logger.log(std::make_unique<StateChangedEvent>(
-            std::string("StdIn detected, reverting from InitialLoopWaiting to Created"),
+            std::string("StdIn. Reset: InitialLoopWaiting -> Created"),
             std::string("InitialLoopWaitingState")));
         state = std::move(std::make_unique<CreatedState>(_resources));
     }

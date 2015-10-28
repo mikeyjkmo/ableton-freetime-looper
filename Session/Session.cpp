@@ -53,7 +53,7 @@ namespace LiveFreetimeLooper
         EventLogger logger;
         LoopTracker loopTracker;
 
-        MessageDispatcher dispatcher(_midiOut);
+        MessageDispatcher dispatcher(_midiOut, logger);
         MessageReceiver receiver(dispatcher, loopTracker, logger);
 
         _midiIn.setCallback(&RtMidiExt::callbackWrapper, &receiver);
@@ -90,7 +90,7 @@ namespace LiveFreetimeLooper
 
         EventLogger logger;
         LoopTracker loopTracker;
-        MessageDispatcher dispatcher(_midiOut);
+        MessageDispatcher dispatcher(_midiOut, logger);
         MessageReceiver receiver(dispatcher, loopTracker, logger);
 
         // Control Change: 176, 7, 100 (volume)
