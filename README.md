@@ -11,8 +11,3 @@ The #includes need to see files in a directory above the .sln file. Add an addit
 
     Project Properties > C/C++ > All Options
     Add the folder that contains the source files (ableton-freetime-looper)
-
-Add winmm.lib
-
-    Project Properties > Linker > Input > Additional Dependencies
-    append winmm.lib to the existing dependancies
