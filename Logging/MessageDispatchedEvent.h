@@ -2,13 +2,13 @@
 
 #include <string>
 #include <chrono>
-#include "EventBase.h"
+#include "IEvent.h"
 #include "Messaging/Message.h"
 
 namespace LiveFreetimeLooper
 {
 
-    class MessageDispatchedEvent final : public EventBase
+    class MessageDispatchedEvent final : public IEvent
     {
     private:
         std::chrono::high_resolution_clock::time_point _time;

@@ -7,7 +7,7 @@ namespace LiveFreetimeLooper
     {
     }
 
-    void EventLogger::log(std::unique_ptr<EventBase> evnt)
+    void EventLogger::log(std::unique_ptr<IEvent> evnt)
     {
         std::cout
             << evnt->getName()

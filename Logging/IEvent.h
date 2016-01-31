@@ -7,12 +7,12 @@ namespace LiveFreetimeLooper
 {
     enum LogLevel { TRACE, DEBUG, INFO, WARN, ERROR, FATAL };
 
-    class EventBase
+    class IEvent
     {
     protected:
-        EventBase() {};
+        IEvent() {};
     public:
-        virtual ~EventBase() = default;
+        virtual ~IEvent() = default;
         virtual std::string getName() const = 0;
         virtual std::chrono::high_resolution_clock::time_point getTime() const = 0;
         virtual std::string getDetail() const = 0;

@@ -2,12 +2,12 @@
 
 #include <string>
 #include <chrono>
-#include "EventBase.h"
+#include "IEvent.h"
 
 namespace LiveFreetimeLooper
 {
 
-    class StateChangedEvent final : public EventBase
+    class StateChangedEvent final : public IEvent
     {
     private:
         std::chrono::high_resolution_clock::time_point _time;

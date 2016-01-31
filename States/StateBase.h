@@ -8,7 +8,7 @@
 
 namespace LiveFreetimeLooper
 {
-    class StateResources
+    class StateResources final
     {
     public:
         MessageDispatcher& messageDispatcher;

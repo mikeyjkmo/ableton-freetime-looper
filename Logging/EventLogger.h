@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "EventBase.h"
+#include "IEvent.h"
 
 namespace LiveFreetimeLooper
 {
@@ -10,6 +10,6 @@ namespace LiveFreetimeLooper
     public:
         EventLogger();
 
-        void log(std::unique_ptr<EventBase> evnt);
+        void log(std::unique_ptr<IEvent> evnt);
     };
 }
