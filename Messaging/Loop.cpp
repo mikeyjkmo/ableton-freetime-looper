@@ -4,6 +4,7 @@ namespace LiveFreetimeLooper
 {
     Loop::Loop(std::unique_ptr<Message> controlMessage) :
         _interval(0),
+        _waitUntilNextRestart(0),
         _controlMessage(std::move(controlMessage))
     {
 
