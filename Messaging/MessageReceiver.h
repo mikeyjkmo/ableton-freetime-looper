@@ -8,8 +8,8 @@
 
 namespace LiveFreetimeLooper
 {
-    class MessageDispatcher;
-    class EventLogger;
+    class IMessageDispatcher;
+    class IEventLogger;
     class LoopTracker;
 
     class MessageReceiver final
@@ -22,7 +22,7 @@ namespace LiveFreetimeLooper
         bool isMidiCommand(Message* message);
     public:
         MessageReceiver(
-            MessageDispatcher& messageDispatcher, LoopTracker& loopTracker, EventLogger& logger);
+            IMessageDispatcher& messageDispatcher, LoopTracker& loopTracker, IEventLogger& logger);
 
         void receiveRawMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
         void receiveMidiMessage(std::unique_ptr<Message> message);

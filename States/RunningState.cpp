@@ -1,9 +1,8 @@
 #include "RunningState.h"
 #include "CreatedState.h"
-#include "Logging/EventLogger.h"
+#include "Logging/IEventLogger.h"
 #include "Logging/StateChangedEvent.h"
 #include "Messaging/Message.h"
-#include "Messaging/MessageDispatcher.h"
 
 namespace LiveFreetimeLooper
 {

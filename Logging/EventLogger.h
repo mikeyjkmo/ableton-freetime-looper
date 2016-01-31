@@ -1,11 +1,12 @@
 #pragma once
 #include <memory>
+#include "IEventLogger.h"
 #include "IEvent.h"
 
 namespace LiveFreetimeLooper
 {
 
-    class EventLogger final
+    class EventLogger final : public IEventLogger
     {
     public:
         EventLogger();

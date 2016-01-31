@@ -51,9 +51,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Logging\EventBase.h">
-      <Filter>Header Files\Logging</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Logging\EventLogger.h">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
@@ -110,6 +107,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Utilities\Stopwatch.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Logging\IEvent.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Logging\IEventLogger.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Messaging\IMessageDispatcher.h">
+      <Filter>Header Files\Messaging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

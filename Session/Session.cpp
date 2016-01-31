@@ -6,7 +6,7 @@
 #include "Utilities/ConcurrentQueue.h"
 #include "Utilities/RtMidiExt.h"
 #include "Messaging/MessageReceiver.h"
-#include "Messaging/MessageReceiver.h"
+#include "Messaging/MessageDispatcher.h"
 #include "Messaging/LoopTracker.h"
 #include "Logging/EventLogger.h"
 #include "Session.h"

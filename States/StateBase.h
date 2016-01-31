@@ -2,21 +2,21 @@
 #include <memory>
 #include <string>
 
-#include "Messaging/MessageDispatcher.h"
+#include "Messaging/IMessageDispatcher.h"
 #include "Messaging/LoopTracker.h"
-#include "Logging/EventLogger.h"
+#include "Logging/IEventLogger.h"
 
 namespace LiveFreetimeLooper
 {
     class StateResources final
     {
     public:
-        MessageDispatcher& messageDispatcher;
+        IMessageDispatcher& messageDispatcher;
         LoopTracker& loopTracker;
-        EventLogger& logger;
+        IEventLogger& logger;
 
         StateResources(
-            MessageDispatcher& messageDispatcher, LoopTracker& loopTracker, EventLogger& logger)
+            IMessageDispatcher& messageDispatcher, LoopTracker& loopTracker, IEventLogger& logger)
             : messageDispatcher(messageDispatcher),
               loopTracker(loopTracker),
               logger(logger)

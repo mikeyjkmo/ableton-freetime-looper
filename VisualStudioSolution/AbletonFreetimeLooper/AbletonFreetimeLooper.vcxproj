@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Logging\EventBase.h" />
+    <ClInclude Include="..\..\Logging\IEvent.h" />
     <ClInclude Include="..\..\Logging\EventLogger.h" />
+    <ClInclude Include="..\..\Logging\IEventLogger.h" />
     <ClInclude Include="..\..\Logging\MessageDispatchedEvent.h" />
     <ClInclude Include="..\..\Logging\StateChangedEvent.h" />
+    <ClInclude Include="..\..\Messaging\IMessageDispatcher.h" />
     <ClInclude Include="..\..\Messaging\Loop.h" />
     <ClInclude Include="..\..\Messaging\LoopTracker.h" />
     <ClInclude Include="..\..\Messaging\Message.h" />
