@@ -51,122 +51,122 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Logging\EventBase.h">
+    <ClInclude Include="..\..\Logging\EventBase.h">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Logging\EventLogger.h">
+    <ClInclude Include="..\..\Logging\EventLogger.h">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Logging\MessageDispatchedEvent.h">
+    <ClInclude Include="..\..\Logging\MessageDispatchedEvent.h">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Logging\StateChangedEvent.h">
+    <ClInclude Include="..\..\Logging\StateChangedEvent.h">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Messaging\Loop.h">
+    <ClInclude Include="..\..\Messaging\Loop.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Messaging\LoopTracker.h">
+    <ClInclude Include="..\..\Messaging\LoopTracker.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Messaging\Message.h">
+    <ClInclude Include="..\..\Messaging\Message.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Messaging\MessageDispatcher.h">
+    <ClInclude Include="..\..\Messaging\MessageDispatcher.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Messaging\MessageReceiver.h">
+    <ClInclude Include="..\..\Messaging\MessageReceiver.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="..\RtMidi\RtMidi.h">
+    <ClInclude Include="..\..\RtMidi\RtMidi.h">
       <Filter>Header Files\RtMidi</Filter>
     </ClInclude>
-    <ClInclude Include="..\Session\Session.h">
+    <ClInclude Include="..\..\Session\Session.h">
       <Filter>Header Files\Session</Filter>
     </ClInclude>
-    <ClInclude Include="..\States\CreatedState.h">
+    <ClInclude Include="..\..\States\CreatedState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\States\InitialLoopState.h">
+    <ClInclude Include="..\..\States\InitialLoopState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\States\InitialLoopWaitingState.h">
+    <ClInclude Include="..\..\States\InitialLoopWaitingState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\States\RunningState.h">
+    <ClInclude Include="..\..\States\RunningState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\States\StateBase.h">
+    <ClInclude Include="..\..\States\StateBase.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utilities\AsyncTimer.h">
+    <ClInclude Include="..\..\Utilities\AsyncTimer.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utilities\ConcurrentQueue.h">
+    <ClInclude Include="..\..\Utilities\ConcurrentQueue.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utilities\RtMidiExt.h">
+    <ClInclude Include="..\..\Utilities\RtMidiExt.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utilities\Stopwatch.h">
+    <ClInclude Include="..\..\Utilities\Stopwatch.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Logging\EventLogger.cpp">
+    <ClCompile Include="..\..\Logging\EventLogger.cpp">
       <Filter>Source Files\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Logging\MessageDispatchedEvent.cpp">
+    <ClCompile Include="..\..\Logging\MessageDispatchedEvent.cpp">
       <Filter>Source Files\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Logging\StateChangedEvent.cpp">
+    <ClCompile Include="..\..\Logging\StateChangedEvent.cpp">
       <Filter>Source Files\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Messaging\Loop.cpp">
+    <ClCompile Include="..\..\Messaging\Loop.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Messaging\LoopTracker.cpp">
+    <ClCompile Include="..\..\Messaging\LoopTracker.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Messaging\MessageDispatcher.cpp">
+    <ClCompile Include="..\..\Messaging\MessageDispatcher.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Messaging\MessageReceiver.cpp">
+    <ClCompile Include="..\..\Messaging\MessageReceiver.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
-    <ClCompile Include="..\RtMidi\RtMidi.cpp">
+    <ClCompile Include="..\..\RtMidi\RtMidi.cpp">
       <Filter>Source Files\RtMidi</Filter>
     </ClCompile>
-    <ClCompile Include="..\Session\Session.cpp">
+    <ClCompile Include="..\..\Session\Session.cpp">
       <Filter>Source Files\Session</Filter>
     </ClCompile>
-    <ClCompile Include="..\States\CreatedState.cpp">
+    <ClCompile Include="..\..\States\CreatedState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\States\InitialLoopState.cpp">
+    <ClCompile Include="..\..\States\InitialLoopState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\States\InitialLoopWaitingState.cpp">
+    <ClCompile Include="..\..\States\InitialLoopWaitingState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\States\RunningState.cpp">
+    <ClCompile Include="..\..\States\RunningState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utilities\AsyncTimer.cpp">
+    <ClCompile Include="..\..\Utilities\AsyncTimer.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utilities\RtMidiExt.cpp">
+    <ClCompile Include="..\..\Utilities\RtMidiExt.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utilities\Stopwatch.cpp">
+    <ClCompile Include="..\..\Utilities\Stopwatch.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\LiveFreetimeLooper.cpp">
+    <ClCompile Include="..\..\LiveFreetimeLooper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Makefile" />
-    <None Include="..\README.md" />
+    <None Include="..\..\Makefile" />
+    <None Include="..\..\README.md" />
   </ItemGroup>
 </Project>

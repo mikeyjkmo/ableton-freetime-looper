@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbletonFreetimeLooper", "AbletonFreetimeLooper.vcxproj", "{380FC39C-E3B3-4996-A993-A2835AC8A481}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbletonFreetimeLooper", "AbletonFreetimeLooper\AbletonFreetimeLooper.vcxproj", "{380FC39C-E3B3-4996-A993-A2835AC8A481}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbletonFreetimeLooper.Tests", "AbletonFreetimeLooper.Tests\AbletonFreetimeLooper.Tests.vcxproj", "{B653C8A4-F86E-42EB-B353-DAE69F6B4799}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{380FC39C-E3B3-4996-A993-A2835AC8A481}.Release|x64.Build.0 = Release|x64
 		{380FC39C-E3B3-4996-A993-A2835AC8A481}.Release|x86.ActiveCfg = Release|Win32
 		{380FC39C-E3B3-4996-A993-A2835AC8A481}.Release|x86.Build.0 = Release|Win32
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Debug|x64.ActiveCfg = Debug|x64
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Debug|x64.Build.0 = Debug|x64
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Debug|x86.ActiveCfg = Debug|Win32
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Debug|x86.Build.0 = Debug|Win32
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Release|x64.ActiveCfg = Release|x64
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Release|x64.Build.0 = Release|x64
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Release|x86.ActiveCfg = Release|Win32
+		{B653C8A4-F86E-42EB-B353-DAE69F6B4799}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
