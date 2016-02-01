@@ -10,11 +10,11 @@ namespace LiveFreetimeLooper
 
     class MessageDispatcher final : public IMessageDispatcher
     {
-    public:
-        MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
-        void sendMidiMessage(Message* message);
     private:
         RtMidiOut& _midiOut;
         IEventLogger& _logger;
+    public:
+        MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
+        void sendMidiMessage(Message* message);
     };
 }
