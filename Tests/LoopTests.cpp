@@ -1,7 +1,7 @@
 #include "Tests\Catch\catch.h"
 #include "Messaging\Message.h"
 
-#include "Messaging\Loop.cpp"
+#include "Messaging\Loop.h"
 
 #include <memory>
 #include <cstdint>
@@ -38,7 +38,7 @@ void A_Loop_of_interval_N_is_restartable_every_Nth_decrement(std::int32_t loopIn
     }
 }
 
-TEST_CASE("A Loop of interval N is restartable every Nth decrement", "[Messaging]") {
+TEST_CASE("A Loop of interval N is restartable every Nth decrement") {
     SECTION("N=1")
     {
         A_Loop_of_interval_N_is_restartable_every_Nth_decrement(1);

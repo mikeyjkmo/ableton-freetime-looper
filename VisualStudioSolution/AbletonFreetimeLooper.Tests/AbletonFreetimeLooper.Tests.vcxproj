@@ -20,11 +20,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AbletonFreetimeLooper.Tests.cpp" />
+    <ClCompile Include="..\..\Tests\CreatedStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\Includes.cpp" />
     <ClCompile Include="..\..\Tests\LoopTests.cpp" />
     <ClCompile Include="..\..\Tests\LoopTrackerTests.cpp" />
+    <ClCompile Include="..\..\Tests\Mocks\MockEventLogger.cpp" />
+    <ClCompile Include="..\..\Tests\Mocks\MockMessageDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h" />
+    <ClInclude Include="..\..\Tests\Mocks\MockEventLogger.h" />
+    <ClInclude Include="..\..\Tests\Mocks\MockMessageDispatcher.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B653C8A4-F86E-42EB-B353-DAE69F6B4799}</ProjectGuid>

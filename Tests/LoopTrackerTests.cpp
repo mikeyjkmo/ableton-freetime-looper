@@ -1,7 +1,7 @@
 #include "Tests\Catch\catch.h"
 #include "Messaging\Message.h"
 
-#include "Messaging\LoopTracker.cpp"
+#include "Messaging\LoopTracker.h"
 
 #include <memory>
 #include <cstdint>

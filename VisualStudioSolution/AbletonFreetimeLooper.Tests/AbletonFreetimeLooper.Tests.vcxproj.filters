@@ -16,6 +16,12 @@
     <Filter Include="Header Files\Catch">
       <UniqueIdentifier>{f7093410-ff57-4486-a58b-743bdd731c22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mocks">
+      <UniqueIdentifier>{f0026228-1cfa-42e5-b870-2e9698a9828c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mocks">
+      <UniqueIdentifier>{fbcebe86-4f68-4078-ae9b-38ed266ee023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\AbletonFreetimeLooper.Tests.cpp">
@@ -27,10 +33,28 @@
     <ClCompile Include="..\..\Tests\LoopTrackerTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Tests\CreatedStateTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\Mocks\MockEventLogger.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\Mocks\MockMessageDispatcher.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\Includes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h">
       <Filter>Header Files\Catch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Tests\Mocks\MockEventLogger.h">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Tests\Mocks\MockMessageDispatcher.h">
+      <Filter>Header Files\Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
