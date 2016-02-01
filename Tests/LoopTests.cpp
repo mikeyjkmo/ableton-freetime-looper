@@ -38,23 +38,28 @@ void A_Loop_of_interval_N_is_restartable_every_Nth_decrement(std::int32_t loopIn
     }
 }
 
-TEST_CASE("A Loop of interval N is restartable every Nth decrement") {
-    SECTION("N=1")
-    {
-        A_Loop_of_interval_N_is_restartable_every_Nth_decrement(1);
-    }
-    SECTION("N=2")
-    {
-        A_Loop_of_interval_N_is_restartable_every_Nth_decrement(2);
-    }
-    SECTION("N=13")
-    {
-        A_Loop_of_interval_N_is_restartable_every_Nth_decrement(13);
-    }
-    SECTION("N=10")
-    {
-        A_Loop_of_interval_N_is_restartable_every_Nth_decrement(10);
-    }
+TEST_CASE("A Loop of interval 1 is restartable every 1st decrement")
+{
+     A_Loop_of_interval_N_is_restartable_every_Nth_decrement(1);
 }
 
-// todo, what is the meaning of a loop of interval 0 (rather than interval 1). They both seem to act the same
+TEST_CASE("A Loop of interval 2 is restartable every 2nd decrement")
+{
+    A_Loop_of_interval_N_is_restartable_every_Nth_decrement(1);
+}
+
+TEST_CASE("A Loop of interval 5 is restartable every 5th decrement")
+{
+    A_Loop_of_interval_N_is_restartable_every_Nth_decrement(1);
+}
+
+TEST_CASE("A Loop of interval 13 is restartable every 13th decrement")
+{
+    A_Loop_of_interval_N_is_restartable_every_Nth_decrement(1);
+}
+
+TEST_CASE("A Loop of interval 0 is restartable every 1st decrement")
+{
+    // Is this the desired behaviour?
+    A_Loop_of_interval_N_is_restartable_every_Nth_decrement(0);
+}

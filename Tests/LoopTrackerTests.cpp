@@ -8,7 +8,7 @@
 #include <vector>
 using namespace LiveFreetimeLooper;
 
-void When_a_message_is_sent_on_the_1st_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(std::int32_t interval)
+void When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(std::int32_t interval)
 {
     std::vector<unsigned char> messagePayload1 = { 0, 0 };
     LoopTracker tracker;
@@ -37,21 +37,25 @@ void When_a_message_is_sent_on_the_1st_and_Nth_interval_it_then_appears_as_resta
     }
 }
 
-TEST_CASE("When a message is sent on the 1st and Nth interval, it then appears as restartable every Nth interval")
+TEST_CASE("When a message is sent on the 0th and 2th interval, it then appears as restartable on the 2nd, 4th, 6th etc interval")
 {
-    SECTION("N=1")
-    {
-        When_a_message_is_sent_on_the_1st_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(1);
-    }
-    SECTION("N=5")
-    {
-        When_a_message_is_sent_on_the_1st_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(5);
-    }
+    // todo would be nice to split this up into send, wait, send, assert restartablity
+    When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(2);
 }
 
-TEST_CASE("When a new message is sent twice in the same interval, err todo, what happens?")
+TEST_CASE("When a message is sent on the 0st and 5th interval, it then appears as restartable on the 5nd, 10th, 15th etc interval")
 {
-    // todo Apparently, it acts the same as a loop of interval 1
+    When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(5);
+}
+
+TEST_CASE("When a message is sent on the 0st and 1th interval, it then appears as restartable on every interval")
+{
+    When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(1);
+}
+
+TEST_CASE("When a message is sent on the 0st and 0th interval, it then appears as restartable on every interval")
+{
+    // Is this the desired behaviour?
 
     std::vector<unsigned char> messagePayload1 = { 0, 0 };
     LoopTracker tracker;
@@ -91,25 +95,26 @@ bool ContainsMessagePayload(std::vector<Message*> messages, std::vector<unsigned
     return false;
 }
 
-TEST_CASE("Loop Tracker can track multiple loops")
+TEST_CASE("Loop Tracker can track multiple loops concurrently")
 {
-    std::vector<unsigned char> messagePayload1 = { 0, 0 };
-    std::vector<unsigned char> messagePayload2 = { 0, 1 };
-    std::vector<unsigned char> messagePayload3 = { 1, 1 };
-    std::vector<unsigned char> messagePayload4 = { 1, 2 };
-    std::vector<unsigned char> messagePayload5 = { 2, 2 };
-    std::vector<unsigned char> messagePayload6 = { 3, 2 };
+    std::vector<unsigned char> loopAPayload = { 'A' };
+    std::vector<unsigned char> loopBPayload = { 'B' };
+    std::vector<unsigned char> loopCPayload = { 'C' };
+    std::vector<unsigned char> loopDPayload = { 'D' };
+    std::vector<unsigned char> loopEPayload = { 'E' };
+    std::vector<unsigned char> loopFPayload = { 'F' };
+    std::vector<unsigned char> loopGPayload = { 'G' };
 
 
     std::vector<LoopInfo> testLoops =
-        {
-            LoopInfo(2, 0, messagePayload1),
-            LoopInfo(2, 3, messagePayload2),
-            LoopInfo(7, 12, messagePayload3),
-            LoopInfo(2, 1, messagePayload4),
-            LoopInfo(2, 1, messagePayload5),
-            LoopInfo(1, 9, messagePayload6)
-        };
+    {
+        LoopInfo(2, 0, loopAPayload),
+        LoopInfo(2, 3, loopBPayload),
+        LoopInfo(7, 12, loopCPayload),
+        LoopInfo(2, 1, loopDPayload),
+        LoopInfo(2, 1, loopEPayload),
+        LoopInfo(1, 9, loopFPayload)
+    };
 
     LoopTracker tracker;
 
