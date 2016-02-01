@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\AbletonFreetimeLooper.Tests.cpp" />
+    <ClCompile Include="..\..\Tests\AbletonFreetimeLooper.Tests.cpp" />
     <ClCompile Include="..\..\Tests\CreatedStateTests.cpp" />
     <ClCompile Include="..\..\Tests\Includes.cpp" />
     <ClCompile Include="..\..\Tests\LoopTests.cpp" />
@@ -120,7 +120,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalUsingDirectories>C:\Users\Nathan\Source\Repos\AbletonFreetimeLooper\ableton-freetime-looper;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>C:\Ableton\ableton-freetime-looper;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalIncludeDirectories>C:\Ableton\ableton-freetime-looper;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

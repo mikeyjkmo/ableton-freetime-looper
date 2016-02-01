@@ -24,9 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\AbletonFreetimeLooper.Tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Tests\LoopTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -43,6 +40,9 @@
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Tests\Includes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\AbletonFreetimeLooper.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
