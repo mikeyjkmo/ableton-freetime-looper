@@ -9280,7 +9280,6 @@ namespace Catch {
 
 			AssertionPrinter printer(stream, _assertionStats, printInfoMessages);
 			printer.print();
-			stream << std::endl;
 			return true;
 		}
 
@@ -9408,6 +9407,7 @@ namespace Catch {
 			}
 
 			void print() const {
+                if (result.isOk()) return;
 				printSourceInfo();
 				if (stats.totals.assertions.total() > 0) {
 					if (result.isOk())
@@ -9420,6 +9420,7 @@ namespace Catch {
 					stream << "\n";
 				}
 				printMessage();
+                stream << std::endl;
 			}
 
 		private:
