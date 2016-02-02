@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\Tests\LiveFreetimeLooper.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Tests\Mocks\MockLoopTracker.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files\Mocks</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Tests\Mocks\MockMessageDispatcher.h">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Tests\Mocks\MockLoopTracker.h">
       <Filter>Header Files\Mocks</Filter>
     </ClInclude>
   </ItemGroup>

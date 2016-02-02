@@ -26,11 +26,13 @@
     <ClCompile Include="..\..\Tests\LoopTests.cpp" />
     <ClCompile Include="..\..\Tests\LoopTrackerTests.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockEventLogger.cpp" />
+    <ClCompile Include="..\..\Tests\Mocks\MockLoopTracker.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockMessageDispatcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h" />
     <ClInclude Include="..\..\Tests\Mocks\MockEventLogger.h" />
+    <ClInclude Include="..\..\Tests\Mocks\MockLoopTracker.h" />
     <ClInclude Include="..\..\Tests\Mocks\MockMessageDispatcher.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

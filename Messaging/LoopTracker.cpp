@@ -2,6 +2,12 @@
 
 namespace LiveFreetimeLooper
 {
+    LoopTracker::LoopTracker() :
+        _recording(),
+        _running()
+    {
+    }
+
     void LoopTracker::incrementInterval()
     {
         for (auto& recordingLoop : _recording)

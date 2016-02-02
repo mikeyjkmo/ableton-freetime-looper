@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         std::unordered_map<Message, std::unique_ptr<Loop>> _recording;
         std::unordered_map<Message, std::unique_ptr<Loop>> _running;
     public:
-        LoopTracker() {}
+        LoopTracker();
 
         void commandReceived(std::unique_ptr<Message> message);
         std::vector<Message*> getNextRestartMessages();
