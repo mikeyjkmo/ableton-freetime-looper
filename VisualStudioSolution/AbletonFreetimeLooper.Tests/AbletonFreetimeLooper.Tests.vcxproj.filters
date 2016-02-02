@@ -51,6 +51,9 @@
     <ClCompile Include="..\..\Tests\Mocks\MockLoopTracker.cpp">
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Tests\InitialLoopStateTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h">

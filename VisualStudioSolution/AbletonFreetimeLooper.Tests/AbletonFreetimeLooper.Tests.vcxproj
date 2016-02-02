@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Tests\CreatedStateTests.cpp" />
     <ClCompile Include="..\..\Tests\Includes.cpp" />
+    <ClCompile Include="..\..\Tests\InitialLoopStateTests.cpp" />
     <ClCompile Include="..\..\Tests\InitialLoopWaitingStateTests.cpp" />
     <ClCompile Include="..\..\Tests\LiveFreetimeLooper.Tests.cpp" />
     <ClCompile Include="..\..\Tests\LoopTests.cpp" />

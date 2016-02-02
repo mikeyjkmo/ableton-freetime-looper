@@ -22,7 +22,7 @@ void MockLoopTracker::commandReceived(std::unique_ptr<LiveFreetimeLooper::Messag
 
 std::vector<LiveFreetimeLooper::Message*> MockLoopTracker::getNextRestartMessages()
 {
-    throw std::runtime_error("Not Implemented");
+    return std::vector<LiveFreetimeLooper::Message*>();
 }
 
 void MockLoopTracker::clear()

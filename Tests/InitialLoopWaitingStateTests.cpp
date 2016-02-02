@@ -51,7 +51,7 @@ TEST_CASE("InitialLoopWaitingState")
         REQUIRE(dynamic_cast<CreatedState*>(state.get()));
     }
 
-    SECTION("InitialLoopWaitingState clears it's LoopTracker when StdIn supplied")
+    SECTION("InitialLoopWaitingState clears its LoopTracker when StdIn supplied")
     {
         state->handleStdin(state, std::string("any string value"));
         REQUIRE(loopTrackerMock.isCleared());
