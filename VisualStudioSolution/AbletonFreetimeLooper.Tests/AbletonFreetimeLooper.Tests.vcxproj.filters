@@ -42,7 +42,10 @@
     <ClCompile Include="..\..\Tests\Includes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Tests\AbletonFreetimeLooper.Tests.cpp">
+    <ClCompile Include="..\..\Tests\InitialLoopWaitingStateTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\LiveFreetimeLooper.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

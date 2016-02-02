@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Tests\AbletonFreetimeLooper.Tests.cpp" />
     <ClCompile Include="..\..\Tests\CreatedStateTests.cpp" />
     <ClCompile Include="..\..\Tests\Includes.cpp" />
+    <ClCompile Include="..\..\Tests\InitialLoopWaitingStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\LiveFreetimeLooper.Tests.cpp" />
     <ClCompile Include="..\..\Tests\LoopTests.cpp" />
     <ClCompile Include="..\..\Tests\LoopTrackerTests.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockEventLogger.cpp" />
