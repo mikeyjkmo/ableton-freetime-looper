@@ -3,7 +3,7 @@
 #include <string>
 
 #include "Messaging/IMessageDispatcher.h"
-#include "Messaging/LoopTracker.h"
+#include "Messaging/ILoopTracker.h"
 #include "Logging/IEventLogger.h"
 
 namespace LiveFreetimeLooper
@@ -12,11 +12,11 @@ namespace LiveFreetimeLooper
     {
     public:
         IMessageDispatcher& messageDispatcher;
-        LoopTracker& loopTracker;
+        ILoopTracker& loopTracker;
         IEventLogger& logger;
 
         StateResources(
-            IMessageDispatcher& messageDispatcher, LoopTracker& loopTracker, IEventLogger& logger)
+            IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker, IEventLogger& logger)
             : messageDispatcher(messageDispatcher),
               loopTracker(loopTracker),
               logger(logger)

@@ -1,13 +1,13 @@
 #include "MessageReceiver.h"
 #include "IMessageDispatcher.h"
-#include "LoopTracker.h"
+#include "ILoopTracker.h"
 #include "States/CreatedState.h"
 #include "Logging/IEventLogger.h"
 
 namespace LiveFreetimeLooper
 {
     MessageReceiver::MessageReceiver(
-        IMessageDispatcher& messageDispatcher, LoopTracker& loopTracker, IEventLogger& logger)
+        IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker, IEventLogger& logger)
         : _resources(messageDispatcher, loopTracker, logger),
           _currentState(std::make_unique<CreatedState>(_resources))
     {

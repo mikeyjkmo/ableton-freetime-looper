@@ -7,6 +7,7 @@
 #include "Mocks\MockMessageDispatcher.h"
 
 #include "Messaging\Message.h"
+#include "Messaging\LoopTracker.h"
 #include "States\StateBase.h"
 #include "States\CreatedState.h"
 #include "States\InitialLoopWaitingState.h"

@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\Logging\IEventLogger.h" />
     <ClInclude Include="..\..\Logging\MessageDispatchedEvent.h" />
     <ClInclude Include="..\..\Logging\StateChangedEvent.h" />
+    <ClInclude Include="..\..\Messaging\ILoopTracker.h" />
     <ClInclude Include="..\..\Messaging\IMessageDispatcher.h" />
     <ClInclude Include="..\..\Messaging\Loop.h" />
     <ClInclude Include="..\..\Messaging\LoopTracker.h" />

@@ -117,6 +117,9 @@
     <ClInclude Include="..\..\Messaging\IMessageDispatcher.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Messaging\ILoopTracker.h">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Logging\EventLogger.cpp">
