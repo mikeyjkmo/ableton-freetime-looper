@@ -5,6 +5,7 @@
 
 #include "Mocks\MockEventLogger.h"
 #include "Mocks\MockMessageDispatcher.h"
+#include "Mocks\MockAsyncTimerFactory.h"
 
 #include "Messaging\Message.h"
 #include "Messaging\LoopTracker.h"
@@ -20,8 +21,9 @@ TEST_CASE("Created State")
     MockMessageDispatcher dispatcherMock;
 
     LoopTracker loopTracker;
+    MockAsyncTimerFactory asyncTimerFactory;
 
-    StateResources resources(dispatcherMock, loopTracker, loggerMock);
+    StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     
     std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
 

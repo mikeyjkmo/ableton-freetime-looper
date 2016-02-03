@@ -6,6 +6,7 @@
 #include "Mocks\MockEventLogger.h"
 #include "Mocks\MockMessageDispatcher.h"
 #include "Mocks\MockLoopTracker.h"
+#include "Mocks\MockAsyncTimerFactory.h"
 
 #include "Messaging\Message.h"
 #include "States\StateBase.h"
@@ -24,7 +25,9 @@ TEST_CASE("InitialLoopState")
     std::vector<unsigned char> startingMessagePayload = { 7, 1 };
     std::vector<unsigned char> otherMessagePayload = { 3, 5 };
 
-    StateResources resources(dispatcherMock, loopTrackerMock, loggerMock);
+    MockAsyncTimerFactory asyncTimerFactory;
+
+    StateResources resources(dispatcherMock, loopTrackerMock, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<InitialLoopState>(resources, Message(startingMessagePayload));
 
     SECTION("When InitialLoopState receives the a message with the same payload as the starting message it relays the message to the dispatcher")

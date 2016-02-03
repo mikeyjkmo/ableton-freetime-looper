@@ -39,7 +39,10 @@
     <ClInclude Include="..\..\States\RunningState.h" />
     <ClInclude Include="..\..\States\StateBase.h" />
     <ClInclude Include="..\..\Utilities\AsyncTimer.h" />
+    <ClInclude Include="..\..\Utilities\AsyncTimerFactory.h" />
     <ClInclude Include="..\..\Utilities\ConcurrentQueue.h" />
+    <ClInclude Include="..\..\Utilities\IAsyncTimer.h" />
+    <ClInclude Include="..\..\Utilities\IAsyncTimerFactory.h" />
     <ClInclude Include="..\..\Utilities\RtMidiExt.h" />
     <ClInclude Include="..\..\Utilities\Stopwatch.h" />
   </ItemGroup>
@@ -59,6 +62,7 @@
     <ClCompile Include="..\..\States\InitialLoopWaitingState.cpp" />
     <ClCompile Include="..\..\States\RunningState.cpp" />
     <ClCompile Include="..\..\Utilities\AsyncTimer.cpp" />
+    <ClCompile Include="..\..\Utilities\AsyncTimerFactory.cpp" />
     <ClCompile Include="..\..\Utilities\RtMidiExt.cpp" />
     <ClCompile Include="..\..\Utilities\Stopwatch.cpp" />
   </ItemGroup>

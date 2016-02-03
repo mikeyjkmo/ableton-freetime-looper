@@ -12,4 +12,5 @@
 #include "States\InitialLoopWaitingState.cpp"
 #include "States\RunningState.cpp"
 #include "Utilities\AsyncTimer.cpp"
+#include "Utilities\AsyncTimerFactory.cpp"
 #include "Utilities\Stopwatch.cpp"

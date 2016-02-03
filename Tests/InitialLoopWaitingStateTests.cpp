@@ -6,6 +6,7 @@
 #include "Mocks\MockEventLogger.h"
 #include "Mocks\MockMessageDispatcher.h"
 #include "Mocks\MockLoopTracker.h"
+#include "Mocks\MockAsyncTimerFactory.h"
 
 #include "Messaging\Message.h"
 #include "States\StateBase.h"
@@ -21,7 +22,9 @@ TEST_CASE("InitialLoopWaitingState")
     MockMessageDispatcher dispatcherMock;
     MockLoopTracker loopTrackerMock;
 
-    StateResources resources(dispatcherMock, loopTrackerMock, loggerMock);
+    MockAsyncTimerFactory asyncTimerFactory;
+
+    StateResources resources(dispatcherMock, loopTrackerMock, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<InitialLoopWaitingState>(resources);
     std::vector<unsigned char> messagePayload = { 0, 1 };
 

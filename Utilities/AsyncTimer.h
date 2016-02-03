@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IAsyncTimer.h"
+
 #include <functional>
 #include <chrono>
 #include <future>
@@ -7,16 +9,8 @@
 
 namespace LiveFreetimeLooper
 {
-    class AsyncTimer final
+    class AsyncTimer final : public IAsyncTimer
     {
-    public:
-        AsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
-            std::function<void()> f);
-        ~AsyncTimer();
-
-        void start();
-        void stop();
-
     private:
         const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> _interval;
         std::function<void()> _function;
@@ -30,5 +24,12 @@ namespace LiveFreetimeLooper
         void _threadCallback();
         void _scheduleNextCall();
 
+    public:
+        AsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
+            std::function<void()> f);
+        ~AsyncTimer();
+
+        void start();
+        void stop();
     };
 }

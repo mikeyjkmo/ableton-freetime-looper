@@ -5,6 +5,7 @@
 #include "Messaging/IMessageDispatcher.h"
 #include "Messaging/ILoopTracker.h"
 #include "Logging/IEventLogger.h"
+#include "Utilities/IAsyncTimerFactory.h"
 
 namespace LiveFreetimeLooper
 {
@@ -14,12 +15,14 @@ namespace LiveFreetimeLooper
         IMessageDispatcher& messageDispatcher;
         ILoopTracker& loopTracker;
         IEventLogger& logger;
+        IAsyncTimerFactory& asyncTimerFactory;
 
         StateResources(
-            IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker, IEventLogger& logger)
+            IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker, IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory)
             : messageDispatcher(messageDispatcher),
               loopTracker(loopTracker),
-              logger(logger)
+              logger(logger),
+              asyncTimerFactory(asyncTimerFactory)
         {
         }
     };

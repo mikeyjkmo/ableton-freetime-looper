@@ -120,6 +120,15 @@
     <ClInclude Include="..\..\Messaging\ILoopTracker.h">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Utilities\IAsyncTimer.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Utilities\IAsyncTimerFactory.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Utilities\AsyncTimerFactory.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Logging\EventLogger.cpp">
@@ -172,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="..\..\LiveFreetimeLooper.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Utilities\AsyncTimerFactory.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

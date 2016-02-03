@@ -3,21 +3,22 @@
 #include "Logging/IEventLogger.h"
 #include "Logging/StateChangedEvent.h"
 #include "Messaging/Message.h"
+#include "Utilities/IAsyncTimerFactory.h"
 
 namespace LiveFreetimeLooper
 {
-
     RunningState::RunningState(StateResources& resources,
-        std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> timespan)
-        : _asyncTimer(timespan, std::bind(&RunningState::_dequeueAndSendAll, this)),
+        std::chrono::duration<std::chrono::high_resolution_clock::rep,
+        std::chrono::high_resolution_clock::period> timespan)
+        : _asyncTimer(resources.asyncTimerFactory.createAsyncTimer(timespan, std::bind(&RunningState::_dequeueAndSendAll, this))),
           _queue(),
           _resources(resources)
     {
-        _asyncTimer.start();
+        _asyncTimer->start();
     }
 
     /*
-     * _dequeueAndSendAll() is called at every interval as set on the AsyncTimer
+     * _dequeueAndSendAll() is called at every interval as set on the IAsyncTimer
      * (which will be the length of the initial loop) until the state
      * changes.
      */

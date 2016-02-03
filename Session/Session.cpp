@@ -5,6 +5,7 @@
 #include "Utilities/Stopwatch.h"
 #include "Utilities/ConcurrentQueue.h"
 #include "Utilities/RtMidiExt.h"
+#include "Utilities/AsyncTimerFactory.h"
 #include "Messaging/MessageReceiver.h"
 #include "Messaging/MessageDispatcher.h"
 #include "Messaging/LoopTracker.h"
@@ -52,9 +53,10 @@ namespace LiveFreetimeLooper
 
         EventLogger logger;
         LoopTracker loopTracker;
+        AsyncTimerFactory asyncTimerFactory;
 
         MessageDispatcher dispatcher(_midiOut, logger);
-        MessageReceiver receiver(dispatcher, loopTracker, logger);
+        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory);
 
         _midiIn.setCallback(&RtMidiExt::callbackWrapper, &receiver);
         _midiIn.ignoreTypes(false, false, false);
@@ -90,8 +92,10 @@ namespace LiveFreetimeLooper
 
         EventLogger logger;
         LoopTracker loopTracker;
+        AsyncTimerFactory asyncTimerFactory;
+
         MessageDispatcher dispatcher(_midiOut, logger);
-        MessageReceiver receiver(dispatcher, loopTracker, logger);
+        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory);
 
         // Control Change: 176, 7, 100 (volume)
         Message volumeControlMessage({176, 7, 100});

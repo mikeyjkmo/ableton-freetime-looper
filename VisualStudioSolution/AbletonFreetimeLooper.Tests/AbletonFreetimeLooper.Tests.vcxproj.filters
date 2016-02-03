@@ -54,6 +54,15 @@
     <ClCompile Include="..\..\Tests\InitialLoopStateTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Tests\RunningStateTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimer.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimerFactory.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h">
@@ -66,6 +75,12 @@
       <Filter>Header Files\Mocks</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Tests\Mocks\MockLoopTracker.h">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Tests\Mocks\MockAsyncTimer.h">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Tests\Mocks\MockAsyncTimerFactory.h">
       <Filter>Header Files\Mocks</Filter>
     </ClInclude>
   </ItemGroup>
