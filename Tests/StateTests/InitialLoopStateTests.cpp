@@ -3,10 +3,10 @@
 #include <cstdint>
 #include <memory>
 
-#include "Mocks\MockEventLogger.h"
-#include "Mocks\MockMessageDispatcher.h"
-#include "Mocks\MockLoopTracker.h"
-#include "Mocks\MockAsyncTimerFactory.h"
+#include "Tests\Mocks\MockEventLogger.h"
+#include "Tests\Mocks\MockMessageDispatcher.h"
+#include "Tests\Mocks\MockLoopTracker.h"
+#include "Tests\Mocks\MockAsyncTimerFactory.h"
 
 #include "Messaging\Message.h"
 #include "States\StateBase.h"

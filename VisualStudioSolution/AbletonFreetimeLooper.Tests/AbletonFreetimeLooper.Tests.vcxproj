@@ -19,20 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Tests\CreatedStateTests.cpp" />
     <ClCompile Include="..\..\Tests\Includes.cpp" />
-    <ClCompile Include="..\..\Tests\InitialLoopStateTests.cpp" />
-    <ClCompile Include="..\..\Tests\InitialLoopWaitingStateTests.cpp" />
     <ClCompile Include="..\..\Tests\LiveFreetimeLooper.Tests.cpp" />
-    <ClCompile Include="..\..\Tests\LoopTests.cpp" />
-    <ClCompile Include="..\..\Tests\LoopTrackerTests.cpp" />
+    <ClCompile Include="..\..\Tests\MessagingTests\LoopTests.cpp" />
+    <ClCompile Include="..\..\Tests\MessagingTests\LoopTrackerTests.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimer.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimerFactory.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockEventLogger.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockLoopTracker.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockMessageDispatcher.cpp" />
-    <ClCompile Include="..\..\Tests\RunningStateTests.cpp" />
-    <ClCompile Include="..\..\Tests\StateTests.cpp" />
+    <ClCompile Include="..\..\Tests\StateTests\CreatedStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\StateTests\InitialLoopStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\StateTests\InitialLoopWaitingStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\StateTests\RunningStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\StateTests\StateTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h" />

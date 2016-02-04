@@ -22,17 +22,14 @@
     <Filter Include="Source Files\Mocks">
       <UniqueIdentifier>{fbcebe86-4f68-4078-ae9b-38ed266ee023}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StateTests">
+      <UniqueIdentifier>{d6c9cd15-b4e4-4302-bbf9-8672233af743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MessagingTests">
+      <UniqueIdentifier>{26d9f0da-f652-455f-b5b0-fa7f6c468f81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Tests\LoopTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tests\LoopTrackerTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tests\CreatedStateTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Tests\Mocks\MockEventLogger.cpp">
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
@@ -42,20 +39,11 @@
     <ClCompile Include="..\..\Tests\Includes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Tests\InitialLoopWaitingStateTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Tests\LiveFreetimeLooper.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Tests\Mocks\MockLoopTracker.cpp">
       <Filter>Source Files\Mocks</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tests\InitialLoopStateTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tests\RunningStateTests.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimer.cpp">
       <Filter>Source Files\Mocks</Filter>
@@ -63,8 +51,26 @@
     <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimerFactory.cpp">
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Tests\StateTests.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\Tests\StateTests\CreatedStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\StateTests\InitialLoopStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\StateTests\InitialLoopWaitingStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\StateTests\RunningStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\StateTests\StateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\MessagingTests\LoopTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Tests\MessagingTests\LoopTrackerTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
