@@ -64,7 +64,7 @@
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Tests\StateTests.cpp">
-      <Filter>Source Files\Mocks</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
