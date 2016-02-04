@@ -14,6 +14,7 @@ class MockLoopTracker final : public LiveFreetimeLooper::ILoopTracker
 private:
     std::vector<std::unique_ptr<LiveFreetimeLooper::Message>> _commandsReceived;
     std::int32_t _interval;
+    std::int32_t _nextRestartMessagesCallCount;
     bool _cleared;
 public:
     MockLoopTracker();
@@ -25,5 +26,6 @@ public:
 
     std::vector<std::unique_ptr<LiveFreetimeLooper::Message>> const& getCommandsReceived() const;
     std::int32_t const& getInterval() const;
+    std::int32_t const& getNextRestartMessagesCallCount() const;
     bool isCleared() const;
 };

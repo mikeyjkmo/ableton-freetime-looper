@@ -2,16 +2,14 @@
 #include <cstdio>
 #include "AsyncTimer.h"
 
-using namespace std;
-
 namespace LiveFreetimeLooper
 {
 
     AsyncTimer::AsyncTimer(
         const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
-            function<void()> f)
+            std::function<void()> func)
             : _interval(interval),
-          _function(f),
+          _function(func),
           _started(false),
           _stopped(false)
     {
@@ -53,7 +51,7 @@ namespace LiveFreetimeLooper
 
     void AsyncTimer::_threadCallback()
     {
-        this_thread::sleep_for(_interval);
+        std::this_thread::sleep_for(_interval);
         if (!_stopped)
         {
             _function();
@@ -71,7 +69,7 @@ namespace LiveFreetimeLooper
                 _previousThread = std::move(_currentThread);
             }
 
-            _currentThread = make_unique<thread>(
+            _currentThread = std::make_unique<std::thread>(
                 std::bind(&AsyncTimer::_threadCallback, this));
         }
     }

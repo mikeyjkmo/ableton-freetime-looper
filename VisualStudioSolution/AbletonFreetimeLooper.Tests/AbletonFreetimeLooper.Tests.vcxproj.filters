@@ -63,6 +63,9 @@
     <ClCompile Include="..\..\Tests\Mocks\MockAsyncTimerFactory.cpp">
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Tests\StateTests.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h">

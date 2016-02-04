@@ -26,7 +26,7 @@ namespace LiveFreetimeLooper
 
     public:
         AsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
-            std::function<void()> f);
+            std::function<void()> func);
         ~AsyncTimer();
 
         void start();

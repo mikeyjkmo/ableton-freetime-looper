@@ -32,6 +32,7 @@
     <ClCompile Include="..\..\Tests\Mocks\MockLoopTracker.cpp" />
     <ClCompile Include="..\..\Tests\Mocks\MockMessageDispatcher.cpp" />
     <ClCompile Include="..\..\Tests\RunningStateTests.cpp" />
+    <ClCompile Include="..\..\Tests\StateTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Tests\Catch\catch.h" />

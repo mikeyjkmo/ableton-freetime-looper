@@ -72,6 +72,23 @@ TEST_CASE("When a message is sent on the 0st and 0th interval, it then appears a
     }
 }
 
+TEST_CASE("The message is interval is decided by the first two messages, all further messages are ignored")
+{
+    // todo
+}
+
+TEST_CASE("The message is restartable immediately after the second message is received")
+{
+    std::vector<unsigned char> messagePayload1 = { 0, 0 };
+    LoopTracker tracker;
+
+    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
+    tracker.incrementInterval();
+    tracker.incrementInterval();
+    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
+    REQUIRE(tracker.getNextRestartMessages().size() == 1);
+}
+
 struct LoopInfo
 {
 public:
