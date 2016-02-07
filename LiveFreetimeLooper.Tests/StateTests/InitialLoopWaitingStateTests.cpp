@@ -1,0 +1,62 @@
+#include "..\Catch\catch.h"
+
+#include <cstdint>
+#include <memory>
+
+#include "..\Mocks\MockEventLogger.h"
+#include "..\Mocks\MockMessageDispatcher.h"
+#include "..\Mocks\MockLoopTracker.h"
+#include "..\Mocks\MockAsyncTimerFactory.h"
+
+#include "..\..\LiveFreetimeLooper\Messaging\Message.h"
+#include "..\..\LiveFreetimeLooper\States\StateBase.h"
+#include "..\..\LiveFreetimeLooper\States\CreatedState.h"
+#include "..\..\LiveFreetimeLooper\States\InitialLoopWaitingState.h"
+#include "..\..\LiveFreetimeLooper\States\InitialLoopState.h"
+
+using namespace LiveFreetimeLooper;
+
+TEST_CASE("InitialLoopWaitingState")
+{
+    MockEventLogger loggerMock;
+    MockMessageDispatcher dispatcherMock;
+    MockLoopTracker loopTrackerMock;
+
+    MockAsyncTimerFactory asyncTimerFactory;
+
+    StateResources resources(dispatcherMock, loopTrackerMock, loggerMock, asyncTimerFactory);
+    std::unique_ptr<StateBase> state = std::make_unique<InitialLoopWaitingState>(resources);
+    std::vector<unsigned char> messagePayload = { 0, 1 };
+
+    SECTION("InitialLoopWaitingState relays the message to the dispatcher")
+    {
+        state->handle(state, std::make_unique<Message>(messagePayload));
+        REQUIRE(dispatcherMock.getMessages().size() == 1);
+        REQUIRE(dispatcherMock.getMessages().back() == messagePayload);
+    }
+
+    SECTION("InitialLoopWaitingState relays the message to the looptracker")
+    {
+        state->handle(state, std::make_unique<Message>(messagePayload));
+        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
+        REQUIRE(*loopTrackerMock.getCommandsReceived().back() == messagePayload);
+    }
+
+    SECTION("IntialLoopWaitingState returns InitialLoopState when message received")
+    {
+        state->handle(state, std::make_unique<Message>(messagePayload));
+        REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
+    }
+
+    SECTION("InitialLoopWaitingState returns CreatedState when StdIn supplied")
+    {
+        state->handleStdin(state, std::string("any string value"));
+        REQUIRE(dynamic_cast<CreatedState*>(state.get()));
+    }
+
+    SECTION("InitialLoopWaitingState clears its LoopTracker when StdIn supplied")
+    {
+        state->handleStdin(state, std::string("any string value"));
+        REQUIRE(loopTrackerMock.isCleared());
+    }
+}
