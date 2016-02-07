@@ -7,11 +7,11 @@
 #include "..\Mocks\MockMessageDispatcher.hpp"
 #include "..\Mocks\MockAsyncTimerFactory.hpp"
 
-#include "..\..\LiveFreetimeLooper\Messaging\Message.hpp"
-#include "..\..\LiveFreetimeLooper\Messaging\LoopTracker.hpp"
-#include "..\..\LiveFreetimeLooper\States\StateBase.hpp"
-#include "..\..\LiveFreetimeLooper\States\CreatedState.hpp"
-#include "..\..\LiveFreetimeLooper\States\InitialLoopWaitingState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\LoopTracker.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\StateBase.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\CreatedState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\InitialLoopWaitingState.hpp"
 
 using namespace LiveFreetimeLooper;
 

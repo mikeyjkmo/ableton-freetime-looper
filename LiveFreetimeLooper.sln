@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper", "LiveF
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper.Tests", "LiveFreetimeLooper.Tests\LiveFreetimeLooper.Tests.vcxproj", "{9ACA0007-B664-4A2F-8F17-266D782ADC93}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper.FreetimeLooper", "LiveFreetimeLooper.FreetimeLooper\LiveFreetimeLooper.FreetimeLooper.vcxproj", "{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{9ACA0007-B664-4A2F-8F17-266D782ADC93}.Release|x64.Build.0 = Release|x64
 		{9ACA0007-B664-4A2F-8F17-266D782ADC93}.Release|x86.ActiveCfg = Release|Win32
 		{9ACA0007-B664-4A2F-8F17-266D782ADC93}.Release|x86.Build.0 = Release|Win32
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Debug|x64.ActiveCfg = Debug|x64
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Debug|x64.Build.0 = Debug|x64
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Debug|x86.ActiveCfg = Debug|Win32
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Debug|x86.Build.0 = Debug|Win32
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Release|x64.ActiveCfg = Release|x64
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Release|x64.Build.0 = Release|x64
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Release|x86.ActiveCfg = Release|Win32
+		{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

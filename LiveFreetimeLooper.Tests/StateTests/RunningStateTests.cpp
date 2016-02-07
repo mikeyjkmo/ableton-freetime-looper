@@ -9,11 +9,11 @@
 #include "..\Mocks\MockAsyncTimer.hpp"
 #include "..\Mocks\MockLoopTracker.hpp"
 
-#include "..\..\LiveFreetimeLooper\Messaging\Message.hpp"
-#include "..\..\LiveFreetimeLooper\Messaging\LoopTracker.hpp"
-#include "..\..\LiveFreetimeLooper\States\StateBase.hpp"
-#include "..\..\LiveFreetimeLooper\States\CreatedState.hpp"
-#include "..\..\LiveFreetimeLooper\States\RunningState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\LoopTracker.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\StateBase.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\CreatedState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\RunningState.hpp"
 
 using namespace LiveFreetimeLooper;
 

@@ -8,13 +8,13 @@
 #include "..\Mocks\MockAsyncTimerFactory.hpp"
 #include "..\Mocks\MockAsyncTimer.hpp"
 
-#include "..\..\LiveFreetimeLooper\Messaging\Message.hpp"
-#include "..\..\LiveFreetimeLooper\Messaging\LoopTracker.hpp"
-#include "..\..\LiveFreetimeLooper\States\StateBase.hpp"
-#include "..\..\LiveFreetimeLooper\States\CreatedState.hpp"
-#include "..\..\LiveFreetimeLooper\States\InitialLoopWaitingState.hpp"
-#include "..\..\LiveFreetimeLooper\States\InitialLoopState.hpp"
-#include "..\..\LiveFreetimeLooper\States\RunningState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\LoopTracker.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\StateBase.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\CreatedState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\InitialLoopWaitingState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\InitialLoopState.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\RunningState.hpp"
 
 using namespace LiveFreetimeLooper;
 

@@ -19,61 +19,80 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LiveFreetimeLooper.Tests.cpp" />
-    <ClCompile Include="MessagingTests\LoopTests.cpp" />
-    <ClCompile Include="MessagingTests\LoopTrackerTests.cpp" />
-    <ClCompile Include="Mocks\MockAsyncTimer.cpp" />
-    <ClCompile Include="Mocks\MockAsyncTimerFactory.cpp" />
-    <ClCompile Include="Mocks\MockEventLogger.cpp" />
-    <ClCompile Include="Mocks\MockLoopTracker.cpp" />
-    <ClCompile Include="Mocks\MockMessageDispatcher.cpp" />
-    <ClCompile Include="StateTests\CreatedStateTests.cpp" />
-    <ClCompile Include="StateTests\InitialLoopStateTests.cpp" />
-    <ClCompile Include="StateTests\InitialLoopWaitingStateTests.cpp" />
-    <ClCompile Include="StateTests\RunningStateTests.cpp" />
-    <ClCompile Include="StateTests\StateTests.cpp" />
+    <ClInclude Include="Logging\EventLogger.hpp" />
+    <ClInclude Include="Logging\IEvent.hpp" />
+    <ClInclude Include="Logging\IEventLogger.hpp" />
+    <ClInclude Include="Logging\MessageDispatchedEvent.hpp" />
+    <ClInclude Include="Logging\StateChangedEvent.hpp" />
+    <ClInclude Include="Messaging\ILoopTracker.hpp" />
+    <ClInclude Include="Messaging\IMessageDispatcher.hpp" />
+    <ClInclude Include="Messaging\Loop.hpp" />
+    <ClInclude Include="Messaging\LoopTracker.hpp" />
+    <ClInclude Include="Messaging\Message.hpp" />
+    <ClInclude Include="Messaging\MessageDispatcher.hpp" />
+    <ClInclude Include="Messaging\MessageReceiver.hpp" />
+    <ClInclude Include="RtMidi\RtMidi.hpp" />
+    <ClInclude Include="Session\Session.hpp" />
+    <ClInclude Include="States\CreatedState.hpp" />
+    <ClInclude Include="States\InitialLoopState.hpp" />
+    <ClInclude Include="States\InitialLoopWaitingState.hpp" />
+    <ClInclude Include="States\RunningState.hpp" />
+    <ClInclude Include="States\StateBase.hpp" />
+    <ClInclude Include="Utilities\AsyncTimer.hpp" />
+    <ClInclude Include="Utilities\AsyncTimerFactory.hpp" />
+    <ClInclude Include="Utilities\ConcurrentQueue.hpp" />
+    <ClInclude Include="Utilities\IAsyncTimer.hpp" />
+    <ClInclude Include="Utilities\IAsyncTimerFactory.hpp" />
+    <ClInclude Include="Utilities\RtMidiExt.hpp" />
+    <ClInclude Include="Utilities\Stopwatch.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Catch\catch.hpp" />
-    <ClInclude Include="Mocks\MockAsyncTimer.hpp" />
-    <ClInclude Include="Mocks\MockAsyncTimerFactory.hpp" />
-    <ClInclude Include="Mocks\MockEventLogger.hpp" />
-    <ClInclude Include="Mocks\MockLoopTracker.hpp" />
-    <ClInclude Include="Mocks\MockMessageDispatcher.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LiveFreetimeLooper.FreetimeLooper\LiveFreetimeLooper.FreetimeLooper.vcxproj">
-      <Project>{2877e868-d2b7-4de5-b70f-69191fdba1fe}</Project>
-    </ProjectReference>
+    <ClCompile Include="Logging\EventLogger.cpp" />
+    <ClCompile Include="Logging\MessageDispatchedEvent.cpp" />
+    <ClCompile Include="Logging\StateChangedEvent.cpp" />
+    <ClCompile Include="Messaging\Loop.cpp" />
+    <ClCompile Include="Messaging\LoopTracker.cpp" />
+    <ClCompile Include="Messaging\MessageDispatcher.cpp" />
+    <ClCompile Include="Messaging\MessageReceiver.cpp" />
+    <ClCompile Include="RtMidi\RtMidi.cpp" />
+    <ClCompile Include="Session\Session.cpp" />
+    <ClCompile Include="States\CreatedState.cpp" />
+    <ClCompile Include="States\InitialLoopState.cpp" />
+    <ClCompile Include="States\InitialLoopWaitingState.cpp" />
+    <ClCompile Include="States\RunningState.cpp" />
+    <ClCompile Include="Utilities\AsyncTimer.cpp" />
+    <ClCompile Include="Utilities\AsyncTimerFactory.cpp" />
+    <ClCompile Include="Utilities\RtMidiExt.cpp" />
+    <ClCompile Include="Utilities\Stopwatch.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9ACA0007-B664-4A2F-8F17-266D782ADC93}</ProjectGuid>
+    <ProjectGuid>{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>LiveFreetimeLooperTests</RootNamespace>
+    <RootNamespace>LiveFreetimeLooperFreetimeLooper</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -97,30 +116,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,14 +136,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>
-      </ImportLibrary>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,14 +151,13 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -165,14 +168,13 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,9 +4,9 @@
 #include <vector>
 #include <cstdint>
 
-#include "..\..\LiveFreetimeLooper\Messaging\ILoopTracker.hpp"
-#include "..\..\LiveFreetimeLooper\Messaging\Message.hpp"
-#include "..\..\LiveFreetimeLooper\Messaging\Loop.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\ILoopTracker.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Loop.hpp"
 
 
 class MockLoopTracker final : public LiveFreetimeLooper::ILoopTracker

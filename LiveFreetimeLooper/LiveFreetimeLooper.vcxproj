@@ -108,6 +108,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(OutDir)LiveFreetimeLooper.lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,51 +149,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LiveFreetimeLooper.cpp" />
-    <ClCompile Include="Logging\EventLogger.cpp" />
-    <ClCompile Include="Logging\MessageDispatchedEvent.cpp" />
-    <ClCompile Include="Logging\StateChangedEvent.cpp" />
-    <ClCompile Include="Messaging\Loop.cpp" />
-    <ClCompile Include="Messaging\LoopTracker.cpp" />
-    <ClCompile Include="Messaging\MessageDispatcher.cpp" />
-    <ClCompile Include="Messaging\MessageReceiver.cpp" />
-    <ClCompile Include="RtMidi\RtMidi.cpp" />
-    <ClCompile Include="Session\Session.cpp" />
-    <ClCompile Include="States\CreatedState.cpp" />
-    <ClCompile Include="States\InitialLoopState.cpp" />
-    <ClCompile Include="States\InitialLoopWaitingState.cpp" />
-    <ClCompile Include="States\RunningState.cpp" />
-    <ClCompile Include="Utilities\AsyncTimer.cpp" />
-    <ClCompile Include="Utilities\AsyncTimerFactory.cpp" />
-    <ClCompile Include="Utilities\RtMidiExt.cpp" />
-    <ClCompile Include="Utilities\Stopwatch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Logging\EventLogger.hpp" />
-    <ClInclude Include="Logging\IEvent.hpp" />
-    <ClInclude Include="Logging\IEventLogger.hpp" />
-    <ClInclude Include="Logging\MessageDispatchedEvent.hpp" />
-    <ClInclude Include="Logging\StateChangedEvent.hpp" />
-    <ClInclude Include="Messaging\ILoopTracker.hpp" />
-    <ClInclude Include="Messaging\IMessageDispatcher.hpp" />
-    <ClInclude Include="Messaging\Loop.hpp" />
-    <ClInclude Include="Messaging\LoopTracker.hpp" />
-    <ClInclude Include="Messaging\Message.hpp" />
-    <ClInclude Include="Messaging\MessageDispatcher.hpp" />
-    <ClInclude Include="Messaging\MessageReceiver.hpp" />
-    <ClInclude Include="RtMidi\RtMidi.hpp" />
-    <ClInclude Include="Session\Session.hpp" />
-    <ClInclude Include="States\CreatedState.hpp" />
-    <ClInclude Include="States\InitialLoopState.hpp" />
-    <ClInclude Include="States\InitialLoopWaitingState.hpp" />
-    <ClInclude Include="States\RunningState.hpp" />
-    <ClInclude Include="States\StateBase.hpp" />
-    <ClInclude Include="Utilities\AsyncTimer.hpp" />
-    <ClInclude Include="Utilities\AsyncTimerFactory.hpp" />
-    <ClInclude Include="Utilities\ConcurrentQueue.hpp" />
-    <ClInclude Include="Utilities\IAsyncTimer.hpp" />
-    <ClInclude Include="Utilities\IAsyncTimerFactory.hpp" />
-    <ClInclude Include="Utilities\RtMidiExt.hpp" />
-    <ClInclude Include="Utilities\Stopwatch.hpp" />
+    <ProjectReference Include="..\LiveFreetimeLooper.FreetimeLooper\LiveFreetimeLooper.FreetimeLooper.vcxproj">
+      <Project>{2877e868-d2b7-4de5-b70f-69191fdba1fe}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

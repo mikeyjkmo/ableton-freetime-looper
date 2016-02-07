@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\..\LiveFreetimeLooper\Utilities\IAsyncTimer.hpp"
+#include "..\..\LiveFreetimeLooper.FreetimeLooper\Utilities\IAsyncTimer.hpp"
 
 #include <functional>
 
