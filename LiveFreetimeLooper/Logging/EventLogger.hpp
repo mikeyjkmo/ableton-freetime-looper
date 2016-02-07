@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "IEventLogger.h"
-#include "IEvent.h"
+#include "IEventLogger.hpp"
+#include "IEvent.hpp"
 
 namespace LiveFreetimeLooper
 {

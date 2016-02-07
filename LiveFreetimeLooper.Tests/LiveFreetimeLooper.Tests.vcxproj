@@ -35,12 +35,12 @@
     <ClCompile Include="StateTests\StateTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Catch\catch.h" />
-    <ClInclude Include="Mocks\MockAsyncTimer.h" />
-    <ClInclude Include="Mocks\MockAsyncTimerFactory.h" />
-    <ClInclude Include="Mocks\MockEventLogger.h" />
-    <ClInclude Include="Mocks\MockLoopTracker.h" />
-    <ClInclude Include="Mocks\MockMessageDispatcher.h" />
+    <ClInclude Include="Catch\catch.hpp" />
+    <ClInclude Include="Mocks\MockAsyncTimer.hpp" />
+    <ClInclude Include="Mocks\MockAsyncTimerFactory.hpp" />
+    <ClInclude Include="Mocks\MockEventLogger.hpp" />
+    <ClInclude Include="Mocks\MockLoopTracker.hpp" />
+    <ClInclude Include="Mocks\MockMessageDispatcher.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9ACA0007-B664-4A2F-8F17-266D782ADC93}</ProjectGuid>

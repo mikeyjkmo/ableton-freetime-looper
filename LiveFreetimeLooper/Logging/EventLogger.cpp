@@ -1,5 +1,5 @@
 #include <iostream>
-#include "EventLogger.h"
+#include "EventLogger.hpp"
 
 namespace LiveFreetimeLooper
 {

@@ -2,21 +2,19 @@
 
 #include <string>
 #include <chrono>
-#include "IEvent.h"
-#include "../Messaging/Message.h"
+#include "IEvent.hpp"
 
 namespace LiveFreetimeLooper
 {
 
-    class MessageDispatchedEvent final : public IEvent
+    class StateChangedEvent final : public IEvent
     {
     private:
         std::chrono::high_resolution_clock::time_point _time;
         std::string _detail;
         std::string _eventSource;
-        static std::string createDetail(Message& message);
     public:
-        MessageDispatchedEvent(Message& message, std::string eventSource);
+        StateChangedEvent(std::string detail, std::string eventSource);
 
         std::string getName() const override;
         std::chrono::high_resolution_clock::time_point getTime() const override;

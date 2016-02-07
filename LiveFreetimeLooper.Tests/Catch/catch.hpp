@@ -6407,7 +6407,7 @@ namespace Catch {
 #define TWOBLUECUBES_CATCH_EXCEPTION_TRANSLATOR_REGISTRY_HPP_INCLUDED
 
 #ifdef __OBJC__
-#import "Foundation/Foundation.h"
+#import "Foundation/Foundation.hpp"
 #endif
 
 namespace Catch {

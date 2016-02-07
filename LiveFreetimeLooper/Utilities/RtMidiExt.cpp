@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../Messaging/MessageReceiver.h"
-#include "RtMidiExt.h"
-#include "../RtMidi/Rtmidi.h"
+#include "../Messaging/MessageReceiver.hpp"
+#include "RtMidiExt.hpp"
+#include "../RtMidi/Rtmidi.hpp"
 
 namespace LiveFreetimeLooper
 {

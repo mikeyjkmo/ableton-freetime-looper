@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IMessageDispatcher.h"
-#include "../RtMidi/RtMidi.h"
+#include "IMessageDispatcher.hpp"
+#include "../RtMidi/RtMidi.hpp"
 
 namespace LiveFreetimeLooper
 {

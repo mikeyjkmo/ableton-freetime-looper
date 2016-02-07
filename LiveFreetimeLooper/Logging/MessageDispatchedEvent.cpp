@@ -1,5 +1,5 @@
-#include "MessageDispatchedEvent.h"
-#include "../Messaging/Message.h"
+#include "MessageDispatchedEvent.hpp"
+#include "../Messaging/Message.hpp"
 
 namespace LiveFreetimeLooper
 {

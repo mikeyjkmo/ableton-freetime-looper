@@ -1,9 +1,9 @@
 #include <string>
 #include <iostream>
-#include "MessageDispatcher.h"
-#include "Message.h"
-#include "../Logging/IEventLogger.h"
-#include "../Logging/MessageDispatchedEvent.h"
+#include "MessageDispatcher.hpp"
+#include "Message.hpp"
+#include "../Logging/IEventLogger.hpp"
+#include "../Logging/MessageDispatchedEvent.hpp"
 
 namespace LiveFreetimeLooper
 {

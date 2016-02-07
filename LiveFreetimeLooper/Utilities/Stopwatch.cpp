@@ -1,4 +1,4 @@
-#include "Stopwatch.h"
+#include "Stopwatch.hpp"
 
 namespace LiveFreetimeLooper
 {

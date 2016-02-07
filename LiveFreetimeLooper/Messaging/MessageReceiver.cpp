@@ -1,5 +1,5 @@
-#include "MessageReceiver.h"
-#include "../States/CreatedState.h"
+#include "MessageReceiver.hpp"
+#include "../States/CreatedState.hpp"
 
 namespace LiveFreetimeLooper
 {

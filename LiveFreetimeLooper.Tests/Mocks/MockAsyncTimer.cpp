@@ -1,4 +1,4 @@
-#include "MockAsyncTimer.h"
+#include "MockAsyncTimer.hpp"
 
 MockAsyncTimer::MockAsyncTimer(std::function<void()> func) :
     _function(func),

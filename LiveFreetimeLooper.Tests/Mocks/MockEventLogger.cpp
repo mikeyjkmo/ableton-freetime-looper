@@ -1,4 +1,4 @@
-#include "MockEventLogger.h"
+#include "MockEventLogger.hpp"
 
 MockEventLogger::MockEventLogger() :
     _evnts()

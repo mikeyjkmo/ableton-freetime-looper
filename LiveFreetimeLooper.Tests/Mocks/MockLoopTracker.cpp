@@ -1,4 +1,4 @@
-#include "MockLoopTracker.h"
+#include "MockLoopTracker.hpp"
 
 MockLoopTracker::MockLoopTracker() :
     _commandsReceived(),

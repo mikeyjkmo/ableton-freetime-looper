@@ -1,5 +1,5 @@
 # pragma once
-#include "../RtMidi/RtMidi.h"
+#include "../RtMidi/RtMidi.hpp"
 
 namespace LiveFreetimeLooper
 {

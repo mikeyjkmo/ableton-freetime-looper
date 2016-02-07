@@ -1,7 +1,7 @@
-#include "InitialLoopState.h"
-#include "RunningState.h"
-#include "CreatedState.h"
-#include "../Logging/StateChangedEvent.h"
+#include "InitialLoopState.hpp"
+#include "RunningState.hpp"
+#include "CreatedState.hpp"
+#include "../Logging/StateChangedEvent.hpp"
 
 namespace LiveFreetimeLooper
 {

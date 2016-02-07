@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IAsyncTimer.h"
+#include "IAsyncTimer.hpp"
 
 #include <functional>
 #include <chrono>

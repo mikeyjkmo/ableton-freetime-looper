@@ -1,9 +1,9 @@
-#include "RunningState.h"
-#include "CreatedState.h"
-#include "../Logging/IEventLogger.h"
-#include "../Logging/StateChangedEvent.h"
-#include "../Messaging/Message.h"
-#include "../Utilities/IAsyncTimerFactory.h"
+#include "RunningState.hpp"
+#include "CreatedState.hpp"
+#include "../Logging/IEventLogger.hpp"
+#include "../Logging/StateChangedEvent.hpp"
+#include "../Messaging/Message.hpp"
+#include "../Utilities/IAsyncTimerFactory.hpp"
 
 namespace LiveFreetimeLooper
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "..\..\LiveFreetimeLooper\Logging\IEventLogger.h"
-#include "..\..\LiveFreetimeLooper\Logging\IEvent.h"
+#include "..\..\LiveFreetimeLooper\Logging\IEventLogger.hpp"
+#include "..\..\LiveFreetimeLooper\Logging\IEvent.hpp"
 
 class MockEventLogger final : public LiveFreetimeLooper::IEventLogger
 {

@@ -1,4 +1,4 @@
-#include "MockMessageDispatcher.h"
+#include "MockMessageDispatcher.hpp"
 
 MockMessageDispatcher::MockMessageDispatcher() :
     _messages()

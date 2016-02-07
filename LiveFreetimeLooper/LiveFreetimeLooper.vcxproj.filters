@@ -107,82 +107,82 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Logging\EventLogger.h">
+    <ClInclude Include="Logging\EventLogger.hpp">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\IEvent.h">
+    <ClInclude Include="Logging\IEvent.hpp">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\IEventLogger.h">
+    <ClInclude Include="Logging\IEventLogger.hpp">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\MessageDispatchedEvent.h">
+    <ClInclude Include="Logging\MessageDispatchedEvent.hpp">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\StateChangedEvent.h">
+    <ClInclude Include="Logging\StateChangedEvent.hpp">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\ILoopTracker.h">
+    <ClInclude Include="Messaging\ILoopTracker.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\IMessageDispatcher.h">
+    <ClInclude Include="Messaging\IMessageDispatcher.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\Loop.h">
+    <ClInclude Include="Messaging\Loop.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\LoopTracker.h">
+    <ClInclude Include="Messaging\LoopTracker.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\Message.h">
+    <ClInclude Include="Messaging\Message.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\MessageDispatcher.h">
+    <ClInclude Include="Messaging\MessageDispatcher.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\MessageReceiver.h">
+    <ClInclude Include="Messaging\MessageReceiver.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="RtMidi\RtMidi.h">
+    <ClInclude Include="RtMidi\RtMidi.hpp">
       <Filter>Header Files\RtMidi</Filter>
     </ClInclude>
-    <ClInclude Include="Session\Session.h">
+    <ClInclude Include="Session\Session.hpp">
       <Filter>Header Files\Session</Filter>
     </ClInclude>
-    <ClInclude Include="States\CreatedState.h">
+    <ClInclude Include="States\CreatedState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="States\InitialLoopState.h">
+    <ClInclude Include="States\InitialLoopState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="States\InitialLoopWaitingState.h">
+    <ClInclude Include="States\InitialLoopWaitingState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="States\RunningState.h">
+    <ClInclude Include="States\RunningState.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="States\StateBase.h">
+    <ClInclude Include="States\StateBase.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\AsyncTimer.h">
+    <ClInclude Include="Utilities\AsyncTimer.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\AsyncTimerFactory.h">
+    <ClInclude Include="Utilities\AsyncTimerFactory.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\ConcurrentQueue.h">
+    <ClInclude Include="Utilities\ConcurrentQueue.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\IAsyncTimer.h">
+    <ClInclude Include="Utilities\IAsyncTimer.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\IAsyncTimerFactory.h">
+    <ClInclude Include="Utilities\IAsyncTimerFactory.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\RtMidiExt.h">
+    <ClInclude Include="Utilities\RtMidiExt.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Stopwatch.h">
+    <ClInclude Include="Utilities\Stopwatch.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>

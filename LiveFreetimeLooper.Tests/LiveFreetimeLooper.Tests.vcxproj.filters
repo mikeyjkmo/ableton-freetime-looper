@@ -74,23 +74,23 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mocks\MockAsyncTimer.h">
-      <Filter>Header Files\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockAsyncTimerFactory.h">
-      <Filter>Header Files\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockEventLogger.h">
-      <Filter>Header Files\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockLoopTracker.h">
-      <Filter>Header Files\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Mocks\MockMessageDispatcher.h">
-      <Filter>Header Files\Mocks</Filter>
-    </ClInclude>
-    <ClInclude Include="Catch\catch.h">
+    <ClInclude Include="Catch\catch.hpp">
       <Filter>Header Files\Catch</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockAsyncTimer.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockAsyncTimerFactory.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockEventLogger.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockLoopTracker.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockMessageDispatcher.hpp">
+      <Filter>Header Files\Mocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

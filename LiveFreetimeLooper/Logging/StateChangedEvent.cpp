@@ -1,4 +1,4 @@
-#include "StateChangedEvent.h"
+#include "StateChangedEvent.hpp"
 
 namespace LiveFreetimeLooper
 {

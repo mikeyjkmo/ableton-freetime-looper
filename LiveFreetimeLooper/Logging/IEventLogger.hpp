@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "IEvent.h"
+#include "IEvent.hpp"
 
 namespace LiveFreetimeLooper
 {

@@ -2,15 +2,15 @@
 #include <chrono>
 #include <thread>
 
-#include "../Utilities/Stopwatch.h"
-#include "../Utilities/ConcurrentQueue.h"
-#include "../Utilities/RtMidiExt.h"
-#include "../Utilities/AsyncTimerFactory.h"
-#include "../Messaging/MessageReceiver.h"
-#include "../Messaging/MessageDispatcher.h"
-#include "../Messaging/LoopTracker.h"
-#include "../Logging/EventLogger.h"
-#include "Session.h"
+#include "../Utilities/Stopwatch.hpp"
+#include "../Utilities/ConcurrentQueue.hpp"
+#include "../Utilities/RtMidiExt.hpp"
+#include "../Utilities/AsyncTimerFactory.hpp"
+#include "../Messaging/MessageReceiver.hpp"
+#include "../Messaging/MessageDispatcher.hpp"
+#include "../Messaging/LoopTracker.hpp"
+#include "../Logging/EventLogger.hpp"
+#include "Session.hpp"
 
 
 namespace LiveFreetimeLooper

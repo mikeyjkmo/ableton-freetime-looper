@@ -2,10 +2,10 @@
 #include <memory>
 #include <string>
 
-#include "../Messaging/IMessageDispatcher.h"
-#include "../Messaging/ILoopTracker.h"
-#include "../Logging/IEventLogger.h"
-#include "../Utilities/IAsyncTimerFactory.h"
+#include "../Messaging/IMessageDispatcher.hpp"
+#include "../Messaging/ILoopTracker.hpp"
+#include "../Logging/IEventLogger.hpp"
+#include "../Utilities/IAsyncTimerFactory.hpp"
 
 namespace LiveFreetimeLooper
 {

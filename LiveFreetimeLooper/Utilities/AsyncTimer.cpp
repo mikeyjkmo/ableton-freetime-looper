@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdio>
-#include "AsyncTimer.h"
+#include "AsyncTimer.hpp"
 
 namespace LiveFreetimeLooper
 {

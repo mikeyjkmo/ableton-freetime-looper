@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\LiveFreetimeLooper\Utilities\IAsyncTimerFactory.h"
-#include "..\..\LiveFreetimeLooper\Utilities\IAsyncTimer.h"
+#include "..\..\LiveFreetimeLooper\Utilities\IAsyncTimerFactory.hpp"
+#include "..\..\LiveFreetimeLooper\Utilities\IAsyncTimer.hpp"
 
 #include <functional>
 #include <chrono>

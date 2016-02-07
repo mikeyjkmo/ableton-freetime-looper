@@ -1,5 +1,5 @@
-#include "AsyncTimerFactory.h"
-#include "AsyncTimer.h"
+#include "AsyncTimerFactory.hpp"
+#include "AsyncTimer.hpp"
 
 namespace LiveFreetimeLooper
 {

@@ -3,8 +3,8 @@
 #include <mutex>
 #include <string>
 
-#include "../States/StateBase.h"
-#include "Message.h"
+#include "../States/StateBase.hpp"
+#include "Message.hpp"
 
 namespace LiveFreetimeLooper
 {

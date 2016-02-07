@@ -3,10 +3,10 @@
 #include <memory>
 #include <string>
 
-#include "StateBase.h"
-#include "../Utilities/IAsyncTimer.h"
-#include "../Utilities/IAsyncTimerFactory.h"
-#include "../Utilities/ConcurrentQueue.h"
+#include "StateBase.hpp"
+#include "../Utilities/IAsyncTimer.hpp"
+#include "../Utilities/IAsyncTimerFactory.hpp"
+#include "../Utilities/ConcurrentQueue.hpp"
 
 namespace LiveFreetimeLooper
 {

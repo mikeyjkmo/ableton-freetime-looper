@@ -4,9 +4,9 @@
 #include <unordered_map>
 #include <vector>
 
-#include "ILoopTracker.h"
-#include "Message.h"
-#include "Loop.h"
+#include "ILoopTracker.hpp"
+#include "Message.hpp"
+#include "Loop.hpp"
 
 namespace LiveFreetimeLooper
 {

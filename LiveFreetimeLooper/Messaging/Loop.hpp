@@ -3,7 +3,7 @@
 #include <memory>
 #include <cstdint>
 
-#include "Message.h"
+#include "Message.hpp"
 
 namespace LiveFreetimeLooper
 {

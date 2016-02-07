@@ -1,5 +1,5 @@
-#include "MockAsyncTimerFactory.h"
-#include "MockAsyncTimer.h"
+#include "MockAsyncTimerFactory.hpp"
+#include "MockAsyncTimer.hpp"
 
 MockAsyncTimerFactory::MockAsyncTimerFactory()
 {

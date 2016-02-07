@@ -1,7 +1,7 @@
-#include "InitialLoopWaitingState.h"
-#include "InitialLoopState.h"
-#include "CreatedState.h"
-#include "../Logging/StateChangedEvent.h"
+#include "InitialLoopWaitingState.hpp"
+#include "InitialLoopState.hpp"
+#include "CreatedState.hpp"
+#include "../Logging/StateChangedEvent.hpp"
 
 namespace LiveFreetimeLooper
 {

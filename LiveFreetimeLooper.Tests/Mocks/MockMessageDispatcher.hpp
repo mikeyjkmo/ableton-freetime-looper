@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "..\..\LiveFreetimeLooper\Messaging\Message.h"
-#include "..\..\LiveFreetimeLooper\Messaging\IMessageDispatcher.h"
+#include "..\..\LiveFreetimeLooper\Messaging\Message.hpp"
+#include "..\..\LiveFreetimeLooper\Messaging\IMessageDispatcher.hpp"
 
 class MockMessageDispatcher final : public LiveFreetimeLooper::IMessageDispatcher
 {

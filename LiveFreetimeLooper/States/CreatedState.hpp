@@ -2,18 +2,18 @@
 #include <memory>
 #include <string>
 
-#include "StateBase.h"
-#include "../Messaging/Message.h"
+#include "StateBase.hpp"
+#include "../Messaging/Message.hpp"
 
 namespace LiveFreetimeLooper
 {
-    // Waiting for first message to start Initial Loop
-    class InitialLoopWaitingState final : public StateBase
+    // Waiting for stdIn to signal that intial loop start message is coming
+    class CreatedState final : public StateBase
     {
     private:
         StateResources& _resources;
     public:
-        InitialLoopWaitingState(StateResources& resources);
+        CreatedState(StateResources& resources);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;
