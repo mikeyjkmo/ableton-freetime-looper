@@ -65,6 +65,14 @@
     <ClCompile Include="Utilities\RtMidiExt.cpp" />
     <ClCompile Include="Utilities\Stopwatch.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ClassDiagram.png">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Image>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
