@@ -8,85 +8,141 @@
 #include <vector>
 using namespace LiveFreetimeLooper;
 
-void When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(std::int32_t interval)
+class LoopTrackerSteps
 {
-    std::vector<unsigned char> messagePayload1 = { 0, 0 };
-    LoopTracker tracker;
+public:
+    LoopTrackerSteps() : _loopTracker() {};
 
-    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
-    for (std::int32_t i = 0;i < interval;i++)
+    void LoopTrackerSteps::Given_I_Send_A_Message(unsigned char message)
     {
-        tracker.incrementInterval();
+        std::vector<unsigned char> messagePayload1 = { message };
+        _loopTracker.commandReceived(std::make_unique<Message>(messagePayload1));
     }
-    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
 
-    for (std::int32_t i = 0;i < interval * 10 + 1;i++)
+    void LoopTrackerSteps::Given_I_Wait_N_Intervals(unsigned char number)
     {
-        auto restartMessages = tracker.getNextRestartMessages();
-        if (i%interval == 0)
+        for (std::int32_t i = 0;i < number;i++)
         {
-            CAPTURE(i);
-            REQUIRE(restartMessages.size() == 1);
+            _loopTracker.incrementInterval();
         }
-        else
-        {
-            CAPTURE(i);
-            REQUIRE(restartMessages.size() == 0);
-        }
-        tracker.incrementInterval();
     }
-}
+
+    void LoopTrackerSteps::Given_I_Wait_One_Interval()
+    {
+        Given_I_Wait_N_Intervals(1);
+    }
+
+    void LoopTrackerSteps::Then_The_Message_Is_Restartable(unsigned char message)
+    {
+        auto restartMessages = _loopTracker.getNextRestartMessages();
+        REQUIRE(MessageCount(message, restartMessages) == 1);
+    }
+
+    void LoopTrackerSteps::Then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
+    {
+        for (std::int32_t i = 0;i < number * 10 + 1;i++)
+        {
+            auto restartMessages = _loopTracker.getNextRestartMessages();
+            if (i%number == 0)
+            {
+                CAPTURE(i);
+                REQUIRE(MessageCount(message, restartMessages) == 1);
+            }
+            else
+            {
+                CAPTURE(i);
+                REQUIRE(MessageCount(message, restartMessages) == 0);
+            }
+
+            _loopTracker.incrementInterval();
+        }
+    }
+
+private : 
+
+    LoopTracker _loopTracker;
+
+    std::int32_t MessageCount(unsigned char message, const std::vector<LiveFreetimeLooper::Message*>& restartMessages)
+    {
+        std::int32_t matchingItems = 0;
+        for (const auto item : restartMessages)
+        {
+            if (item->payload.size() == 1 && *item->payload.begin() == message) ++matchingItems;
+        }
+
+        return matchingItems;
+    }
+};
+
 
 TEST_CASE("When a message is sent on the 0th and 2th interval, it then appears as restartable on the 2nd, 4th, 6th etc interval")
 {
-    // todo would be nice to split this up into send, wait, send, assert restartablity
-    When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(2);
+    LoopTrackerSteps test;
+
+    test.Given_I_Send_A_Message('a');
+    test.Given_I_Wait_One_Interval();
+    test.Given_I_Wait_One_Interval();
+
+    test.Given_I_Send_A_Message('a');
+
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('a', 2);
 }
 
 TEST_CASE("When a message is sent on the 0st and 5th interval, it then appears as restartable on the 5nd, 10th, 15th etc interval")
 {
-    When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(5);
+    LoopTrackerSteps test;
+
+    test.Given_I_Send_A_Message('b');
+    test.Given_I_Wait_N_Intervals(5);
+    test.Given_I_Send_A_Message('b');
+
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('b', 5);
 }
 
 TEST_CASE("When a message is sent on the 0st and 1th interval, it then appears as restartable on every interval")
 {
-    When_a_message_is_sent_on_the_0th_and_Nth_interval_it_then_appears_as_restartable_every_Nth_interval(1);
+    LoopTrackerSteps test;
+
+    test.Given_I_Send_A_Message('c');
+    test.Given_I_Wait_One_Interval();
+    test.Given_I_Send_A_Message('c');
+
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('c', 1);
+
 }
 
 TEST_CASE("When a message is sent on the 0st and 0th interval, it then appears as restartable on every interval")
 {
-    // Is this the desired behaviour?
+    // I don't think is behaviour is desired
+    LoopTrackerSteps test;
 
-    std::vector<unsigned char> messagePayload1 = { 0, 0 };
-    LoopTracker tracker;
+    test.Given_I_Send_A_Message('d');
+    test.Given_I_Send_A_Message('d');
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
 
-    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
-    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
-
-    tracker.incrementInterval();
-    for (std::int32_t i = 0;i < 5;i++)
-    {
-        auto restartMessages = tracker.getNextRestartMessages();
-        CAPTURE(i);
-        REQUIRE(restartMessages.size() == 1);
-    }
 }
 
-TEST_CASE("The message is interval is decided by the first two messages, all further messages are ignored")
+TEST_CASE("The message is interval is decided by the first two identical messages")
 {
-    // todo
+    LoopTrackerSteps test;
+    test.Given_I_Send_A_Message('g');
+    test.Given_I_Wait_One_Interval();
+    test.Given_I_Send_A_Message('e');
+    test.Given_I_Wait_N_Intervals(3);
+    test.Given_I_Send_A_Message('f');
+    test.Given_I_Wait_N_Intervals(3);
+    test.Given_I_Send_A_Message('e');
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('e', 6);
 }
 
 TEST_CASE("The message is restartable immediately after the second message is received")
 {
-    std::vector<unsigned char> messagePayload1 = { 0, 0 };
-    LoopTracker tracker;
+    LoopTrackerSteps test;
 
-    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
-    tracker.incrementInterval();
-    tracker.incrementInterval();
-    tracker.commandReceived(std::make_unique<Message>(messagePayload1));
-    REQUIRE(tracker.getNextRestartMessages().size() == 1);
+    test.Given_I_Send_A_Message('h');
+    test.Given_I_Wait_N_Intervals(2);
+    test.Given_I_Send_A_Message('h');
+    test.Then_The_Message_Is_Restartable('h');
 }
 
 struct LoopInfo
