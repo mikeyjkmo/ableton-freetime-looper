@@ -19,6 +19,7 @@ namespace LiveFreetimeLooper
         RecordingLoop(std::unique_ptr<Message> controlMessage);
         void incrementInterval();
         RunningLoop MoveToRunningLoop();
+        std::int32_t RecordingLoop::GetInterval();
     };
 
 }

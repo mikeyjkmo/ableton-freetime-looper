@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <cstdint>
+#include <stdexcept>
 using namespace LiveFreetimeLooper;
 
 void A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(std::int32_t loopInterval, std::int32_t decrementInterval)
@@ -47,15 +48,16 @@ TEST_CASE("A RunningLoop of interval 13 is restartable every 13th decrement")
     A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(13, 13);
 }
 
-TEST_CASE("A RunningLoop of interval 0 is restartable every 1st decrement")
+TEST_CASE("A RunningLoop of interval less than 1 cannot be created")
 {
-    // Is this the desired behaviour? //todo test broken this is checking the 0th decremeent
-    A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(0, 1);
+    REQUIRE_THROWS_AS(RunningLoop(__nullptr, 0),std::runtime_error);
+    REQUIRE_THROWS_AS(RunningLoop(__nullptr, -1), std::runtime_error);
+    REQUIRE_THROWS_AS(RunningLoop(__nullptr, -54), std::runtime_error);
 }
 
 TEST_CASE("A RunningLoop of any interval is restartable before the first decrement")
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 1; i < 10; i++)
     {
         auto loop = RunningLoop(nullptr, i);
         REQUIRE(loop.checkIfRestartRequired());

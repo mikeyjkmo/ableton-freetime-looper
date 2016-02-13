@@ -52,17 +52,17 @@ TEST_CASE("Running State")
         REQUIRE(dispatcherMock.getMessages().back() == messagePayloadTwo);
     }
 
-    SECTION("Running State quantises a loop defined by two (roughly) simultanous messages as a loop of length 1") //not sure if this is desirable
+    SECTION("Running State ignores a loop defined by two (roughly) simultanous messages as a loop of length 1, but still relays both messages")
     {
         state->handle(state, std::make_unique<Message>(messagePayload)); 
         state->handle(state, std::make_unique<Message>(messagePayload)); 
         REQUIRE(dispatcherMock.getMessages().size() == 0);
-        timer->step();  // LOOP START RECORDING + LOOP STOP RECORDING + LOOP RESTARTED
-        REQUIRE(dispatcherMock.getMessages().size() == 3);
+        timer->step();  // LOOP START RECORDING + LOOP STOP RECORDING simultaneously
+        REQUIRE(dispatcherMock.getMessages().size() == 2);
         timer->step();
-        REQUIRE(dispatcherMock.getMessages().size() == 4);
+        REQUIRE(dispatcherMock.getMessages().size() == 2);
         timer->step();
-        REQUIRE(dispatcherMock.getMessages().size() == 5);
+        REQUIRE(dispatcherMock.getMessages().size() == 2);
     }
 
     SECTION("Running State quantises a loop of length 1 correctly")

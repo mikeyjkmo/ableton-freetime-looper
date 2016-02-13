@@ -58,6 +58,16 @@ public:
         }
     }
 
+    void LoopTrackerSteps::Then_The_Message_Is_Not_Restartable_For_N_Intervals(unsigned char message, int number)
+    {
+        for (std::int32_t i = 0;i < number * 10 + 1;i++)
+        {
+            auto restartMessages = _loopTracker.getNextRestartMessages();
+            CAPTURE(i);
+            REQUIRE(MessageCount(message, restartMessages) == 0);
+        }
+    }
+
 private : 
 
     LoopTracker _loopTracker;
@@ -111,15 +121,19 @@ TEST_CASE("When a message is sent on the 0st and 1th interval, it then appears a
 
 }
 
-TEST_CASE("When a message is sent on the 0st and 0th interval, it then appears as restartable on every interval")
+
+TEST_CASE("When a message is sent on the same interval, that is ignored and  the next message starts a new recording")
 {
-    // I don't think is behaviour is desired
     LoopTrackerSteps test;
 
     test.Given_I_Send_A_Message('d');
     test.Given_I_Send_A_Message('d');
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
+    test.Then_The_Message_Is_Not_Restartable_For_N_Intervals('d', 10);
+    test.Given_I_Send_A_Message('d');
+    test.Given_I_Wait_One_Interval();
+    test.Given_I_Send_A_Message('d');
 
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
 }
 
 TEST_CASE("The message is interval is decided by the first two identical messages")

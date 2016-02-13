@@ -19,4 +19,9 @@ namespace LiveFreetimeLooper
     {
         return RunningLoop(std::move(_controlMessage), _interval);
     }
+
+    std::int32_t RecordingLoop::GetInterval()
+    {
+        return _interval;
+    }
 }

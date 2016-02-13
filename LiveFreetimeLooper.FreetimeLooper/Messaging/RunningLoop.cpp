@@ -1,4 +1,5 @@
 #include "RunningLoop.hpp"
+#include <stdexcept>
 
 namespace LiveFreetimeLooper
 {
@@ -7,7 +8,7 @@ namespace LiveFreetimeLooper
         _waitUntilNextRestart(0),
         _controlMessage(std::move(controlMessage))
     {
-
+        if (_interval < 1) throw std::runtime_error("Interval must be a positive number");
     }
 
     bool RunningLoop::checkIfRestartRequired()
