@@ -98,5 +98,3 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 }
 
 // todo. "The timespan passed to RunningState's async timer is equal to the time waited by InitialLoopState")
-
-// todo MessageCancellingIdeas: have message cancelling involved

@@ -230,5 +230,3 @@ TEST_CASE("Running State (with mock looptracker)")
         }
     }
 }
-
-// todo MessageCancellingIdeas: tests for cancelling a loop and also the orginal loop. For cancelling and restarting.
