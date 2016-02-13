@@ -6,15 +6,16 @@
 
 #include "ILoopTracker.hpp"
 #include "Message.hpp"
-#include "Loop.hpp"
+#include "RunningLoop.hpp"
+#include "RecordingLoop.hpp"
 
 namespace LiveFreetimeLooper
 {
     class LoopTracker final : public ILoopTracker
     {
     private:
-        std::unordered_map<Message, std::unique_ptr<Loop>> _recording;
-        std::unordered_map<Message, std::unique_ptr<Loop>> _running;
+        std::unordered_map<Message, std::unique_ptr<RecordingLoop>> _recording;
+        std::unordered_map<Message, std::unique_ptr<RunningLoop>> _running;
     public:
         LoopTracker();
 

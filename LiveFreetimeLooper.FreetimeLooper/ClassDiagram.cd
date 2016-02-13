@@ -125,21 +125,14 @@
       <FileName>Messaging\Message.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LiveFreetimeLooper::Loop">
-    <Position X="3" Y="16.75" Width="3" />
-    <TypeIdentifier>
-      <HashCode>AAAgAAAIAAAAAAAEAAgAIAAAAAAAAAAAQYAAAAAAAAA=</HashCode>
-      <FileName>Messaging\Loop.hpp</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="LiveFreetimeLooper::LoopTracker">
-    <Position X="8.75" Y="17.75" Width="4" />
+    <Position X="8.75" Y="17.75" Width="4.75" />
     <InheritanceLine Type="LiveFreetimeLooper::ILoopTracker" FixedToPoint="true">
       <Path>
         <Point X="10.375" Y="17.565" />
         <Point X="10.375" Y="17.656" />
-        <Point X="10.75" Y="17.656" />
-        <Point X="10.75" Y="17.75" />
+        <Point X="11.125" Y="17.656" />
+        <Point X="11.125" Y="17.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -243,6 +236,20 @@
     <TypeIdentifier>
       <HashCode>AAAAABAEIAAAAAAgAIIgQAQAAAAgAAAAAEAAAgAAAAA=</HashCode>
       <FileName>Utilities\Stopwatch.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::RecordingLoop">
+    <Position X="3" Y="19.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAEAQAAAAAAAAAYAAAAAAAAA=</HashCode>
+      <FileName>Messaging\RecordingLoop.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::Loop">
+    <Position X="3" Y="16.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAIAAACAAAAAAgAIAAAAAAAAAAAQYAAAAAAAAA=</HashCode>
+      <FileName>Messaging\Loop.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="LiveFreetimeLooper::LogLevel">

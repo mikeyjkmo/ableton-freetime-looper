@@ -20,8 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LiveFreetimeLooper.Tests.cpp" />
-    <ClCompile Include="MessagingTests\LoopTests.cpp" />
+    <ClCompile Include="MessagingTests\RunningLoopTests.cpp" />
     <ClCompile Include="MessagingTests\LoopTrackerTests.cpp" />
+    <ClCompile Include="MessagingTests\RecordingLoopTests.cpp" />
     <ClCompile Include="Mocks\MockAsyncTimer.cpp" />
     <ClCompile Include="Mocks\MockAsyncTimerFactory.cpp" />
     <ClCompile Include="Mocks\MockEventLogger.cpp" />

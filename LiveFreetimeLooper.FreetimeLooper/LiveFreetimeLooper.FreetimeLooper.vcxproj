@@ -26,11 +26,12 @@
     <ClInclude Include="Logging\StateChangedEvent.hpp" />
     <ClInclude Include="Messaging\ILoopTracker.hpp" />
     <ClInclude Include="Messaging\IMessageDispatcher.hpp" />
-    <ClInclude Include="Messaging\Loop.hpp" />
+    <ClInclude Include="Messaging\RunningLoop.hpp" />
     <ClInclude Include="Messaging\LoopTracker.hpp" />
     <ClInclude Include="Messaging\Message.hpp" />
     <ClInclude Include="Messaging\MessageDispatcher.hpp" />
     <ClInclude Include="Messaging\MessageReceiver.hpp" />
+    <ClInclude Include="Messaging\RecordingLoop.hpp" />
     <ClInclude Include="RtMidi\RtMidi.hpp" />
     <ClInclude Include="Session\Session.hpp" />
     <ClInclude Include="States\CreatedState.hpp" />
@@ -50,10 +51,11 @@
     <ClCompile Include="Logging\EventLogger.cpp" />
     <ClCompile Include="Logging\MessageDispatchedEvent.cpp" />
     <ClCompile Include="Logging\StateChangedEvent.cpp" />
-    <ClCompile Include="Messaging\Loop.cpp" />
+    <ClCompile Include="Messaging\RunningLoop.cpp" />
     <ClCompile Include="Messaging\LoopTracker.cpp" />
     <ClCompile Include="Messaging\MessageDispatcher.cpp" />
     <ClCompile Include="Messaging\MessageReceiver.cpp" />
+    <ClCompile Include="Messaging\RecordingLoop.cpp" />
     <ClCompile Include="RtMidi\RtMidi.cpp" />
     <ClCompile Include="Session\Session.cpp" />
     <ClCompile Include="States\CreatedState.cpp" />
@@ -69,9 +71,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ClassDiagram.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </Image>
+    <Image Include="ClassDiagram.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}</ProjectGuid>

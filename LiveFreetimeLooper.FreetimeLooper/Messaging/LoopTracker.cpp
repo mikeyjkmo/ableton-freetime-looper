@@ -24,7 +24,7 @@ namespace LiveFreetimeLooper
         // If recording, move to running
         if (recordingLoopEntry != _recording.end())
         {
-            _running.emplace(recordingLoopEntry->first, std::move(recordingLoopEntry->second));
+            _running.emplace(recordingLoopEntry->first, std::make_unique<RunningLoop>(recordingLoopEntry->second->MoveToRunningLoop()));
             _recording.erase(recordingLoopEntry);
             return;
         }
@@ -33,7 +33,7 @@ namespace LiveFreetimeLooper
         // If unknown, move to recording
         if (runningMessageEntry == _running.end())
         {
-            _recording.emplace(messageKey, std::make_unique<Loop>(std::move(message)));
+            _recording.emplace(messageKey, std::make_unique<RecordingLoop>(std::move(message)));
         }
     }
 

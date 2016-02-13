@@ -72,9 +72,6 @@
     <ClInclude Include="Messaging\IMessageDispatcher.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\Loop.hpp">
-      <Filter>Header Files\Messaging</Filter>
-    </ClInclude>
     <ClInclude Include="Messaging\LoopTracker.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
@@ -129,6 +126,12 @@
     <ClInclude Include="Utilities\Stopwatch.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Messaging\RecordingLoop.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\RunningLoop.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logging\EventLogger.cpp">
@@ -139,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="Logging\StateChangedEvent.cpp">
       <Filter>Source Files\Logging</Filter>
-    </ClCompile>
-    <ClCompile Include="Messaging\Loop.cpp">
-      <Filter>Source Files\Messaging</Filter>
     </ClCompile>
     <ClCompile Include="Messaging\LoopTracker.cpp">
       <Filter>Source Files\Messaging</Filter>
@@ -181,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="Utilities\Stopwatch.cpp">
       <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Messaging\RecordingLoop.cpp">
+      <Filter>Source Files\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Messaging\RunningLoop.cpp">
+      <Filter>Source Files\Messaging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

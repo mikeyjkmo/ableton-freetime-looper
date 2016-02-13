@@ -48,9 +48,6 @@
     <ClCompile Include="Mocks\MockMessageDispatcher.cpp">
       <Filter>Source Files\Mocks</Filter>
     </ClCompile>
-    <ClCompile Include="MessagingTests\LoopTests.cpp">
-      <Filter>Source Files\MessagingTests</Filter>
-    </ClCompile>
     <ClCompile Include="MessagingTests\LoopTrackerTests.cpp">
       <Filter>Source Files\MessagingTests</Filter>
     </ClCompile>
@@ -68,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="StateTests\StateTests.cpp">
       <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingTests\RecordingLoopTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingTests\RunningLoopTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

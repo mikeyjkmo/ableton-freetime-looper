@@ -1,26 +1,21 @@
-#include "Loop.hpp"
+#include "RunningLoop.hpp"
 
 namespace LiveFreetimeLooper
 {
-    Loop::Loop(std::unique_ptr<Message> controlMessage) :
-        _interval(0),
+    RunningLoop::RunningLoop(std::unique_ptr<Message> controlMessage, std::int32_t interval) :
+        _interval(interval),
         _waitUntilNextRestart(0),
         _controlMessage(std::move(controlMessage))
     {
 
     }
 
-    void Loop::incrementInterval()
-    {
-        ++_interval;
-    }
-
-    bool Loop::checkIfRestartRequired()
+    bool RunningLoop::checkIfRestartRequired()
     {
         return _waitUntilNextRestart < 1;
     }
 
-    void Loop::decrementNextRestartWait()
+    void RunningLoop::decrementNextRestartWait()
     {
         if (_waitUntilNextRestart < 1)
         {
@@ -31,8 +26,13 @@ namespace LiveFreetimeLooper
         --_waitUntilNextRestart;
     }
 
-    Message* Loop::getControlMessage()
+    Message* RunningLoop::getControlMessage()
     {
         return _controlMessage.get();
+    }
+
+    std::int32_t RunningLoop::GetInterval()
+    {
+        return _interval;
     }
 }
