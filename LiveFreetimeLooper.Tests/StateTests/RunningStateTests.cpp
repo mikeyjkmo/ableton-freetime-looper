@@ -16,6 +16,7 @@
 #include "..\..\LiveFreetimeLooper.FreetimeLooper\States\RunningState.hpp"
 
 using namespace LiveFreetimeLooper;
+using namespace std::chrono_literals;
 
 TEST_CASE("Running State")
 {
@@ -27,7 +28,7 @@ TEST_CASE("Running State")
     MockAsyncTimerFactory asyncTimerFactory;
 
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
-    std::unique_ptr<StateBase> state = std::make_unique<RunningState>(resources, std::chrono::high_resolution_clock::duration::zero());
+    std::unique_ptr<StateBase> state = std::make_unique<RunningState>(resources, 1min);
 
     std::vector<unsigned char> messagePayload = { 1 };
     std::vector<unsigned char> messagePayloadTwo = { 2 };
@@ -37,6 +38,11 @@ TEST_CASE("Running State")
     SECTION("Running State starts the AsyncTimer")
     {
         REQUIRE(timer->isRunning());       
+    }
+
+    SECTION("Running State creates AsyncTimer with correct duration")
+    {
+        REQUIRE(timer->getInterval() == 1min);
     }
 
     SECTION("Running State queues requests until the async timer recurs")

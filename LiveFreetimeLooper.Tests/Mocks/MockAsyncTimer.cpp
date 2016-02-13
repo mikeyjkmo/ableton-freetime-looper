@@ -1,8 +1,10 @@
 #include "MockAsyncTimer.hpp"
 
-MockAsyncTimer::MockAsyncTimer(std::function<void()> func) :
+MockAsyncTimer::MockAsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
+    std::function<void()> func) :
     _function(func),
-    _running(false)
+    _running(false),
+    _interval(interval)
 {
 }
 
@@ -24,4 +26,9 @@ void MockAsyncTimer::step()
 bool MockAsyncTimer::isRunning()
 {
     return _running;
+}
+
+const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> MockAsyncTimer::getInterval()
+{
+    return _interval;
 }

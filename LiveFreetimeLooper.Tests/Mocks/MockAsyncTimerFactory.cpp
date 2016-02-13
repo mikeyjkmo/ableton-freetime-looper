@@ -10,7 +10,7 @@ std::unique_ptr<LiveFreetimeLooper::IAsyncTimer> MockAsyncTimerFactory::createAs
     std::chrono::high_resolution_clock::period> interval,
     std::function<void()> func)
 {
-    auto timer = std::make_unique<MockAsyncTimer>(func);
+    auto timer = std::make_unique<MockAsyncTimer>(interval, func);
     _createdTimersWeakRefs.push_back(timer.get());
     return std::move(timer);
 }
