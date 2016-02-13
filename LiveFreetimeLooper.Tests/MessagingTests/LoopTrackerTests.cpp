@@ -136,7 +136,7 @@ TEST_CASE("When a message is sent on the same interval, that is ignored and  the
     test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
 }
 
-TEST_CASE("The message is interval is decided by the first two identical messages")
+TEST_CASE("The interval is decided by the first two identical messages")
 {
     LoopTrackerSteps test;
     test.Given_I_Send_A_Message('g');
@@ -148,6 +148,33 @@ TEST_CASE("The message is interval is decided by the first two identical message
     test.Given_I_Send_A_Message('e');
     test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('e', 6);
 }
+
+TEST_CASE("On receipt of a message that matches a running loop, the message is relayed but ignored")
+{
+    LoopTrackerSteps test;
+    test.Given_I_Send_A_Message('y');
+    test.Given_I_Wait_N_Intervals(4);
+    test.Given_I_Send_A_Message('y');
+    test.Given_I_Wait_N_Intervals(3);
+    test.Given_I_Send_A_Message('y');
+    test.Given_I_Wait_N_Intervals(2);
+    test.Given_I_Send_A_Message('y');
+    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('y', 4);
+}
+
+
+//// todo MessageCancellingIdeas: Alternative to "On receipt of a message that matches a running loop, the message is relayed but ignored"
+//TEST_CASE("On receipt of a message that matches a runnign loop, that loop is forgotten")
+//{
+//    LoopTrackerSteps test;
+//    test.Given_I_Send_A_Message('y');
+//    test.Given_I_Wait_N_Intervals(4);
+//    test.Given_I_Send_A_Message('y');
+//    test.Given_I_Wait_N_Intervals(3);
+//    test.Given_I_Send_A_Message('y');
+//    test.Then_The_Message_Is_Not_Restartable_For_N_Intervals('y', 100);
+//}
+
 
 TEST_CASE("The message is restartable immediately after the second message is received")
 {
