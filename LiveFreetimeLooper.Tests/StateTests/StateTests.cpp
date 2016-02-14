@@ -1,21 +1,21 @@
-#include "..\Catch\catch.hpp"
+#include "../Catch/catch.hpp"
 
 #include <memory>
 #include <chrono>
 
-#include "..\Mocks\MockEventLogger.hpp"
-#include "..\Mocks\MockMessageDispatcher.hpp"
-#include "..\Mocks\MockAsyncTimerFactory.hpp"
-#include "..\Mocks\MockAsyncTimer.hpp"
+#include "../Mocks/MockEventLogger.hpp"
+#include "../Mocks/MockMessageDispatcher.hpp"
+#include "../Mocks/MockAsyncTimerFactory.hpp"
+#include "../Mocks/MockAsyncTimer.hpp"
 
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\LoopTracker.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\StateBase.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\CreatedState.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\InitialLoopWaitingState.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\InitialLoopState.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\RunningState.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Utilities\AsyncTimerFactory.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/CreatedState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopWaitingState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/RunningState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Utilities/AsyncTimerFactory.hpp"
 
 using namespace LiveFreetimeLooper;
 

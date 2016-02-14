@@ -1,7 +1,7 @@
-#include "..\Catch\catch.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
+#include "../Catch/catch.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
 
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\LoopTracker.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
 
 #include <memory>
 #include <cstdint>
@@ -13,13 +13,13 @@ class LoopTrackerSteps
 public:
     LoopTrackerSteps() : _loopTracker() {};
 
-    void LoopTrackerSteps::given_I_Send_A_Message(unsigned char message)
+    void given_I_Send_A_Message(unsigned char message)
     {
         std::vector<unsigned char> messagePayload1 = { message };
         _loopTracker.commandReceived(std::make_unique<Message>(messagePayload1));
     }
 
-    void LoopTrackerSteps::given_I_Wait_N_Intervals(unsigned char number)
+    void given_I_Wait_N_Intervals(unsigned char number)
     {
         for (std::int32_t i = 0;i < number;i++)
         {
@@ -27,18 +27,18 @@ public:
         }
     }
 
-    void LoopTrackerSteps::given_I_Wait_One_Interval()
+    void given_I_Wait_One_Interval()
     {
         given_I_Wait_N_Intervals(1);
     }
 
-    void LoopTrackerSteps::then_The_Message_Is_Restartable(unsigned char message)
+    void then_The_Message_Is_Restartable(unsigned char message)
     {
         auto restartMessages = _loopTracker.getNextRestartMessages();
         REQUIRE(MessageCount(message, restartMessages) == 1);
     }
 
-    void LoopTrackerSteps::then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
+    void then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
@@ -58,7 +58,7 @@ public:
         }
     }
 
-    void LoopTrackerSteps::then_The_Message_Is_Not_Restartable_For_N_Intervals(unsigned char message, int number)
+    void then_The_Message_Is_Not_Restartable_For_N_Intervals(unsigned char message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
@@ -68,7 +68,7 @@ public:
         }
     }
 
-private : 
+private :
 
     LoopTracker _loopTracker;
 
@@ -179,7 +179,7 @@ public:
     std::vector<unsigned char> MessagePayload;
     std::int32_t StartInterval;
     LoopInfo(std::int32_t interval, std::int32_t startInterval, std::vector<unsigned char> messagePayload) :
-        Interval(interval), StartInterval(startInterval), MessagePayload(messagePayload) {}
+        Interval(interval), MessagePayload(messagePayload), StartInterval(startInterval) {}
 };
 
 bool ContainsMessagePayload(std::vector<Message*> messages, std::vector<unsigned char> expectedMessagePayload)

@@ -1,7 +1,7 @@
-#include "..\Catch\catch.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
+#include "../Catch/catch.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
 
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\RunningLoop.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/RunningLoop.hpp"
 
 #include <memory>
 #include <cstdint>

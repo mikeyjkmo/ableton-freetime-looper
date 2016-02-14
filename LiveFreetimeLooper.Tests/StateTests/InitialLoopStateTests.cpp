@@ -1,18 +1,18 @@
-#include "..\Catch\catch.hpp"
+#include "../Catch/catch.hpp"
 
 #include <cstdint>
 #include <memory>
 
-#include "..\Mocks\MockEventLogger.hpp"
-#include "..\Mocks\MockMessageDispatcher.hpp"
-#include "..\Mocks\MockLoopTracker.hpp"
-#include "..\Mocks\MockAsyncTimerFactory.hpp"
+#include "../Mocks/MockEventLogger.hpp"
+#include "../Mocks/MockMessageDispatcher.hpp"
+#include "../Mocks/MockLoopTracker.hpp"
+#include "../Mocks/MockAsyncTimerFactory.hpp"
 
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Messaging\Message.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\StateBase.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\CreatedState.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\InitialLoopState.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\States\RunningState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/CreatedState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopState.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/States/RunningState.hpp"
 
 using namespace LiveFreetimeLooper;
 
@@ -28,7 +28,9 @@ TEST_CASE("InitialLoopState")
     MockAsyncTimerFactory asyncTimerFactory;
 
     StateResources resources(dispatcherMock, loopTrackerMock, loggerMock, asyncTimerFactory);
-    std::unique_ptr<StateBase> state = std::make_unique<InitialLoopState>(resources, Message(startingMessagePayload));
+    Message startingMessage(startingMessagePayload);
+    std::unique_ptr<StateBase> state = std::make_unique<InitialLoopState>(
+        resources, startingMessage);
 
     SECTION("When InitialLoopState receives the a message with the same payload as the starting message it relays the message to the dispatcher")
     {

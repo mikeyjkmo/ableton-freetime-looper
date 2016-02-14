@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Utilities\IAsyncTimerFactory.hpp"
-#include "..\..\LiveFreetimeLooper.FreetimeLooper\Utilities\IAsyncTimer.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Utilities/IAsyncTimerFactory.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Utilities/IAsyncTimer.hpp"
 
 #include <functional>
 #include <chrono>
@@ -22,5 +22,5 @@ public:
         std::function<void()> func);
 
     // Here be dragons: The caller of createAsyncTimer owns the MockAsyncTimer*, and may have already deleted it
-    std::vector<MockAsyncTimer*> const& MockAsyncTimerFactory::getCreatedTimersWeakRefs() const;
+    std::vector<MockAsyncTimer*> const& getCreatedTimersWeakRefs() const;
 };
