@@ -32,6 +32,7 @@
     <ClInclude Include="Logging\IEventLogger.hpp" />
     <ClInclude Include="Logging\MessageDispatchedEvent.hpp" />
     <ClInclude Include="Logging\StateChangedEvent.hpp" />
+    <ClInclude Include="Messaging\CommandMappings.hpp" />
     <ClInclude Include="Messaging\ILoopTracker.hpp" />
     <ClInclude Include="Messaging\IMessageDispatcher.hpp" />
     <ClInclude Include="Messaging\RunningLoop.hpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="Logging\EventLogger.cpp" />
     <ClCompile Include="Logging\MessageDispatchedEvent.cpp" />
     <ClCompile Include="Logging\StateChangedEvent.cpp" />
+    <ClCompile Include="Messaging\CommandMappings.cpp" />
     <ClCompile Include="Messaging\RunningLoop.cpp" />
     <ClCompile Include="Messaging\LoopTracker.cpp" />
     <ClCompile Include="Messaging\MessageDispatcher.cpp" />

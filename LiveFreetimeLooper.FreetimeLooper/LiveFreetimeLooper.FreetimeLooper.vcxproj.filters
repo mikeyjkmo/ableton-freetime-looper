@@ -132,6 +132,9 @@
     <ClInclude Include="Messaging\RunningLoop.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="Messaging\CommandMappings.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logging\EventLogger.cpp">
@@ -186,6 +189,9 @@
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
     <ClCompile Include="Messaging\RunningLoop.cpp">
+      <Filter>Source Files\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Messaging\CommandMappings.cpp">
       <Filter>Source Files\Messaging</Filter>
     </ClCompile>
   </ItemGroup>
