@@ -2,7 +2,7 @@
 
 namespace LiveFreetimeLooper
 {
-    class Message;
+    class StartMessage;
 
     class IMessageDispatcher
     {
@@ -10,6 +10,6 @@ namespace LiveFreetimeLooper
         IMessageDispatcher() {};
     public:
         virtual ~IMessageDispatcher() = default;
-        virtual void sendMidiMessage(Message* message) = 0;
+        virtual void sendMidiMessage(StartMessage* message) = 0;
     };
 }

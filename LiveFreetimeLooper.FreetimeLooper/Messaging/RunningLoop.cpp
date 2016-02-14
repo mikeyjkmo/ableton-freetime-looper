@@ -3,7 +3,7 @@
 
 namespace LiveFreetimeLooper
 {
-    RunningLoop::RunningLoop(std::unique_ptr<Message> controlMessage, std::int32_t interval) :
+    RunningLoop::RunningLoop(std::unique_ptr<StartMessage> controlMessage, std::int32_t interval) :
         _interval(interval),
         _waitUntilNextRestart(0),
         _controlMessage(std::move(controlMessage))
@@ -27,7 +27,7 @@ namespace LiveFreetimeLooper
         --_waitUntilNextRestart;
     }
 
-    Message* RunningLoop::getControlMessage()
+    StartMessage* RunningLoop::getControlMessage()
     {
         return _controlMessage.get();
     }

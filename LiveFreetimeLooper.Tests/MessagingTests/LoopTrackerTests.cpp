@@ -1,5 +1,5 @@
 #include "../Catch/catch.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/StartMessage.hpp"
 
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
@@ -17,7 +17,7 @@ public:
     void given_I_Send_A_Message(unsigned char message)
     {
         std::vector<unsigned char> messagePayload1 = { message };
-        _loopTracker.commandReceived(std::make_unique<Message>(messagePayload1));
+        _loopTracker.commandReceived(std::make_unique<StartMessage>(messagePayload1));
     }
 
     void given_I_Wait_N_Intervals(unsigned char number)
@@ -73,7 +73,7 @@ private :
 
     LoopTracker _loopTracker;
 
-    std::int32_t MessageCount(unsigned char message, const std::vector<LiveFreetimeLooper::Message*>& restartMessages)
+    std::int32_t MessageCount(unsigned char message, const std::vector<LiveFreetimeLooper::StartMessage*>& restartMessages)
     {
         std::int32_t matchingItems = 0;
         for (const auto item : restartMessages)
@@ -183,7 +183,7 @@ public:
         Interval(interval), MessagePayload(messagePayload), StartInterval(startInterval) {}
 };
 
-bool ContainsMessagePayload(std::vector<Message*> messages, std::vector<unsigned char> expectedMessagePayload)
+bool ContainsMessagePayload(std::vector<StartMessage*> messages, std::vector<unsigned char> expectedMessagePayload)
 {
     for (auto &message : messages)
     {
@@ -244,7 +244,7 @@ TEST_CASE("Loop Tracker can track multiple loops concurrently")
 
         for (auto &message : messagePayloadsToSend)
         {
-            tracker.commandReceived(std::make_unique<Message>(message));
+            tracker.commandReceived(std::make_unique<StartMessage>(message));
         }
 
         auto restartMessages = tracker.getNextRestartMessages();

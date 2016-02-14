@@ -18,7 +18,7 @@ namespace LiveFreetimeLooper
         }
     }
 
-    void LoopTracker::commandReceived(std::unique_ptr<Message> message)
+    void LoopTracker::commandReceived(std::unique_ptr<StartMessage> message)
     {
         auto messageKey = *message;
         auto recordingLoopEntry = _recording.find(messageKey);
@@ -43,9 +43,9 @@ namespace LiveFreetimeLooper
         }
     }
 
-    std::vector<Message*> LoopTracker::getNextRestartMessages()
+    std::vector<StartMessage*> LoopTracker::getNextRestartMessages()
     {
-        std::vector<Message*> restartMessages;
+        std::vector<StartMessage*> restartMessages;
 
         for (auto& i : _running)
         {

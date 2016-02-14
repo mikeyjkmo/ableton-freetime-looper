@@ -75,9 +75,6 @@
     <ClInclude Include="Messaging\LoopTracker.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Messaging\Message.hpp">
-      <Filter>Header Files\Messaging</Filter>
-    </ClInclude>
     <ClInclude Include="Messaging\MessageDispatcher.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
@@ -133,6 +130,12 @@
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
     <ClInclude Include="Messaging\CommandMappings.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\StartMessage.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\StopMessage.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,10 +21,10 @@ namespace LiveFreetimeLooper
     void MessageReceiver::receiveRawMidiMessage(
         double deltatime, std::vector<unsigned char> *rawMessage)
     {
-        receiveMidiMessage(std::make_unique<Message>(rawMessage, deltatime));
+        receiveMidiMessage(std::make_unique<StartMessage>(rawMessage, deltatime));
     }
 
-    void MessageReceiver::receiveMidiMessage(std::unique_ptr<Message> message)
+    void MessageReceiver::receiveMidiMessage(std::unique_ptr<StartMessage> message)
     {
         std::lock_guard<std::mutex> lock(_mutex);
         if (isMidiCommand(message.get()))
@@ -39,7 +39,7 @@ namespace LiveFreetimeLooper
         _currentState->handleStdin(_currentState, input);
     }
 
-    bool MessageReceiver::isMidiCommand(Message* message)
+    bool MessageReceiver::isMidiCommand(StartMessage* message)
     {
         if (message->payload.empty()) return false;
 

@@ -2,7 +2,7 @@
 #include "CreatedState.hpp"
 #include "../Logging/IEventLogger.hpp"
 #include "../Logging/StateChangedEvent.hpp"
-#include "../Messaging/Message.hpp"
+#include "../Messaging/StartMessage.hpp"
 #include "../Utilities/IAsyncTimerFactory.hpp"
 
 namespace LiveFreetimeLooper
@@ -24,7 +24,7 @@ namespace LiveFreetimeLooper
      */
     void RunningState::_dequeueAndSendAll()
     {
-        std::unique_ptr<Message> message;
+        std::unique_ptr<StartMessage> message;
         while (_queue.tryDequeue(message))
         {
             _resources.messageDispatcher.sendMidiMessage(message.get());
@@ -41,7 +41,7 @@ namespace LiveFreetimeLooper
         _resources.loopTracker.incrementInterval();
     }
 
-    void RunningState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message)
+    void RunningState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
     {
         _queue.enqueue(std::move(message));
     }

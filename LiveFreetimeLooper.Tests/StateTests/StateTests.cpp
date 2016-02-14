@@ -9,7 +9,7 @@
 #include "../Mocks/MockAsyncTimerFactory.hpp"
 #include "../Mocks/MockAsyncTimer.hpp"
 
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/StartMessage.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
@@ -31,7 +31,7 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
+    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<StartMessage>(payload)); };
     
     std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
     std::vector<unsigned char> unrelatedMessagePayload = { 12, 3 };

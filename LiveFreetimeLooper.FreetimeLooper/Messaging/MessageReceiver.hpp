@@ -4,7 +4,7 @@
 #include <string>
 
 #include "../States/StateBase.hpp"
-#include "Message.hpp"
+#include "StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -22,14 +22,14 @@ namespace LiveFreetimeLooper
         CommandMappings& _commandMappings;
         std::unique_ptr<StateBase> _currentState;
 
-        bool isMidiCommand(Message* message);
+        bool isMidiCommand(StartMessage* message);
     public:
         MessageReceiver(
             IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker,
             IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory, CommandMappings& commandMappings);
 
         void receiveRawMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
-        void receiveMidiMessage(std::unique_ptr<Message> message);
+        void receiveMidiMessage(std::unique_ptr<StartMessage> message);
         void receiveStdin(const std::string& input);
     };
 }

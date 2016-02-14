@@ -5,7 +5,7 @@
 
 namespace LiveFreetimeLooper
 {
-    class Message;
+    class StartMessage;
     class IEventLogger;
 
     class MessageDispatcher final : public IMessageDispatcher
@@ -15,6 +15,6 @@ namespace LiveFreetimeLooper
         IEventLogger& _logger;
     public:
         MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
-        void sendMidiMessage(Message* message);
+        void sendMidiMessage(StartMessage* message);
     };
 }

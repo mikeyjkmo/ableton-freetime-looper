@@ -4,7 +4,7 @@
 
 #include "StateBase.hpp"
 #include "../Utilities/Stopwatch.hpp"
-#include "../Messaging/Message.hpp"
+#include "../Messaging/StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -14,11 +14,11 @@ namespace LiveFreetimeLooper
     private:
         Stopwatch _stopWatch;
         StateResources& _resources;
-        Message _loopStartingMessage;
+        StartMessage _loopStartingMessage;
     public:
-        InitialLoopState(StateResources& resources, Message& message);
+        InitialLoopState(StateResources& resources, StartMessage& message);
 
-        void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
+        void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, const std::string& input) override;
     };
 

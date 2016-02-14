@@ -3,7 +3,7 @@
 #include <memory>
 #include <cstdint>
 
-#include "Message.hpp"
+#include "StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -14,9 +14,9 @@ namespace LiveFreetimeLooper
     private:
         // Length of loop relative to initial loop interval
         std::int32_t _interval;
-        std::unique_ptr<Message> _controlMessage;
+        std::unique_ptr<StartMessage> _controlMessage;
     public:
-        RecordingLoop(std::unique_ptr<Message> controlMessage);
+        RecordingLoop(std::unique_ptr<StartMessage> controlMessage);
         void incrementInterval();
         RunningLoop moveToRunningLoop();
         std::int32_t getInterval();

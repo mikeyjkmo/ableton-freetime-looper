@@ -3,7 +3,7 @@
 #include <memory>
 #include <cstdint>
 
-#include "Message.hpp"
+#include "StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -16,12 +16,12 @@ namespace LiveFreetimeLooper
         // Counts down when checkIfRestartRequired and decrementNextRestartWait called
         // st checkIfRestartRequired returns true every _interval times
         std::int32_t _waitUntilNextRestart;
-        std::unique_ptr<Message> _controlMessage;
+        std::unique_ptr<StartMessage> _controlMessage;
     public:
-        RunningLoop(std::unique_ptr<Message> controlMessage, std::int32_t interval);
+        RunningLoop(std::unique_ptr<StartMessage> controlMessage, std::int32_t interval);
         bool checkIfRestartRequired();
         void decrementNextRestartWait();
-        Message* getControlMessage();
+        StartMessage* getControlMessage();
         std::int32_t getInterval();
     };
 

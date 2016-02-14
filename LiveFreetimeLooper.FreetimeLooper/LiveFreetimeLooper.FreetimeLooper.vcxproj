@@ -37,10 +37,11 @@
     <ClInclude Include="Messaging\IMessageDispatcher.hpp" />
     <ClInclude Include="Messaging\RunningLoop.hpp" />
     <ClInclude Include="Messaging\LoopTracker.hpp" />
-    <ClInclude Include="Messaging\Message.hpp" />
+    <ClInclude Include="Messaging\StartMessage.hpp" />
     <ClInclude Include="Messaging\MessageDispatcher.hpp" />
     <ClInclude Include="Messaging\MessageReceiver.hpp" />
     <ClInclude Include="Messaging\RecordingLoop.hpp" />
+    <ClInclude Include="Messaging\StopMessage.hpp" />
     <ClInclude Include="RtMidi\RtMidi.hpp" />
     <ClInclude Include="Session\Session.hpp" />
     <ClInclude Include="States\CreatedState.hpp" />

@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 #include "IEvent.hpp"
-#include "../Messaging/Message.hpp"
+#include "../Messaging/StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -14,9 +14,9 @@ namespace LiveFreetimeLooper
         std::chrono::high_resolution_clock::time_point _time;
         std::string _detail;
         std::string _eventSource;
-        static std::string createDetail(Message& message);
+        static std::string createDetail(StartMessage& message);
     public:
-        MessageDispatchedEvent(Message& message, std::string eventSource);
+        MessageDispatchedEvent(StartMessage& message, std::string eventSource);
 
         std::string getName() const override;
         std::chrono::high_resolution_clock::time_point getTime() const override;

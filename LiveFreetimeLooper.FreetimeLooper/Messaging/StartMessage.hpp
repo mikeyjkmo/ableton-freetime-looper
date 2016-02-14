@@ -1,21 +1,18 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 
 namespace LiveFreetimeLooper
 {
-    class Message final
+    class StartMessage final
     {
     public:
-        Message() {}
-
-        Message(std::vector<unsigned char> payload) :
+        StartMessage(std::vector<unsigned char> payload) :
             payload(payload), deltatime(0.0)
         {
         }
 
-        Message(std::vector<unsigned char> *rawMessage, double deltatime)
+        StartMessage(std::vector<unsigned char> *rawMessage, double deltatime)
             : payload(*rawMessage), deltatime(deltatime)
         {
         }
@@ -23,20 +20,19 @@ namespace LiveFreetimeLooper
         std::vector<unsigned char> payload;
         double deltatime;
 
-        bool operator==(const Message& other) const
+        bool operator==(const StartMessage& other) const
         {
             return other.payload == payload;
         }
     };
-
 }
 
 namespace std
 {
     template <>
-    struct hash<LiveFreetimeLooper::Message>
+    struct hash<LiveFreetimeLooper::StartMessage>
     {
-        size_t operator()(const LiveFreetimeLooper::Message& k) const
+        size_t operator()(const LiveFreetimeLooper::StartMessage& k) const
         {
             // Hash just based on payload
             std::size_t seed = 0;

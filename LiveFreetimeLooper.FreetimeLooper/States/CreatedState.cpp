@@ -9,7 +9,7 @@ namespace LiveFreetimeLooper
     {
     }
 
-    void CreatedState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message)
+    void CreatedState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
     {
         _resources.messageDispatcher.sendMidiMessage(message.get());
     }

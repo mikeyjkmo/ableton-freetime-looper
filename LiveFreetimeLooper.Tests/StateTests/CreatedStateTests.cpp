@@ -7,7 +7,7 @@
 #include "../Mocks/MockMessageDispatcher.hpp"
 #include "../Mocks/MockAsyncTimerFactory.hpp"
 
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/StartMessage.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
@@ -34,7 +34,7 @@ TEST_CASE("Created State")
         for (unsigned char i = 1; i < 21; i++)
         {
             std::vector<unsigned char> messagePayload = { 0, i };
-            state->handle(state, std::make_unique<Message>(messagePayload));
+            state->handle(state, std::make_unique<StartMessage>(messagePayload));
             REQUIRE(dispatcherMock.getMessages().size() == i);
             REQUIRE(dispatcherMock.getMessages().back().payload == messagePayload);
         }

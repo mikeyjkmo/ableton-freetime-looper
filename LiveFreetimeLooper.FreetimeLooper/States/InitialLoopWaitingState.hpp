@@ -3,7 +3,7 @@
 #include <string>
 
 #include "StateBase.hpp"
-#include "../Messaging/Message.hpp"
+#include "../Messaging/StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -15,7 +15,7 @@ namespace LiveFreetimeLooper
     public:
         InitialLoopWaitingState(StateResources& resources);
 
-        void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
+        void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message) override;
         void handleStdin(std::unique_ptr<StateBase>& state, const std::string& input) override;
     };
 

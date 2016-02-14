@@ -3,7 +3,7 @@
 
 namespace LiveFreetimeLooper
 {
-    RecordingLoop::RecordingLoop(std::unique_ptr<Message> controlMessage) :
+    RecordingLoop::RecordingLoop(std::unique_ptr<StartMessage> controlMessage) :
         _interval(0),
         _controlMessage(std::move(controlMessage))
     {

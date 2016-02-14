@@ -5,7 +5,7 @@
 
 namespace LiveFreetimeLooper
 {
-    class Message;
+    class StartMessage;
 
     class ILoopTracker
     {
@@ -13,8 +13,8 @@ namespace LiveFreetimeLooper
         ILoopTracker() {}
     public:
         virtual ~ILoopTracker() = default;
-        virtual void commandReceived(std::unique_ptr<Message> message) = 0;
-        virtual std::vector<Message*> getNextRestartMessages() = 0;
+        virtual void commandReceived(std::unique_ptr<StartMessage> message) = 0;
+        virtual std::vector<StartMessage*> getNextRestartMessages() = 0;
         virtual void incrementInterval() = 0;
         virtual void clear() = 0;
     };

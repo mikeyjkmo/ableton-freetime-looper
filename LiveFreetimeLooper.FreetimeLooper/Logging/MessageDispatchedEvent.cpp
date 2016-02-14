@@ -1,16 +1,16 @@
 #include "MessageDispatchedEvent.hpp"
-#include "../Messaging/Message.hpp"
+#include "../Messaging/StartMessage.hpp"
 
 namespace LiveFreetimeLooper
 {
-    MessageDispatchedEvent::MessageDispatchedEvent(Message& message, std::string eventSource) :
+    MessageDispatchedEvent::MessageDispatchedEvent(StartMessage& message, std::string eventSource) :
         _time(std::chrono::high_resolution_clock::now()),
         _detail(MessageDispatchedEvent::createDetail(message)),
         _eventSource(eventSource)
     {
     }
 
-    std::string MessageDispatchedEvent::createDetail(Message& message)
+    std::string MessageDispatchedEvent::createDetail(StartMessage& message)
     {
         auto detail = std::string("Payload:");
         for (auto& c : message.payload)

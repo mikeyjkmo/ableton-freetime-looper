@@ -6,7 +6,7 @@
 namespace LiveFreetimeLooper
 {
 
-    InitialLoopState::InitialLoopState(StateResources& resources, Message& message)
+    InitialLoopState::InitialLoopState(StateResources& resources, StartMessage& message)
         : _stopWatch(),
          _resources(resources),
          _loopStartingMessage(message)
@@ -14,7 +14,7 @@ namespace LiveFreetimeLooper
         _stopWatch.start();
     }
 
-    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message)
+    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
     {
         _resources.messageDispatcher.sendMidiMessage(message.get());
 

@@ -8,7 +8,7 @@
 #include "../Mocks/MockLoopTracker.hpp"
 #include "../Mocks/MockAsyncTimerFactory.hpp"
 
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/StartMessage.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/CreatedState.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopWaitingState.hpp"
@@ -30,21 +30,21 @@ TEST_CASE("InitialLoopWaitingState")
 
     SECTION("InitialLoopWaitingState relays the message to the dispatcher")
     {
-        state->handle(state, std::make_unique<Message>(messagePayload));
+        state->handle(state, std::make_unique<StartMessage>(messagePayload));
         REQUIRE(dispatcherMock.getMessages().size() == 1);
         REQUIRE(dispatcherMock.getMessages().back().payload == messagePayload);
     }
 
     SECTION("InitialLoopWaitingState relays the message to the looptracker")
     {
-        state->handle(state, std::make_unique<Message>(messagePayload));
+        state->handle(state, std::make_unique<StartMessage>(messagePayload));
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
         REQUIRE(loopTrackerMock.getCommandsReceived().back()->payload == messagePayload);
     }
 
     SECTION("IntialLoopWaitingState returns InitialLoopState when message received")
     {
-        state->handle(state, std::make_unique<Message>(messagePayload));
+        state->handle(state, std::make_unique<StartMessage>(messagePayload));
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
 
