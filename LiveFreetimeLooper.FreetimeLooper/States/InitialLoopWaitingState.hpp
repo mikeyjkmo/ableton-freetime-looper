@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         InitialLoopWaitingState(StateResources& resources);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) override;
-        void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) override;
+        void handleStdin(std::unique_ptr<StateBase>& state, const std::string& input) override;
     };
 
 }
