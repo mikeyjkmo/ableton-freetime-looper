@@ -34,7 +34,7 @@ namespace LiveFreetimeLooper
     public:
         virtual ~StateBase() = default;
         virtual void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<Message> message) = 0;
-        virtual void handleStdin(std::unique_ptr<StateBase>& state, std::string& input) = 0;
+        virtual void handleStdin(std::unique_ptr<StateBase>& state, const std::string& input) = 0;
     };
 
 }

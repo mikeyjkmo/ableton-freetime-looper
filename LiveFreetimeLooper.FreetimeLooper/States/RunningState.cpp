@@ -46,7 +46,7 @@ namespace LiveFreetimeLooper
         _queue.enqueue(std::move(message));
     }
 
-    void RunningState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
+    void RunningState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)
     {
         _resources.loopTracker.clear();
         _resources.logger.log(std::make_unique<StateChangedEvent>(

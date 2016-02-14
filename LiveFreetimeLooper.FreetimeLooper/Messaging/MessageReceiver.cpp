@@ -31,7 +31,7 @@ namespace LiveFreetimeLooper
         }
     }
 
-    void MessageReceiver::receiveStdin(std::string& input)
+    void MessageReceiver::receiveStdin(const std::string& input)
     {
         std::lock_guard<std::mutex> lock(_mutex);
         _currentState->handleStdin(_currentState, input);

@@ -28,6 +28,6 @@ namespace LiveFreetimeLooper
 
         void receiveRawMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
         void receiveMidiMessage(std::unique_ptr<Message> message);
-        void receiveStdin(std::string& input);
+        void receiveStdin(const std::string& input);
     };
 }

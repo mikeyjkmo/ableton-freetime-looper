@@ -21,7 +21,7 @@ namespace LiveFreetimeLooper
         state = std::make_unique<InitialLoopState>(_resources, tempMessage);
     }
 
-    void InitialLoopWaitingState::handleStdin(std::unique_ptr<StateBase>& state, std::string& input)
+    void InitialLoopWaitingState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)
     {
         _resources.loopTracker.clear();
         _resources.logger.log(std::make_unique<StateChangedEvent>(
