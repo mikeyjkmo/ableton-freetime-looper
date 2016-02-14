@@ -45,33 +45,33 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     REQUIRE(dispatcherMock.getMessages().size() == 1);
-    REQUIRE(dispatcherMock.getMessages().back() == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
 
     send(unrelatedMessagePayload);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     REQUIRE(dispatcherMock.getMessages().size() == 2);
-    REQUIRE(dispatcherMock.getMessages().back() == unrelatedMessagePayload);
+    REQUIRE(dispatcherMock.getMessages().back().payload == unrelatedMessagePayload);
 
     // Send in the second message, to move to RunningState
     send(quantisableMessagePayload);
 
     REQUIRE(dynamic_cast<RunningState*>(state.get()));
     REQUIRE(dispatcherMock.getMessages().size() == 3);
-    REQUIRE(dispatcherMock.getMessages().back() == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
     // The quantised loop restart message is being dispached once per step 
     timer->step();
     REQUIRE(dispatcherMock.getMessages().size() == 4);
-    REQUIRE(dispatcherMock.getMessages().back() == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
     timer->step();
     REQUIRE(dispatcherMock.getMessages().size() == 5);
-    REQUIRE(dispatcherMock.getMessages().back() == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
     timer->step();
     REQUIRE(dispatcherMock.getMessages().size() == 6);
-    REQUIRE(dispatcherMock.getMessages().back() == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
 
     // Introduce more loops
     // => A) Loop of length 1 (original quantised) + B) Loop of length 1 + C) Loop of length 2

@@ -187,7 +187,7 @@ bool ContainsMessagePayload(std::vector<Message*> messages, std::vector<unsigned
 {
     for (auto &message : messages)
     {
-        if ((*message).payload == expectedMessagePayload)
+        if (message->payload == expectedMessagePayload)
         {
             return true;
         }

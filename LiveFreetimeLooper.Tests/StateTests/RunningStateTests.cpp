@@ -56,14 +56,14 @@ TEST_CASE("Running State")
         timer->step();
         REQUIRE(dispatcherMock.getMessages().size() == 2);
 
-        REQUIRE(dispatcherMock.getMessages()[dispatcherMock.getMessages().size() - 2] == messagePayload);
-        REQUIRE(dispatcherMock.getMessages().back() == messagePayloadTwo);
+        REQUIRE(dispatcherMock.getMessages()[dispatcherMock.getMessages().size() - 2].payload == messagePayload);
+        REQUIRE(dispatcherMock.getMessages().back().payload == messagePayloadTwo);
     }
 
     SECTION("Running State ignores a loop defined by two (roughly) simultanous messages as a loop of length 1, but still relays both messages")
     {
-        state->handle(state, std::make_unique<Message>(messagePayload)); 
-        state->handle(state, std::make_unique<Message>(messagePayload)); 
+        state->handle(state, std::make_unique<Message>(messagePayload));
+        state->handle(state, std::make_unique<Message>(messagePayload));
         REQUIRE(dispatcherMock.getMessages().size() == 0);
         timer->step();  // LOOP START RECORDING + LOOP STOP RECORDING simultaneously
         REQUIRE(dispatcherMock.getMessages().size() == 2);
@@ -154,7 +154,7 @@ TEST_CASE("Running State")
         REQUIRE(dispatcherMock.getMessages().size() == 4);
 
         timer->step();  timer->step();
-        state->handle(state, std::make_unique<Message>(messagePayload)); 
+        state->handle(state, std::make_unique<Message>(messagePayload));
         timer->step(); // IGNORED MESSAGE
         state->handle(state, std::make_unique<Message>(messagePayload));
         timer->step(); // IGNORED MESSAGE
@@ -197,13 +197,13 @@ TEST_CASE("Running State (with mock looptracker)")
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 0);
         timer->step();
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(*loopTrackerMock.getCommandsReceived().back() == messagePayload);
+        REQUIRE(loopTrackerMock.getCommandsReceived().back()->payload == messagePayload);
         timer->step();
         timer->step();
         state->handle(state, std::make_unique<Message>(messagePayloadTwo));
         timer->step();
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 2);
-        REQUIRE(*loopTrackerMock.getCommandsReceived().back() == messagePayloadTwo);
+        REQUIRE(loopTrackerMock.getCommandsReceived().back()->payload == messagePayloadTwo);
     }
 
     SECTION("The loop tracker is not notified of restarting messages, only newly received ones")

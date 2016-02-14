@@ -36,7 +36,7 @@ TEST_CASE("Created State")
             std::vector<unsigned char> messagePayload = { 0, i };
             state->handle(state, std::make_unique<Message>(messagePayload));
             REQUIRE(dispatcherMock.getMessages().size() == i);
-            REQUIRE(dispatcherMock.getMessages().back() == messagePayload);
+            REQUIRE(dispatcherMock.getMessages().back().payload == messagePayload);
         }
     }
 

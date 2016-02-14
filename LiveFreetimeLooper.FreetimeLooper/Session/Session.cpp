@@ -88,50 +88,6 @@ namespace LiveFreetimeLooper
         return 0;
     }
 
-    int Session::_test()
-    {
-        _midiOut.openPort(_outputDeviceID);
-
-        CommandMappings commandMappings;
-        EventLogger logger;
-        LoopTracker loopTracker(commandMappings);
-        AsyncTimerFactory asyncTimerFactory;
-
-        MessageDispatcher dispatcher(_midiOut, logger);
-        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory, commandMappings);
-
-        // Control Change: 176, 7, 100 (volume)
-        Message volumeControlMessage({176, 7, 100});
-        Message otherControlMessage({ 176, 7, 99 });
-
-        // Send Messages through Created State
-        receiver.receiveMidiMessage(std::make_unique<Message>(volumeControlMessage));
-        receiver.receiveMidiMessage(std::make_unique<Message>(volumeControlMessage));
-
-        std::string inputStr;
-        receiver.receiveStdin(inputStr);
-
-        // Send Message to Set Loop time to 2 seconds
-        receiver.receiveMidiMessage(std::make_unique<Message>(volumeControlMessage));
-        // Unrelated messages are just relayed
-        receiver.receiveMidiMessage(std::make_unique<Message>(otherControlMessage));
-
-        std::this_thread::sleep_for(std::chrono::seconds(2));
-
-        receiver.receiveMidiMessage(std::make_unique<Message>(volumeControlMessage));
-
-        // Send Messages through Running State
-        for (int i = 0; i < 20; i++)
-        {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            receiver.receiveMidiMessage(std::make_unique<Message>(volumeControlMessage));
-        }
-
-        _midiOut.closePort();
-
-        return 0;
-    }
-
     void Session::_printAllAvailablePorts()
     {
         RtMidiExt::printPorts(_midiIn, "Input");

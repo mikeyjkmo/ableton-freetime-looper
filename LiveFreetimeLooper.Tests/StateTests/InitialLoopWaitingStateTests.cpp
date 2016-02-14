@@ -32,14 +32,14 @@ TEST_CASE("InitialLoopWaitingState")
     {
         state->handle(state, std::make_unique<Message>(messagePayload));
         REQUIRE(dispatcherMock.getMessages().size() == 1);
-        REQUIRE(dispatcherMock.getMessages().back() == messagePayload);
+        REQUIRE(dispatcherMock.getMessages().back().payload == messagePayload);
     }
 
     SECTION("InitialLoopWaitingState relays the message to the looptracker")
     {
         state->handle(state, std::make_unique<Message>(messagePayload));
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(*loopTrackerMock.getCommandsReceived().back() == messagePayload);
+        REQUIRE(loopTrackerMock.getCommandsReceived().back()->payload == messagePayload);
     }
 
     SECTION("IntialLoopWaitingState returns InitialLoopState when message received")

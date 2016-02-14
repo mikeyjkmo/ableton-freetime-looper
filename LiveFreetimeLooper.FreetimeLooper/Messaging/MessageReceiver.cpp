@@ -21,7 +21,7 @@ namespace LiveFreetimeLooper
     void MessageReceiver::receiveRawMidiMessage(
         double deltatime, std::vector<unsigned char> *rawMessage)
     {
-        receiveMidiMessage(std::make_unique<Message>(deltatime, rawMessage));
+        receiveMidiMessage(std::make_unique<Message>(rawMessage, deltatime));
     }
 
     void MessageReceiver::receiveMidiMessage(std::unique_ptr<Message> message)

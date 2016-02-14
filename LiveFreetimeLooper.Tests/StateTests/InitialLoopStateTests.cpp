@@ -36,14 +36,14 @@ TEST_CASE("InitialLoopState")
     {
         state->handle(state, std::make_unique<Message>(startingMessagePayload));
         REQUIRE(dispatcherMock.getMessages().size() == 1);
-        REQUIRE(dispatcherMock.getMessages().back() == startingMessagePayload);
+        REQUIRE(dispatcherMock.getMessages().back().payload == startingMessagePayload);
     }
 
     SECTION("When InitialLoopState receives the a message with the same payload as the starting message it is relayed to the looptracker")
     {
         state->handle(state, std::make_unique<Message>(startingMessagePayload));
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(*loopTrackerMock.getCommandsReceived().back() == startingMessagePayload);
+        REQUIRE(loopTrackerMock.getCommandsReceived().back()->payload == startingMessagePayload);
     }
 
     SECTION("When InitialLoopState receives the a message with the same payload as the starting message the state changes to RunningState")
@@ -56,7 +56,7 @@ TEST_CASE("InitialLoopState")
     {
         state->handle(state, std::make_unique<Message>(otherMessagePayload));
         REQUIRE(dispatcherMock.getMessages().size() == 1);
-        REQUIRE(dispatcherMock.getMessages().back() == otherMessagePayload);
+        REQUIRE(dispatcherMock.getMessages().back().payload == otherMessagePayload);
     }
 
     SECTION("When InitialLoopState receives the a message with a different payload as the starting message the state remains unchanged")

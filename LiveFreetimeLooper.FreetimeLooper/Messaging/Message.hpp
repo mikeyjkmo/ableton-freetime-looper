@@ -10,11 +10,12 @@ namespace LiveFreetimeLooper
     public:
         Message() {}
 
-        Message(std::vector<unsigned char> payload) : payload(payload), deltatime(0.0)
+        Message(std::vector<unsigned char> payload) :
+            payload(payload), deltatime(0.0)
         {
         }
 
-        Message(double deltatime, std::vector<unsigned char> *rawMessage)
+        Message(std::vector<unsigned char> *rawMessage, double deltatime)
             : payload(*rawMessage), deltatime(deltatime)
         {
         }
@@ -26,7 +27,6 @@ namespace LiveFreetimeLooper
         {
             return other.payload == payload;
         }
-
     };
 
 }
