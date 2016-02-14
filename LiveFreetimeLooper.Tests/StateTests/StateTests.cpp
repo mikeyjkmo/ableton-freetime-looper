@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <chrono>
+#include <thread>
 
 #include "../Mocks/MockEventLogger.hpp"
 #include "../Mocks/MockMessageDispatcher.hpp"
