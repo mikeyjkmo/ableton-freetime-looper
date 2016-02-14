@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="A message holds the Midi Control messages received by the system">
+    <Position X="0.5" Y="0.555" Height="1.193" Width="1.122" />
+  </Comment>
+  <Comment CommentText="Message Reciever recieves Midi messages from the outside world. It filters for control messages, and passed them to the State machine, which it owns.">
+    <Position X="4.479" Y="0.562" Height="1.675" Width="1.613" />
+  </Comment>
+  <Comment CommentText="The State Machine. The program is started, made ready to receive the message that begins the initial loop, recieves that message, recieves the message ending the initial loop and then starts relaying messages quantised on the original loop.">
+    <Position X="0.5" Y="4.771" Height="0.957" Width="3.995" />
+  </Comment>
+  <Comment CommentText="CreatedState: Instantly relays messages, until StdIn detected, when it yields to InitialLoopWaitingState">
+    <Position X="0.51" Y="9.454" Height="1.545" Width="2.232" />
+  </Comment>
+  <Comment CommentText="InitialLoopWaitingState: The system is ready to start recieving the first loop. When the message is received, yields to InitialLoopState">
+    <Position X="2.997" Y="9.464" Height="1.545" Width="2.246" />
+  </Comment>
+  <Comment CommentText="InitialLoopState: the first loop is recording. The system is ready to recieve the message ending this loop. Measures the time this takes to pass quantising time to RunningState. When recieved, yields to Running State.">
+    <Position X="5.519" Y="9.839" Height="1.163" Width="2.451" />
+  </Comment>
+  <Comment CommentText="RunningState: Batches and sends Midi commands in order to quantise them to the length of the first loop.">
+    <Position X="8.238" Y="10.244" Height="0.75" Width="2.867" />
+  </Comment>
+  <Comment CommentText="Messages are held on a queue and dispatched by an asyncTiimer">
+    <Position X="11.357" Y="10.274" Height="0.721" Width="2.634" />
+  </Comment>
+  <Comment CommentText="The time the system is in initialLoopState is measured, this is the quantising period.">
+    <Position X="0.985" Y="11.597" Height="0.478" Width="2.538" />
+  </Comment>
+  <Comment CommentText="The system forwards on Midi Control messages using the MessageDispatcher">
+    <Position X="9.135" Y="0.573" Height="1.361" Width="1.366" />
+  </Comment>
+  <Comment CommentText="Loop Tracking: To quantise the system must delay and batch messages based on a clock. To avoid drift, this means the tracking and restarting of all loops in play must be handled by the system. Therefore Running state must pass messages to Loop Tracking code:">
+    <Position X="0.5" Y="15.5" Height="0.906" Width="7.574" />
+  </Comment>
+  <Comment CommentText="A loop knows how long it is in relation to the first quantised loop, call this N. It will reply that it is ready to be sent every Nth increment.">
+    <Position X="0.5" Y="16.73" Height="1.094" Width="2.19" />
+  </Comment>
+  <Comment CommentText="An increment means the Async Timer on the Running State has gone through another cycle of sending batched messages.">
+    <Position X="0.5" Y="17.98" Height="1.104" Width="2.21" />
+  </Comment>
+  <Comment CommentText="LoopTracker: Keeps track of what loops are known to be recording (one message received), or known to be running (two messages received). Running loop require periodic restarts.">
+    <Position X="6.193" Y="16.73" Height="2.073" Width="2.21" />
+  </Comment>
+  <Comment CommentText="Owns the moving parts and hooks everything up to RtMidi and the outside world.">
+    <Position X="0.5" Y="25.719" Height="0.865" Width="2.294" />
+  </Comment>
+  <Comment CommentText="Event based logging">
+    <Position X="0.5" Y="21.741" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Bag 'o Stuff used by the states.">
+    <Position X="11.469" Y="4.542" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="LiveFreetimeLooper::IEventLogger">
+    <Position X="2.5" Y="21.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging\IEventLogger.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::IAsyncTimerFactory">
+    <Position X="12.25" Y="11.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAIAAAAAAAAAAQAA=</HashCode>
+      <FileName>Utilities\IAsyncTimerFactory.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::ILoopTracker">
+    <Position X="8.75" Y="15.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AECAAAAAAAAAKAAEAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messaging\ILoopTracker.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::IMessageDispatcher">
+    <Position X="10.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAQAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messaging\IMessageDispatcher.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::EventLogger" Collapsed="true">
+    <Position X="2.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging\EventLogger.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::IEvent">
+    <Position X="6.25" Y="21.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAACAAAAAAAAAACAAAAIAAAAAAAAAEBAEAAAA=</HashCode>
+      <FileName>Logging\IEvent.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::MessageDispatchedEvent" Collapsed="true">
+    <Position X="9.5" Y="22" Width="2" />
+    <InheritanceLine Type="LiveFreetimeLooper::IEvent" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.75" Y="22.625" />
+        <Point X="9.125" Y="22.625" />
+        <Point X="9.125" Y="22.375" />
+        <Point X="9.5" Y="22.375" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAACQAAAACAgAAAAAAAACAAAAIAAAQgAAAAEAAEAAAA=</HashCode>
+      <FileName>Logging\MessageDispatchedEvent.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::StateChangedEvent" Collapsed="true">
+    <Position X="9.5" Y="23" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAACAgAAAAAAAACAEAAIAAAQAAAAAEAAEAAAA=</HashCode>
+      <FileName>Logging\StateChangedEvent.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::Message">
+    <Position X="1.75" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAABAAAAAAAQAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Messaging\Message.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::LoopTracker">
+    <Position X="8.75" Y="17.75" Width="4.75" />
+    <InheritanceLine Type="LiveFreetimeLooper::ILoopTracker" FixedToPoint="true">
+      <Path>
+        <Point X="10.375" Y="17.565" />
+        <Point X="10.375" Y="17.656" />
+        <Point X="11.125" Y="17.656" />
+        <Point X="11.125" Y="17.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AECAAAAAAAAAAAIEAAEAAAgAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Messaging\LoopTracker.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::MessageDispatcher">
+    <Position X="13" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAABAAAAAAAIAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Messaging\MessageDispatcher.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::MessageReceiver">
+    <Position X="6.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQgAAAAAAAAACACAAAAAAAAAAAACEAAAAEBA=</HashCode>
+      <FileName>Messaging\MessageReceiver.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::Session" Collapsed="true">
+    <Position X="3.25" Y="26" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAQAAAAAQAAAAkAAAAAIAACAAAABQAAAAAAKBA=</HashCode>
+      <FileName>Session\Session.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::CreatedState">
+    <Position X="0.5" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAEAgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>States\CreatedState.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::InitialLoopState">
+    <Position X="5.5" Y="7.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ICAAAAAAAgAAAQAAAAAAAAAAAAAABAAAAAACAAAAAAA=</HashCode>
+      <FileName>States\InitialLoopState.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::InitialLoopWaitingState">
+    <Position X="3" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>States\InitialLoopWaitingState.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::RunningState">
+    <Position X="8.25" Y="7.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAgAAAAAAEAAAAAAAAAIAABAAAAACAgAIAAA=</HashCode>
+      <FileName>States\RunningState.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::StateResources">
+    <Position X="8.25" Y="4.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAACAAgAAAABAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>States\StateBase.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::StateBase">
+    <Position X="5.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAA=</HashCode>
+      <FileName>States\StateBase.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::AsyncTimer" Collapsed="true">
+    <Position X="10.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAQAAAAAAAAgCAAAAAAAAAAgAAABQQIAAhAgAAE=</HashCode>
+      <FileName>Utilities\AsyncTimer.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::IAsyncTimer">
+    <Position X="8.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkAAAAAIAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\IAsyncTimer.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::AsyncTimerFactory" Collapsed="true">
+    <Position X="12.25" Y="13.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\AsyncTimerFactory.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::ConcurrentQueue&lt;T&gt;">
+    <Position X="12.25" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEIACAAACAAAAAAAQAAEAAAAAQAA=</HashCode>
+      <FileName>Utilities\ConcurrentQueue.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::Stopwatch">
+    <Position X="4" Y="11.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAEIAAAAAAgAIIgQAQAAAAgAAAAAEAAAgAAAAA=</HashCode>
+      <FileName>Utilities\Stopwatch.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::RecordingLoop">
+    <Position X="3" Y="19.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAEAQAAAAAAAAAYAAAAAAAAA=</HashCode>
+      <FileName>Messaging\RecordingLoop.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LiveFreetimeLooper::Loop">
+    <Position X="3" Y="16.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAIAAACAAAAAAgAIAAAAAAAAAAAQYAAAAAAAAA=</HashCode>
+      <FileName>Messaging\Loop.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="LiveFreetimeLooper::LogLevel">
+    <Position X="4.5" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAABgAAAAAAAAAAAAAAAAQAAAAAAAAQABAAAAAA=</HashCode>
+      <FileName>Logging\IEvent.hpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

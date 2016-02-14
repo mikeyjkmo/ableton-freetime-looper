@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Mocks">
+      <UniqueIdentifier>{7c1518f5-412f-4615-9f52-3b3ba7338c95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mocks">
+      <UniqueIdentifier>{f6e8803f-f32a-4fdf-a275-b30f11803041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Catch">
+      <UniqueIdentifier>{6a26c424-587c-44e8-9ce9-c799af37b0a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MessagingTests">
+      <UniqueIdentifier>{f19f83d3-e932-47e1-806c-bd9db577383e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateTests">
+      <UniqueIdentifier>{17e020d8-f08d-4962-83c7-100e69999cc1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LiveFreetimeLooper.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mocks\MockAsyncTimer.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Mocks\MockAsyncTimerFactory.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Mocks\MockEventLogger.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Mocks\MockLoopTracker.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Mocks\MockMessageDispatcher.cpp">
+      <Filter>Source Files\Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingTests\LoopTrackerTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTests\CreatedStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTests\InitialLoopStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTests\InitialLoopWaitingStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTests\RunningStateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="StateTests\StateTests.cpp">
+      <Filter>Source Files\StateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingTests\RecordingLoopTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingTests\RunningLoopTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Catch\catch.hpp">
+      <Filter>Header Files\Catch</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockAsyncTimer.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockAsyncTimerFactory.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockEventLogger.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockLoopTracker.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Mocks\MockMessageDispatcher.hpp">
+      <Filter>Header Files\Mocks</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
