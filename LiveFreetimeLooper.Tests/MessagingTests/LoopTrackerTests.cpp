@@ -13,13 +13,13 @@ class LoopTrackerSteps
 public:
     LoopTrackerSteps() : _loopTracker() {};
 
-    void LoopTrackerSteps::Given_I_Send_A_Message(unsigned char message)
+    void LoopTrackerSteps::given_I_Send_A_Message(unsigned char message)
     {
         std::vector<unsigned char> messagePayload1 = { message };
         _loopTracker.commandReceived(std::make_unique<Message>(messagePayload1));
     }
 
-    void LoopTrackerSteps::Given_I_Wait_N_Intervals(unsigned char number)
+    void LoopTrackerSteps::given_I_Wait_N_Intervals(unsigned char number)
     {
         for (std::int32_t i = 0;i < number;i++)
         {
@@ -27,18 +27,18 @@ public:
         }
     }
 
-    void LoopTrackerSteps::Given_I_Wait_One_Interval()
+    void LoopTrackerSteps::given_I_Wait_One_Interval()
     {
-        Given_I_Wait_N_Intervals(1);
+        given_I_Wait_N_Intervals(1);
     }
 
-    void LoopTrackerSteps::Then_The_Message_Is_Restartable(unsigned char message)
+    void LoopTrackerSteps::then_The_Message_Is_Restartable(unsigned char message)
     {
         auto restartMessages = _loopTracker.getNextRestartMessages();
         REQUIRE(MessageCount(message, restartMessages) == 1);
     }
 
-    void LoopTrackerSteps::Then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
+    void LoopTrackerSteps::then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
@@ -58,7 +58,7 @@ public:
         }
     }
 
-    void LoopTrackerSteps::Then_The_Message_Is_Not_Restartable_For_N_Intervals(unsigned char message, int number)
+    void LoopTrackerSteps::then_The_Message_Is_Not_Restartable_For_N_Intervals(unsigned char message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
@@ -89,35 +89,35 @@ TEST_CASE("When a message is sent on the 0th and 2th interval, it then appears a
 {
     LoopTrackerSteps test;
 
-    test.Given_I_Send_A_Message('a');
-    test.Given_I_Wait_One_Interval();
-    test.Given_I_Wait_One_Interval();
+    test.given_I_Send_A_Message('a');
+    test.given_I_Wait_One_Interval();
+    test.given_I_Wait_One_Interval();
 
-    test.Given_I_Send_A_Message('a');
+    test.given_I_Send_A_Message('a');
 
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('a', 2);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('a', 2);
 }
 
 TEST_CASE("When a message is sent on the 0st and 5th interval, it then appears as restartable on the 5nd, 10th, 15th etc interval")
 {
     LoopTrackerSteps test;
 
-    test.Given_I_Send_A_Message('b');
-    test.Given_I_Wait_N_Intervals(5);
-    test.Given_I_Send_A_Message('b');
+    test.given_I_Send_A_Message('b');
+    test.given_I_Wait_N_Intervals(5);
+    test.given_I_Send_A_Message('b');
 
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('b', 5);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('b', 5);
 }
 
 TEST_CASE("When a message is sent on the 0st and 1th interval, it then appears as restartable on every interval")
 {
     LoopTrackerSteps test;
 
-    test.Given_I_Send_A_Message('c');
-    test.Given_I_Wait_One_Interval();
-    test.Given_I_Send_A_Message('c');
+    test.given_I_Send_A_Message('c');
+    test.given_I_Wait_One_Interval();
+    test.given_I_Send_A_Message('c');
 
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('c', 1);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('c', 1);
 
 }
 
@@ -126,50 +126,50 @@ TEST_CASE("When a message is sent on the same interval, that is ignored and  the
 {
     LoopTrackerSteps test;
 
-    test.Given_I_Send_A_Message('d');
-    test.Given_I_Send_A_Message('d');
-    test.Then_The_Message_Is_Not_Restartable_For_N_Intervals('d', 10);
-    test.Given_I_Send_A_Message('d');
-    test.Given_I_Wait_One_Interval();
-    test.Given_I_Send_A_Message('d');
+    test.given_I_Send_A_Message('d');
+    test.given_I_Send_A_Message('d');
+    test.then_The_Message_Is_Not_Restartable_For_N_Intervals('d', 10);
+    test.given_I_Send_A_Message('d');
+    test.given_I_Wait_One_Interval();
+    test.given_I_Send_A_Message('d');
 
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
 }
 
 TEST_CASE("The interval is decided by the first two identical messages")
 {
     LoopTrackerSteps test;
-    test.Given_I_Send_A_Message('g');
-    test.Given_I_Wait_One_Interval();
-    test.Given_I_Send_A_Message('e');
-    test.Given_I_Wait_N_Intervals(3);
-    test.Given_I_Send_A_Message('f');
-    test.Given_I_Wait_N_Intervals(3);
-    test.Given_I_Send_A_Message('e');
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('e', 6);
+    test.given_I_Send_A_Message('g');
+    test.given_I_Wait_One_Interval();
+    test.given_I_Send_A_Message('e');
+    test.given_I_Wait_N_Intervals(3);
+    test.given_I_Send_A_Message('f');
+    test.given_I_Wait_N_Intervals(3);
+    test.given_I_Send_A_Message('e');
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('e', 6);
 }
 
 TEST_CASE("On receipt of a message that matches a running loop, the message is relayed but ignored")
 {
     LoopTrackerSteps test;
-    test.Given_I_Send_A_Message('y');
-    test.Given_I_Wait_N_Intervals(4);
-    test.Given_I_Send_A_Message('y');
-    test.Given_I_Wait_N_Intervals(3);
-    test.Given_I_Send_A_Message('y');
-    test.Given_I_Wait_N_Intervals(2);
-    test.Given_I_Send_A_Message('y');
-    test.Then_The_Message_Is_Restartable_On_Every_Nth_Interval('y', 4);
+    test.given_I_Send_A_Message('y');
+    test.given_I_Wait_N_Intervals(4);
+    test.given_I_Send_A_Message('y');
+    test.given_I_Wait_N_Intervals(3);
+    test.given_I_Send_A_Message('y');
+    test.given_I_Wait_N_Intervals(2);
+    test.given_I_Send_A_Message('y');
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('y', 4);
 }
 
 TEST_CASE("The message is restartable immediately after the second message is received")
 {
     LoopTrackerSteps test;
 
-    test.Given_I_Send_A_Message('h');
-    test.Given_I_Wait_N_Intervals(2);
-    test.Given_I_Send_A_Message('h');
-    test.Then_The_Message_Is_Restartable('h');
+    test.given_I_Send_A_Message('h');
+    test.given_I_Wait_N_Intervals(2);
+    test.given_I_Send_A_Message('h');
+    test.then_The_Message_Is_Restartable('h');
 }
 
 struct LoopInfo

@@ -8,7 +8,7 @@
 #include <stdexcept>
 using namespace LiveFreetimeLooper;
 
-void A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(std::int32_t loopInterval, std::int32_t decrementInterval)
+void a_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(std::int32_t loopInterval, std::int32_t decrementInterval)
 {
     auto loop = RunningLoop(nullptr, loopInterval);
     for (std::int32_t j = 0;j < 5;j++)
@@ -30,22 +30,22 @@ void A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(std::int32_t
 
 TEST_CASE("A RunningLoop of interval 1 is restartable every 1st decrement")
 {
-    A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(1, 1);
+    a_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(1, 1);
 }
 
 TEST_CASE("A RunningLoop of interval 2 is restartable every 2nd decrement")
 {
-    A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(2, 2);
+    a_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(2, 2);
 }
 
 TEST_CASE("A RunningLoop of interval 5 is restartable every 5th decrement")
 {
-    A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(5, 5);
+    a_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(5, 5);
 }
 
 TEST_CASE("A RunningLoop of interval 13 is restartable every 13th decrement")
 {
-    A_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(13, 13);
+    a_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(13, 13);
 }
 
 TEST_CASE("A RunningLoop of interval less than 1 cannot be created")
