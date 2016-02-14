@@ -2,6 +2,7 @@
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
 
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
 
 #include <memory>
 #include <cstdint>
@@ -11,7 +12,7 @@ using namespace LiveFreetimeLooper;
 class LoopTrackerSteps
 {
 public:
-    LoopTrackerSteps() : _loopTracker() {};
+    LoopTrackerSteps() : _loopTracker(CommandMappings()) {};
 
     void given_I_Send_A_Message(unsigned char message)
     {
@@ -216,7 +217,8 @@ TEST_CASE("Loop Tracker can track multiple loops concurrently")
         LoopInfo(1, 9, loopFPayload)
     };
 
-    LoopTracker tracker;
+    CommandMappings commandMappings;
+    LoopTracker tracker(commandMappings);
 
     for (std::int32_t i = 0;i < 100;i++)
     {

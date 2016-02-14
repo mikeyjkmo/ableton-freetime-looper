@@ -1,4 +1,5 @@
 #include "MessageReceiver.hpp"
+#include "CommandMappings.hpp"
 #include "../States/CreatedState.hpp"
 
 namespace LiveFreetimeLooper
@@ -10,9 +11,10 @@ namespace LiveFreetimeLooper
 
     MessageReceiver::MessageReceiver(
         IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker,
-        IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory)
-        : _resources(messageDispatcher, loopTracker, logger, asyncTimerFactory),
-          _currentState(std::make_unique<CreatedState>(_resources))
+        IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory, CommandMappings& commandMappings) : 
+        _resources(messageDispatcher, loopTracker, logger, asyncTimerFactory),
+        _commandMappings(commandMappings),
+        _currentState(std::make_unique<CreatedState>(_resources))
     {
     }
 

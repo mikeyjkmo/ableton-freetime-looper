@@ -11,13 +11,16 @@
 
 namespace LiveFreetimeLooper
 {
+    class CommandMappings;
+
     class LoopTracker final : public ILoopTracker
     {
     private:
         std::unordered_map<Message, std::unique_ptr<RecordingLoop>> _recording;
         std::unordered_map<Message, std::unique_ptr<RunningLoop>> _running;
+        const CommandMappings& _commandMappings;
     public:
-        LoopTracker();
+        LoopTracker(const CommandMappings& commandMappings);
 
         void commandReceived(std::unique_ptr<Message> message);
         std::vector<Message*> getNextRestartMessages();

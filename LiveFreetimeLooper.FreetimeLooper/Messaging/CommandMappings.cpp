@@ -2,5 +2,8 @@
 
 namespace LiveFreetimeLooper
 {
-
+    CommandMappings::CommandMappings()
+    {
+        // todo
+    }
 }

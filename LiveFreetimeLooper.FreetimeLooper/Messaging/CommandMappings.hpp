@@ -9,5 +9,8 @@ namespace LiveFreetimeLooper
         // somecollection< startmessage, stoppMessage >
 
         // todo some kind of isMapped() function
+
+    public:
+        CommandMappings();
     };
 }

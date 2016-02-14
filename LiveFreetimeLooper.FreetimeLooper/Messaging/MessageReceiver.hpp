@@ -12,19 +12,21 @@ namespace LiveFreetimeLooper
     class IEventLogger;
     class ILoopTracker;
     class IAsyncTimerFactory;
+    class CommandMappings;
 
     class MessageReceiver final
     {
     private:
         std::mutex _mutex;
         StateResources _resources;
+        CommandMappings& _commandMappings;
         std::unique_ptr<StateBase> _currentState;
 
         bool isMidiCommand(Message* message);
     public:
         MessageReceiver(
             IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker,
-            IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory);
+            IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory, CommandMappings& commandMappings);
 
         void receiveRawMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
         void receiveMidiMessage(std::unique_ptr<Message> message);

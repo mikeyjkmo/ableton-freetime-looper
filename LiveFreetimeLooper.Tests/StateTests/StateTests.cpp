@@ -11,6 +11,7 @@
 
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Message.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/CreatedState.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopWaitingState.hpp"
@@ -24,7 +25,8 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 {
     MockEventLogger loggerMock;
     MockMessageDispatcher dispatcherMock;
-    LoopTracker loopTracker;
+    CommandMappings commandMappings;
+    LoopTracker loopTracker(commandMappings);
     MockAsyncTimerFactory asyncTimerFactory;
 
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);

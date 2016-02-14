@@ -1,10 +1,12 @@
 #include "LoopTracker.hpp"
+#include "CommandMappings.hpp"
 
 namespace LiveFreetimeLooper
 {
-    LoopTracker::LoopTracker() :
+    LoopTracker::LoopTracker(const CommandMappings& commandMappings) :
         _recording(),
-        _running()
+        _running(),
+        _commandMappings(commandMappings)
     {
     }
 

@@ -9,6 +9,7 @@
 #include "../Messaging/MessageReceiver.hpp"
 #include "../Messaging/MessageDispatcher.hpp"
 #include "../Messaging/LoopTracker.hpp"
+#include "../Messaging/CommandMappings.hpp"
 #include "../Logging/EventLogger.hpp"
 #include "Session.hpp"
 
@@ -51,12 +52,13 @@ namespace LiveFreetimeLooper
         _midiOut.openPort(_outputDeviceID);
         _midiIn.openPort(_inputDeviceID);
 
+        CommandMappings commandMappings;
         EventLogger logger;
-        LoopTracker loopTracker;
+        LoopTracker loopTracker(commandMappings);
         AsyncTimerFactory asyncTimerFactory;
 
         MessageDispatcher dispatcher(_midiOut, logger);
-        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory);
+        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory, commandMappings);
 
         _midiIn.setCallback(&RtMidiExt::callbackWrapper, &receiver);
         _midiIn.ignoreTypes(false, false, false);
@@ -90,12 +92,13 @@ namespace LiveFreetimeLooper
     {
         _midiOut.openPort(_outputDeviceID);
 
+        CommandMappings commandMappings;
         EventLogger logger;
-        LoopTracker loopTracker;
+        LoopTracker loopTracker(commandMappings);
         AsyncTimerFactory asyncTimerFactory;
 
         MessageDispatcher dispatcher(_midiOut, logger);
-        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory);
+        MessageReceiver receiver(dispatcher, loopTracker, logger, asyncTimerFactory, commandMappings);
 
         // Control Change: 176, 7, 100 (volume)
         Message volumeControlMessage({176, 7, 100});
