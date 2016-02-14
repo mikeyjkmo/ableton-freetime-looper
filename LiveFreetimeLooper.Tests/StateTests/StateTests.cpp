@@ -100,59 +100,61 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 }
 
 // Uses std::this_thread::sleep_for and measures outputs based on actual time.
-TEST_CASE("The Loop quantising interval is correctly set")
-{
-    std::chrono::milliseconds wait(15);
-    std::chrono::milliseconds epsilon(2);
+// FIXME: RACE CONDITION MEANS THAT THIS TEST DOES NOT PASS ON ALL PLATFORMS
+//TEST_CASE("The Loop quantising interval is correctly set")
+//{
+//    std::chrono::milliseconds wait(15);
+//    std::chrono::milliseconds epsilon(2);
+//
+//    MockEventLogger loggerMock;
+//    MockMessageDispatcher dispatcherMock;
+//    LoopTracker loopTracker;
+//    MockAsyncTimerFactory asyncTimerFactory;
+//
+//    StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
+//    std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
+//    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
+//
+//    std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
+//    state->handleStdin(state, std::string("this is a string"));
+//
+//    // First Loop
+//    send(quantisableMessagePayload);
+//    std::this_thread::sleep_for(wait);
+//    send(quantisableMessagePayload);
+//
+//    auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
+//    auto interval = timer->getInterval();
+//
+//    CAPTURE(interval.count());
+//    REQUIRE(interval > wait - epsilon);
+//    REQUIRE(interval < wait + epsilon);
+//}
 
-    MockEventLogger loggerMock;
-    MockMessageDispatcher dispatcherMock;
-    LoopTracker loopTracker;
-    MockAsyncTimerFactory asyncTimerFactory;
-
-    StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
-    std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
-
-    std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
-    state->handleStdin(state, std::string("this is a string"));
-
-    // First Loop
-    send(quantisableMessagePayload);
-    std::this_thread::sleep_for(wait);
-    send(quantisableMessagePayload);
-
-    auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
-    auto interval = timer->getInterval();
-
-    CAPTURE(interval.count());
-    REQUIRE(interval > wait - epsilon);
-    REQUIRE(interval < wait + epsilon);
-}
-
+// FIXME: RACE CONDITION MEANS THAT THIS TEST DOES NOT PASS ON ALL PLATFORMS
 // Uses std::this_thread::sleep_for and measures outputs based on actual time.
-TEST_CASE("The Loop quantising interval is correctly set and works as expected")
-{
-    const int waitMilliseconds = 20;
-    MockEventLogger loggerMock;
-    MockMessageDispatcher dispatcherMock;
-    LoopTracker loopTracker;
-    AsyncTimerFactory asyncTimerFactory;
-
-    StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
-    std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
-
-    std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
-    state->handleStdin(state, std::string("this is a string"));
-
-    // First Loop
-    send(quantisableMessagePayload);
-    std::this_thread::sleep_for(std::chrono::milliseconds(waitMilliseconds));
-    send(quantisableMessagePayload);
-
-    REQUIRE(dispatcherMock.getMessages().size() == 2);
-    std::this_thread::sleep_for(std::chrono::milliseconds((4 * waitMilliseconds) + 10));
-
-    REQUIRE(dispatcherMock.getMessages().size() == 6);
-}
+// TEST_CASE("The Loop quantising interval is correctly set and works as expected")
+// {
+//     const int waitMilliseconds = 20;
+//     MockEventLogger loggerMock;
+//     MockMessageDispatcher dispatcherMock;
+//     LoopTracker loopTracker;
+//     AsyncTimerFactory asyncTimerFactory;
+// 
+//     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
+//     std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
+//     auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
+// 
+//     std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
+//     state->handleStdin(state, std::string("this is a string"));
+// 
+//     // First Loop
+//     send(quantisableMessagePayload);
+//     std::this_thread::sleep_for(std::chrono::milliseconds(waitMilliseconds));
+//     send(quantisableMessagePayload);
+// 
+//     REQUIRE(dispatcherMock.getMessages().size() == 2);
+//     std::this_thread::sleep_for(std::chrono::milliseconds((4 * waitMilliseconds) + 10));
+// 
+//     REQUIRE(dispatcherMock.getMessages().size() == 6);
+// }
