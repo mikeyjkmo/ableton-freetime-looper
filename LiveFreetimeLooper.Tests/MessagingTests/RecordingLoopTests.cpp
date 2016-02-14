@@ -21,7 +21,7 @@ TEST_CASE("Recording Loop yields a loop of correct interval and message")
 
     auto loop = recordingLoop.MoveToRunningLoop();
 
-    REQUIRE(loop.GetInterval() == 27);
+    REQUIRE(loop.getInterval() == 27);
     REQUIRE(*loop.getControlMessage() == message);
 }
 

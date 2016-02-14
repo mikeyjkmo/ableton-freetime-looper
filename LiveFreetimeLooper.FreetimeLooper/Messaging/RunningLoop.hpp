@@ -22,7 +22,7 @@ namespace LiveFreetimeLooper
         bool checkIfRestartRequired();
         void decrementNextRestartWait();
         Message* getControlMessage();
-        std::int32_t GetInterval();
+        std::int32_t getInterval();
     };
 
 }

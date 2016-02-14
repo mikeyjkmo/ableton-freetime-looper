@@ -32,7 +32,7 @@ namespace LiveFreetimeLooper
         return _controlMessage.get();
     }
 
-    std::int32_t RunningLoop::GetInterval()
+    std::int32_t RunningLoop::getInterval()
     {
         return _interval;
     }
