@@ -21,3 +21,5 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+*.o
+*.tags
