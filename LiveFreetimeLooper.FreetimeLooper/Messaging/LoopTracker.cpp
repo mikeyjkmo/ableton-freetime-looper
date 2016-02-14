@@ -27,7 +27,7 @@ namespace LiveFreetimeLooper
             // If recording stopped in the same interval as started (ie interval == 0), discard.
             if (recordingLoopEntry->second->getInterval() > 0)
             {
-                _running.emplace(recordingLoopEntry->first, std::make_unique<RunningLoop>(recordingLoopEntry->second->MoveToRunningLoop()));
+                _running.emplace(recordingLoopEntry->first, std::make_unique<RunningLoop>(recordingLoopEntry->second->moveToRunningLoop()));
             }
             _recording.erase(recordingLoopEntry);
             return;
