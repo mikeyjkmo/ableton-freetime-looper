@@ -15,8 +15,8 @@ public:
     MockAsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
         std::function<void()> func);
 
-    void start();
-    void stop();
+    void start() override;
+    void stop() override;
 
     void step();
     bool isRunning();

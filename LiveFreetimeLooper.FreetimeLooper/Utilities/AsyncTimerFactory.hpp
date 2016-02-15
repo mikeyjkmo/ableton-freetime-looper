@@ -17,6 +17,6 @@ namespace LiveFreetimeLooper
         virtual std::unique_ptr<IAsyncTimer> createAsyncTimer(
             const std::chrono::duration<std::chrono::high_resolution_clock::rep,
             std::chrono::high_resolution_clock::period> interval,
-            std::function<void()> f);
+            std::function<void()> f) override;
     };
 }

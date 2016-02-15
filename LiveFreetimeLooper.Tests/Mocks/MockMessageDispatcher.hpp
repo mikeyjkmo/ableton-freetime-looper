@@ -10,7 +10,7 @@ private:
     std::vector<LiveFreetimeLooper::Command> _commands;
 public:
     MockMessageDispatcher();
-    void sendNewMidiMessage(LiveFreetimeLooper::Command command);
-    void sendMidiMessage(LiveFreetimeLooper::StartMessage* message);
+    void sendNewMidiMessage(LiveFreetimeLooper::Command command) override;
+    void sendMidiMessage(LiveFreetimeLooper::StartMessage* message) override;
     std::vector<LiveFreetimeLooper::Command> const& getCommands() const;
 };

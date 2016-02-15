@@ -19,7 +19,7 @@ public:
     virtual std::unique_ptr<LiveFreetimeLooper::IAsyncTimer> createAsyncTimer(
         const std::chrono::duration<std::chrono::high_resolution_clock::rep,
         std::chrono::high_resolution_clock::period> interval,
-        std::function<void()> func);
+        std::function<void()> func) override;
 
     // Here be dragons: The caller of createAsyncTimer owns the MockAsyncTimer*, and may have already deleted it
     std::vector<MockAsyncTimer*> const& getCreatedTimersWeakRefs() const;

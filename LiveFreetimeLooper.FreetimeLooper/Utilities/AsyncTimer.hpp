@@ -29,7 +29,7 @@ namespace LiveFreetimeLooper
             std::function<void()> func);
         ~AsyncTimer();
 
-        void start();
-        void stop();
+        void start() override;
+        void stop() override;
     };
 }

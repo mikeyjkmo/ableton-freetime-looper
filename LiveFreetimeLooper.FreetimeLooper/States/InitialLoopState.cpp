@@ -33,6 +33,11 @@ namespace LiveFreetimeLooper
         }
     }
 
+    void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message)
+    {
+        // not implemented
+    }
+
     void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)
     {
         _resources.loopTracker.clear();

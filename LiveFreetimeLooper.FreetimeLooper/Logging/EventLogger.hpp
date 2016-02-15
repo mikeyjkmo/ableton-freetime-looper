@@ -11,6 +11,6 @@ namespace LiveFreetimeLooper
     public:
         EventLogger();
 
-        void log(std::unique_ptr<IEvent> evnt);
+        void log(std::unique_ptr<IEvent> evnt) override;
     };
 }

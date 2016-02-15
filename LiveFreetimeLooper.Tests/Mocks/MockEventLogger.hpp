@@ -10,6 +10,6 @@ private:
     std::vector<std::unique_ptr<LiveFreetimeLooper::IEvent>> _evnts;
 public:
     MockEventLogger();
-    void log(std::unique_ptr<LiveFreetimeLooper::IEvent> evnt);
+    void log(std::unique_ptr<LiveFreetimeLooper::IEvent> evnt) override;
     std::vector<std::unique_ptr<LiveFreetimeLooper::IEvent>> const& getEvents() const;
 };

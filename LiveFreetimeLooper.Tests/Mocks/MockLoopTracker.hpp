@@ -19,10 +19,10 @@ private:
 public:
     MockLoopTracker();
 
-    void commandReceived(LiveFreetimeLooper::Command command);
-    std::vector<LiveFreetimeLooper::Command> getNextRestartCommands();
-    void incrementInterval();
-    void clear();
+    void commandReceived(LiveFreetimeLooper::Command command) override;
+    std::vector<LiveFreetimeLooper::Command> getNextRestartCommands() override;
+    void incrementInterval() override;
+    void clear() override;
 
     std::vector<LiveFreetimeLooper::Command> const& getCommandsReceived() const;
     std::int32_t const& getInterval() const;
