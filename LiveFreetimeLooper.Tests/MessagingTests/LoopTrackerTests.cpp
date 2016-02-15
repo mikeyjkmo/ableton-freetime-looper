@@ -1,5 +1,5 @@
 #include "../Catch/catch.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/StartMessage.hpp"
+#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Command.hpp"
 
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
 #include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
@@ -12,12 +12,12 @@ using namespace LiveFreetimeLooper;
 class LoopTrackerSteps
 {
 public:
-    LoopTrackerSteps() : _loopTracker(CommandMappings()) {};
+    LoopTrackerSteps() : _loopTracker() {};
 
     void given_I_Send_A_Message(unsigned char message)
     {
-        std::vector<unsigned char> messagePayload1 = { message };
-        _loopTracker.commandReceived(std::make_unique<StartMessage>(messagePayload1));
+        std::vector<unsigned char> command = { message };
+        _loopTracker.commandReceived(Command(command));
     }
 
     void given_I_Wait_N_Intervals(unsigned char number)
@@ -35,24 +35,24 @@ public:
 
     void then_The_Message_Is_Restartable(unsigned char message)
     {
-        auto restartMessages = _loopTracker.getNextRestartMessages();
-        REQUIRE(MessageCount(message, restartMessages) == 1);
+        auto restartCommands = _loopTracker.getNextRestartCommands();
+        REQUIRE(MessageCount(message, restartCommands) == 1);
     }
 
     void then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
-            auto restartMessages = _loopTracker.getNextRestartMessages();
+            auto restartCommands = _loopTracker.getNextRestartCommands();
             if (i%number == 0)
             {
                 CAPTURE(i);
-                REQUIRE(MessageCount(message, restartMessages) == 1);
+                REQUIRE(MessageCount(message, restartCommands) == 1);
             }
             else
             {
                 CAPTURE(i);
-                REQUIRE(MessageCount(message, restartMessages) == 0);
+                REQUIRE(MessageCount(message, restartCommands) == 0);
             }
 
             _loopTracker.incrementInterval();
@@ -63,9 +63,9 @@ public:
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
-            auto restartMessages = _loopTracker.getNextRestartMessages();
+            auto restartCommands = _loopTracker.getNextRestartCommands();
             CAPTURE(i);
-            REQUIRE(MessageCount(message, restartMessages) == 0);
+            REQUIRE(MessageCount(message, restartCommands) == 0);
         }
     }
 
@@ -73,12 +73,12 @@ private :
 
     LoopTracker _loopTracker;
 
-    std::int32_t MessageCount(unsigned char message, const std::vector<LiveFreetimeLooper::StartMessage*>& restartMessages)
+    std::int32_t MessageCount(unsigned char message, const std::vector<Command>& restartCommands)
     {
         std::int32_t matchingItems = 0;
-        for (const auto item : restartMessages)
+        for (const auto command : restartCommands)
         {
-            if (item->payload.size() == 1 && *item->payload.begin() == message) ++matchingItems;
+            if (command.content.size() == 1 && *command.content.begin() == message) ++matchingItems;
         }
 
         return matchingItems;
@@ -177,17 +177,17 @@ struct LoopInfo
 {
 public:
     std::int32_t Interval;
-    std::vector<unsigned char> MessagePayload;
+    std::vector<unsigned char> Command;
     std::int32_t StartInterval;
-    LoopInfo(std::int32_t interval, std::int32_t startInterval, std::vector<unsigned char> messagePayload) :
-        Interval(interval), MessagePayload(messagePayload), StartInterval(startInterval) {}
+    LoopInfo(std::int32_t interval, std::int32_t startInterval, std::vector<unsigned char> command) :
+        Interval(interval), Command(command), StartInterval(startInterval) {}
 };
 
-bool ContainsMessagePayload(std::vector<StartMessage*> messages, std::vector<unsigned char> expectedMessagePayload)
+bool ContainsCommand(std::vector<Command> commands, std::vector<unsigned char>& expectedCommand)
 {
-    for (auto &message : messages)
+    for (auto &command : commands)
     {
-        if (message->payload == expectedMessagePayload)
+        if (command.content == expectedCommand)
         {
             return true;
         }
@@ -198,38 +198,37 @@ bool ContainsMessagePayload(std::vector<StartMessage*> messages, std::vector<uns
 
 TEST_CASE("Loop Tracker can track multiple loops concurrently")
 {
-    std::vector<unsigned char> loopAPayload = { 'A' };
-    std::vector<unsigned char> loopBPayload = { 'B' };
-    std::vector<unsigned char> loopCPayload = { 'C' };
-    std::vector<unsigned char> loopDPayload = { 'D' };
-    std::vector<unsigned char> loopEPayload = { 'E' };
-    std::vector<unsigned char> loopFPayload = { 'F' };
-    std::vector<unsigned char> loopGPayload = { 'G' };
+    std::vector<unsigned char> loopACommand = { 'A' };
+    std::vector<unsigned char> loopBCommand = { 'B' };
+    std::vector<unsigned char> loopCCommand = { 'C' };
+    std::vector<unsigned char> loopDCommand = { 'D' };
+    std::vector<unsigned char> loopECommand = { 'E' };
+    std::vector<unsigned char> loopFCommand = { 'F' };
+    std::vector<unsigned char> loopGCommand = { 'G' };
 
 
     std::vector<LoopInfo> testLoops =
     {
-        LoopInfo(2, 0, loopAPayload),
-        LoopInfo(2, 3, loopBPayload),
-        LoopInfo(7, 12, loopCPayload),
-        LoopInfo(2, 1, loopDPayload),
-        LoopInfo(2, 1, loopEPayload),
-        LoopInfo(1, 9, loopFPayload)
+        LoopInfo(2, 0, loopACommand),
+        LoopInfo(2, 3, loopBCommand),
+        LoopInfo(7, 12, loopCCommand),
+        LoopInfo(2, 1, loopDCommand),
+        LoopInfo(2, 1, loopECommand),
+        LoopInfo(1, 9, loopFCommand)
     };
 
-    CommandMappings commandMappings;
-    LoopTracker tracker(commandMappings);
+    LoopTracker tracker;
 
     for (std::int32_t i = 0;i < 100;i++)
     {
-        std::vector<std::vector<unsigned char>> messagePayloadsToSend;
-        std::vector<std::vector<unsigned char>> expectedRestartMessages;
+        std::vector<std::vector<unsigned char>> commandsToSend;
+        std::vector<std::vector<unsigned char>> expectedRestartCommands;
         for (auto &loop : testLoops)
         {
             // Is time to start or stop recording
             if (i == loop.StartInterval || i == loop.StartInterval + loop.Interval)
             {
-                messagePayloadsToSend.push_back(loop.MessagePayload);
+                commandsToSend.push_back(loop.Command);
             }
 
             // Not finished recording
@@ -238,24 +237,24 @@ TEST_CASE("Loop Tracker can track multiple loops concurrently")
             // Is it the correct interval to get a restart message
             if ((i - loop.StartInterval) % loop.Interval == 0)
             {
-                expectedRestartMessages.push_back(loop.MessagePayload);
+                expectedRestartCommands.push_back(loop.Command);
             }
         }
 
-        for (auto &message : messagePayloadsToSend)
+        for (auto &command : commandsToSend)
         {
-            tracker.commandReceived(std::make_unique<StartMessage>(message));
+            tracker.commandReceived(Command(command));
         }
 
-        auto restartMessages = tracker.getNextRestartMessages();
+        auto restartCommands = tracker.getNextRestartCommands();
 
         CAPTURE(i);
-        REQUIRE(restartMessages.size() == expectedRestartMessages.size());
+        REQUIRE(restartCommands.size() == expectedRestartCommands.size());
 
-        for (auto &expectedMessage : expectedRestartMessages)
+        for (auto &expectedCommand : expectedRestartCommands)
         {
             CAPTURE(i);
-            REQUIRE(ContainsMessagePayload(restartMessages, expectedMessage));
+            REQUIRE(ContainsCommand(restartCommands, expectedCommand));
         }
 
         tracker.incrementInterval();

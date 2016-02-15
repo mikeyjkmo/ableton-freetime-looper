@@ -1,36 +1,45 @@
 #pragma once
 
 #include <vector>
+#include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
     class StopMessage final
     {
     public:
-        StopMessage(std::vector<unsigned char> payload,
-            const std::vector<unsigned char>& correspondingStartPayload) :
-            payload(payload),
-            correspondingStartPayload(correspondingStartPayload),
+        StopMessage(Command command,
+            const Command& startCommand) :
+            command(command),
+            startCommand(startCommand),
             deltatime(0.0)
         {
         }
 
-        StopMessage(std::vector<unsigned char> *rawMessage,
-            const std::vector<unsigned char>& correspondingStartPayload,
+        StopMessage(std::vector<unsigned char> command,
+            const Command& startCommand) :
+            command(command),
+            startCommand(startCommand),
+            deltatime(0.0)
+        {
+        }
+
+        StopMessage(std::vector<unsigned char>* rawMessage,
+            const Command& startCommand,
             double deltatime) :
-            payload(*rawMessage),
-            correspondingStartPayload(correspondingStartPayload),
+            command(*rawMessage),
+            startCommand(startCommand),
             deltatime(deltatime)
         {
         }
 
-        std::vector<unsigned char> payload;
-        const std::vector<unsigned char>& correspondingStartPayload;
+        Command command;
+        const Command& startCommand;
         double deltatime;
 
         bool operator==(const StopMessage& other) const
         {
-            return other.payload == payload;
+            return other.command == command;
         }
     };
 }

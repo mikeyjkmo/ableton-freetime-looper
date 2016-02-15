@@ -3,10 +3,9 @@
 
 namespace LiveFreetimeLooper
 {
-    LoopTracker::LoopTracker(const CommandMappings& commandMappings) :
+    LoopTracker::LoopTracker() :
         _recording(),
-        _running(),
-        _commandMappings(commandMappings)
+        _running()
     {
     }
 
@@ -18,10 +17,9 @@ namespace LiveFreetimeLooper
         }
     }
 
-    void LoopTracker::commandReceived(std::unique_ptr<StartMessage> message)
+    void LoopTracker::commandReceived(Command command)
     {
-        auto messageKey = *message;
-        auto recordingLoopEntry = _recording.find(messageKey);
+        auto recordingLoopEntry = _recording.find(command);
 
         // If recording, move to running
         if (recordingLoopEntry != _recording.end())
@@ -35,23 +33,23 @@ namespace LiveFreetimeLooper
             return;
         }
 
-        auto runningMessageEntry = _running.find(messageKey);
+        auto runningMessageEntry = _running.find(command);
         // If unknown, move to recording
         if (runningMessageEntry == _running.end())
         {
-            _recording.emplace(messageKey, std::make_unique<RecordingLoop>(std::move(message)));
+            _recording.emplace(command, std::make_unique<RecordingLoop>(command));
         }
     }
 
-    std::vector<StartMessage*> LoopTracker::getNextRestartMessages()
+    std::vector<Command> LoopTracker::getNextRestartCommands()
     {
-        std::vector<StartMessage*> restartMessages;
+        std::vector<Command> restartMessages;
 
         for (auto& i : _running)
         {
             if (i.second->checkIfRestartRequired())
             {
-                restartMessages.push_back(i.second->getControlMessage());
+                restartMessages.push_back(i.second->getCommand());
             }
 
             i.second->decrementNextRestartWait();

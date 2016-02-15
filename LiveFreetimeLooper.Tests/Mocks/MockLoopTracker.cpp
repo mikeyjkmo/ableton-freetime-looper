@@ -13,16 +13,16 @@ void MockLoopTracker::incrementInterval()
     ++_interval;
 }
 
-void MockLoopTracker::commandReceived(std::unique_ptr<LiveFreetimeLooper::StartMessage> message)
+void MockLoopTracker::commandReceived(LiveFreetimeLooper::Command command)
 {
-    _commandsReceived.push_back(std::move(message));
+    _commandsReceived.push_back(command);
     _cleared = false;
 }
 
-std::vector<LiveFreetimeLooper::StartMessage*> MockLoopTracker::getNextRestartMessages()
+std::vector<LiveFreetimeLooper::Command> MockLoopTracker::getNextRestartCommands()
 {
     ++_nextRestartMessagesCallCount;
-    return std::vector<LiveFreetimeLooper::StartMessage*>();
+    return std::vector<LiveFreetimeLooper::Command>();
 }
 
 void MockLoopTracker::clear()
@@ -30,7 +30,7 @@ void MockLoopTracker::clear()
     _cleared = true;
 }
 
-std::vector<std::unique_ptr<LiveFreetimeLooper::StartMessage>> const& MockLoopTracker::getCommandsReceived() const
+std::vector<LiveFreetimeLooper::Command> const& MockLoopTracker::getCommandsReceived() const
 {
     return _commandsReceived;
 }

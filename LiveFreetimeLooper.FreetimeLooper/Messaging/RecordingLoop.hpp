@@ -9,14 +9,14 @@ namespace LiveFreetimeLooper
 {
     class RunningLoop;
 
-    class RecordingLoop
+    class RecordingLoop final
     {
     private:
         // Length of loop relative to initial loop interval
         std::int32_t _interval;
-        std::unique_ptr<StartMessage> _controlMessage;
+        Command _command;
     public:
-        RecordingLoop(std::unique_ptr<StartMessage> controlMessage);
+        RecordingLoop(Command command);
         void incrementInterval();
         RunningLoop moveToRunningLoop();
         std::int32_t getInterval();

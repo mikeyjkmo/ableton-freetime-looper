@@ -1,46 +1,34 @@
 #pragma once
 
 #include <vector>
+#include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
     class StartMessage final
     {
     public:
-        StartMessage(std::vector<unsigned char> payload) :
-            payload(payload), deltatime(0.0)
+        StartMessage(Command command) :
+            command(command), deltatime(0.0)
         {
         }
 
-        StartMessage(std::vector<unsigned char> *rawMessage, double deltatime)
-            : payload(*rawMessage), deltatime(deltatime)
+        StartMessage(std::vector<unsigned char> command) :
+            command(command), deltatime(0.0)
         {
         }
 
-        std::vector<unsigned char> payload;
+        StartMessage(std::vector<unsigned char>* rawMessage, double deltatime)
+            : command(*rawMessage), deltatime(deltatime)
+        {
+        }
+
+        Command command;
         double deltatime;
 
         bool operator==(const StartMessage& other) const
         {
-            return other.payload == payload;
-        }
-    };
-}
-
-namespace std
-{
-    template <>
-    struct hash<LiveFreetimeLooper::StartMessage>
-    {
-        size_t operator()(const LiveFreetimeLooper::StartMessage& k) const
-        {
-            // Hash just based on payload
-            std::size_t seed = 0;
-            for (auto& i : k.payload)
-            {
-                seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-            }
-            return seed;
+            return other.command == command;
         }
     };
 }

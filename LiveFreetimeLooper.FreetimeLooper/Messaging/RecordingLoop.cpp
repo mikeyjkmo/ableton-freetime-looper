@@ -3,9 +3,9 @@
 
 namespace LiveFreetimeLooper
 {
-    RecordingLoop::RecordingLoop(std::unique_ptr<StartMessage> controlMessage) :
+    RecordingLoop::RecordingLoop(Command command) :
         _interval(0),
-        _controlMessage(std::move(controlMessage))
+        _command(command)
     {
 
     }
@@ -17,7 +17,7 @@ namespace LiveFreetimeLooper
 
     RunningLoop RecordingLoop::moveToRunningLoop()
     {
-        return RunningLoop(std::move(_controlMessage), _interval);
+        return RunningLoop(_command, _interval);
     }
 
     std::int32_t RecordingLoop::getInterval()

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "MessageDispatcher.hpp"
 #include "StartMessage.hpp"
+#include "Command.hpp"
 #include "../Logging/IEventLogger.hpp"
 #include "../Logging/MessageDispatchedEvent.hpp"
 
@@ -14,11 +15,18 @@ namespace LiveFreetimeLooper
     {
     }
 
+    void MessageDispatcher::sendNewMidiMessage(Command command)
+    {
+        StartMessage message(command);
+        _logger.log(std::make_unique<MessageDispatchedEvent>(message, std::string("MessageDispatcher")));
+
+        _midiOut.sendMessage(&(message.command.content));
+    }
+
     void MessageDispatcher::sendMidiMessage(StartMessage* message)
     {
         _logger.log(std::make_unique<MessageDispatchedEvent>(*message, std::string("MessageDispatcher")));
 
-        _midiOut.sendMessage(&(message->payload));
+        _midiOut.sendMessage(&(message->command.content)); // todo doesn't it care about delta-time?
     }
-
 }

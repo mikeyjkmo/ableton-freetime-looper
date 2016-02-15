@@ -22,7 +22,7 @@ namespace LiveFreetimeLooper
         {
             _stopWatch.stop();
             _resources.loopTracker.incrementInterval();
-            _resources.loopTracker.commandReceived(std::move(message));
+            _resources.loopTracker.commandReceived(message->command);
             _resources.logger.log(std::make_unique<StateChangedEvent>(
                 std::string("End Message received. Interval measured at ") +
                 std::to_string(_stopWatch.getElapsedMilliseconds().count()) +

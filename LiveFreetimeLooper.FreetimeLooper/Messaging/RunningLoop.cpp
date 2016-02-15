@@ -1,12 +1,13 @@
 #include "RunningLoop.hpp"
+#include "Command.hpp"
 #include <stdexcept>
 
 namespace LiveFreetimeLooper
 {
-    RunningLoop::RunningLoop(std::unique_ptr<StartMessage> controlMessage, std::int32_t interval) :
+    RunningLoop::RunningLoop(Command command, std::int32_t interval) :
         _interval(interval),
         _waitUntilNextRestart(0),
-        _controlMessage(std::move(controlMessage))
+        _command(command)
     {
         if (_interval < 1) throw std::runtime_error("Interval must be a positive number");
     }
@@ -27,9 +28,9 @@ namespace LiveFreetimeLooper
         --_waitUntilNextRestart;
     }
 
-    StartMessage* RunningLoop::getControlMessage()
+    Command RunningLoop::getCommand()
     {
-        return _controlMessage.get();
+        return _command;
     }
 
     std::int32_t RunningLoop::getInterval()

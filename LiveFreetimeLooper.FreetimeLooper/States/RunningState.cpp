@@ -29,13 +29,13 @@ namespace LiveFreetimeLooper
         {
             _resources.messageDispatcher.sendMidiMessage(message.get());
             // inform the loopTracker that a command has been received
-            _resources.loopTracker.commandReceived(std::move(message));
+            _resources.loopTracker.commandReceived(message->command);
         }
 
         // Get vector of restart messages to send
-        for (auto*& restartMessage : _resources.loopTracker.getNextRestartMessages())
+        for (auto& restartCommand : _resources.loopTracker.getNextRestartCommands())
         {
-            _resources.messageDispatcher.sendMidiMessage(restartMessage);
+            _resources.messageDispatcher.sendNewMidiMessage(restartCommand);
         }
 
         _resources.loopTracker.incrementInterval();

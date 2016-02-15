@@ -13,12 +13,11 @@ namespace LiveFreetimeLooper
     void InitialLoopWaitingState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
     {
         _resources.messageDispatcher.sendMidiMessage(message.get());
-        StartMessage tempMessage = *message;
-        _resources.loopTracker.commandReceived(std::move(message));       
+        _resources.loopTracker.commandReceived(message->command);
         _resources.logger.log(std::make_unique<StateChangedEvent>(
             std::string("Start Message Received. Progress: InitialLoopWaiting -> InitialLoop"),
             std::string("InitialLoopWaitingState")));
-        state = std::make_unique<InitialLoopState>(_resources, tempMessage);
+        state = std::make_unique<InitialLoopState>(_resources, *message.get());
     }
 
     void InitialLoopWaitingState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)

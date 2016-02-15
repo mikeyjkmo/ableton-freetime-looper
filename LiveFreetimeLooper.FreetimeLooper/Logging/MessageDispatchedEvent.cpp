@@ -12,8 +12,8 @@ namespace LiveFreetimeLooper
 
     std::string MessageDispatchedEvent::createDetail(StartMessage& message)
     {
-        auto detail = std::string("Payload:");
-        for (auto& c : message.payload)
+        auto detail = std::string("Command Content:");
+        for (auto& c : message.command.content)
         {
             detail += std::string(" ");
             detail += std::to_string((unsigned int)c);

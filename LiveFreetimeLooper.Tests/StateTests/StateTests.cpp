@@ -25,84 +25,83 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 {
     MockEventLogger loggerMock;
     MockMessageDispatcher dispatcherMock;
-    CommandMappings commandMappings;
-    LoopTracker loopTracker(commandMappings);
+    LoopTracker loopTracker;
     MockAsyncTimerFactory asyncTimerFactory;
 
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<StartMessage>(payload)); };
+    auto send = [&state](std::vector<unsigned char> command) { state->handle(state, std::make_unique<StartMessage>(command)); };
     
-    std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
-    std::vector<unsigned char> unrelatedMessagePayload = { 12, 3 };
+    std::vector<unsigned char> quantisableCommand = { 0, 1 };
+    std::vector<unsigned char> unrelatedCommand = { 12, 3 };
 
     // Send StdIn to move to InitialLoopWaitingState
     state->handleStdin(state, std::string("this is a string"));
     REQUIRE(dynamic_cast<InitialLoopWaitingState*>(state.get()));
 
     // Send in the first message, to move to InitialLoopState
-    send(quantisableMessagePayload);
+    send(quantisableCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getMessages().size() == 1);
-    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 1);
+    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
 
-    send(unrelatedMessagePayload);
+    send(unrelatedCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getMessages().size() == 2);
-    REQUIRE(dispatcherMock.getMessages().back().payload == unrelatedMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 2);
+    REQUIRE(dispatcherMock.getCommands().back().content == unrelatedCommand);
 
     // Send in the second message, to move to RunningState
-    send(quantisableMessagePayload);
+    send(quantisableCommand);
 
     REQUIRE(dynamic_cast<RunningState*>(state.get()));
-    REQUIRE(dispatcherMock.getMessages().size() == 3);
-    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 3);
+    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
     // The quantised loop restart message is being dispached once per step 
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 4);
-    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 4);
+    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 5);
-    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 5);
+    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 6);
-    REQUIRE(dispatcherMock.getMessages().back().payload == quantisableMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 6);
+    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
 
     // Introduce more loops
     // => A) Loop of length 1 (original quantised) + B) Loop of length 1 + C) Loop of length 2
-    std::vector<unsigned char> loopOfLengthOneMessagePayload = { 2, 54 };
-    std::vector<unsigned char> loopOfLengthTwoMessagePayload = { 24, 4 };
+    std::vector<unsigned char> loopOfLengthOneCommand = { 2, 54 };
+    std::vector<unsigned char> loopOfLengthTwoCommand = { 24, 4 };
 
-    send(loopOfLengthOneMessagePayload);
-    REQUIRE(dispatcherMock.getMessages().size() == 6);
+    send(loopOfLengthOneCommand);
+    REQUIRE(dispatcherMock.getCommands().size() == 6);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 8);
-    send(loopOfLengthTwoMessagePayload);
-    send(loopOfLengthOneMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 8);
+    send(loopOfLengthTwoCommand);
+    send(loopOfLengthOneCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 12);
+    REQUIRE(dispatcherMock.getCommands().size() == 12);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 14);
-    send(loopOfLengthTwoMessagePayload);
+    REQUIRE(dispatcherMock.getCommands().size() == 14);
+    send(loopOfLengthTwoCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 18);
+    REQUIRE(dispatcherMock.getCommands().size() == 18);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 20); // +2: A and B restart 
+    REQUIRE(dispatcherMock.getCommands().size() == 20); // +2: A and B restart 
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 23); // +3: A, B and C restart
+    REQUIRE(dispatcherMock.getCommands().size() == 23); // +3: A, B and C restart
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 25);
+    REQUIRE(dispatcherMock.getCommands().size() == 25);
     timer->step();
-    REQUIRE(dispatcherMock.getMessages().size() == 28);
+    REQUIRE(dispatcherMock.getCommands().size() == 28);
 }
 
-// Uses std::this_thread::sleep_for and measures outputs based on actual time.
-// FIXME: RACE CONDITION MEANS THAT THIS TEST DOES NOT PASS ON ALL PLATFORMS
+// //Uses std::this_thread::sleep_for and measures outputs based on actual time.
+// //FIXME: RACE CONDITION MEANS THAT THIS TEST DOES NOT PASS ON ALL PLATFORMS
 //TEST_CASE("The Loop quantising interval is correctly set")
 //{
 //    std::chrono::milliseconds wait(15);
@@ -110,20 +109,21 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 //
 //    MockEventLogger loggerMock;
 //    MockMessageDispatcher dispatcherMock;
-//    LoopTracker loopTracker;
+//    CommandMappings commandMappings;
+//    LoopTracker loopTracker(commandMappings);
 //    MockAsyncTimerFactory asyncTimerFactory;
 //
 //    StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
 //    std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-//    auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
+//    auto send = [&state](std::vector<unsigned char> command) { state->handle(state, std::make_unique<StartMessage>(command)); };
 //
-//    std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
+//    std::vector<unsigned char> quantisableCommand = { 0, 1 };
 //    state->handleStdin(state, std::string("this is a string"));
 //
 //    // First Loop
-//    send(quantisableMessagePayload);
+//    send(quantisableCommand);
 //    std::this_thread::sleep_for(wait);
-//    send(quantisableMessagePayload);
+//    send(quantisableCommand);
 //
 //    auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 //    auto interval = timer->getInterval();
@@ -132,31 +132,32 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 //    REQUIRE(interval > wait - epsilon);
 //    REQUIRE(interval < wait + epsilon);
 //}
-
-// FIXME: RACE CONDITION MEANS THAT THIS TEST DOES NOT PASS ON ALL PLATFORMS
-// Uses std::this_thread::sleep_for and measures outputs based on actual time.
+//
+// //FIXME: RACE CONDITION MEANS THAT THIS TEST DOES NOT PASS ON ALL PLATFORMS
+// //Uses std::this_thread::sleep_for and measures outputs based on actual time.
 // TEST_CASE("The Loop quantising interval is correctly set and works as expected")
 // {
 //     const int waitMilliseconds = 20;
 //     MockEventLogger loggerMock;
 //     MockMessageDispatcher dispatcherMock;
-//     LoopTracker loopTracker;
+//     CommandMappings commandMappings;
+//     LoopTracker loopTracker(commandMappings);
 //     AsyncTimerFactory asyncTimerFactory;
 // 
 //     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
 //     std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-//     auto send = [&state](std::vector<unsigned char> payload) { state->handle(state, std::make_unique<Message>(payload)); };
+//     auto send = [&state](std::vector<unsigned char> command) { state->handle(state, std::make_unique<StartMessage>(command)); };
 // 
-//     std::vector<unsigned char> quantisableMessagePayload = { 0, 1 };
+//     std::vector<unsigned char> quantisableCommand = { 0, 1 };
 //     state->handleStdin(state, std::string("this is a string"));
 // 
 //     // First Loop
-//     send(quantisableMessagePayload);
+//     send(quantisableCommand);
 //     std::this_thread::sleep_for(std::chrono::milliseconds(waitMilliseconds));
-//     send(quantisableMessagePayload);
+//     send(quantisableCommand);
 // 
-//     REQUIRE(dispatcherMock.getMessages().size() == 2);
+//     REQUIRE(dispatcherMock.getCommands().size() == 2);
 //     std::this_thread::sleep_for(std::chrono::milliseconds((4 * waitMilliseconds) + 10));
 // 
-//     REQUIRE(dispatcherMock.getMessages().size() == 6);
+//     REQUIRE(dispatcherMock.getCommands().size() == 6);
 // }

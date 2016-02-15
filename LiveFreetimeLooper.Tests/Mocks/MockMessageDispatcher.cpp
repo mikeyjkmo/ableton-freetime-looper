@@ -1,16 +1,21 @@
 #include "MockMessageDispatcher.hpp"
 
 MockMessageDispatcher::MockMessageDispatcher() :
-    _messages()
+    _commands()
 {
+}
+
+void MockMessageDispatcher::sendNewMidiMessage(LiveFreetimeLooper::Command command)
+{
+    _commands.push_back(command);
 }
 
 void MockMessageDispatcher::sendMidiMessage(LiveFreetimeLooper::StartMessage* message)
 {
-    _messages.push_back(*message);
+    _commands.push_back(message->command);
 }
 
-std::vector<LiveFreetimeLooper::StartMessage> const& MockMessageDispatcher::getMessages() const
+std::vector<LiveFreetimeLooper::Command> const& MockMessageDispatcher::getCommands() const
 {
-    return _messages;
+    return _commands;
 }

@@ -26,25 +26,25 @@ TEST_CASE("InitialLoopWaitingState")
 
     StateResources resources(dispatcherMock, loopTrackerMock, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<InitialLoopWaitingState>(resources);
-    std::vector<unsigned char> messagePayload = { 0, 1 };
+    std::vector<unsigned char> command = { 0, 1 };
 
     SECTION("InitialLoopWaitingState relays the message to the dispatcher")
     {
-        state->handle(state, std::make_unique<StartMessage>(messagePayload));
-        REQUIRE(dispatcherMock.getMessages().size() == 1);
-        REQUIRE(dispatcherMock.getMessages().back().payload == messagePayload);
+        state->handle(state, std::make_unique<StartMessage>(command));
+        REQUIRE(dispatcherMock.getCommands().size() == 1);
+        REQUIRE(dispatcherMock.getCommands().back().content == command);
     }
 
     SECTION("InitialLoopWaitingState relays the message to the looptracker")
     {
-        state->handle(state, std::make_unique<StartMessage>(messagePayload));
+        state->handle(state, std::make_unique<StartMessage>(command));
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back()->payload == messagePayload);
+        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == command);
     }
 
     SECTION("IntialLoopWaitingState returns InitialLoopState when message received")
     {
-        state->handle(state, std::make_unique<StartMessage>(messagePayload));
+        state->handle(state, std::make_unique<StartMessage>(command));
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
 

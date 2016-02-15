@@ -54,7 +54,7 @@ namespace LiveFreetimeLooper
 
         CommandMappings commandMappings;
         EventLogger logger;
-        LoopTracker loopTracker(commandMappings);
+        LoopTracker loopTracker;
         AsyncTimerFactory asyncTimerFactory;
 
         MessageDispatcher dispatcher(_midiOut, logger);

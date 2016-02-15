@@ -21,8 +21,7 @@ TEST_CASE("Created State")
     MockEventLogger loggerMock;
     MockMessageDispatcher dispatcherMock;
 
-    CommandMappings commandMappings;
-    LoopTracker loopTracker(commandMappings);
+    LoopTracker loopTracker;
     MockAsyncTimerFactory asyncTimerFactory;
 
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
@@ -33,10 +32,10 @@ TEST_CASE("Created State")
     {
         for (unsigned char i = 1; i < 21; i++)
         {
-            std::vector<unsigned char> messagePayload = { 0, i };
-            state->handle(state, std::make_unique<StartMessage>(messagePayload));
-            REQUIRE(dispatcherMock.getMessages().size() == i);
-            REQUIRE(dispatcherMock.getMessages().back().payload == messagePayload);
+            std::vector<unsigned char> command = { 0, i };
+            state->handle(state, std::make_unique<StartMessage>(command));
+            REQUIRE(dispatcherMock.getCommands().size() == i);
+            REQUIRE(dispatcherMock.getCommands().back().content == command);
         }
     }
 

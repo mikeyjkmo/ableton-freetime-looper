@@ -138,6 +138,9 @@
     <ClInclude Include="Messaging\StopMessage.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="Messaging\Command.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logging\EventLogger.cpp">

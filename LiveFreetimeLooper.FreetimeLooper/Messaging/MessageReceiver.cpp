@@ -41,9 +41,9 @@ namespace LiveFreetimeLooper
 
     bool MessageReceiver::isMidiCommand(StartMessage* message)
     {
-        if (message->payload.empty()) return false;
+        if (message->command.content.empty()) return false;
 
-        auto first_byte = message->payload[0];
+        auto first_byte = message->command.content[0];
         return first_byte > 175 && first_byte < 192;
     }
 }

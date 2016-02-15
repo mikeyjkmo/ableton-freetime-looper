@@ -2,11 +2,13 @@
 
 #include "IMessageDispatcher.hpp"
 #include "../RtMidi/RtMidi.hpp"
+#include <memory>
 
 namespace LiveFreetimeLooper
 {
     class StartMessage;
     class IEventLogger;
+    class Command;
 
     class MessageDispatcher final : public IMessageDispatcher
     {
@@ -15,6 +17,7 @@ namespace LiveFreetimeLooper
         IEventLogger& _logger;
     public:
         MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
+        void sendNewMidiMessage(Command command);
         void sendMidiMessage(StartMessage* message);
     };
 }
