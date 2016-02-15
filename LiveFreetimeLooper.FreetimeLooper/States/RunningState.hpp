@@ -18,7 +18,6 @@ namespace LiveFreetimeLooper
         ConcurrentQueue<std::unique_ptr<StartMessage>> _queue;
         StateResources& _resources;
 
-        void forwardMessage();
         void _dequeueAndSendAll();
     public:
         RunningState(StateResources& resources,
