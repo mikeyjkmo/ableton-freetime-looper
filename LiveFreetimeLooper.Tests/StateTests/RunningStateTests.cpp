@@ -171,6 +171,21 @@ TEST_CASE("Running State")
         state->handleStdin(state, std::string("any string value"));
         REQUIRE(dynamic_cast<CreatedState*>(state.get()));
     }
+
+    SECTION("Running State immediately relays a Stop Message")
+    {
+        for (unsigned char i = 1; i < 21; i++)
+        {
+            std::vector<unsigned char> command = { 0, i };
+            std::vector<unsigned char> startCommand{ 1, i };
+            state->handle(state, std::make_unique<StopMessage>(command, startCommand));
+            REQUIRE(dispatcherMock.getCommands().size() == i);
+            REQUIRE(dispatcherMock.getCommands().back().content == command);
+            timer->step();
+            REQUIRE(dispatcherMock.getCommands().size() == i);
+            REQUIRE(dynamic_cast<CreatedState*>(state.get()));
+        }
+    }
 }
 
 TEST_CASE("Running State (with mock looptracker)")

@@ -52,11 +52,10 @@ TEST_CASE("InitialLoopState")
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
     }
 
-    SECTION("When InitialLoopState receives the a message with a different command as the starting message it is relayed to the dispatcher")
+    SECTION("When InitialLoopState receives the a message with a different command as the starting message it is not relayed to the dispatcher")
     {
         state->handle(state, std::make_unique<StartMessage>(otherCommand));
-        REQUIRE(dispatcherMock.getCommands().size() == 1);
-        REQUIRE(dispatcherMock.getCommands().back().content == otherCommand);
+        REQUIRE(dispatcherMock.getCommands().size() == 0);
     }
 
     SECTION("When InitialLoopState receives the a message with a different command as the starting message the state remains unchanged")
@@ -82,5 +81,10 @@ TEST_CASE("InitialLoopState")
     {
         state->handleStdin(state, std::string("any string value"));
         REQUIRE(loopTrackerMock.isCleared());
+    }
+
+    SECTION("InitialLoopState does ?? with Stop Messages")
+    {
+        REQUIRE("not implemented" == "");
     }
 }
