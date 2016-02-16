@@ -18,16 +18,10 @@ namespace LiveFreetimeLooper
     {
     }
 
-    void MessageReceiver::receiveRawMidiMessage(
+    void MessageReceiver::receiveMidiMessage(
         double deltatime, std::vector<unsigned char> *rawMessage)
     {
-        std::lock_guard<std::mutex> lock(_mutex);
-        if (!isMidiCommand(rawMessage))
-        {
-            return;
-        }
-
-        _currentState->handle(_currentState, std::make_unique<StartMessage>(rawMessage, deltatime));
+        receiveMidiMessage(deltatime, Command(*rawMessage));
     }
 
     void MessageReceiver::receiveStdin(const std::string& input)
@@ -36,11 +30,37 @@ namespace LiveFreetimeLooper
         _currentState->handleStdin(_currentState, input);
     }
 
-    bool MessageReceiver::isMidiCommand(std::vector<unsigned char>* rawMessage)
+    bool MessageReceiver::isMidiCommand(const Command& command)
     {
-        if (rawMessage->empty()) return false;
+        if (command.content.empty()) return false;
 
-        auto first_byte = (*rawMessage)[0];
+        auto first_byte = command.content[0];
         return first_byte > 175 && first_byte < 192;
+    }
+
+    void MessageReceiver::receiveMidiMessage(double deltatime, Command command)
+    {
+        std::lock_guard<std::mutex> lock(_mutex);
+        if (!isMidiCommand(command))
+            return;
+
+        Command* correspondingStartCommand(nullptr);
+        MessageType messageType(_commandMappings.getMessageType(command, correspondingStartCommand));
+
+        if (messageType == MessageType::START)
+        {
+            _currentState->handle(_currentState,
+                std::make_unique<StartMessage>(command, deltatime));
+            return;
+        }
+        if (messageType == MessageType::STOP)
+        {
+            _currentState->handle(_currentState,
+                std::make_unique<StopMessage>(command, *correspondingStartCommand, deltatime));
+            return;
+        }
+
+        // todo what to do with Unknown Messages, for now, nothing
+        return;
     }
 }

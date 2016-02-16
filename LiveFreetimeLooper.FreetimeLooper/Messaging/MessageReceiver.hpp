@@ -22,13 +22,14 @@ namespace LiveFreetimeLooper
         CommandMappings& _commandMappings;
         std::unique_ptr<StateBase> _currentState;
 
-        bool isMidiCommand(std::vector<unsigned char>* rawMessage);
+        bool isMidiCommand(const Command& command);
+        void receiveMidiMessage(double deltatime, Command command);
     public:
         MessageReceiver(
             IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker,
             IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory, CommandMappings& commandMappings);
 
-        void receiveRawMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
+        void receiveMidiMessage(double deltatime, std::vector<unsigned char> *rawMessage);
         void receiveStdin(const std::string& input);
     };
 }

@@ -24,10 +24,10 @@ namespace LiveFreetimeLooper
         {
         }
 
-        StopMessage(std::vector<unsigned char>* rawMessage,
+        StopMessage(Command command,
             const Command& startCommand,
             double deltatime) :
-            command(*rawMessage),
+            command(command),
             startCommand(startCommand),
             deltatime(deltatime)
         {

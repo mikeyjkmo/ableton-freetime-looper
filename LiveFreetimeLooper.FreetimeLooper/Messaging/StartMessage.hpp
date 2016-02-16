@@ -18,8 +18,8 @@ namespace LiveFreetimeLooper
         {
         }
 
-        StartMessage(std::vector<unsigned char>* rawMessage, double deltatime)
-            : command(*rawMessage), deltatime(deltatime)
+        StartMessage(Command command, double deltatime) :
+            command(command), deltatime(deltatime)
         {
         }
 

@@ -30,7 +30,7 @@ namespace LiveFreetimeLooper
         void callbackWrapper(
             double deltatime, std::vector<unsigned char> *rawMessage, void *userData)
         {
-            (static_cast<MessageReceiver*>(userData))->receiveRawMidiMessage(
+            (static_cast<MessageReceiver*>(userData))->receiveMidiMessage(
                     deltatime, rawMessage);
         }
     }
