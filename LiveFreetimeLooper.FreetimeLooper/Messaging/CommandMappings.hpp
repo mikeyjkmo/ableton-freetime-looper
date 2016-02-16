@@ -13,10 +13,10 @@ namespace LiveFreetimeLooper
 
         // somecollection< startmessage, stoppMessage >
 
-        // todo some kind of isMapped() function
-
     public:
         CommandMappings();
-        MessageType getMessageType(const Command& command, Command* startCommand);
+        //MessageType getMessageType(const Command& command, Command* startCommand);
+        MessageType getMessageType(const Command& command);
+        const Command& getStartCommand(const Command& stopCommand);
     };
 }

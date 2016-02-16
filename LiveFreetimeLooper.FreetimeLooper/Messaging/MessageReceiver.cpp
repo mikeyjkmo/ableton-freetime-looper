@@ -44,8 +44,7 @@ namespace LiveFreetimeLooper
         if (!isMidiCommand(command))
             return;
 
-        Command* correspondingStartCommand(nullptr);
-        MessageType messageType(_commandMappings.getMessageType(command, correspondingStartCommand));
+        MessageType messageType(_commandMappings.getMessageType(command));
 
         if (messageType == MessageType::START)
         {
@@ -56,7 +55,8 @@ namespace LiveFreetimeLooper
         if (messageType == MessageType::STOP)
         {
             _currentState->handle(_currentState,
-                std::make_unique<StopMessage>(command, *correspondingStartCommand, deltatime));
+                std::make_unique<StopMessage>(command,
+                    _commandMappings.getStartCommand(command), deltatime));
             return;
         }
 
