@@ -11,8 +11,8 @@ TESTSOURCES=$(wildcard LiveFreetimeLooper.Tests/LiveFreetimeLooper.Tests.cpp) \
 OBJECTS=$(SOURCES:.cpp=.o)
 TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
 
-EXECUTABLE=LiveFreetimeLooperMain
-TESTEXECUTABLE=LiveFreetimeLooperTests
+EXECUTABLE=RunLiveFreetimeLooper
+TESTEXECUTABLE=TestLiveFreetimeLooper
 
 all: $(SOURCES) $(EXECUTABLE)
 
