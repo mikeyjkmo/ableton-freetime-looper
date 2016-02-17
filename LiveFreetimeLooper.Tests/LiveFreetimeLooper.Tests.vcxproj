@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="LiveFreetimeLooper.Tests.cpp" />
     <ClCompile Include="MessagingTests\CommandMappingsTest.cpp" />
+    <ClCompile Include="MessagingTests\CommandTest.cpp" />
     <ClCompile Include="MessagingTests\RunningLoopTests.cpp" />
     <ClCompile Include="MessagingTests\LoopTrackerTests.cpp" />
     <ClCompile Include="MessagingTests\RecordingLoopTests.cpp" />

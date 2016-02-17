@@ -11,7 +11,7 @@ namespace LiveFreetimeLooper
     class Command final
     {
     public:
-        Command(std::vector<unsigned char> content) : content(content)
+        Command(const std::vector<unsigned char>& content) : content(content)
         {
             if (content.size() < 2)
             {
@@ -30,6 +30,11 @@ namespace LiveFreetimeLooper
         bool operator==(const Command& other) const
         {
             return other.content[0] == content[0] && other.content[1] == content[1];
+        }
+
+        bool operator!=(const Command& other) const
+        {
+            return !operator==(other);
         }
     };
 }
