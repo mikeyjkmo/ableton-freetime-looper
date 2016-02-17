@@ -12,6 +12,11 @@ namespace LiveFreetimeLooper
         {
         }
 
+        Command(unsigned char b1, unsigned char b2, unsigned char b3) :
+            content({b1, b2, b3})
+        {
+        }
+
         std::vector<unsigned char> content;
 
         bool operator==(const Command& other) const

@@ -1,21 +1,22 @@
 #pragma once
 
-#include <vector>
+#include <unordered_map>
 #include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
-    enum MessageType { UNKNOWN, START, STOP };
+    enum MessageType { INVALID, START, STOP };
 
     class CommandMappings final
     {
-        // todo collection of all the loop messages we know and all their respective stop message
-
-        // somecollection< startmessage, stoppMessage >
+    private:
+        std::unordered_map<Command, Command> _startsToStops;
+        std::unordered_map<Command, Command> _stopsToStarts;
 
     public:
         CommandMappings();
-        //MessageType getMessageType(const Command& command, Command* startCommand);
+        CommandMappings(const std::unordered_map<Command, Command>& startsToStops);
+
         MessageType getMessageType(const Command& command);
         const Command& getStartCommand(const Command& stopCommand);
     };
