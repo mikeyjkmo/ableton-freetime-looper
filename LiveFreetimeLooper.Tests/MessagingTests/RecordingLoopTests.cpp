@@ -10,7 +10,7 @@ using namespace LiveFreetimeLooper;
 
 TEST_CASE("Recording Loop yields a loop of correct interval and message")
 {
-    std::vector<unsigned char> commandContent = { 'q' };
+    std::vector<unsigned char> commandContent = { 'q', 1 };
     Command command(commandContent);
     RecordingLoop recordingLoop(command);
 
@@ -27,7 +27,7 @@ TEST_CASE("Recording Loop yields a loop of correct interval and message")
 
 TEST_CASE("Recording Loop cannot move to Running Loop with a zero interval")
 {
-    std::vector<unsigned char> commandContent = { 'g' };
+    std::vector<unsigned char> commandContent = { 'g', 1 };
     Command command(commandContent);
     RecordingLoop recordingLoop(command);
     REQUIRE_THROWS_AS(recordingLoop.moveToRunningLoop(), std::runtime_error);

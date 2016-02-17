@@ -14,15 +14,14 @@ class LoopTrackerSteps
 public:
     LoopTrackerSteps() : _loopTracker() {};
 
-    void given_I_Send_A_Message(unsigned char message)
+    void given_I_Send_A_Message(const std::vector<unsigned char>& command)
     {
-        std::vector<unsigned char> command = { message };
         _loopTracker.commandReceived(Command(command));
     }
 
-    void given_I_Wait_N_Intervals(unsigned char number)
+    void given_I_Wait_N_Intervals(unsigned int number)
     {
-        for (std::int32_t i = 0;i < number;i++)
+        for (std::int32_t i = 0; i < number; ++i)
         {
             _loopTracker.incrementInterval();
         }
@@ -33,13 +32,14 @@ public:
         given_I_Wait_N_Intervals(1);
     }
 
-    void then_The_Message_Is_Restartable(unsigned char message)
+    void then_The_Message_Is_Restartable(const std::vector<unsigned char>& message)
     {
         auto restartCommands = _loopTracker.getNextRestartCommands();
         REQUIRE(MessageCount(message, restartCommands) == 1);
     }
 
-    void then_The_Message_Is_Restartable_On_Every_Nth_Interval(unsigned char message, int number)
+    void then_The_Message_Is_Restartable_On_Every_Nth_Interval(
+        const std::vector<unsigned char>& message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
@@ -59,7 +59,8 @@ public:
         }
     }
 
-    void then_The_Message_Is_Not_Restartable_For_N_Intervals(unsigned char message, int number)
+    void then_The_Message_Is_Not_Restartable_For_N_Intervals(
+        const std::vector<unsigned char>& message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
         {
@@ -73,12 +74,13 @@ private :
 
     LoopTracker _loopTracker;
 
-    std::int32_t MessageCount(unsigned char message, const std::vector<Command>& restartCommands)
+    std::int32_t MessageCount(
+        const std::vector<unsigned char>& message, const std::vector<Command>& restartCommands)
     {
         std::int32_t matchingItems = 0;
         for (const auto command : restartCommands)
         {
-            if (command.content.size() == 1 && *command.content.begin() == message) ++matchingItems;
+            if (command.content == message) ++matchingItems;
         }
 
         return matchingItems;
@@ -90,35 +92,35 @@ TEST_CASE("When a message is sent on the 0th and 2th interval, it then appears a
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message('a');
+    test.given_I_Send_A_Message({'a', 1});
     test.given_I_Wait_One_Interval();
     test.given_I_Wait_One_Interval();
 
-    test.given_I_Send_A_Message('a');
+    test.given_I_Send_A_Message({'a', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('a', 2);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'a', 1}, 2);
 }
 
 TEST_CASE("When a message is sent on the 0st and 5th interval, it then appears as restartable on the 5nd, 10th, 15th etc interval")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message('b');
+    test.given_I_Send_A_Message({'b', 1});
     test.given_I_Wait_N_Intervals(5);
-    test.given_I_Send_A_Message('b');
+    test.given_I_Send_A_Message({'b', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('b', 5);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'b', 1}, 5);
 }
 
 TEST_CASE("When a message is sent on the 0st and 1th interval, it then appears as restartable on every interval")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message('c');
+    test.given_I_Send_A_Message({'c', 1});
     test.given_I_Wait_One_Interval();
-    test.given_I_Send_A_Message('c');
+    test.given_I_Send_A_Message({'c', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('c', 1);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'c', 1}, 1);
 
 }
 
@@ -127,50 +129,50 @@ TEST_CASE("When a message is sent on the same interval, that is ignored and  the
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message('d');
-    test.given_I_Send_A_Message('d');
-    test.then_The_Message_Is_Not_Restartable_For_N_Intervals('d', 10);
-    test.given_I_Send_A_Message('d');
+    test.given_I_Send_A_Message({'d', 1});
+    test.given_I_Send_A_Message({'d', 1});
+    test.then_The_Message_Is_Not_Restartable_For_N_Intervals({'d', 1}, 10);
+    test.given_I_Send_A_Message({'d', 1});
     test.given_I_Wait_One_Interval();
-    test.given_I_Send_A_Message('d');
+    test.given_I_Send_A_Message({'d', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('d', 1);
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'d', 1}, 1);
 }
 
 TEST_CASE("The interval is decided by the first two identical messages")
 {
     LoopTrackerSteps test;
-    test.given_I_Send_A_Message('g');
+    test.given_I_Send_A_Message({'g', 1});
     test.given_I_Wait_One_Interval();
-    test.given_I_Send_A_Message('e');
+    test.given_I_Send_A_Message({'e', 1});
     test.given_I_Wait_N_Intervals(3);
-    test.given_I_Send_A_Message('f');
+    test.given_I_Send_A_Message({'f', 1});
     test.given_I_Wait_N_Intervals(3);
-    test.given_I_Send_A_Message('e');
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('e', 6);
+    test.given_I_Send_A_Message({'e', 1});
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'e', 1}, 6);
 }
 
 TEST_CASE("On receipt of a message that matches a running loop, the message is relayed but ignored")
 {
     LoopTrackerSteps test;
-    test.given_I_Send_A_Message('y');
+    test.given_I_Send_A_Message({'y', 1});
     test.given_I_Wait_N_Intervals(4);
-    test.given_I_Send_A_Message('y');
+    test.given_I_Send_A_Message({'y', 1});
     test.given_I_Wait_N_Intervals(3);
-    test.given_I_Send_A_Message('y');
+    test.given_I_Send_A_Message({'y', 1});
     test.given_I_Wait_N_Intervals(2);
-    test.given_I_Send_A_Message('y');
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval('y', 4);
+    test.given_I_Send_A_Message({'y', 1});
+    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'y', 1}, 4);
 }
 
 TEST_CASE("The message is restartable immediately after the second message is received")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message('h');
+    test.given_I_Send_A_Message({'h', 1});
     test.given_I_Wait_N_Intervals(2);
-    test.given_I_Send_A_Message('h');
-    test.then_The_Message_Is_Restartable('h');
+    test.given_I_Send_A_Message({'h', 1});
+    test.then_The_Message_Is_Restartable({'h', 1});
 }
 
 struct LoopInfo
@@ -198,13 +200,13 @@ bool ContainsCommand(std::vector<Command> commands, std::vector<unsigned char>& 
 
 TEST_CASE("Loop Tracker can track multiple loops concurrently")
 {
-    std::vector<unsigned char> loopACommand = { 'A' };
-    std::vector<unsigned char> loopBCommand = { 'B' };
-    std::vector<unsigned char> loopCCommand = { 'C' };
-    std::vector<unsigned char> loopDCommand = { 'D' };
-    std::vector<unsigned char> loopECommand = { 'E' };
-    std::vector<unsigned char> loopFCommand = { 'F' };
-    std::vector<unsigned char> loopGCommand = { 'G' };
+    std::vector<unsigned char> loopACommand = {'A', 1};
+    std::vector<unsigned char> loopBCommand = {'B', 1};
+    std::vector<unsigned char> loopCCommand = {'C', 1};
+    std::vector<unsigned char> loopDCommand = {'D', 1};
+    std::vector<unsigned char> loopECommand = {'E', 1};
+    std::vector<unsigned char> loopFCommand = {'F', 1};
+    std::vector<unsigned char> loopGCommand = {'G', 1};
 
 
     std::vector<LoopInfo> testLoops =
@@ -219,7 +221,7 @@ TEST_CASE("Loop Tracker can track multiple loops concurrently")
 
     LoopTracker tracker;
 
-    for (std::int32_t i = 0;i < 100;i++)
+    for (std::int32_t i = 0; i < 100; ++i)
     {
         std::vector<std::vector<unsigned char>> commandsToSend;
         std::vector<std::vector<unsigned char>> expectedRestartCommands;

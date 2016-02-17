@@ -1,15 +1,23 @@
 #pragma once
 
+#include <algorithm>
 #include <vector>
 
 namespace LiveFreetimeLooper
 {
+    // The first n items in Command::content that identify the Command
+    const int COMMAND_ID_SIZE = 2;
+
     class Command final
     {
     public:
-        Command(std::vector<unsigned char> content) :
-            content(content)
+        Command(std::vector<unsigned char> content) : content(content)
         {
+            if (content.size() < 2)
+            {
+                throw std::runtime_error(
+                    "A Command must have a minimum of two elements in its contents");
+            }
         }
 
         Command(unsigned char b1, unsigned char b2, unsigned char b3) :
@@ -21,7 +29,7 @@ namespace LiveFreetimeLooper
 
         bool operator==(const Command& other) const
         {
-            return other.content == content;
+            return other.content[0] == content[0] && other.content[1] == content[1];
         }
     };
 }
@@ -35,9 +43,9 @@ namespace std
         {
             // Hash just based on command content
             std::size_t seed = 0;
-            for (auto& i : k.content)
+            for (int i = 0; i < LiveFreetimeLooper::COMMAND_ID_SIZE; ++i)
             {
-                seed ^= i + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+                seed ^= k.content[i] + 0x9e3779b9 + (seed << 6) + (seed >> 2);
             }
             return seed;
         }

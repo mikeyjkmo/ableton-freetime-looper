@@ -31,8 +31,8 @@ TEST_CASE("Running State")
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<RunningState>(resources, 1min);
 
-    std::vector<unsigned char> command = { 1 };
-    std::vector<unsigned char> commandTwo = { 2 };
+    std::vector<unsigned char> command = { 1, 1 };
+    std::vector<unsigned char> commandTwo = { 2, 1 };
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
@@ -185,8 +185,8 @@ TEST_CASE("Running State (with mock looptracker)")
     StateResources resources(dispatcherMock, loopTrackerMock, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<RunningState>(resources, std::chrono::high_resolution_clock::duration::zero());
 
-    std::vector<unsigned char> command = { 1 };
-    std::vector<unsigned char> commandTwo = { 2 };
+    std::vector<unsigned char> command = { 1, 1 };
+    std::vector<unsigned char> commandTwo = { 2, 1 };
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
