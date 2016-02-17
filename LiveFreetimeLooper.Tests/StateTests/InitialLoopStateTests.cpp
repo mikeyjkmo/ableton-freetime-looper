@@ -83,8 +83,23 @@ TEST_CASE("InitialLoopState")
         REQUIRE(loopTrackerMock.isCleared());
     }
 
-    SECTION("InitialLoopState does ?? with Stop Messages")
+    SECTION("InitialLoopState immediately relays Stop message that matches with the recording state message")
     {
-        REQUIRE("not implemented" == "");
+        throw std::runtime_error("not implemented");
+    }
+
+    SECTION("Upon receiving a stop message that matches the recording start message the state is changed to InitialLoopWaitingState")
+    {
+        throw std::runtime_error("not implemented");
+    }
+
+    SECTION("InitialLoopState immediately relays Stop Message that doesn't match the recording start message ")
+    {
+        throw std::runtime_error("not implemented");
+    }
+
+    SECTION("Upon receiving a stop message that doesn't match the recording start message the state is remains unchanged")
+    {
+        throw std::runtime_error("not implemented");
     }
 }
