@@ -16,6 +16,12 @@ namespace LiveFreetimeLooper
         }
     }
 
+    void CommandMappings::addMapping(const Command& startCommand, const Command& stopCommand)
+    {
+        _startsToStops.emplace(startCommand, stopCommand);
+        _stopsToStarts.emplace(stopCommand, startCommand);
+    }
+
     MessageType CommandMappings::getMessageType(const Command& command)
     {
         if (_stopsToStarts.find(command) != _stopsToStarts.end())

@@ -8,9 +8,9 @@ TEST_CASE("CommandsMappings::getMessageType() returns the correct message type."
 {
     std::unordered_map<Command, Command> startsToStops = {
         {Command(1, 2, 3), Command(4, 5, 6)},
-        {Command(7, 8, 9), Command(10, 11, 12)}
     };
     CommandMappings cm(startsToStops);
+    cm.addMapping(Command(7, 8, 9), Command(10, 11, 12));
 
     REQUIRE(cm.getMessageType(Command(1, 2, 3)) == MessageType::START);
     REQUIRE(cm.getMessageType(Command(4, 5, 6)) == MessageType::STOP);
