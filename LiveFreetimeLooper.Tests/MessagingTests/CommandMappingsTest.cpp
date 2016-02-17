@@ -16,6 +16,7 @@ TEST_CASE("CommandsMappings::getMessageType() returns the correct message type."
     REQUIRE(cm.getMessageType(Command(4, 5, 6)) == MessageType::STOP);
     REQUIRE(cm.getMessageType(Command(7, 8, 9)) == MessageType::START);
     REQUIRE(cm.getMessageType(Command(10, 11, 12)) == MessageType::STOP);
+    REQUIRE(cm.getMessageType(Command(15, 16, 17)) == MessageType::INVALID);
 }
 
 TEST_CASE("CommandsMappings::getStartCommand() returns the correct message or throws an exception.")
