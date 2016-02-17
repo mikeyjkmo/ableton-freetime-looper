@@ -1,17 +1,17 @@
 CC=clang++
 CFLAGS=-std=c++14 -stdlib=libc++ -Wall -D__MACOSX_CORE__ -c
 LDFLAGS=-framework CoreMIDI -framework CoreAudio -framework CoreFoundation
-LIBSOURCES=../LiveFreetimeLooper.FreetimeLooper/**/*.cpp
+LIBSOURCES=LiveFreetimeLooper.FreetimeLooper/**/*.cpp
 
-SOURCES=$(wildcard LiveFreetimeLooper.cpp) $(wildcard $(LIBSOURCES))
-TESTSOURCES=$(wildcard ../LiveFreetimeLooper.Tests/LiveFreetimeLooper.Tests.cpp) \
-            $(wildcard ../LiveFreetimeLooper.Tests/**/*.cpp) \
+SOURCES=$(wildcard LiveFreetimeLooper/LiveFreetimeLooper.cpp) $(wildcard $(LIBSOURCES))
+TESTSOURCES=$(wildcard LiveFreetimeLooper.Tests/LiveFreetimeLooper.Tests.cpp) \
+            $(wildcard LiveFreetimeLooper.Tests/**/*.cpp) \
 	    $(wildcard $(LIBSOURCES))
 
 OBJECTS=$(SOURCES:.cpp=.o)
 TESTOBJECTS=$(TESTSOURCES:.cpp=.o)
 
-EXECUTABLE=LiveFreetimeLooper
+EXECUTABLE=LiveFreetimeLooperMain
 TESTEXECUTABLE=LiveFreetimeLooperTests
 
 all: $(SOURCES) $(EXECUTABLE)
@@ -22,7 +22,7 @@ $(EXECUTABLE): $(OBJECTS)
 tests: $(TESTSOURCES) $(TESTEXECUTABLE)
 
 $(TESTEXECUTABLE): $(TESTOBJECTS)
-	$(CC) $(LDFLAGS) $(TESTOBJECTS) -o $@
+	$(CC) $(LDFLAGS) $(TESTOBJECTS) -o $@ && ./$(TESTEXECUTABLE)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@ -I .
