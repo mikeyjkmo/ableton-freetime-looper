@@ -9,15 +9,15 @@
 #include "../Mocks/MockAsyncTimerFactory.hpp"
 #include "../Mocks/MockAsyncTimer.hpp"
 
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/StartMessage.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/States/StateBase.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/States/CreatedState.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopWaitingState.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/States/InitialLoopState.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/States/RunningState.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Utilities/AsyncTimerFactory.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/StartMessage.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/LoopTracker.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/CommandMappings.hpp"
+#include "../../LiveFreetimeLooper.Core/States/StateBase.hpp"
+#include "../../LiveFreetimeLooper.Core/States/CreatedState.hpp"
+#include "../../LiveFreetimeLooper.Core/States/InitialLoopWaitingState.hpp"
+#include "../../LiveFreetimeLooper.Core/States/InitialLoopState.hpp"
+#include "../../LiveFreetimeLooper.Core/States/RunningState.hpp"
+#include "../../LiveFreetimeLooper.Core/Utilities/AsyncTimerFactory.hpp"
 
 using namespace LiveFreetimeLooper;
 

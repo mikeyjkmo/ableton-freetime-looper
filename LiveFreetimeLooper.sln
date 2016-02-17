@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper", "LiveF
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper.Tests", "LiveFreetimeLooper.Tests\LiveFreetimeLooper.Tests.vcxproj", "{9ACA0007-B664-4A2F-8F17-266D782ADC93}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper.FreetimeLooper", "LiveFreetimeLooper.FreetimeLooper\LiveFreetimeLooper.FreetimeLooper.vcxproj", "{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LiveFreetimeLooper.Core", "LiveFreetimeLooper.Core\LiveFreetimeLooper.Core.vcxproj", "{2877E868-D2B7-4DE5-B70F-69191FDBA1FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

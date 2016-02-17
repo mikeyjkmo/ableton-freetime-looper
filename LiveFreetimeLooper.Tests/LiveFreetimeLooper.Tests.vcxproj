@@ -51,7 +51,7 @@
     <ClInclude Include="Mocks\MockMessageDispatcher.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveFreetimeLooper.FreetimeLooper\LiveFreetimeLooper.FreetimeLooper.vcxproj">
+    <ProjectReference Include="..\LiveFreetimeLooper.Core\LiveFreetimeLooper.Core.vcxproj">
       <Project>{2877e868-d2b7-4de5-b70f-69191fdba1fe}</Project>
     </ProjectReference>
   </ItemGroup>

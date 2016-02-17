@@ -1,5 +1,5 @@
 #include "../Catch/catch.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/CommandMappings.hpp"
 
 using namespace LiveFreetimeLooper;
 

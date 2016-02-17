@@ -1,8 +1,8 @@
 #include "../Catch/catch.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/Command.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/Command.hpp"
 
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/LoopTracker.hpp"
-#include "../../LiveFreetimeLooper.FreetimeLooper/Messaging/CommandMappings.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/LoopTracker.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/CommandMappings.hpp"
 
 #include <memory>
 #include <cstdint>

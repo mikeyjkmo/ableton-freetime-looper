@@ -1,4 +1,4 @@
-#include "../LiveFreetimeLooper.FreetimeLooper/Session/Session.hpp"
+#include "../LiveFreetimeLooper.Core/Session/Session.hpp"
 
 using namespace LiveFreetimeLooper;
 

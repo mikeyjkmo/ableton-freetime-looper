@@ -1,7 +1,7 @@
 CC=clang++
 CFLAGS=-std=c++14 -stdlib=libc++ -Wall -D__MACOSX_CORE__ -c
 LDFLAGS=-framework CoreMIDI -framework CoreAudio -framework CoreFoundation
-LIBSOURCES=LiveFreetimeLooper.FreetimeLooper/**/*.cpp
+LIBSOURCES=LiveFreetimeLooper.Core/**/*.cpp
 
 SOURCES=$(wildcard LiveFreetimeLooper/LiveFreetimeLooper.cpp) $(wildcard $(LIBSOURCES))
 TESTSOURCES=$(wildcard LiveFreetimeLooper.Tests/LiveFreetimeLooper.Tests.cpp) \
