@@ -28,6 +28,7 @@ TEST_CASE("Running State")
     
     MockAsyncTimerFactory asyncTimerFactory;
 
+    auto intervalDuration = 1min;
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<RunningState>(resources, 1min);
 
@@ -36,14 +37,10 @@ TEST_CASE("Running State")
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
-    SECTION("Running State starts the AsyncTimer")
+    SECTION("AsyncTimers is created with the correct duration and started")
     {
-        REQUIRE(timer->isRunning());       
-    }
-
-    SECTION("Running State creates AsyncTimer with correct duration")
-    {
-        REQUIRE(timer->getInterval() == 1min);
+        REQUIRE(timer->getInterval() == intervalDuration);
+        REQUIRE(timer->isRunning());
     }
 
     SECTION("Running State queues requests until the async timer recurs")
@@ -166,7 +163,7 @@ TEST_CASE("Running State")
         REQUIRE(dispatcherMock.getCommands().size() == 8);
     }
 
-    SECTION("Running State returns CreatedState when StdIn supplied")
+    SECTION("When Stdin is supplied it clears looptracker and returns state to CreatedState")
     {
         state->handleStdin(state, std::string("any string value"));
         REQUIRE(dynamic_cast<CreatedState*>(state.get()));
