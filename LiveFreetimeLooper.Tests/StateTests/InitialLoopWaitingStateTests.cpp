@@ -38,8 +38,8 @@ TEST_CASE("InitialLoopWaitingState")
     SECTION("InitialLoopWaitingState relays the message to the looptracker")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == command);
+        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
+        REQUIRE(loopTrackerMock.getStartCommandsReceived().back().content == command);
     }
 
     SECTION("IntialLoopWaitingState returns InitialLoopState when message received")

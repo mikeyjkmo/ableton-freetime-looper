@@ -19,12 +19,12 @@ private:
 public:
     MockLoopTracker();
 
-    void commandReceived(LiveFreetimeLooper::Command command) override;
+    void startCommand(LiveFreetimeLooper::Command command) override;
     std::vector<LiveFreetimeLooper::Command> getNextRestartCommands() override;
     void incrementInterval() override;
     void clear() override;
 
-    std::vector<LiveFreetimeLooper::Command> const& getCommandsReceived() const;
+    std::vector<LiveFreetimeLooper::Command> const& getStartCommandsReceived() const;
     std::int32_t const& getInterval() const;
     std::int32_t const& getNextRestartMessagesCallCount() const;
     bool isCleared() const;

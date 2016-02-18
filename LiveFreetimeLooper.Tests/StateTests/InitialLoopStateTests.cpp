@@ -42,8 +42,8 @@ TEST_CASE("InitialLoopState")
     SECTION("When InitialLoopState receives the a message with the same command as the starting message it is relayed to the looptracker")
     {
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
+        REQUIRE(loopTrackerMock.getStartCommandsReceived().back().content == startingCommand);
     }
 
     SECTION("When InitialLoopState receives the a message with the same command as the starting message the state changes to RunningState")
@@ -68,7 +68,7 @@ TEST_CASE("InitialLoopState")
     SECTION("When InitialLoopState receives the a message with a different command as the starting message it is not relayed to the looptracker")
     {
         state->handle(state, std::make_unique<StartMessage>(otherCommand));
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 0);
+        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 0);
     }
 
 
