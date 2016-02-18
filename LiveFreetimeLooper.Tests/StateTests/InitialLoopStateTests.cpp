@@ -41,8 +41,8 @@ TEST_CASE("InitialLoopState")
         REQUIRE(dispatcherMock.getCommands().size() == 1);
         REQUIRE(dispatcherMock.getCommands().back().content == startingCommand);
 
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
 
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
     }
@@ -55,7 +55,7 @@ TEST_CASE("InitialLoopState")
 
         REQUIRE(dispatcherMock.getCommands().size() == 0);
 
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 0);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 0);
 
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }

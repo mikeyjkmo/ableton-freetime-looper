@@ -41,6 +41,11 @@ namespace LiveFreetimeLooper
         }
     }
 
+    void LoopTracker::stopCommand(const Command& correspondingStartCommand)
+    {
+        // not implemented
+    }
+
     std::vector<Command> LoopTracker::getNextRestartCommands()
     {
         std::vector<Command> restartMessages;

@@ -205,28 +205,28 @@ TEST_CASE("Running State (with mock looptracker)")
     SECTION("If there are incoming messages the loop tracker is notified on every recurrance of the timer")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 0);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 0);
         timer->step();
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().back().content == command);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == command);
         timer->step();
         timer->step();
         state->handle(state, std::make_unique<StartMessage>(commandTwo));
         timer->step();
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 2);
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().back().content == commandTwo);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 2);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == commandTwo);
     }
 
     SECTION("The loop tracker is not notified of restarting messages, only newly received ones")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 0);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 0);
         timer->step();
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
         timer->step();
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
         timer->step();
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
     }
 
     SECTION("The loop tracker function getNextRestartMessages once on every recurrance of the timer")

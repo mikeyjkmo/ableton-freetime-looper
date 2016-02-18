@@ -36,8 +36,8 @@ TEST_CASE("InitialLoopWaitingState")
         REQUIRE(dispatcherMock.getCommands().size() == 1);
         REQUIRE(dispatcherMock.getCommands().back().content == command);
 
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getStartCommandsReceived().back().content == command);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == command);
 
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
