@@ -13,7 +13,7 @@ void MockLoopTracker::incrementInterval()
     ++_interval;
 }
 
-void MockLoopTracker::commandReceived(LiveFreetimeLooper::Command command)
+void MockLoopTracker::startCommand(LiveFreetimeLooper::Command command)
 {
     _commandsReceived.push_back(command);
     _cleared = false;
@@ -30,7 +30,7 @@ void MockLoopTracker::clear()
     _cleared = true;
 }
 
-std::vector<LiveFreetimeLooper::Command> const& MockLoopTracker::getCommandsReceived() const
+std::vector<LiveFreetimeLooper::Command> const& MockLoopTracker::getStartCommandsReceived() const
 {
     return _commandsReceived;
 }

@@ -22,7 +22,7 @@ namespace LiveFreetimeLooper
     public:
         LoopTracker();
 
-        void commandReceived(Command command) override;
+        void startCommand(Command command) override;
         std::vector<Command> getNextRestartCommands() override;
         void incrementInterval() override;
         void clear() override;

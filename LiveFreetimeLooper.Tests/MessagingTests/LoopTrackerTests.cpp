@@ -14,9 +14,9 @@ class LoopTrackerSteps
 public:
     LoopTrackerSteps() : _loopTracker() {};
 
-    void given_I_Send_A_Message(const std::vector<unsigned char>& command)
+    void given_I_Send_A_Start_Command(const std::vector<unsigned char>& command)
     {
-        _loopTracker.commandReceived(Command(command));
+        _loopTracker.startCommand(Command(command));
     }
 
     void given_I_Wait_N_Intervals(unsigned int number)
@@ -32,13 +32,13 @@ public:
         given_I_Wait_N_Intervals(1);
     }
 
-    void then_The_Message_Is_Restartable(const std::vector<unsigned char>& message)
+    void then_The_Command_Is_Restartable(const std::vector<unsigned char>& message)
     {
         auto restartCommands = _loopTracker.getNextRestartCommands();
         REQUIRE(MessageCount(message, restartCommands) == 1);
     }
 
-    void then_The_Message_Is_Restartable_On_Every_Nth_Interval(
+    void then_The_Command_Is_Restartable_On_Every_Nth_Interval(
         const std::vector<unsigned char>& message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
@@ -59,7 +59,7 @@ public:
         }
     }
 
-    void then_The_Message_Is_Not_Restartable_For_N_Intervals(
+    void then_The_Command_Is_Not_Restartable_For_N_Intervals(
         const std::vector<unsigned char>& message, int number)
     {
         for (std::int32_t i = 0;i < number * 10 + 1;i++)
@@ -88,91 +88,97 @@ private :
 };
 
 
-TEST_CASE("When a message is sent on the 0th and 2th interval, it then appears as restartable on the 2nd, 4th, 6th etc interval")
+TEST_CASE("When a start command is sent on the 0th and 2th interval,"
+    " the loop is restartable on the 2nd, 4th, 6th etc interval")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message({'a', 1});
+    test.given_I_Send_A_Start_Command({'a', 1});
     test.given_I_Wait_One_Interval();
     test.given_I_Wait_One_Interval();
 
-    test.given_I_Send_A_Message({'a', 1});
+    test.given_I_Send_A_Start_Command({'a', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'a', 1}, 2);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval({'a', 1}, 2);
 }
 
-TEST_CASE("When a message is sent on the 0st and 5th interval, it then appears as restartable on the 5nd, 10th, 15th etc interval")
+TEST_CASE("When a start command is sent on the 0st and 5th interval, "
+    " the loop is restartable on the 5nd, 10th, 15th etc interval")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message({'b', 1});
+    test.given_I_Send_A_Start_Command({'b', 1});
     test.given_I_Wait_N_Intervals(5);
-    test.given_I_Send_A_Message({'b', 1});
+    test.given_I_Send_A_Start_Command({'b', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'b', 1}, 5);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval({'b', 1}, 5);
 }
 
-TEST_CASE("When a message is sent on the 0st and 1th interval, it then appears as restartable on every interval")
+TEST_CASE("When a start command is sent on the 0st and 1th interval, "
+    " the loop is restartable on every interval")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message({'c', 1});
+    test.given_I_Send_A_Start_Command({'c', 1});
     test.given_I_Wait_One_Interval();
-    test.given_I_Send_A_Message({'c', 1});
+    test.given_I_Send_A_Start_Command({'c', 1});
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'c', 1}, 1);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval({'c', 1}, 1);
 
 }
 
 
-TEST_CASE("When a message is sent on the same interval, that is ignored and  the next message starts a new recording")
+TEST_CASE("When two start commands are send on the same interval"
+    "both are ignored")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message({'d', 1});
-    test.given_I_Send_A_Message({'d', 1});
-    test.then_The_Message_Is_Not_Restartable_For_N_Intervals({'d', 1}, 10);
-    test.given_I_Send_A_Message({'d', 1});
-    test.given_I_Wait_One_Interval();
-    test.given_I_Send_A_Message({'d', 1});
+    test.given_I_Send_A_Start_Command({'d', 1});
+    test.given_I_Send_A_Start_Command({'d', 1});
+    test.then_The_Command_Is_Not_Restartable_For_N_Intervals({'d', 1}, 10);
 
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'d', 1}, 1);
+    // The start command can be sent in again later, with the usual effect.
+    test.given_I_Send_A_Start_Command({'d', 1});
+    test.given_I_Wait_One_Interval();
+    test.given_I_Send_A_Start_Command({'d', 1});
+
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval({'d', 1}, 1);
 }
 
-TEST_CASE("The interval is decided by the first two identical messages")
+TEST_CASE("The loop is defined by two matching commands")
 {
     LoopTrackerSteps test;
-    test.given_I_Send_A_Message({'g', 1});
+    test.given_I_Send_A_Start_Command({'g', 1});
     test.given_I_Wait_One_Interval();
-    test.given_I_Send_A_Message({'e', 1});
+    test.given_I_Send_A_Start_Command({'e', 1});
     test.given_I_Wait_N_Intervals(3);
-    test.given_I_Send_A_Message({'f', 1});
+    test.given_I_Send_A_Start_Command({'f', 1});
     test.given_I_Wait_N_Intervals(3);
-    test.given_I_Send_A_Message({'e', 1});
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'e', 1}, 6);
+    test.given_I_Send_A_Start_Command({'e', 1});
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval({'e', 1}, 6);
 }
 
-TEST_CASE("On receipt of a message that matches a running loop, the message is relayed but ignored")
+TEST_CASE("A start command that matches a running loop is ignored")
 {
     LoopTrackerSteps test;
-    test.given_I_Send_A_Message({'y', 1});
+    test.given_I_Send_A_Start_Command({'y', 1});
     test.given_I_Wait_N_Intervals(4);
-    test.given_I_Send_A_Message({'y', 1});
+    test.given_I_Send_A_Start_Command({'y', 1});
     test.given_I_Wait_N_Intervals(3);
-    test.given_I_Send_A_Message({'y', 1});
+    test.given_I_Send_A_Start_Command({'y', 1});
     test.given_I_Wait_N_Intervals(2);
-    test.given_I_Send_A_Message({'y', 1});
-    test.then_The_Message_Is_Restartable_On_Every_Nth_Interval({'y', 1}, 4);
+    test.given_I_Send_A_Start_Command({'y', 1});
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval({'y', 1}, 4);
 }
 
-TEST_CASE("The message is restartable immediately after the second message is received")
+TEST_CASE("The loop is restartable immediately after the second start command is received")
 {
     LoopTrackerSteps test;
 
-    test.given_I_Send_A_Message({'h', 1});
+    test.given_I_Send_A_Start_Command({'h', 1});
     test.given_I_Wait_N_Intervals(2);
-    test.given_I_Send_A_Message({'h', 1});
-    test.then_The_Message_Is_Restartable({'h', 1});
+    test.given_I_Send_A_Start_Command({'h', 1});
+    test.then_The_Command_Is_Restartable({'h', 1});
 }
 
 struct LoopInfo
@@ -245,7 +251,7 @@ TEST_CASE("Loop Tracker can track multiple loops concurrently")
 
         for (auto &command : commandsToSend)
         {
-            tracker.commandReceived(Command(command));
+            tracker.startCommand(Command(command));
         }
 
         auto restartCommands = tracker.getNextRestartCommands();

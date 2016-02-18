@@ -17,7 +17,7 @@ namespace LiveFreetimeLooper
         }
     }
 
-    void LoopTracker::commandReceived(Command command)
+    void LoopTracker::startCommand(Command command)
     {
         auto recordingLoopEntry = _recording.find(command);
 
