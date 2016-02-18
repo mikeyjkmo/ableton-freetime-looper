@@ -32,73 +32,54 @@ TEST_CASE("InitialLoopState")
     std::unique_ptr<StateBase> state = std::make_unique<InitialLoopState>(
         resources, startingMessage);
 
-    SECTION("When InitialLoopState receives the a message with the same command as the starting message it relays the message to the dispatcher")
+    SECTION(
+        "Start Message with the same command as the starting message "
+        "is dispatched, sent to looptracker and changes state to RunningState")
     {
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
+
         REQUIRE(dispatcherMock.getCommands().size() == 1);
         REQUIRE(dispatcherMock.getCommands().back().content == startingCommand);
-    }
 
-    SECTION("When InitialLoopState receives the a message with the same command as the starting message it is relayed to the looptracker")
-    {
-        state->handle(state, std::make_unique<StartMessage>(startingCommand));
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
         REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
-    }
 
-    SECTION("When InitialLoopState receives the a message with the same command as the starting message the state changes to RunningState")
-    {
-        state->handle(state, std::make_unique<StartMessage>(startingCommand));
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
     }
 
-    SECTION("When InitialLoopState receives the a message with a different command as the starting message it is not relayed to the dispatcher")
+    SECTION(
+        "Start Message with the different command as the starting message "
+        "is not dipatched, not sent to looptracker and the state does not change")
     {
         state->handle(state, std::make_unique<StartMessage>(otherCommand));
-        REQUIRE(dispatcherMock.getCommands().size() == 0);
-    }
 
-    SECTION("When InitialLoopState receives the a message with a different command as the starting message the state remains unchanged")
-    {
-        state->handle(state, std::make_unique<StartMessage>(otherCommand));
+        REQUIRE(dispatcherMock.getCommands().size() == 0);
+
+        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 0);
+
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
 
-    SECTION("When InitialLoopState receives the a message with a different command as the starting message it is not relayed to the looptracker")
-    {
-        state->handle(state, std::make_unique<StartMessage>(otherCommand));
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 0);
-    }
 
-
-    SECTION("InitialLoopState returns CreatedState when StdIn supplied")
-    {
-        state->handleStdin(state, std::string("any string value"));
-        REQUIRE(dynamic_cast<CreatedState*>(state.get()));
-    }
-
-    SECTION("InitialLoopState clears its LoopTracker when StdIn supplied")
+    SECTION("When Stdin is supplied it clears looptracker and returns state to CreatedState")
     {
         state->handleStdin(state, std::string("any string value"));
         REQUIRE(loopTrackerMock.isCleared());
+        REQUIRE(dynamic_cast<CreatedState*>(state.get()));
     }
 
-    SECTION("InitialLoopState immediately relays Stop message that matches with the recording state message")
+    SECTION(
+        "Stop message that matches the starting message "
+        "is immediately dispatched, clears the looptracker "
+        "and returns the state to InitialLoopWaitingState")
     {
         throw std::runtime_error("not implemented");
     }
 
-    SECTION("Upon receiving a stop message that matches the recording start message the state is changed to InitialLoopWaitingState")
-    {
-        throw std::runtime_error("not implemented");
-    }
-
-    SECTION("InitialLoopState immediately relays Stop Message that doesn't match the recording start message ")
-    {
-        throw std::runtime_error("not implemented");
-    }
-
-    SECTION("Upon receiving a stop message that doesn't match the recording start message the state is remains unchanged")
+    SECTION(
+        "Stop message that doesn't match the starting message "
+        "is immediately dispatched, does not clear the looptracker, "
+        "is not sent to the loop tracker, and returns the state to InitialLoopWaitingState")
     {
         throw std::runtime_error("not implemented");
     }
