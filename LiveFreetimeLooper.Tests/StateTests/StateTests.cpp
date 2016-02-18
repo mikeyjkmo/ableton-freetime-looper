@@ -43,34 +43,34 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
     send(quantisableCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getCommands().size() == 1);
-    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
 
     send(unrelatedCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getCommands().size() == 2);
-    REQUIRE(dispatcherMock.getCommands().back().content == unrelatedCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == unrelatedCommand);
 
     // Send in the second message, to move to RunningState
     send(quantisableCommand);
 
     REQUIRE(dynamic_cast<RunningState*>(state.get()));
-    REQUIRE(dispatcherMock.getCommands().size() == 3);
-    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
     // The quantised loop restart message is being dispached once per step 
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 4);
-    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 5);
-    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 6);
-    REQUIRE(dispatcherMock.getCommands().back().content == quantisableCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 6);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
 
     // Introduce more loops
     // => A) Loop of length 1 (original quantised) + B) Loop of length 1 + C) Loop of length 2
@@ -78,26 +78,26 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
     std::vector<unsigned char> loopOfLengthTwoCommand = { 24, 4 };
 
     send(loopOfLengthOneCommand);
-    REQUIRE(dispatcherMock.getCommands().size() == 6);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 6);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 8);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
     send(loopOfLengthTwoCommand);
     send(loopOfLengthOneCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 12);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 12);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 14);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 14);
     send(loopOfLengthTwoCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 18);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 18);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 20); // +2: A and B restart 
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 20); // +2: A and B restart 
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 23); // +3: A, B and C restart
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 23); // +3: A, B and C restart
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 25);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 25);
     timer->step();
-    REQUIRE(dispatcherMock.getCommands().size() == 28);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 28);
 }
 
 // //Uses std::this_thread::sleep_for and measures outputs based on actual time.
@@ -156,8 +156,8 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 //     std::this_thread::sleep_for(std::chrono::milliseconds(waitMilliseconds));
 //     send(quantisableCommand);
 // 
-//     REQUIRE(dispatcherMock.getCommands().size() == 2);
+//     REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
 //     std::this_thread::sleep_for(std::chrono::milliseconds((4 * waitMilliseconds) + 10));
 // 
-//     REQUIRE(dispatcherMock.getCommands().size() == 6);
+//     REQUIRE(dispatcherMock.getDispatchedCommands().size() == 6);
 // }

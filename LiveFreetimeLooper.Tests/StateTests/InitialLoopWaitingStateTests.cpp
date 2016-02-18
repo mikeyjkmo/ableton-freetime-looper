@@ -31,8 +31,8 @@ TEST_CASE("InitialLoopWaitingState")
     SECTION("InitialLoopWaitingState relays the message to the dispatcher")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(dispatcherMock.getCommands().size() == 1);
-        REQUIRE(dispatcherMock.getCommands().back().content == command);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command);
     }
 
     SECTION("InitialLoopWaitingState relays the message to the looptracker")
@@ -67,8 +67,8 @@ TEST_CASE("InitialLoopWaitingState")
             std::vector<unsigned char> command = { 0, i };
             std::vector<unsigned char> startCommand{ 1, i };
             state->handle(state, std::make_unique<StopMessage>(command, startCommand));
-            REQUIRE(dispatcherMock.getCommands().size() == i);
-            REQUIRE(dispatcherMock.getCommands().back().content == command);
+            REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
+            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command);
             REQUIRE(dynamic_cast<InitialLoopWaitingState*>(state.get()));
         }
     }

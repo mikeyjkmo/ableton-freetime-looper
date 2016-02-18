@@ -38,9 +38,8 @@ TEST_CASE("InitialLoopState")
     {
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
 
-        REQUIRE(dispatcherMock.getCommands().size() == 1);
-        REQUIRE(dispatcherMock.getCommands().back().content == startingCommand);
-
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
         REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
 
@@ -52,11 +51,8 @@ TEST_CASE("InitialLoopState")
         "is not dipatched, not sent to looptracker and the state does not change")
     {
         state->handle(state, std::make_unique<StartMessage>(otherCommand));
-
-        REQUIRE(dispatcherMock.getCommands().size() == 0);
-
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0);
         REQUIRE(loopTrackerMock.getCommandsReceived().size() == 0);
-
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
 

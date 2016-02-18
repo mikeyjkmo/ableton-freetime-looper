@@ -50,107 +50,107 @@ TEST_CASE("Running State")
     {    
         state->handle(state, std::make_unique<StartMessage>(command));
         state->handle(state, std::make_unique<StartMessage>(commandTwo));
-        REQUIRE(dispatcherMock.getCommands().size() == 0);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0);
 
         timer->step();
-        REQUIRE(dispatcherMock.getCommands().size() == 2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
 
-        REQUIRE(dispatcherMock.getCommands()[dispatcherMock.getCommands().size() - 2].content == command);
-        REQUIRE(dispatcherMock.getCommands().back().content == commandTwo);
+        REQUIRE(dispatcherMock.getDispatchedCommands()[dispatcherMock.getDispatchedCommands().size() - 2].content == command);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == commandTwo);
     }
 
     SECTION("Running State ignores a loop defined by two (roughly) simultanous messages as a loop of length 1, but still relays both messages")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(dispatcherMock.getCommands().size() == 0);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0);
         timer->step();  // LOOP START RECORDING + LOOP STOP RECORDING simultaneously
-        REQUIRE(dispatcherMock.getCommands().size() == 2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
         timer->step();
-        REQUIRE(dispatcherMock.getCommands().size() == 2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
         timer->step();
-        REQUIRE(dispatcherMock.getCommands().size() == 2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
     }
 
     SECTION("Running State quantises a loop of length 1 correctly")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(dispatcherMock.getCommands().size() == 0);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0);
         timer->step();   // LOOP START RECORDING
-        REQUIRE(dispatcherMock.getCommands().size() == 1);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         state->handle(state, std::make_unique<StartMessage>(command));
         timer->step(); // LOOP STOP RECORDING + LOOP RESTARTED
-        REQUIRE(dispatcherMock.getCommands().size() == 3);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         timer->step();
-        REQUIRE(dispatcherMock.getCommands().size() == 4);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
     }
 
     SECTION("Running State quantises a loop of length 5 correctly")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(dispatcherMock.getCommands().size() == 0); // Message sent at start
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0); // Message sent at start
 
         timer->step(); // 1st interation finishes with queued start recording message. LOOP START SENT.
-        CAPTURE(1); REQUIRE(dispatcherMock.getCommands().size() == 1);
+        CAPTURE(1); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         timer->step();
-        CAPTURE(2); REQUIRE(dispatcherMock.getCommands().size() == 1);
+        CAPTURE(2); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         timer->step();
-        CAPTURE(3); REQUIRE(dispatcherMock.getCommands().size() == 1);
+        CAPTURE(3); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         timer->step();
-        CAPTURE(4); REQUIRE(dispatcherMock.getCommands().size() == 1);
+        CAPTURE(4); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         timer->step();
-        CAPTURE(5); REQUIRE(dispatcherMock.getCommands().size() == 1);
+        CAPTURE(5); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
 
         state->handle(state, std::make_unique<StartMessage>(command));
 
         timer->step(); // 5th interation finishes with end recording message. LOOP END SENT +  LOOP RESTART SENT
-        CAPTURE(6); REQUIRE(dispatcherMock.getCommands().size() == 3);
+        CAPTURE(6); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         timer->step(); 
-        CAPTURE(7); REQUIRE(dispatcherMock.getCommands().size() == 3);
+        CAPTURE(7); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         timer->step(); 
-        CAPTURE(8); REQUIRE(dispatcherMock.getCommands().size() == 3);
+        CAPTURE(8); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         timer->step(); 
-        CAPTURE(9); REQUIRE(dispatcherMock.getCommands().size() == 3);
+        CAPTURE(9); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         timer->step();
-        CAPTURE(10); REQUIRE(dispatcherMock.getCommands().size() == 3);
+        CAPTURE(10); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         timer->step(); // LOOP RESTART SENT
-        CAPTURE(11); REQUIRE(dispatcherMock.getCommands().size() == 4);
+        CAPTURE(11); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
         timer->step(); 
-        CAPTURE(12); REQUIRE(dispatcherMock.getCommands().size() == 4);
+        CAPTURE(12); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
         timer->step();
-        CAPTURE(13); REQUIRE(dispatcherMock.getCommands().size() == 4);
+        CAPTURE(13); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
         timer->step();
-        CAPTURE(14); REQUIRE(dispatcherMock.getCommands().size() == 4);
+        CAPTURE(14); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
         timer->step();
-        CAPTURE(15); REQUIRE(dispatcherMock.getCommands().size() == 4);
+        CAPTURE(15); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
         timer->step(); // LOOP RESTART SENT
-        CAPTURE(16); REQUIRE(dispatcherMock.getCommands().size() == 5);
+        CAPTURE(16); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
         timer->step(); 
-        CAPTURE(17); REQUIRE(dispatcherMock.getCommands().size() == 5);
+        CAPTURE(17); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
         timer->step();
-        CAPTURE(18); REQUIRE(dispatcherMock.getCommands().size() == 5);
+        CAPTURE(18); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
         timer->step();
-        CAPTURE(19); REQUIRE(dispatcherMock.getCommands().size() == 5);
+        CAPTURE(19); REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
         timer->step();
     }
 
     SECTION("A message is relayed, but ignored for quantising purposes, after the second occurance")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
-        REQUIRE(dispatcherMock.getCommands().size() == 0); // LOOP START
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0); // LOOP START
 
         timer->step(); timer->step(); timer->step(); timer->step(); timer->step();
 
-        REQUIRE(dispatcherMock.getCommands().size() == 1);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         state->handle(state, std::make_unique<StartMessage>(command));
 
         timer->step(); // LOOP END + LOOP RESTART
-        REQUIRE(dispatcherMock.getCommands().size() == 3);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
         state->handle(state, std::make_unique<StartMessage>(command));
         timer->step(); // IGNORED MESSAGE
         timer->step(); timer->step(); timer->step();
 
-        REQUIRE(dispatcherMock.getCommands().size() == 4);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
 
         timer->step();  timer->step();
         state->handle(state, std::make_unique<StartMessage>(command));
@@ -159,11 +159,11 @@ TEST_CASE("Running State")
         timer->step(); // IGNORED MESSAGE
         timer->step();
 
-        REQUIRE(dispatcherMock.getCommands().size() == 7);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 7);
 
         timer->step(); timer->step(); timer->step(); timer->step(); timer->step();
 
-        REQUIRE(dispatcherMock.getCommands().size() == 8);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
     }
 
     SECTION("Running State returns CreatedState when StdIn supplied")
@@ -179,10 +179,10 @@ TEST_CASE("Running State")
             std::vector<unsigned char> command = { 0, i };
             std::vector<unsigned char> startCommand{ 1, i };
             state->handle(state, std::make_unique<StopMessage>(command, startCommand));
-            REQUIRE(dispatcherMock.getCommands().size() == i);
-            REQUIRE(dispatcherMock.getCommands().back().content == command);
+            REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
+            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command);
             timer->step();
-            REQUIRE(dispatcherMock.getCommands().size() == i);
+            REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
             REQUIRE(dynamic_cast<CreatedState*>(state.get()));
         }
     }

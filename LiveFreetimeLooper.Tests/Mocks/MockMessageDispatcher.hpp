@@ -12,5 +12,5 @@ public:
     MockMessageDispatcher();
     void sendNewMidiMessage(LiveFreetimeLooper::Command command) override;
     void sendMidiMessage(LiveFreetimeLooper::StartMessage* message) override;
-    std::vector<LiveFreetimeLooper::Command> const& getCommands() const;
+    std::vector<LiveFreetimeLooper::Command> const& getDispatchedCommands() const;
 };

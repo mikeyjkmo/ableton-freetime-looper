@@ -15,7 +15,7 @@ void MockMessageDispatcher::sendMidiMessage(LiveFreetimeLooper::StartMessage* me
     _commands.push_back(message->command);
 }
 
-std::vector<LiveFreetimeLooper::Command> const& MockMessageDispatcher::getCommands() const
+std::vector<LiveFreetimeLooper::Command> const& MockMessageDispatcher::getDispatchedCommands() const
 {
     return _commands;
 }
