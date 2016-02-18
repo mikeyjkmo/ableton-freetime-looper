@@ -41,8 +41,8 @@ TEST_CASE("InitialLoopState")
 
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
 
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
     }
@@ -53,7 +53,7 @@ TEST_CASE("InitialLoopState")
     {
         state->handle(state, std::make_unique<StartMessage>(otherCommand));
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 0);
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 0);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 0);
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
 
@@ -73,13 +73,13 @@ TEST_CASE("InitialLoopState")
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
 
         state->handle(state, std::make_unique<StopMessage>(stopCommand, startingCommand));
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 2);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 2);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
         REQUIRE(dispatcherMock.getDispatchedCommands().back().content == stopCommand);
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
@@ -93,13 +93,13 @@ TEST_CASE("InitialLoopState")
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
         REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
 
         state->handle(state, std::make_unique<StopMessage>(stopCommand, otherCommand));
-        REQUIRE(loopTrackerMock.getCommandsReceived().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsReceived().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
         REQUIRE(dispatcherMock.getDispatchedCommands().back().content == stopCommand);
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));

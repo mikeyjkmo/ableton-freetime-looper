@@ -17,7 +17,7 @@ namespace LiveFreetimeLooper
         }
     }
 
-    void LoopTracker::commandReceived(Command command)
+    void LoopTracker::startCommand(Command command)
     {
         auto recordingLoopEntry = _recording.find(command);
 
@@ -39,6 +39,11 @@ namespace LiveFreetimeLooper
         {
             _recording.emplace(command, std::make_unique<RecordingLoop>(command));
         }
+    }
+
+    void LoopTracker::stopCommand(const Command& correspondingStartCommand)
+    {
+        // not implemented
     }
 
     std::vector<Command> LoopTracker::getNextRestartCommands()
