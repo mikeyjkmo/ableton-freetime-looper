@@ -70,16 +70,16 @@ TEST_CASE("InitialLoopState")
 
     SECTION(
         "Stop message that matches the starting message "
-        "is immediately dispatched, clears the looptracker "
-        "and returns the state to InitialLoopWaitingState")
+        "is dispatched, the start command is sent to looptracker and changes state to RunningState "
+        "ie its treated the same as a start command")
     {
         throw std::runtime_error("not implemented");
     }
 
     SECTION(
         "Stop message that doesn't match the starting message "
-        "is immediately dispatched, does not clear the looptracker, "
-        "is not sent to the loop tracker, and returns the state to InitialLoopWaitingState")
+        "is immediately dispatched but ignored: does not clear the looptracker, "
+        "is not sent to the loop tracker and does not change the state")
     {
         throw std::runtime_error("not implemented");
     }
