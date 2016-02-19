@@ -5,8 +5,13 @@
 
 namespace LiveFreetimeLooper
 {
-    class StopMessage final
+    class StopMessage final : public IMessage
     {
+    private:
+        Command command;
+        const Command& startCommand;
+        double deltatime;
+
     public:
         StopMessage(Command command,
             const Command& startCommand) :
@@ -33,9 +38,20 @@ namespace LiveFreetimeLooper
         {
         }
 
-        Command command;
-        const Command& startCommand;
-        double deltatime;
+        const Command& getCommand() override
+        {
+            return command;
+        }
+
+        double getDeltatime() override
+        {
+            return deltatime;
+        }
+
+        const Command& getStartCommand()
+        {
+            return startCommand;
+        }
 
         bool operator==(const StopMessage& other) const
         {

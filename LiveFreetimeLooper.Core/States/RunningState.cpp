@@ -29,7 +29,7 @@ namespace LiveFreetimeLooper
         {
             _resources.messageDispatcher.sendMidiMessage(message.get());
             // inform the loopTracker that a command has been received
-            _resources.loopTracker.startCommand(message->command);
+            _resources.loopTracker.startCommand(message->getCommand());
         }
 
         // Get vector of restart messages to send

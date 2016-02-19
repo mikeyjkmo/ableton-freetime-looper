@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
 
     void CreatedState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message)
     {
-        // not implemented
+        _resources.messageDispatcher.sendMidiMessage(message.get());
     }
 
     void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)
