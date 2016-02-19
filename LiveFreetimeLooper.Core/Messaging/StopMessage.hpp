@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "IMessage.hpp"
+#include "StartMessage.hpp"
 #include "Command.hpp"
 
 namespace LiveFreetimeLooper
@@ -32,6 +33,11 @@ namespace LiveFreetimeLooper
             Message(command, deltatime),
             startCommand(startCommand)
         {
+        }
+
+        bool isMatchingStopMessageFor(StartMessage startMessage)
+        {
+            return startMessage.getCommand() == startCommand;
         }
 
         const Command& getStartCommand()

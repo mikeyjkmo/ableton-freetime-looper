@@ -39,7 +39,14 @@ namespace LiveFreetimeLooper
 
     void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message)
     {
-        // not implemented
+        if (message->isMatchingStopMessageFor(_loopStartingMessage))
+        {
+            // not implemented
+        }
+        else
+        {
+            _resources.messageDispatcher.sendMidiMessage(message.get());
+        }
     }
 
     void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)

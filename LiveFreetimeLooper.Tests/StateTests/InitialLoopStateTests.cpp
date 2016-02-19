@@ -22,9 +22,12 @@ TEST_CASE("InitialLoopState")
     MockMessageDispatcher dispatcherMock;
     MockLoopTracker loopTrackerMock;
 
-    std::vector<unsigned char> startingCommand = { 7, 1 };
-    std::vector<unsigned char> stopCommand = { 8, 1 };
-    std::vector<unsigned char> otherCommand = { 3, 5 };
+    std::vector<unsigned char> startingCommandContent = { 7, 1 };
+    std::vector<unsigned char> stopCommandContent = { 8, 1 };
+    std::vector<unsigned char> otherCommandContent = { 3, 5 };
+    Command startingCommand(startingCommandContent);
+    Command stopCommand(stopCommandContent);
+    Command otherCommand(otherCommandContent);
 
     MockAsyncTimerFactory asyncTimerFactory;
 
@@ -40,9 +43,9 @@ TEST_CASE("InitialLoopState")
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
 
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
-        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand.content);
         REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand.content);
 
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
     }
@@ -65,23 +68,18 @@ TEST_CASE("InitialLoopState")
         REQUIRE(dynamic_cast<CreatedState*>(state.get()));
     }
 
+    // todo, I don't think this will be the case for long. 
+    // Once we have the concept of an extant stopped loop we need to rethink
     SECTION(
         "Stop message that matches the starting message "
         "is dispatched, the START command is sent to looptracker and changes state to "
         "RunningState ie its treated the same as a start command")
     {
-        state->handle(state, std::make_unique<StartMessage>(startingCommand));
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
-        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
-        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
-        REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-
         state->handle(state, std::make_unique<StopMessage>(stopCommand, startingCommand));
-        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 2);
-        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
-        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == stopCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
+        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand.content);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == stopCommand.content);
         REQUIRE(dynamic_cast<RunningState*>(state.get()));
     }
 
@@ -90,18 +88,10 @@ TEST_CASE("InitialLoopState")
         "dispatched but ignored: does not clear the looptracker, is not sent "
         "to the loop tracker and does not change the state")
     {
-        state->handle(state, std::make_unique<StartMessage>(startingCommand));
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
-        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == startingCommand);
-        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
-        REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-
         state->handle(state, std::make_unique<StopMessage>(stopCommand, otherCommand));
-        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 1);
-        REQUIRE(loopTrackerMock.getCommandsStarted().back().content == startingCommand);
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
-        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == stopCommand);
+        REQUIRE(loopTrackerMock.getCommandsStarted().size() == 0);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == stopCommand.content);
         REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
     }
 }
