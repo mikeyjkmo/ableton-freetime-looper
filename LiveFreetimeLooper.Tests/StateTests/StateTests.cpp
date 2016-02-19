@@ -49,27 +49,26 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
     send(unrelatedCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == unrelatedCommand);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
 
     // Send in the second message, to move to RunningState
     send(quantisableCommand);
 
     REQUIRE(dynamic_cast<RunningState*>(state.get()));
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
     REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
     // The quantised loop restart message is being dispached once per step 
     timer->step();
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
+    timer->step();
     REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
     REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
     timer->step();
     REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
-    timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 6);
     REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
 
     // Introduce more loops
@@ -78,26 +77,26 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
     std::vector<unsigned char> loopOfLengthTwoCommand = { 24, 4 };
 
     send(loopOfLengthOneCommand);
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 6);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 7);
     send(loopOfLengthTwoCommand);
     send(loopOfLengthOneCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 12);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 11);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 14);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 13);
     send(loopOfLengthTwoCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 18);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 17);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 20); // +2: A and B restart 
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 19); // +2: A and B restart 
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 23); // +3: A, B and C restart
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 22); // +3: A, B and C restart
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 25);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 24);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 28);
+    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 27);
 }
 
 // //Uses std::this_thread::sleep_for and measures outputs based on actual time.

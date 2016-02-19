@@ -16,10 +16,10 @@ namespace LiveFreetimeLooper
 
     void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
     {
-        _resources.messageDispatcher.sendMidiMessage(message.get());
-
         if (_loopStartingMessage == *message)
         {
+            _resources.messageDispatcher.sendMidiMessage(message.get());
+
             _stopWatch.stop();
             _resources.loopTracker.incrementInterval();
             _resources.loopTracker.startCommand(message->command);
@@ -30,6 +30,10 @@ namespace LiveFreetimeLooper
                 std::string("InitialLoopState")));
             state = std::move(std::make_unique<RunningState>(
                 _resources, _stopWatch.getElapsed()));
+        }
+        else
+        {
+            // ignore
         }
     }
 
