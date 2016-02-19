@@ -2,11 +2,11 @@
 
 #include <memory>
 #include <vector>
-#include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
     class StartMessage;
+    class Command;
 
     class ILoopTracker
     {

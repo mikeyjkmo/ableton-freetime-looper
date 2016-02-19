@@ -37,6 +37,7 @@
     <ClInclude Include="Messaging\IMessage.hpp" />
     <ClInclude Include="Messaging\IMessageDispatcher.hpp" />
     <ClInclude Include="Messaging\Command.hpp" />
+    <ClInclude Include="Messaging\Message.hpp" />
     <ClInclude Include="Messaging\RunningLoop.hpp" />
     <ClInclude Include="Messaging\LoopTracker.hpp" />
     <ClInclude Include="Messaging\StartMessage.hpp" />

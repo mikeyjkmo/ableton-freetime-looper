@@ -144,6 +144,9 @@
     <ClInclude Include="Messaging\IMessage.hpp">
       <Filter>Header Files\Messaging</Filter>
     </ClInclude>
+    <ClInclude Include="Messaging\Message.hpp">
+      <Filter>Header Files\Messaging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Logging\EventLogger.cpp">

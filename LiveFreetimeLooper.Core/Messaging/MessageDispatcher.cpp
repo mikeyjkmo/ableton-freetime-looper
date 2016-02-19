@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include "MessageDispatcher.hpp"
-#include "StartMessage.hpp"
+#include "Message.hpp"
 #include "IMessage.hpp"
 #include "Command.hpp"
 #include "../Logging/IEventLogger.hpp"
@@ -18,7 +18,7 @@ namespace LiveFreetimeLooper
 
     void MessageDispatcher::sendNewMidiMessage(Command command)
     {
-        StartMessage message(command);
+        Message message(command);
         _logger.log(std::make_unique<MessageDispatchedEvent>(message, std::string("MessageDispatcher")));
 
         auto content = message.getCommand().content;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <algorithm>
 #include <vector>
+#include <stdexcept>
 
 namespace LiveFreetimeLooper
 {
