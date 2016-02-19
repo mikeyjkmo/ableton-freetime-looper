@@ -257,6 +257,27 @@ TEST_CASE("When an unknown loop is stopped, "
     test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, 2);
 }
 
+TEST_CASE("Loop tracker does not depend on start commands being in scope")
+{
+    LoopTracker _loopTracker;
+
+    { // inner scope
+        std::vector<unsigned char> content = { 'k', 1 };
+        Command command(content);
+
+        _loopTracker.startCommand(command);
+        _loopTracker.incrementInterval();
+        _loopTracker.startCommand(command);
+
+        content[0] = 'l';
+        command.content[0] = 'j';
+    }
+
+    auto restartCommands = _loopTracker.getNextRestartCommands();
+    REQUIRE(restartCommands.size() == 1);
+    REQUIRE(restartCommands.back().content[0] == 'k');
+}
+
 struct LoopInfo
 {
 public:

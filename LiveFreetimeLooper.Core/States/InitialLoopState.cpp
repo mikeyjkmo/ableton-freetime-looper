@@ -41,7 +41,18 @@ namespace LiveFreetimeLooper
     {
         if (message->isMatchingStopMessageFor(_loopStartingMessage))
         {
-            // not implemented
+            _resources.messageDispatcher.sendMidiMessage(message.get());
+
+            _stopWatch.stop();
+            _resources.loopTracker.incrementInterval();
+            _resources.loopTracker.startCommand(message->getStartCommand());
+            _resources.logger.log(std::make_unique<StateChangedEvent>(
+                std::string("End Message received. Interval measured at ") +
+                std::to_string(_stopWatch.getElapsedMilliseconds().count()) +
+                std::string("ms. Progress: InitialLoop -> Running"),
+                std::string("InitialLoopState")));
+            state = std::move(std::make_unique<RunningState>(
+                _resources, _stopWatch.getElapsed()));
         }
         else
         {
