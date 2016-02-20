@@ -3,6 +3,7 @@
 #include "../Logging/IEventLogger.hpp"
 #include "../Logging/StateChangedEvent.hpp"
 #include "../Messaging/StartMessage.hpp"
+#include "../Messaging/StopMessage.hpp"
 #include "../Utilities/IAsyncTimerFactory.hpp"
 
 namespace LiveFreetimeLooper
@@ -48,7 +49,8 @@ namespace LiveFreetimeLooper
 
     void RunningState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message)
     {
-        // not implemented
+        _resources.messageDispatcher.sendMidiMessage(message.get());
+        _resources.loopTracker.stopCommand(message->getStartCommand());
     }
 
     void RunningState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)

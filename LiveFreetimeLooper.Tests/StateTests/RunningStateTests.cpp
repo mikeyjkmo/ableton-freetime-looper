@@ -177,14 +177,17 @@ TEST_CASE("Running State")
     {
         for (unsigned char i = 1; i < 21; i++)
         {
-            std::vector<unsigned char> command = { 0, i };
-            std::vector<unsigned char> startCommand{ 1, i };
+            std::vector<unsigned char> commandContent = { 0, i };
+            std::vector<unsigned char> startCommandContent = { 1, i };
+            Command startCommand(commandContent);
+            Command stopCommand(startCommandContent);
+
             state->handle(state, std::make_unique<StopMessage>(command, startCommand));
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
-            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command);
+            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command.content);
             timer->step();
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
-            REQUIRE(dynamic_cast<CreatedState*>(state.get()));
+            REQUIRE(dynamic_cast<RunningState*>(state.get()));
         }
     }
 
@@ -219,15 +222,15 @@ TEST_CASE("Running State")
         timer->step();
 
         state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
         timer->step(10);
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
 
         state->handle(state, std::make_unique<StartMessage>(command));
         timer->step(4);
         state->handle(state, std::make_unique<StartMessage>(command));
         timer->step(4);
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
     }
 
     // todo, "and does not affect future loop" this isn't the way ableton works
