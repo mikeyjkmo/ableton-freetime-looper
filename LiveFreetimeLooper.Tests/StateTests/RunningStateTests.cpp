@@ -32,8 +32,12 @@ TEST_CASE("Running State")
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<RunningState>(resources, 1min);
 
-    std::vector<unsigned char> command = { 1, 1 };
-    std::vector<unsigned char> commandTwo = { 2, 1 };
+    std::vector<unsigned char> commandContent = { 1, 1 };
+    std::vector<unsigned char> commandTwoContent = { 2, 1 };
+    std::vector<unsigned char> stopCommandContent = { 3, 1 };
+    Command command(commandContent);
+    Command commandTwo(commandTwoContent);
+    Command stopCommand(stopCommandContent);
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
@@ -52,8 +56,8 @@ TEST_CASE("Running State")
         timer->step();
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
 
-        REQUIRE(dispatcherMock.getDispatchedCommands()[dispatcherMock.getDispatchedCommands().size() - 2].content == command);
-        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == commandTwo);
+        REQUIRE(dispatcherMock.getDispatchedCommands()[dispatcherMock.getDispatchedCommands().size() - 2].content == command.content);
+        REQUIRE(dispatcherMock.getDispatchedCommands().back().content == commandTwo.content);
     }
 
     SECTION("Running State ignores a loop defined by two (roughly) simultanous messages as a loop of length 1, but still relays both messages")
@@ -182,6 +186,63 @@ TEST_CASE("Running State")
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
             REQUIRE(dynamic_cast<CreatedState*>(state.get()));
         }
+    }
+
+    // todo, "and forgotten about" this isn't the way ableton works
+    SECTION("A running loop is stoped correctly and forgotten about"
+        "and the the stop message is relayed")
+    {
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step();
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
+
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+        timer->step(2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+
+        // Clean Slate
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(5);
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(5);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
+    }
+
+    // todo, "and forgotten about" this isn't the way ableton works
+    SECTION("A recording loop is stoped correctly and forgotten about"
+        "and the the stop message is relayed")
+    {
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step();
+
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+        timer->step(10);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(4);
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(4);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
+    }
+
+    // todo, "and does not affect future loop" this isn't the way ableton works
+    SECTION("Try to stop an unknown loop does nothing and does not affect future loop"
+        "and the the stop message is relayed")
+    {
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+        timer->step(2);
+
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(3);
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(3);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
     }
 }
 

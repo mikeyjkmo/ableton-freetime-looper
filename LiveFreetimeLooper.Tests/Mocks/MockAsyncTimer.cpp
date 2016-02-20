@@ -23,6 +23,14 @@ void MockAsyncTimer::step()
     _function();
 }
 
+void MockAsyncTimer::step(std::int32_t times)
+{
+    for (auto i = 0; i < times; i++)
+    {
+        _function();
+    }
+}
+
 bool MockAsyncTimer::isRunning()
 {
     return _running;

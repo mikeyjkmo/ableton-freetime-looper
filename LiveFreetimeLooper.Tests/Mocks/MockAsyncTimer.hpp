@@ -4,6 +4,7 @@
 
 #include <functional>
 #include <chrono>
+#include <cstdint>
 
 class MockAsyncTimer final : public LiveFreetimeLooper::IAsyncTimer
 {
@@ -19,6 +20,7 @@ public:
     void stop() override;
 
     void step();
+    void step(std::int32_t times);
     bool isRunning();
     const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> getInterval();
 };

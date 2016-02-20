@@ -241,6 +241,7 @@ TEST_CASE("When a recording loop is stopped, the tracker forgets the command")
     test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, 2);
 }
 
+//todo, this isn't the way ableton works.
 TEST_CASE("When an unknown loop is stopped, "
     "nothing happens and the future definition is unaffected")
 {
