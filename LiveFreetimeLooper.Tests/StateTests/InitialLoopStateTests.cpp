@@ -37,7 +37,7 @@ TEST_CASE("InitialLoopState")
         resources, startingMessage);
 
     SECTION(
-        "Start Message with the same command as the starting message "
+        "Start Message with the same command as the beginning message "
         "is dispatched, sent to looptracker and changes state to RunningState")
     {
         state->handle(state, std::make_unique<StartMessage>(startingCommand));
@@ -51,7 +51,7 @@ TEST_CASE("InitialLoopState")
     }
 
     SECTION(
-        "Start Message with the different command as the starting message "
+        "Start Message with the different command as the beginning message "
         "is not dipatched, not sent to looptracker and the state does not change")
     {
         state->handle(state, std::make_unique<StartMessage>(otherCommand));
@@ -71,7 +71,7 @@ TEST_CASE("InitialLoopState")
     // todo, I don't think this will be the case for long. 
     // Once we have the concept of an extant stopped loop we need to rethink
     SECTION(
-        "Stop message that matches the starting message "
+        "Stop message that matches the beginning message "
         "is dispatched, the START command is sent to looptracker and changes state to "
         "RunningState ie its treated the same as a start command")
     {
@@ -84,7 +84,7 @@ TEST_CASE("InitialLoopState")
     }
 
     SECTION(
-        "Stop message that doesn't match the starting message is immediately "
+        "Stop message that doesn't match the beginning message is immediately "
         "dispatched but ignored: does not clear the looptracker, is not sent "
         "to the loop tracker and does not change the state")
     {

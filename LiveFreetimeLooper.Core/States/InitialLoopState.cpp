@@ -9,14 +9,14 @@ namespace LiveFreetimeLooper
     InitialLoopState::InitialLoopState(StateResources& resources, StartMessage& message)
         : _stopWatch(),
          _resources(resources),
-         _loopStartingMessage(message)
+        _loopBeginMessage(message)
     {
         _stopWatch.start();
     }
 
     void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
     {
-        if (_loopStartingMessage == *message)
+        if (_loopBeginMessage == *message)
         {
             _resources.messageDispatcher.sendMidiMessage(message.get());
 
@@ -39,7 +39,7 @@ namespace LiveFreetimeLooper
 
     void InitialLoopState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message)
     {
-        if (message->isMatchingStopMessageFor(_loopStartingMessage))
+        if (message->isMatchingStopMessageFor(_loopBeginMessage))
         {
             _resources.messageDispatcher.sendMidiMessage(message.get());
 
