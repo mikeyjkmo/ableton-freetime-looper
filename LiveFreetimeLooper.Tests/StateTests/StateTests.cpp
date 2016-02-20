@@ -21,7 +21,7 @@
 
 using namespace LiveFreetimeLooper;
 
-TEST_CASE("A loop is quantised, and continue to restart whilst other loops are added")
+TEST_CASE("Smoke test")
 {
     MockEventLogger loggerMock;
     MockMessageDispatcher dispatcherMock;
@@ -30,73 +30,119 @@ TEST_CASE("A loop is quantised, and continue to restart whilst other loops are a
 
     StateResources resources(dispatcherMock, loopTracker, loggerMock, asyncTimerFactory);
     std::unique_ptr<StateBase> state = std::make_unique<CreatedState>(resources);
-    auto send = [&state](std::vector<unsigned char> command) { state->handle(state, std::make_unique<StartMessage>(command)); };
-    
-    std::vector<unsigned char> quantisableCommand = { 0, 1 };
-    std::vector<unsigned char> unrelatedCommand = { 12, 3 };
+
+    auto sendStart = [&state](Command command)
+    {
+        state->handle(state, std::make_unique<StartMessage>(command));
+    };
+
+    auto sendStop = [&state](Command command, const Command& startCommand)
+    {
+        state->handle(state, std::make_unique<StopMessage>(command, startCommand));
+    };
+
+    auto numberOfDispatchedCommands = [&dispatcherMock]
+    {
+        return dispatcherMock.getDispatchedCommands().size();
+    };
+
+    std::vector<unsigned char> quantisableCommandContent = { 0, 1 };
+    std::vector<unsigned char> unrelatedCommandContent = { 12, 3 };
+    Command quantisableCommand(quantisableCommandContent);
+    Command unrelatedCommand(unrelatedCommandContent);
 
     // Send StdIn to move to InitialLoopWaitingState
     state->handleStdin(state, std::string("this is a string"));
     REQUIRE(dynamic_cast<InitialLoopWaitingState*>(state.get()));
 
     // Send in the first message, to move to InitialLoopState
-    send(quantisableCommand);
+    sendStart(quantisableCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
+    REQUIRE(numberOfDispatchedCommands() == 1);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand.content);
 
-    send(unrelatedCommand);
+    sendStart(unrelatedCommand);
 
     REQUIRE(dynamic_cast<InitialLoopState*>(state.get()));
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 1);
+    REQUIRE(numberOfDispatchedCommands() == 1);
 
     // Send in the second message, to move to RunningState
-    send(quantisableCommand);
+    sendStart(quantisableCommand);
 
     REQUIRE(dynamic_cast<RunningState*>(state.get()));
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
+    REQUIRE(numberOfDispatchedCommands() == 2);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand.content);
 
     auto timer = asyncTimerFactory.getCreatedTimersWeakRefs().back();
 
     // The quantised loop restart message is being dispached once per step 
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
+    REQUIRE(numberOfDispatchedCommands() == 3);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand.content);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
+    REQUIRE(numberOfDispatchedCommands() == 4);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand.content);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
-    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand);
+    REQUIRE(numberOfDispatchedCommands() == 5);
+    REQUIRE(dispatcherMock.getDispatchedCommands().back().content == quantisableCommand.content);
 
     // Introduce more loops
     // => A) Loop of length 1 (original quantised) + B) Loop of length 1 + C) Loop of length 2
-    std::vector<unsigned char> loopOfLengthOneCommand = { 2, 54 };
-    std::vector<unsigned char> loopOfLengthTwoCommand = { 24, 4 };
+    std::vector<unsigned char> loopOfLengthOneCommandContent = { 2, 54 };
+    std::vector<unsigned char> loopOfLengthTwoCommandContent = { 24, 4 };
+    Command loopOfLengthOneCommand(loopOfLengthOneCommandContent);
+    Command loopOfLengthTwoCommand(loopOfLengthTwoCommandContent);
 
-    send(loopOfLengthOneCommand);
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+    sendStart(loopOfLengthOneCommand);
+    REQUIRE(numberOfDispatchedCommands() == 5);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 7);
-    send(loopOfLengthTwoCommand);
-    send(loopOfLengthOneCommand);
+    REQUIRE(numberOfDispatchedCommands() == 7);
+    sendStart(loopOfLengthTwoCommand);
+    sendStart(loopOfLengthOneCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 11);
+    REQUIRE(numberOfDispatchedCommands() == 11);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 13);
-    send(loopOfLengthTwoCommand);
+    REQUIRE(numberOfDispatchedCommands() == 13);
+    sendStart(loopOfLengthTwoCommand);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 17);
+    REQUIRE(numberOfDispatchedCommands() == 17);
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 19); // +2: A and B restart 
+    REQUIRE(numberOfDispatchedCommands() == 19); // +2: A and B restart 
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 22); // +3: A, B and C restart
+    REQUIRE(numberOfDispatchedCommands() == 22); // +3: A, B and C restart
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 24);
+    REQUIRE(numberOfDispatchedCommands() == 24); // +2
     timer->step();
-    REQUIRE(dispatcherMock.getDispatchedCommands().size() == 27);
+    REQUIRE(numberOfDispatchedCommands() == 27); // +3
+
+    // Stop loopOfLengthOne introduced loop
+    std::vector<unsigned char> stopCommandContent = { 31, 9 };
+    Command stopCommand(stopCommandContent);
+    sendStop(stopCommand, loopOfLengthOneCommand);
+    REQUIRE(numberOfDispatchedCommands() == 28); // +1 stop message
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 29); // +1 A restarts
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 31); // +2 A and C restarts
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 32); // +1
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 34); // +2
+
+    // Re-introduce loopOfLengthOne
+    sendStart(loopOfLengthOneCommand);
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 36); // +1 and B command 
+    sendStart(loopOfLengthOneCommand);
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 40); // +4 A, B, C and B command
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 42); // +2 A, B
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 45); // +3 A, B, C
+    timer->step();
+    REQUIRE(numberOfDispatchedCommands() == 47); // +2 A, B
 }
 
 // //Uses std::this_thread::sleep_for and measures outputs based on actual time.
