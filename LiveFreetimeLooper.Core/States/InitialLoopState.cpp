@@ -60,7 +60,7 @@ namespace LiveFreetimeLooper
         }
     }
 
-    void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)
+    void InitialLoopState::handleStdin(std::unique_ptr<StateBase>& state, const std::string&)
     {
         _resources.loopTracker.clear();
         _resources.logger.log(std::make_unique<StateChangedEvent>(

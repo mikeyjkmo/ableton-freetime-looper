@@ -35,7 +35,7 @@ public:
 
     void given_I_Wait_N_Intervals(unsigned int number)
     {
-        for (std::int32_t i = 0; i < number; ++i)
+        for (unsigned int i = 0; i < number; ++i)
         {
             _loopTracker.incrementInterval();
         }

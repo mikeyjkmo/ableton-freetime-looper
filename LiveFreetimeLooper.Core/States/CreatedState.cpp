@@ -9,17 +9,17 @@ namespace LiveFreetimeLooper
     {
     }
 
-    void CreatedState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message)
+    void CreatedState::handle(std::unique_ptr<StateBase>&, std::unique_ptr<StartMessage> message)
     {
         _resources.messageDispatcher.sendMidiMessage(message.get());
     }
 
-    void CreatedState::handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message)
+    void CreatedState::handle(std::unique_ptr<StateBase>&, std::unique_ptr<StopMessage> message)
     {
         _resources.messageDispatcher.sendMidiMessage(message.get());
     }
 
-    void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, const std::string& input)
+    void CreatedState::handleStdin(std::unique_ptr<StateBase>& state, const std::string&)
     {
         _resources.logger.log(std::make_unique<StateChangedEvent>(
             std::string("StdIn. Progress: Created -> InitialLoopWaiting"),

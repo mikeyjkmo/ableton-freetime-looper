@@ -177,14 +177,14 @@ TEST_CASE("Running State")
     {
         for (unsigned char i = 1; i < 21; i++)
         {
-            std::vector<unsigned char> commandContent = { 0, i };
-            std::vector<unsigned char> startCommandContent = { 1, i };
-            Command startCommand(commandContent);
-            Command stopCommand(startCommandContent);
+            std::vector<unsigned char> iCommandContent = { 0, i };
+            std::vector<unsigned char> iStartCommandContent = { 1, i };
+            Command iStartCommand(iCommandContent);
+            Command iStopCommand(iStartCommandContent);
 
-            state->handle(state, std::make_unique<StopMessage>(command, startCommand));
+            state->handle(state, std::make_unique<StopMessage>(iStopCommand, iStartCommand));
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
-            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command.content);
+            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == iStopCommand.content);
             timer->step();
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
             REQUIRE(dynamic_cast<RunningState*>(state.get()));

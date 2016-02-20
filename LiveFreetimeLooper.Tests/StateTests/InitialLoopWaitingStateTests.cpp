@@ -53,11 +53,13 @@ TEST_CASE("InitialLoopWaitingState")
     {
         for (unsigned char i = 1; i < 21; i++)
         {
-            std::vector<unsigned char> command = { 0, i };
-            std::vector<unsigned char> startCommand{ 1, i };
-            state->handle(state, std::make_unique<StopMessage>(command, startCommand));
+            std::vector<unsigned char> iCommandContent = { 0, i };
+            std::vector<unsigned char> iStartCommandContent = { 1, i };
+            Command iCommand(iCommandContent);
+            Command iStartCommand(iStartCommandContent);
+            state->handle(state, std::make_unique<StopMessage>(iCommand, iStartCommand));
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
-            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command);
+            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == iCommand.content);
             REQUIRE(dynamic_cast<InitialLoopWaitingState*>(state.get()));
         }
     }
