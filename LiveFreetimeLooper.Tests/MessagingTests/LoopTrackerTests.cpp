@@ -210,16 +210,10 @@ TEST_CASE("When a running loop is stopped, it should stop being restartable")
 
     test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 10);
 
-    // todo, this isn't the way ableton works
-    SECTION("and the tracker forgets the command")
+    SECTION("and the loop can be restarted")
     {
-        const std::int32_t newInterval = 3;
-
-        // Clean slate
         test.given_I_Send_A_Start_Command(command);
-        test.given_I_Wait_N_Intervals(newInterval);
-        test.given_I_Send_A_Start_Command(command);
-        test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, newInterval);
+        test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
     }
 }
 
@@ -239,6 +233,30 @@ TEST_CASE("When a recording loop is stopped, the tracker forgets the command")
     test.given_I_Wait_N_Intervals(2);
     test.given_I_Send_A_Start_Command(command);
     test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, 2);
+}
+
+TEST_CASE("When a stopped loop is stopped, "
+    "nothing happens and its later restart is unaffected")
+{
+    LoopTrackerSteps test;
+    std::vector<unsigned char> command = { 'l', 1 };
+    const std::int32_t interval = 3;
+
+    test.given_I_Send_A_Start_Command(command);
+    test.given_I_Wait_N_Intervals(interval);
+    test.given_I_Send_A_Start_Command(command);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
+    test.when_I_Send_A_Stop_Command(command);
+    test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 10);
+
+    test.when_I_Send_A_Stop_Command(command);
+    
+    // the loop is stopped
+    test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 10);
+
+    // The loop can still be restarted
+    test.given_I_Send_A_Start_Command(command);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
 }
 
 //todo, this isn't the way ableton works.

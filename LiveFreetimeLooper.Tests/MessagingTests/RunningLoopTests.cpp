@@ -1,12 +1,14 @@
 #include "../Catch/catch.hpp"
-#include "../../LiveFreetimeLooper.Core/Messaging/Command.hpp"
-
-#include "../../LiveFreetimeLooper.Core/Messaging/RunningLoop.hpp"
 
 #include <memory>
 #include <cstdint>
 #include <stdexcept>
 #include <vector>
+
+#include "../../LiveFreetimeLooper.Core/Messaging/Command.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/RunningLoop.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/StoppedLoop.hpp"
+
 using namespace LiveFreetimeLooper;
 
 void a_RunningLoop_of_interval_N_is_restartable_every_Mth_decrement(std::int32_t loopInterval, std::int32_t decrementInterval)
@@ -63,4 +65,16 @@ TEST_CASE("A RunningLoop of any interval is restartable before the first decreme
         auto loop = RunningLoop(Command('a', 1, 0), i);
         REQUIRE(loop.checkIfRestartRequired());
     }
+}
+
+TEST_CASE("Running Loop yields a stopped loop of correct interval and message")
+{
+    const int interval(5);
+    Command command('y', 1, 0);
+    RunningLoop loop(command, interval);
+
+    auto stoppedLoop = loop.moveToStoppedLoop();
+
+    REQUIRE(loop.getInterval() == interval);
+    REQUIRE(loop.getCommand() == command);
 }

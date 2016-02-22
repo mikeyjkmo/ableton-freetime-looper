@@ -33,6 +33,7 @@
     <ClCompile Include="MessagingTests\RunningLoopTests.cpp" />
     <ClCompile Include="MessagingTests\LoopTrackerTests.cpp" />
     <ClCompile Include="MessagingTests\RecordingLoopTests.cpp" />
+    <ClCompile Include="MessagingTests\StoppedLoopTests.cpp" />
     <ClCompile Include="Mocks\MockAsyncTimer.cpp" />
     <ClCompile Include="Mocks\MockAsyncTimerFactory.cpp" />
     <ClCompile Include="Mocks\MockEventLogger.cpp" />

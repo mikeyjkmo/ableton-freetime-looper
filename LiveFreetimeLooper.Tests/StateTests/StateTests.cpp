@@ -188,33 +188,32 @@ TEST_CASE("Smoke test")
     smokeTest.stepTimer();
     REQUIRE_CorrectNumberOfMessagesDispatched(24 + 3); // A, B and C restart
 
-    // Stop loop B
+    // Stop loop C
     Command stopCommand(createCommand(5));
-    smokeTest.sendStopMessage(stopCommand, loopBCommand);
+    smokeTest.sendStopMessage(stopCommand, loopCCommand);
     REQUIRE_CorrectNumberOfMessagesDispatched(27 + 1); // Message just sent
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(28 + 1); // A restart
+    REQUIRE_CorrectNumberOfMessagesDispatched(28 + 2); // A and B restart
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(29 + 2); // A and C restart
+    REQUIRE_CorrectNumberOfMessagesDispatched(30 + 2); // A and B restart (C absent)
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(31 + 1); // A restart
+    REQUIRE_CorrectNumberOfMessagesDispatched(32 + 2); // A and B restart
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(32 + 2); // A and C restart
+    REQUIRE_CorrectNumberOfMessagesDispatched(34 + 2); // A and B restart (C absent)
 
-    // Re-introduce loop B
-    smokeTest.sendStartMessage(loopBCommand);
-    REQUIRE_CorrectNumberOfMessagesDispatched(34 + 0);
+    // Re-introduce loop C (offset by one from original pattern)
+    smokeTest.sendStartMessage(loopCCommand);
+    REQUIRE_CorrectNumberOfMessagesDispatched(36 + 0);
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(34 + 2); // Message just sent and A restart
-    smokeTest.sendStartMessage(loopBCommand);
+    REQUIRE_CorrectNumberOfMessagesDispatched(36 + 4); // Message just sent and A, B and C restart
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(36 + 4);  // Message just sent, A, B and C restart
-    smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(40 + 2);  // A and B restart
+    REQUIRE_CorrectNumberOfMessagesDispatched(40 + 2);  // A and B restart (C absent)
     smokeTest.stepTimer();
     REQUIRE_CorrectNumberOfMessagesDispatched(42 + 3);  // A, B and C restart
     smokeTest.stepTimer();
-    REQUIRE_CorrectNumberOfMessagesDispatched(45 + 2);  // A and B restart
+    REQUIRE_CorrectNumberOfMessagesDispatched(45 + 2);  // A and B restart (C absent)
+    smokeTest.stepTimer();
+    REQUIRE_CorrectNumberOfMessagesDispatched(47 + 3);  // A, B and C restart
 }
 
 // //Uses std::this_thread::sleep_for and measures outputs based on actual time.

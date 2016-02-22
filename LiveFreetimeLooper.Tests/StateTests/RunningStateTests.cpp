@@ -192,7 +192,7 @@ TEST_CASE("Running State")
     }
 
     // todo, "and forgotten about" this isn't the way ableton works
-    SECTION("A running loop is stoped correctly and forgotten about"
+    SECTION("A running loop is stopped"
         "and the the stop message is relayed")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
@@ -205,13 +205,27 @@ TEST_CASE("Running State")
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
         timer->step(2);
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+    }
 
-        // Clean Slate
+    SECTION("A running loop that has been stopped is restartable")
+    {
+        // Stop
         state->handle(state, std::make_unique<StartMessage>(command));
-        timer->step(5);
+        timer->step();
         state->handle(state, std::make_unique<StartMessage>(command));
-        timer->step(5);
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
+        timer->step(2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 4);
+
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+        timer->step(2);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+
+        // Restart
+        state->handle(state, std::make_unique<StartMessage>(command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
+        timer->step(4);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 10);
     }
 
     // todo, "and forgotten about" this isn't the way ableton works

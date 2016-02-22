@@ -1,4 +1,5 @@
 #include "RunningLoop.hpp"
+#include "StoppedLoop.hpp"
 #include "Command.hpp"
 #include <stdexcept>
 
@@ -26,6 +27,11 @@ namespace LiveFreetimeLooper
         }
 
         --_waitUntilNextRestart;
+    }
+
+    StoppedLoop RunningLoop::moveToStoppedLoop()
+    {
+        return StoppedLoop(_command, _interval);
     }
 
     Command RunningLoop::getCommand()

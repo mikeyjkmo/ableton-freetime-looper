@@ -9,16 +9,16 @@ namespace LiveFreetimeLooper
 {
     class RunningLoop;
 
-    class RecordingLoop final
+    class StoppedLoop final
     {
-    private:
+    private:    
         // Length of loop relative to initial loop interval
-        std::int32_t _interval;
+        const std::int32_t _interval; 
         Command _command;
     public:
-        RecordingLoop(Command command);
-        void incrementInterval();
+        StoppedLoop(Command command, std::int32_t interval);
         RunningLoop moveToRunningLoop();
+        Command getCommand();
         std::int32_t getInterval();
     };
 

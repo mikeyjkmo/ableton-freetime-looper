@@ -78,6 +78,9 @@
     <ClCompile Include="MessagingTests\CommandTest.cpp">
       <Filter>Source Files\MessagingTests</Filter>
     </ClCompile>
+    <ClCompile Include="MessagingTests\StoppedLoopTests.cpp">
+      <Filter>Source Files\MessagingTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch\catch.hpp">

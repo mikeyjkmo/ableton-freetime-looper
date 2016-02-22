@@ -26,7 +26,10 @@ namespace LiveFreetimeLooper
             // If recording stopped in the same interval as started (ie interval == 0), discard.
             if (recordingLoopEntry->second->getInterval() > 0)
             {
-                _running.emplace(recordingLoopEntry->first, std::make_unique<RunningLoop>(recordingLoopEntry->second->moveToRunningLoop()));
+                _running.emplace(
+                    recordingLoopEntry->first,
+                    std::make_unique<RunningLoop>(recordingLoopEntry->second->moveToRunningLoop())
+                    );
             }
 
             _recording.erase(recordingLoopEntry);
@@ -34,11 +37,26 @@ namespace LiveFreetimeLooper
         }
 
         auto runningMessageEntry = _running.find(command);
-        // If unknown, move to recording
-        if (runningMessageEntry == _running.end())
+        // If running, do nothing
+        if (runningMessageEntry != _running.end())
         {
-            _recording.emplace(command, std::make_unique<RecordingLoop>(command));
+            return;
         }
+
+        auto stoppedLoopEntry = _stopped.find(command);
+        // If stopped, move to running
+        if (stoppedLoopEntry != _stopped.end())
+        {
+            _running.emplace(
+                stoppedLoopEntry->first,
+                std::make_unique<RunningLoop>(stoppedLoopEntry->second->moveToRunningLoop())
+                );
+
+            _stopped.erase(stoppedLoopEntry);
+        }
+   
+        // If unknown, move to recording
+        _recording.emplace(command, std::make_unique<RecordingLoop>(command));
     }
 
     void LoopTracker::stopCommand(const Command& correspondingStartCommand)
@@ -51,11 +69,18 @@ namespace LiveFreetimeLooper
         }
 
         auto runningMessageEntry = _running.find(correspondingStartCommand);
-        // If running, delete the loop
+        // If running, move to stopped
         if (runningMessageEntry != _running.end())
         {
+            _stopped.emplace(
+                runningMessageEntry->first,
+                std::make_unique<StoppedLoop>(runningMessageEntry->second->moveToStoppedLoop())
+                );
+
             _running.erase(runningMessageEntry);
         }
+
+        // If Stopped?
 
         // If unknown, do nothing
     }

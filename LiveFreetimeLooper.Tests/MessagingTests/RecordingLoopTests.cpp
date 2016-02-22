@@ -1,27 +1,29 @@
 #include "../Catch/catch.hpp"
-#include "../../LiveFreetimeLooper.Core/Messaging/Command.hpp"
-
-#include "../../LiveFreetimeLooper.Core/Messaging/RunningLoop.hpp"
-#include "../../LiveFreetimeLooper.Core/Messaging/RecordingLoop.hpp"
 
 #include <memory>
 #include <cstdint>
+
+#include "../../LiveFreetimeLooper.Core/Messaging/Command.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/RunningLoop.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/RecordingLoop.hpp"
+
 using namespace LiveFreetimeLooper;
 
 TEST_CASE("Recording Loop yields a loop of correct interval and message")
 {
+    const int interval(27);
     std::vector<unsigned char> commandContent = { 'q', 1 };
     Command command(commandContent);
     RecordingLoop recordingLoop(command);
 
-    for (std::int32_t i = 0; i < 27; i++)
+    for (std::int32_t i = 0; i < interval; i++)
     {
         recordingLoop.incrementInterval();
     }
 
     auto loop = recordingLoop.moveToRunningLoop();
 
-    REQUIRE(loop.getInterval() == 27);
+    REQUIRE(loop.getInterval() == interval);
     REQUIRE(loop.getCommand() == command);
 }
 

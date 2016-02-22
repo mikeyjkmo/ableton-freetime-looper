@@ -8,6 +8,7 @@
 #include "StartMessage.hpp"
 #include "RunningLoop.hpp"
 #include "RecordingLoop.hpp"
+#include "StoppedLoop.hpp"
 #include "Command.hpp"
 
 namespace LiveFreetimeLooper
@@ -19,6 +20,7 @@ namespace LiveFreetimeLooper
     private:
         std::unordered_map<Command, std::unique_ptr<RecordingLoop>> _recording;
         std::unordered_map<Command, std::unique_ptr<RunningLoop>> _running;
+        std::unordered_map<Command, std::unique_ptr<StoppedLoop>> _stopped;
     public:
         LoopTracker();
 

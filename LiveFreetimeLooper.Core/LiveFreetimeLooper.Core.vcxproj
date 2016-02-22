@@ -45,6 +45,7 @@
     <ClInclude Include="Messaging\MessageReceiver.hpp" />
     <ClInclude Include="Messaging\RecordingLoop.hpp" />
     <ClInclude Include="Messaging\StopMessage.hpp" />
+    <ClInclude Include="Messaging\StoppedLoop.hpp" />
     <ClInclude Include="RtMidi\RtMidi.hpp" />
     <ClInclude Include="Session\Session.hpp" />
     <ClInclude Include="States\CreatedState.hpp" />
@@ -70,6 +71,7 @@
     <ClCompile Include="Messaging\MessageDispatcher.cpp" />
     <ClCompile Include="Messaging\MessageReceiver.cpp" />
     <ClCompile Include="Messaging\RecordingLoop.cpp" />
+    <ClCompile Include="Messaging\StoppedLoop.cpp" />
     <ClCompile Include="RtMidi\RtMidi.cpp" />
     <ClCompile Include="Session\Session.cpp" />
     <ClCompile Include="States\CreatedState.cpp" />

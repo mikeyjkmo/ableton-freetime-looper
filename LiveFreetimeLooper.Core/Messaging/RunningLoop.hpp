@@ -3,11 +3,11 @@
 #include <memory>
 #include <cstdint>
 
-#include "StartMessage.hpp"
+#include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
-    class Command;
+    class StoppedLoop;
 
     class RunningLoop final
     {
@@ -22,6 +22,7 @@ namespace LiveFreetimeLooper
         RunningLoop(Command command, std::int32_t interval);
         bool checkIfRestartRequired();
         void decrementNextRestartWait();
+        StoppedLoop moveToStoppedLoop();
         Command getCommand();
         std::int32_t getInterval();
     };
