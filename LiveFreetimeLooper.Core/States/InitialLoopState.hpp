@@ -14,7 +14,7 @@ namespace LiveFreetimeLooper
     private:
         Stopwatch _stopWatch;
         StateResources& _resources;
-        StartMessage _loopStartingMessage;
+        StartMessage _loopBeginMessage;
     public:
         InitialLoopState(StateResources& resources, StartMessage& message);
 

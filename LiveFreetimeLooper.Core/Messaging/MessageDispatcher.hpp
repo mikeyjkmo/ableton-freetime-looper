@@ -6,7 +6,7 @@
 
 namespace LiveFreetimeLooper
 {
-    class StartMessage;
+    class IMessage;
     class IEventLogger;
     class Command;
 
@@ -18,6 +18,6 @@ namespace LiveFreetimeLooper
     public:
         MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
         void sendNewMidiMessage(Command command) override;
-        void sendMidiMessage(StartMessage* message) override;
+        void sendMidiMessage(IMessage* message) override;
     };
 }

@@ -2,11 +2,11 @@
 
 #include <memory>
 #include <vector>
-#include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
     class StartMessage;
+    class Command;
 
     class ILoopTracker
     {
@@ -15,6 +15,7 @@ namespace LiveFreetimeLooper
     public:
         virtual ~ILoopTracker() = default;
         virtual void startCommand(Command command) = 0;
+        virtual void stopCommand(const Command& correspondingStartCommand) = 0;
         virtual std::vector<Command> getNextRestartCommands() = 0;
         virtual void incrementInterval() = 0;
         virtual void clear() = 0;

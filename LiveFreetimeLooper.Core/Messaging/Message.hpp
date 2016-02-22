@@ -1,0 +1,48 @@
+#pragma once
+
+#include <vector>
+#include "IMessage.hpp"
+#include "Command.hpp"
+
+namespace LiveFreetimeLooper
+{
+    class Message : public IMessage
+    {
+    private:
+        Command command;
+        double deltatime;
+
+    public:
+        Message(Command command) :
+            command(command), deltatime(0.0)
+        {
+        }
+
+        Message(std::vector<unsigned char> command) :
+            command(command), deltatime(0.0)
+        {
+        }
+
+        Message(Command command, double deltatime) :
+            command(command), deltatime(deltatime)
+        {
+        }
+
+        virtual ~Message() = default;
+
+        const Command& getCommand() override
+        {
+            return command;
+        }
+
+        double getDeltatime() override
+        {
+            return deltatime;
+        }
+
+        bool operator==(const Message& other) const
+        {
+            return other.command == command;
+        }
+    };
+}

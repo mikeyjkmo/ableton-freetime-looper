@@ -1,45 +1,48 @@
 #pragma once
 
 #include <vector>
+#include "IMessage.hpp"
+#include "StartMessage.hpp"
 #include "Command.hpp"
 
 namespace LiveFreetimeLooper
 {
-    class StopMessage final
+    class StopMessage final : public Message
     {
+    private:
+        const Command& startCommand;
+
     public:
         StopMessage(Command command,
             const Command& startCommand) :
-            command(command),
-            startCommand(startCommand),
-            deltatime(0.0)
+            Message(command),
+            startCommand(startCommand)
         {
         }
 
         StopMessage(std::vector<unsigned char> command,
             const Command& startCommand) :
-            command(command),
-            startCommand(startCommand),
-            deltatime(0.0)
+            Message(command),
+            startCommand(startCommand)
         {
         }
 
         StopMessage(Command command,
             const Command& startCommand,
             double deltatime) :
-            command(command),
-            startCommand(startCommand),
-            deltatime(deltatime)
+            Message(command, deltatime),
+            startCommand(startCommand)
         {
         }
 
-        Command command;
-        const Command& startCommand;
-        double deltatime;
-
-        bool operator==(const StopMessage& other) const
+        bool isMatchingStopMessageFor(StartMessage startMessage)
         {
-            return other.command == command;
+            return startMessage.getCommand() == startCommand;
+        }
+
+        const Command& getStartCommand()
+        {
+            return startCommand;
         }
     };
 }

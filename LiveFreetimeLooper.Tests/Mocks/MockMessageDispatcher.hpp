@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "../../LiveFreetimeLooper.Core/Messaging/Command.hpp"
-#include "../../LiveFreetimeLooper.Core/Messaging/StartMessage.hpp"
+#include "../../LiveFreetimeLooper.Core/Messaging/IMessage.hpp"
 #include "../../LiveFreetimeLooper.Core/Messaging/IMessageDispatcher.hpp"
 
 class MockMessageDispatcher final : public LiveFreetimeLooper::IMessageDispatcher
@@ -11,6 +11,6 @@ private:
 public:
     MockMessageDispatcher();
     void sendNewMidiMessage(LiveFreetimeLooper::Command command) override;
-    void sendMidiMessage(LiveFreetimeLooper::StartMessage* message) override;
-    std::vector<LiveFreetimeLooper::Command> const& getCommands() const;
+    void sendMidiMessage(LiveFreetimeLooper::IMessage* message) override;
+    std::vector<LiveFreetimeLooper::Command> const& getDispatchedCommands() const;
 };

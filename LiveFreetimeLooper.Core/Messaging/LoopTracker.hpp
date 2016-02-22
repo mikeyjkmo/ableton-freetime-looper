@@ -23,9 +23,9 @@ namespace LiveFreetimeLooper
         LoopTracker();
 
         void startCommand(Command command) override;
+        void stopCommand(const Command& correspondingStartCommand) override;
         std::vector<Command> getNextRestartCommands() override;
         void incrementInterval() override;
         void clear() override;
-
     };
 }

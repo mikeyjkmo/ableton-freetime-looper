@@ -19,9 +19,23 @@ public:
         _loopTracker.startCommand(Command(command));
     }
 
+    void given_I_Send_A_Stop_Command(
+        const std::vector<unsigned char>& correspondingStartCommand
+        )
+    {
+        when_I_Send_A_Stop_Command(correspondingStartCommand);
+    }
+
+    void when_I_Send_A_Stop_Command(
+        const std::vector<unsigned char>& correspondingStartCommand
+        )
+    {
+        _loopTracker.stopCommand(Command(correspondingStartCommand));
+    }
+
     void given_I_Wait_N_Intervals(unsigned int number)
     {
-        for (std::int32_t i = 0; i < number; ++i)
+        for (unsigned int i = 0; i < number; ++i)
         {
             _loopTracker.incrementInterval();
         }
@@ -181,14 +195,107 @@ TEST_CASE("The loop is restartable immediately after the second start command is
     test.then_The_Command_Is_Restartable({'h', 1});
 }
 
+TEST_CASE("When a running loop is stopped, it should stop being restartable")
+{
+    LoopTrackerSteps test;
+    std::vector<unsigned char> command = { 'i', 1 };
+    const std::int32_t interval = 2;
+
+    test.given_I_Send_A_Start_Command(command);
+    test.given_I_Wait_N_Intervals(interval);
+    test.given_I_Send_A_Start_Command(command);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
+
+    test.when_I_Send_A_Stop_Command(command);
+
+    test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 10);
+
+    // todo, this isn't the way ableton works
+    SECTION("and the tracker forgets the command")
+    {
+        const std::int32_t newInterval = 3;
+
+        // Clean slate
+        test.given_I_Send_A_Start_Command(command);
+        test.given_I_Wait_N_Intervals(newInterval);
+        test.given_I_Send_A_Start_Command(command);
+        test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, newInterval);
+    }
+}
+
+//todo, this isn't the way ableton works.
+TEST_CASE("When a recording loop is stopped, the tracker forgets the command")
+{
+    LoopTrackerSteps test;
+    std::vector<unsigned char> command = { 'j', 1 };
+
+    test.given_I_Send_A_Start_Command(command);
+    test.given_I_Wait_One_Interval();
+    test.given_I_Send_A_Stop_Command(command);
+    test.given_I_Wait_One_Interval();
+    
+    //Clean slate
+    test.given_I_Send_A_Start_Command(command);
+    test.given_I_Wait_N_Intervals(2);
+    test.given_I_Send_A_Start_Command(command);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, 2);
+}
+
+//todo, this isn't the way ableton works.
+TEST_CASE("When an unknown loop is stopped, "
+    "nothing happens and the future definition is unaffected")
+{
+    LoopTrackerSteps test;
+    std::vector<unsigned char> command = { 'k', 1 };
+
+    test.given_I_Send_A_Stop_Command(command);
+    test.given_I_Wait_One_Interval();
+
+    //Clean slate
+    test.given_I_Send_A_Start_Command(command);
+    test.given_I_Wait_N_Intervals(2);
+    test.given_I_Send_A_Start_Command(command);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, 2);
+}
+
+TEST_CASE("Loop tracker does not depend on start commands being in scope")
+{
+    LoopTracker _loopTracker;
+
+    { // inner scope
+        std::vector<unsigned char> content = { 'k', 1 };
+        Command command(content);
+
+        _loopTracker.startCommand(command);
+        _loopTracker.incrementInterval();
+        _loopTracker.startCommand(command);
+
+        content[0] = 'l';
+        command.content[0] = 'j';
+    }
+
+    auto restartCommands = _loopTracker.getNextRestartCommands();
+    REQUIRE(restartCommands.size() == 1);
+    REQUIRE(restartCommands.back().content[0] == 'k');
+}
+
 struct LoopInfo
 {
 public:
     std::int32_t Interval;
     std::vector<unsigned char> Command;
     std::int32_t StartInterval;
-    LoopInfo(std::int32_t interval, std::int32_t startInterval, std::vector<unsigned char> command) :
-        Interval(interval), Command(command), StartInterval(startInterval) {}
+
+    LoopInfo(
+        std::int32_t interval,
+        std::int32_t startInterval,
+        std::vector<unsigned char> command
+        ) :
+        Interval(interval),
+        Command(command),
+        StartInterval(startInterval)
+    {
+    }
 };
 
 bool ContainsCommand(std::vector<Command> commands, std::vector<unsigned char>& expectedCommand)
