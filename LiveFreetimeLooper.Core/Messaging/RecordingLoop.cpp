@@ -1,5 +1,6 @@
 #include "RecordingLoop.hpp"
 #include "RunningLoop.hpp"
+#include "StoppedLoop.hpp"
 
 namespace LiveFreetimeLooper
 {
@@ -18,6 +19,11 @@ namespace LiveFreetimeLooper
     RunningLoop RecordingLoop::moveToRunningLoop()
     {
         return RunningLoop(_command, _interval);
+    }
+
+    StoppedLoop RecordingLoop::moveToStoppedLoop()
+    {
+        return StoppedLoop(_command, _interval);
     }
 
     std::int32_t RecordingLoop::getInterval()

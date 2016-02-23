@@ -210,29 +210,51 @@ TEST_CASE("When a running loop is stopped, it should stop being restartable")
 
     test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 10);
 
-    SECTION("and the loop can be restarted")
+    SECTION("and the loop can be started again")
     {
         test.given_I_Send_A_Start_Command(command);
         test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
     }
 }
 
-//todo, this isn't the way ableton works.
-TEST_CASE("When a recording loop is stopped, the tracker forgets the command")
+TEST_CASE("When a recording loop is stopped, "
+    "it should stop being restartable")
+{
+    LoopTrackerSteps test;
+    std::vector<unsigned char> command = { 'j', 1 };
+    const std::int32_t interval = 6;
+
+    test.given_I_Send_A_Start_Command(command);
+    test.given_I_Wait_N_Intervals(interval);
+
+    test.given_I_Send_A_Stop_Command(command);
+    
+    test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 20);
+
+    SECTION("and the loop can be started again")
+    {
+        test.given_I_Send_A_Start_Command(command);
+        test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
+    }
+}
+
+TEST_CASE("When a recording loop is stopped on the same interval as it is started "
+    "it is forgotten about")
 {
     LoopTrackerSteps test;
     std::vector<unsigned char> command = { 'j', 1 };
 
     test.given_I_Send_A_Start_Command(command);
-    test.given_I_Wait_One_Interval();
     test.given_I_Send_A_Stop_Command(command);
-    test.given_I_Wait_One_Interval();
-    
-    //Clean slate
+
+    test.then_The_Command_Is_Not_Restartable_For_N_Intervals(command, 10);
+
+    // Clean Slate
+    const std::int32_t interval = 4;
     test.given_I_Send_A_Start_Command(command);
-    test.given_I_Wait_N_Intervals(2);
+    test.given_I_Wait_N_Intervals(interval);
     test.given_I_Send_A_Start_Command(command);
-    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, 2);
+    test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
 }
 
 TEST_CASE("When a stopped loop is stopped, "
@@ -259,7 +281,6 @@ TEST_CASE("When a stopped loop is stopped, "
     test.then_The_Command_Is_Restartable_On_Every_Nth_Interval(command, interval);
 }
 
-//todo, this isn't the way ableton works.
 TEST_CASE("When an unknown loop is stopped, "
     "nothing happens and the future definition is unaffected")
 {

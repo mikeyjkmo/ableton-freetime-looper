@@ -191,7 +191,6 @@ TEST_CASE("Running State")
         }
     }
 
-    // todo, "and forgotten about" this isn't the way ableton works
     SECTION("A running loop is stopped"
         "and the the stop message is relayed")
     {
@@ -228,8 +227,7 @@ TEST_CASE("Running State")
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 10);
     }
 
-    // todo, "and forgotten about" this isn't the way ableton works
-    SECTION("A recording loop is stoped correctly and forgotten about"
+    SECTION("A recording loop is stopped"
         "and the the stop message is relayed")
     {
         state->handle(state, std::make_unique<StartMessage>(command));
@@ -239,15 +237,40 @@ TEST_CASE("Running State")
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
         timer->step(10);
         REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
-
-        state->handle(state, std::make_unique<StartMessage>(command));
-        timer->step(4);
-        state->handle(state, std::make_unique<StartMessage>(command));
-        timer->step(4);
-        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 5);
     }
 
-    // todo, "and does not affect future loop" this isn't the way ableton works
+    SECTION("A recording loop that has been stopped is restartable")
+    {
+        // Stop
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(3);
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        timer->step(15);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
+
+        // Restart
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(15);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 8);
+    }
+
+    SECTION("Try to stop an stopped loop does nothing"
+        "and the the stop message is relayed")
+    {
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step();
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 2);
+        timer->step();
+
+        state->handle(state, std::make_unique<StopMessage>(stopCommand, command));
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 3);
+        timer->step(5);
+        state->handle(state, std::make_unique<StartMessage>(command));
+        timer->step(3);
+        REQUIRE(dispatcherMock.getDispatchedCommands().size() == 7);
+    }
+
     SECTION("Try to stop an unknown loop does nothing and does not affect future loop"
         "and the the stop message is relayed")
     {

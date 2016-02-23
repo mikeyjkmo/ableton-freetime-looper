@@ -62,9 +62,18 @@ namespace LiveFreetimeLooper
     void LoopTracker::stopCommand(const Command& correspondingStartCommand)
     {
         auto recordingLoopEntry = _recording.find(correspondingStartCommand);
-        // If recording, delete the loop
+        // If recording, move to stopped
         if (recordingLoopEntry != _recording.end())
         {
+            // If recording stopped in the same interval as started (ie interval == 0), discard.
+            if (recordingLoopEntry->second->getInterval() > 0)
+            {
+                _stopped.emplace(
+                    recordingLoopEntry->first,
+                    std::make_unique<StoppedLoop>(recordingLoopEntry->second->moveToStoppedLoop())
+                    );
+            }
+
             _recording.erase(recordingLoopEntry);
         }
 
@@ -80,9 +89,9 @@ namespace LiveFreetimeLooper
             _running.erase(runningMessageEntry);
         }
 
-        // If Stopped?
+        // If Stopped, do nothing
 
-        // If unknown, do nothing
+        // If unknown, do nothing 
     }
 
     std::vector<Command> LoopTracker::getNextRestartCommands()

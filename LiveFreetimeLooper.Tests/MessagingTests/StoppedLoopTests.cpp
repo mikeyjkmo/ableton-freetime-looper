@@ -8,7 +8,7 @@ using namespace LiveFreetimeLooper;
 
 TEST_CASE("Stopped Loop yields a stopped loop of correct interval and message")
 {
-    const int interval(5);
+    const std::int32_t interval(5);
     Command command('y', 1, 0);
     StoppedLoop loop(command, interval);
 

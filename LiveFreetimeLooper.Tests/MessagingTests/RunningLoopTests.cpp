@@ -69,7 +69,7 @@ TEST_CASE("A RunningLoop of any interval is restartable before the first decreme
 
 TEST_CASE("Running Loop yields a stopped loop of correct interval and message")
 {
-    const int interval(5);
+    const std::int32_t interval(5);
     Command command('y', 1, 0);
     RunningLoop loop(command, interval);
 

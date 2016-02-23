@@ -8,6 +8,7 @@
 namespace LiveFreetimeLooper
 {
     class RunningLoop;
+    class StoppedLoop;
 
     class RecordingLoop final
     {
@@ -19,6 +20,7 @@ namespace LiveFreetimeLooper
         RecordingLoop(Command command);
         void incrementInterval();
         RunningLoop moveToRunningLoop();
+        StoppedLoop moveToStoppedLoop();
         std::int32_t getInterval();
     };
 
