@@ -46,7 +46,7 @@
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{a980dc38-83f3-4016-85bd-4aee53751261}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\States\Utilities">
+    <Filter Include="Header Files\Utilities">
       <UniqueIdentifier>{2c5ed1cf-89ca-49be-886f-35994015ec7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -103,25 +103,25 @@
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\AsyncTimer.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\AsyncTimerFactory.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\ConcurrentQueue.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\IAsyncTimer.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\IAsyncTimerFactory.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\RtMidiExt.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\Stopwatch.hpp">
-      <Filter>Header Files\States\Utilities</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Messaging\RecordingLoop.hpp">
       <Filter>Header Files\Messaging</Filter>
