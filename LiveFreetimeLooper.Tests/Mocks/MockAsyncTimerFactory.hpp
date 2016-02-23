@@ -15,7 +15,7 @@ class MockAsyncTimerFactory final : public LiveFreetimeLooper::IAsyncTimerFactor
 private:
     std::vector<MockAsyncTimer*> _createdTimersWeakRefs;
 public:
-    MockAsyncTimerFactory();
+    explicit MockAsyncTimerFactory();
     virtual std::unique_ptr<LiveFreetimeLooper::IAsyncTimer> createAsyncTimer(
         const std::chrono::duration<std::chrono::high_resolution_clock::rep,
         std::chrono::high_resolution_clock::period> interval,

@@ -13,7 +13,7 @@ namespace LiveFreetimeLooper
     private:
         StateResources& _resources;
     public:
-        InitialLoopWaitingState(StateResources& resources);
+        explicit InitialLoopWaitingState(StateResources& resources);
 
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message) override;
         void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StopMessage> message) override;

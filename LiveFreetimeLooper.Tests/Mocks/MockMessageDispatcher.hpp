@@ -9,7 +9,7 @@ class MockMessageDispatcher final : public LiveFreetimeLooper::IMessageDispatche
 private:
     std::vector<LiveFreetimeLooper::Command> _commands;
 public:
-    MockMessageDispatcher();
+    explicit MockMessageDispatcher();
     void sendNewMidiMessage(LiveFreetimeLooper::Command command) override;
     void sendMidiMessage(LiveFreetimeLooper::IMessage* message) override;
     std::vector<LiveFreetimeLooper::Command> const& getDispatchedCommands() const;

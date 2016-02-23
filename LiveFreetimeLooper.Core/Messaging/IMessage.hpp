@@ -7,7 +7,7 @@ namespace LiveFreetimeLooper
     class IMessage
     {
     protected:
-        IMessage() {}
+        explicit IMessage() {}
     public:
         virtual ~IMessage() = default;
         virtual const Command& getCommand() = 0;

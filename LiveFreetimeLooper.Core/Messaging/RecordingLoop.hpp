@@ -17,7 +17,7 @@ namespace LiveFreetimeLooper
         std::int32_t _interval;
         Command _command;
     public:
-        RecordingLoop(Command command);
+        explicit RecordingLoop(Command command);
         void incrementInterval();
         RunningLoop moveToRunningLoop();
         StoppedLoop moveToStoppedLoop();

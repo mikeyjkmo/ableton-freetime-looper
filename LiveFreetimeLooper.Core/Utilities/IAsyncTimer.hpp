@@ -5,7 +5,7 @@ namespace LiveFreetimeLooper
     class IAsyncTimer
     {
     protected:
-        IAsyncTimer() {};
+        explicit IAsyncTimer() {};
     public:
         virtual ~IAsyncTimer() = default;
         virtual void start() = 0;

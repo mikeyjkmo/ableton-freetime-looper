@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         const std::int32_t _interval; 
         Command _command;
     public:
-        StoppedLoop(Command command, std::int32_t interval);
+        explicit StoppedLoop(Command command, std::int32_t interval);
         RunningLoop moveToRunningLoop();
         Command getCommand();
         std::int32_t getInterval();

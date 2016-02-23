@@ -19,7 +19,7 @@ namespace LiveFreetimeLooper
         std::int32_t _waitUntilNextRestart;
         Command _command;
     public:
-        RunningLoop(Command command, std::int32_t interval);
+        explicit RunningLoop(Command command, std::int32_t interval);
         bool checkIfRestartRequired();
         void decrementNextRestartWait();
         StoppedLoop moveToStoppedLoop();

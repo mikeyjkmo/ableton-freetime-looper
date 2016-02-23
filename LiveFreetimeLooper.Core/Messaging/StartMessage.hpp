@@ -10,17 +10,17 @@ namespace LiveFreetimeLooper
     class StartMessage final : public Message
     {
     public:
-        StartMessage(Command command) :
+        explicit StartMessage(Command command) :
             Message(command)
         {
         }
 
-        StartMessage(std::vector<unsigned char> command) :
+        explicit StartMessage(std::vector<unsigned char> command) :
             Message(command)
         {
         }
 
-        StartMessage(Command command, double deltatime) :
+        explicit StartMessage(Command command, double deltatime) :
             Message(command, deltatime)
         {
         }

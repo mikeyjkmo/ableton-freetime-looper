@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         std::string _eventSource;
         static std::string createDetail(IMessage& message);
     public:
-        MessageDispatchedEvent(IMessage& message, std::string eventSource);
+        explicit MessageDispatchedEvent(IMessage& message, std::string eventSource);
 
         std::string getName() const override;
         std::chrono::high_resolution_clock::time_point getTime() const override;

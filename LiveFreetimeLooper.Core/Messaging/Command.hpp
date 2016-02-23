@@ -11,7 +11,7 @@ namespace LiveFreetimeLooper
         // The first n items in Command::content that identify the Command
         const static int COMMAND_ID_SIZE = 2;
 
-        Command(const std::vector<unsigned char>& content) : content(content)
+        explicit Command(const std::vector<unsigned char>& content) : content(content)
         {
             if (content.size() < 2)
             {
@@ -20,7 +20,7 @@ namespace LiveFreetimeLooper
             }
         }
 
-        Command(unsigned char b1, unsigned char b2, unsigned char b3) :
+        explicit Command(unsigned char b1, unsigned char b2, unsigned char b3) :
             content({b1, b2, b3})
         {
         }

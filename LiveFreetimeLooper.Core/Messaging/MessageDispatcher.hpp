@@ -16,7 +16,7 @@ namespace LiveFreetimeLooper
         RtMidiOut& _midiOut;
         IEventLogger& _logger;
     public:
-        MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
+        explicit MessageDispatcher(RtMidiOut& mOut, IEventLogger& logger);
         void sendNewMidiMessage(Command command) override;
         void sendMidiMessage(IMessage* message) override;
     };

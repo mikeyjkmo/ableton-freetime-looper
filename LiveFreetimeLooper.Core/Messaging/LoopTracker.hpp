@@ -22,7 +22,7 @@ namespace LiveFreetimeLooper
         std::unordered_map<Command, std::unique_ptr<RunningLoop>> _running;
         std::unordered_map<Command, std::unique_ptr<StoppedLoop>> _stopped;
     public:
-        LoopTracker();
+        explicit LoopTracker();
 
         void startCommand(Command command) override;
         void stopCommand(const Command& correspondingStartCommand) override;

@@ -13,17 +13,17 @@ namespace LiveFreetimeLooper
         double deltatime;
 
     public:
-        Message(Command command) :
+        explicit Message(Command command) :
             command(command), deltatime(0.0)
         {
         }
 
-        Message(std::vector<unsigned char> command) :
+        explicit Message(std::vector<unsigned char> command) :
             command(command), deltatime(0.0)
         {
         }
 
-        Message(Command command, double deltatime) :
+        explicit Message(Command command, double deltatime) :
             command(command), deltatime(deltatime)
         {
         }

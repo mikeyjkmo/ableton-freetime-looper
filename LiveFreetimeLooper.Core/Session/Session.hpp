@@ -6,7 +6,7 @@ namespace LiveFreetimeLooper
     class Session final
     {
     public:
-        Session(int ac, char* av[]);
+        explicit Session(int ac, char* av[]);
 
         int run();
     private:

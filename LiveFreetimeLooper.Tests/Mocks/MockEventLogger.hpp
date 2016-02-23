@@ -9,7 +9,7 @@ class MockEventLogger final : public LiveFreetimeLooper::IEventLogger
 private:
     std::vector<std::unique_ptr<LiveFreetimeLooper::IEvent>> _evnts;
 public:
-    MockEventLogger();
+    explicit MockEventLogger();
     void log(std::unique_ptr<LiveFreetimeLooper::IEvent> evnt) override;
     std::vector<std::unique_ptr<LiveFreetimeLooper::IEvent>> const& getEvents() const;
 };

@@ -9,7 +9,7 @@ namespace LiveFreetimeLooper
     class EventLogger final : public IEventLogger
     {
     public:
-        EventLogger();
+        explicit EventLogger();
 
         void log(std::unique_ptr<IEvent> evnt) override;
     };

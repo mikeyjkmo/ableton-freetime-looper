@@ -8,7 +8,7 @@ namespace LiveFreetimeLooper
     class IMessageDispatcher
     {
     protected:
-        IMessageDispatcher() {};
+        explicit IMessageDispatcher() {};
     public:
         virtual ~IMessageDispatcher() = default;
         virtual void sendNewMidiMessage(Command command) = 0;

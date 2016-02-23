@@ -50,11 +50,13 @@ TEST_CASE("Created State")
     {
         for (unsigned char i = 1; i < 21; i++)
         {
-            std::vector<unsigned char> command = { 0, i };
-            std::vector<unsigned char> startCommand{ 1, i };
+            std::vector<unsigned char> commandContent = { 0, i };
+            std::vector<unsigned char> startCommandContent { 1, i };
+            Command command(commandContent);
+            Command startCommand(startCommandContent);
             state->handle(state, std::make_unique<StopMessage>(command, startCommand));
             REQUIRE(dispatcherMock.getDispatchedCommands().size() == i);
-            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command);
+            REQUIRE(dispatcherMock.getDispatchedCommands().back().content == command.content);
             REQUIRE(dynamic_cast<CreatedState*>(state.get()));
         }
     }

@@ -10,7 +10,7 @@ namespace LiveFreetimeLooper
     class IEvent
     {
     protected:
-        IEvent() {};
+        explicit IEvent() {};
     public:
         virtual ~IEvent() = default;
         virtual std::string getName() const = 0;

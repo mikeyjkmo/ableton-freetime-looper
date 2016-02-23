@@ -13,7 +13,7 @@ namespace LiveFreetimeLooper
     class AsyncTimerFactory final : public IAsyncTimerFactory
     {
     public:
-        AsyncTimerFactory();
+        explicit AsyncTimerFactory();
         virtual std::unique_ptr<IAsyncTimer> createAsyncTimer(
             const std::chrono::duration<std::chrono::high_resolution_clock::rep,
             std::chrono::high_resolution_clock::period> interval,

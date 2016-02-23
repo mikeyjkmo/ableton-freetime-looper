@@ -18,7 +18,7 @@ private:
     std::int32_t _nextRestartMessagesCallCount;
     bool _cleared;
 public:
-    MockLoopTracker();
+    explicit MockLoopTracker();
 
     void startCommand(LiveFreetimeLooper::Command command) override;
     void stopCommand(const LiveFreetimeLooper::Command& correspondingStartCommand) override;

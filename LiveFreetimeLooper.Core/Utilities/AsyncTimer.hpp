@@ -12,7 +12,8 @@ namespace LiveFreetimeLooper
     class AsyncTimer final : public IAsyncTimer
     {
     private:
-        const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> _interval;
+        const std::chrono::duration<std::chrono::high_resolution_clock::rep,
+            std::chrono::high_resolution_clock::period> _interval;
         std::function<void()> _function;
 
         bool _started;
@@ -25,8 +26,11 @@ namespace LiveFreetimeLooper
         void _scheduleNextCall();
 
     public:
-        AsyncTimer(const std::chrono::duration<std::chrono::high_resolution_clock::rep, std::chrono::high_resolution_clock::period> interval,
-            std::function<void()> func);
+        explicit AsyncTimer(
+            const std::chrono::duration<std::chrono::high_resolution_clock::rep,
+            std::chrono::high_resolution_clock::period> interval,
+            std::function<void()> func
+            );
         ~AsyncTimer();
 
         void start() override;

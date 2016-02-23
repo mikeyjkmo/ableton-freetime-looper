@@ -19,7 +19,7 @@ namespace LiveFreetimeLooper
         IEventLogger& logger;
         IAsyncTimerFactory& asyncTimerFactory;
 
-        StateResources(
+        explicit StateResources(
             IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker, IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory)
             : messageDispatcher(messageDispatcher),
               loopTracker(loopTracker),
@@ -32,7 +32,7 @@ namespace LiveFreetimeLooper
     class StateBase
     {
     protected:
-        StateBase() {};
+        explicit StateBase() {};
     public:
         virtual ~StateBase() = default;
         virtual void handle(std::unique_ptr<StateBase>& state, std::unique_ptr<StartMessage> message) = 0;

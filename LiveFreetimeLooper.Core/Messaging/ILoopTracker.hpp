@@ -11,7 +11,7 @@ namespace LiveFreetimeLooper
     class ILoopTracker
     {
     protected:
-        ILoopTracker() {}
+        explicit ILoopTracker() {}
     public:
         virtual ~ILoopTracker() = default;
         virtual void startCommand(Command command) = 0;

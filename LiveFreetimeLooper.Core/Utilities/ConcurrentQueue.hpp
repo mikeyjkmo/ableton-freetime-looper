@@ -14,7 +14,7 @@ namespace LiveFreetimeLooper
         std::mutex _mutex;
 
     public:
-        ConcurrentQueue() : _queue(), _mutex()
+        explicit ConcurrentQueue() : _queue(), _mutex()
         {
         }
 

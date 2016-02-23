@@ -8,7 +8,7 @@ namespace LiveFreetimeLooper
     class IEventLogger 
     {
     protected:
-        IEventLogger() {};
+        explicit IEventLogger() {};
     public:
         virtual ~IEventLogger() = default;
         virtual void log(std::unique_ptr<IEvent> evnt) = 0;

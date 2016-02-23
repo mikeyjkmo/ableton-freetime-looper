@@ -13,21 +13,21 @@ namespace LiveFreetimeLooper
         const Command& startCommand;
 
     public:
-        StopMessage(Command command,
+        explicit StopMessage(Command command,
             const Command& startCommand) :
             Message(command),
             startCommand(startCommand)
         {
         }
 
-        StopMessage(std::vector<unsigned char> command,
+        explicit StopMessage(std::vector<unsigned char> command,
             const Command& startCommand) :
             Message(command),
             startCommand(startCommand)
         {
         }
 
-        StopMessage(Command command,
+        explicit StopMessage(Command command,
             const Command& startCommand,
             double deltatime) :
             Message(command, deltatime),

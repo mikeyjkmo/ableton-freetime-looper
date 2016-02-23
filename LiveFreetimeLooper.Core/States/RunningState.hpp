@@ -20,7 +20,7 @@ namespace LiveFreetimeLooper
 
         void _dequeueAndSendAll();
     public:
-        RunningState(StateResources& resources,
+        explicit RunningState(StateResources& resources,
             std::chrono::duration<std::chrono::high_resolution_clock::rep,
             std::chrono::high_resolution_clock::period> timespan);
 

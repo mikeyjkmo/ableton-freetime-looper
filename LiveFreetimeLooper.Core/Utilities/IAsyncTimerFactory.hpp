@@ -11,7 +11,7 @@ namespace LiveFreetimeLooper
     class IAsyncTimerFactory
     {
     protected:
-        IAsyncTimerFactory() {};
+        explicit IAsyncTimerFactory() {};
     public:
         virtual ~IAsyncTimerFactory() = default;
         virtual std::unique_ptr<IAsyncTimer> createAsyncTimer(

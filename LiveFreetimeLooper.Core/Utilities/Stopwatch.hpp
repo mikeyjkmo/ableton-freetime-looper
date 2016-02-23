@@ -15,7 +15,7 @@ namespace LiveFreetimeLooper
         std::chrono::duration<std::chrono::high_resolution_clock::rep,
                               std::chrono::high_resolution_clock::period> calculateElapsed() const;
     public:
-        Stopwatch();
+        explicit Stopwatch();
 
         void start();
         void stop();

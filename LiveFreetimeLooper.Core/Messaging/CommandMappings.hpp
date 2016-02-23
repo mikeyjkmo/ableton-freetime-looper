@@ -14,8 +14,8 @@ namespace LiveFreetimeLooper
         std::unordered_map<Command, Command> _stopsToStarts;
 
     public:
-        CommandMappings();
-        CommandMappings(const std::unordered_map<Command, Command>& startsToStops);
+        explicit CommandMappings();
+        explicit CommandMappings(const std::unordered_map<Command, Command>& startsToStops);
 
         void addMapping(const Command& startCommand, const Command& stopCommand);
         MessageType getMessageType(const Command& command);

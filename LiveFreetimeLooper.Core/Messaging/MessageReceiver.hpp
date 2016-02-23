@@ -25,7 +25,7 @@ namespace LiveFreetimeLooper
         bool isMidiCommand(const Command& command);
         void receiveMidiMessage(double deltatime, Command command);
     public:
-        MessageReceiver(
+        explicit MessageReceiver(
             IMessageDispatcher& messageDispatcher, ILoopTracker& loopTracker,
             IEventLogger& logger, IAsyncTimerFactory& asyncTimerFactory, CommandMappings& commandMappings);
 
